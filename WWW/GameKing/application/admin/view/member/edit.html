@@ -1,0 +1,92 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+	<form action="{:url("edit_do")}" id="addform" method="post">
+		<input name="uid" type="hidden" value="{$users.id}" />
+		<div class="item">
+			<label>用户名:</label>
+			<div class="i_bd">
+				<input name="nicheng" class="edit_input" value="{$users.nicheng}" type="text" />
+				<span class="hongse">( * )</span>
+			</div>
+		</div>
+
+	<div class="item">
+		<label>性别：</label>
+		<div class="i_bd" id="price">
+			<div  class="select_style">
+				<select name="sex"  style='height:28.8px;line-height:28.8px;'>
+					<option value="1"{if condition="$users.sex eq 1"}selected="selected" {/if}>男</option>
+					<option value="2" {if condition="$users.sex eq 2"}selected="selected" {/if}>女</option>
+
+				</select>
+			</div>
+		</div>
+	</div>
+
+	<div class="item">
+		<label>头像：</label>
+		<div class="i_bd">
+			<div class="chanpin_pic_list">
+				<div class="iitem">
+					<input name="headimg" id="picval_logo" type="hidden" value='{$users.headimg}'/>
+					<div class="pic" id="logo">
+						<a onclick="addpic_logo();" class="upload_pic" title="上传图片"><img id='pic_yl_logo' src="{$users.headimg}" width="100" height="100" /></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+		<div class="item">
+			<label>手机号:</label>
+			<div class="i_bd">
+				<input name="phone" class="edit_input" value="{$users.phone}" type="text" />
+			</div>
+		</div>
+		
+
+		
+		<div class="item">
+			<label>密码:</label>
+			<div class="i_bd">
+				<input name="password" class="edit_input" type="password" /> <span class="hongse">( 为空不做修改 )</span>
+			</div>
+		</div>
+		
+		<div class="item">
+			<label></label>
+			<div class="i_bd">
+				<input name="提交" id="addformbtn" class="btn btn-success" type="submit" value="提交" />
+				<span id="reerror"></span>
+			</div>
+		</div>
+	</form>
+</div><!--v_bd-->	 
+{include file="common:foot"}
+<script>
+$(document).ready(function(){
+	$('#addformbtn').click(function(){
+    $('#addform').ajaxSubmit(function(data){
+			if(data.code==0){
+			  alert(data.msg)
+				window.location.href='{:url("index")}'
+			}else{
+				$("#reerror").html(data.msg).show();
+			}
+		});
+		return false;
+	});
+});
+
+function addpic_logo(){
+    var html='<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("yinsi_upimg")}" ></iframe>';
+    tanchuang("apppic_logo",700,'上传图片',html)
+}
+ 
+function addpic_do(pic,pid){
+	re_tanchuang('apppic_logo');
+	$("#pic_yl_logo").attr('src',pic);
+	$("#picval_logo").val(pic)
+}
+</script>
+

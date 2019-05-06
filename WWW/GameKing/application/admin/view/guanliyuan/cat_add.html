@@ -1,0 +1,45 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+	<form action="{:url('cat_add_do')}" method="post" id="form">
+
+		<div class="item">
+			<label>角色名：</label>
+			<div class="i_bd">
+				<input type="text" id="title" name="name" class="edit_input" size="60" />
+			</div>
+		</div>
+
+		<!-- <div class="item">
+			<label>状态：</label>
+			<div class="i_bd">
+				<select name="status" class="edit_input">
+				  <option value="1" selected>启用</option>
+				  <option value="2">禁用</option>
+				</select>
+			</div>
+		</div> -->
+
+		<div class="item">
+			<label></label>
+			<div class="i_bd">
+				<input name="" class="btn btn-success" type="button" id="form_btn" value="提交" />
+			</div>
+		</div>
+
+	</form>
+
+</div><!--v_bd-->
+<script>
+$(function(){
+	$("#form_btn").click(function(){
+		$("#form").ajaxSubmit(function(txt){
+			if(txt.code==1){
+				tishi('success',txt.msg,"{:url('cat')}")
+			}else{
+				tishi('error',txt.msg)
+			}
+		});
+	})
+})
+</script>
+{include file="common/foot" /}

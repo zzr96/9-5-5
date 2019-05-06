@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="/static/mobile/css/mui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/style.css"/>
+    <link href="/static/mobile/css/iconfont.css" rel="stylesheet" />
+   <style type="text/css">
+   html,body{background: #fff;}
+       .upload-input{width: 100%;height: 100%;opacity:0;position: absolute;top:0;left:0;z-index: 999;}
+
+   </style>
+</head>
+<body>
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-pull-left " onclick="javascript:history.go(-1)"><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">入驻</h1>
+        {if condition="isset($renzheng['idcard_front']) or $renzheng.status eq 1"}
+        {else}
+        <span class="tijiao">提交</span>
+        {/if}
+
+	</header>
+	<div class="header-counter ruzhu-next">
+		<h2>身份证正面</h2>
+         <div class="img-box img1">
+             {if condition="isset($renzheng['idcard_front']) or $renzheng.status eq 1"}
+             <img src="/{$renzheng.idcard_front}" alt="" style="display:block">
+             {else}
+             <input type="file" class="upload-input" name="image" accept="image/*" onchange="changeImg(event,'img1')">
+             <img src="" alt="" style="display: none;">
+             <input type="hidden" name="idcard_front">
+             <span class="iconfont icon-tianjiatupian"></span>
+             {/if}
+
+         </div>
+         <h2>身份证反面</h2>
+         <div class="img-box img2">
+             {if condition="isset($renzheng['idcard_back']) or $renzheng.status eq 1"}
+             <img src="/{$renzheng.idcard_back}" alt="" style="display:block">
+             {else}
+             <input type="file" class="upload-input" name="image" accept="image/*" onchange="changeImg(event,'img2')">
+             <img src="" alt="" style="display: none;">
+             <input type="hidden" name="idcard_back">
+             <span class="iconfont icon-tianjiatupian"></span>
+             {/if}
+
+         </div>
+         <h2>营业执照</h2>
+         <div class="img-box img3">
+             {if condition="isset($renzheng['license']) or $renzheng.status eq 1"}
+             <img src="/{$renzheng.license}" alt="" style="display:block">
+             {else}
+             <input type="file" class="upload-input" name="image" accept="image/*" onchange="changeImg(event,'img3')">
+             <img src="" alt="" style="display: none;">
+             <input type="hidden" name="license">
+             <span class="iconfont icon-tianjiatupian"></span>
+             {/if}
+
+         </div>
+	</div>
+
+
+
+</body>
+
+<script type="text/javascript" src="/static/mobile/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.min.js"></script>
+<script src="/static/mobile/js/imageResizer.js"></script>
+ <script type="text/javascript">
+     function changeImg(e,name) {
+         // var _thisName = e.target.name;
+         const file = e.target.files[0];
+         if (!(/^image\/.*$/i.test(file.type))) {
+             mui.toast("图片类型错误");
+             return;
+         }
+
+         var reader = new FileReader();
+         reader.onload = function(e) {
+             var base64Img = e.target.result;
+             var _ir = ImageResizer({
+                 resizeMode: "auto",
+                 dataSource: base64Img,
+                 dataSourceType: "base64",
+                 maxWidth: 1000,
+                 maxHeight: 1000,
+                 onTmpImgGenerate:function(img){
+                 },
+                 success:function(resizeImgBase64, canvas){
+                     $('.'+name).find('img').show();
+                     $('.'+name).find('span').hide();
+                     $('.'+name).find('img').attr('src', resizeImgBase64);
+
+                     var formData = new FormData(document.querySelector('form.hidden'));
+                     formData.append('image', dataURItoBlob(resizeImgBase64), file.name);
+                     $.ajax({
+                         url: "{:url('mobile/member/upload')}",
+                         type: 'POST',
+                         data: formData,
+                         mimeType: "multipart/form-data",
+                         contentType: false,
+                         cache: false,
+                         processData: false,
+                         success:function(data){
+                             data1 = eval("("+data+")");
+                             if (data1.code == 0) {
+                                 $('.'+name).find("input[type=hidden]").val(data1.url);
+                             } else {
+                                 alert(data1.msg);
+                             }
+                         },
+                         error:function(data){
+                             alert("出现错误，请联系客服人员");
+                         }
+                     });
+                 },
+                 debug: false
+             });
+         };
+         reader.readAsDataURL(file);
+     }
+     function dataURItoBlob(dataURI) {
+         var byteString = atob(dataURI.split(',')[1]);
+         var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+         var ab = new ArrayBuffer(byteString.length);
+         var ia = new Uint8Array(ab);
+         for (var i = 0; i < byteString.length; i++) {
+             ia[i] = byteString.charCodeAt(i);
+         }
+         return new Blob([ab], {type: mimeString});
+     }
+     $('.tijiao').on('click',function(){
+         var idcard_front = $('input[name=idcard_front]').val();
+         var idcard_back = $('input[name=idcard_back]').val();
+         var license = $('input[name=license]').val();
+         if(!idcard_front || !idcard_back || !license){
+             mui.toast('请上传所有照片');
+             return false;
+         }
+         var param = {
+             idcard_front:idcard_front,
+             idcard_back:idcard_back,
+             license:license
+         };
+         $.ajax({
+             type: "POST",
+             url: "{:url('mobile/member/qiye2')}",
+             dataType: 'json',
+             data: param,
+             success: function (data) {
+                 if(data.code == 1){
+                     mui.toast(data.msg);
+                 }else{
+                     mui.toast('成功提交');
+                     setTimeout(function(){
+                         window.location.href = "{:url('mobile/member/index')}";
+                     },1000)
+
+                 }
+             }
+         });
+     })
+</script>
+</html>

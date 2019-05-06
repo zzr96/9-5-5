@@ -1,0 +1,47 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+	<form action="{:url("hongbao_do")}" id="addform" method="post">
+		 
+		 
+		
+		<div class="item">
+			<label>设定金额:</label>
+			<div class="i_bd">
+				<input name="hongbao" class="edit_input" value="{$hongbao}" type="text" />
+			</div>
+		</div>
+		
+
+	 
+		
+		<div class="item">
+			<label></label>
+			<div class="i_bd">
+				<input name="提交" id="addformbtn" class="btn btn-success" type="submit" value="提交" />
+				<span id="reerror"></span>
+			</div>
+		</div>
+	</form>
+</div><!--v_bd-->	 
+{include file="common:foot"}
+<script>
+$(document).ready(function(){
+	$('#addformbtn').click(function(){
+    $('#addform').ajaxSubmit(function(data){
+			if(data.code==1){
+				alert(data.msg);
+			 
+			  window.location.href='{:url("hongbao")}';
+			   
+				
+			}else{
+				$("#reerror").html(data.msg).show();
+			}
+		});
+		return false;
+	});
+});
+
+ 
+</script>
+

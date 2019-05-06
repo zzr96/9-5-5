@@ -1,0 +1,166 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('addLeibie3')}" method="post" id="form">
+
+        <div class="item">
+            <label>供应专业：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="zyid" id="zyid" >
+                        {volist name="zhuanye" id="zy"}
+                        {if condition="$zy.id eq $model.fid"}
+                        <option value="{$zy.id}" selected>{$zy.title}</option>
+                        {else/}
+                        <option value="{$zy.id}">{$zy.title}</option>
+                        {/if}
+                        {/volist}
+                    </select>
+                </div>
+                <span class="btn btn-primary addZy">添加专业</span>
+
+            </div>
+        </div>
+        <div class="item">
+            <label>供应类别：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="pid" id="pid" >
+                        {volist name="leibie" id="lb"}
+                        {if condition="$lb.id eq $model.pid"}
+                        <option value="{$lb.id}" selected>{$lb.title}</option>
+                        {else/}
+                        <option value="{$lb.id}">{$lb.title}</option>
+                        {/if}
+                        {/volist}
+                    </select>
+                </div>
+                <span class="btn btn-primary addLb">添加类别</span>
+
+            </div>
+        </div>
+
+    <div class="item">
+        <label>类型：</label>
+        <div class="i_bd">
+            <input type="text" name="title" class="edit_input" size="60" value="{$model.title}"/>
+        </div>
+    </div>
+
+    <div class="item">
+        <label></label>
+        <div class="i_bd">
+            <input type="hidden" name="level" value="3">
+            <input type="hidden" name="id" value="{$model.id}">
+            <input name="" class="btn btn-success" type="button" id="form_btn" value="提交" />
+        </div>
+    </div>
+
+    </form>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+    var layer;
+    layui.use(['layer'], function(){
+        layer = layui.layer;
+    });
+    $(function () {
+        $(document).on('change','#zyid',function(){
+            var _zyid = $('#zyid').val();
+
+            $.ajax({
+                type: "GET",
+                url: "{:url('admin/xitong/getlb')}",
+                dataType: 'json',
+                data: {zyid: _zyid},
+                success: function (data) {
+                    if(data.code){
+                        alert(data.msg);
+                    }else{
+                        $('#pid').html('');
+                        $.each(data.data,function(k,v){
+                            var _option = '<option value="'+v.id+'">'+v.title+'</option>'
+                            $('#pid').append(_option);
+                        })
+                    }
+                }
+            });
+        })
+        $("#form_btn").click(function () {
+            var _zhuanye = $('input[name=title]').val();
+            if(_zhuanye == ''){
+                tishi('error', '请填写专业');
+                return false;
+            }
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href);
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+    $('.addZy').on('click',function(){
+        layer.prompt({
+            formType: 2,
+            title: '添加专业',
+        }, function(value, index, elem){
+            $.ajax({
+                type: "POST",
+                url: "{:url('addZy')}",
+                dataType: 'json',
+                data: {title:value},
+                success: function (data) {
+                    if (data.code) {
+                        layer.msg('添加成功', {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            layer.close(index);
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg(data.msg, {
+                            icon: 5,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                        //tishi('error', data.msg);
+                    }
+                }
+            });
+        });
+    })
+    $('.addLb').on('click',function(){
+        var pid = $('#zyid').val();
+        layer.prompt({
+            formType: 2,
+            title: '添加类别',
+        }, function(value, index, elem){
+            $.ajax({
+                type: "POST",
+                url: "{:url('addLb')}",
+                dataType: 'json',
+                data: {title:value,pid:pid},
+                success: function (data) {
+                    if (data.code) {
+                        layer.msg('添加成功', {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            layer.close(index);
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg(data.msg, {
+                            icon: 5,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                        //tishi('error', data.msg);
+                    }
+                }
+            });
+        });
+    })
+</script>
+{include file="common/foot" /}

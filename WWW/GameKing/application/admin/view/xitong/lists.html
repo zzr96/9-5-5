@@ -1,0 +1,600 @@
+{include file="common/head" /}
+<link rel="stylesheet" type="text/css" href="/static/manage/css/all.css"/>
+
+<style>
+    .table td {
+        border: 1px solid #dce4ec;
+    }
+
+    .param-list {
+        float: left;
+        width: 40%;
+        padding-left: 50px;
+    }
+
+    .param-list h1 {
+        font-size: 16px;
+    }
+
+    .add-cat1 i {
+        display: inline-block;
+        background-color: #1E9FFF;
+        color: #fff;
+        border-radius: 3px;
+        padding: 3px 10px;
+        height: 16px;
+        line-height: 16px;
+        font-size: 12px;
+        font-style: normal;
+    }
+
+    .li-btn {
+        display: inline-block;
+        background-color: #1E9FFF;
+        color: #fff;
+        border-radius: 3px;
+        padding: 3px 5px;
+        height: 12px;
+        line-height: 12px;
+        font-size: 12px;
+        font-style: normal;
+    }
+
+    .active {
+        background-color: #1E9FFF;
+        color: #fff;
+    }
+    .canshu-block{float: left;width: 500px;height: auto;border:1px solid #ccc;padding: 10px;margin-left: 10px;display: none;}
+    .model-item{margin-bottom: 10px;}
+    .del-btn{font-style: normal;background-color: #FF5722;color: #fff;display: inline-block;padding: 0 5px;height: 26px;line-height: 26px;}
+</style>
+<div class="v_bd" style="overflow: hidden;"><!--v_bd-->
+    <div style="display: block;">
+        <span class="layui-btn layui-btn-normal layui-btn-sm edit-cat">编辑</span>
+        <span class="layui-btn layui-btn-normal layui-btn-sm add-cat">添加</span>
+        <span class="layui-btn layui-btn-danger layui-btn-sm del-cat">删除</span>
+        <span class="layui-btn layui-btn-sm move-up">上移</span>
+        <span class="layui-btn layui-btn-sm move-down">下移</span>
+    </div>
+
+    <div class="accordion" fillspace="sidebar" style="margin-top: 20px;padding: 10px;float: left;width: 400px;">
+        <div class="accordionContent">
+            {volist name="list" id="vo"}
+            <ul class="tree treeFolder collapse ul-{$vo.id}">
+                <li class="li-{$vo.id}" data-id="{$vo.id}">
+                    <div class="div1 li-div" data-id="{$vo.id}" data-level="1">
+                        <div class="end_expandable tree-btn"></div>
+                        <a autobypy="bz">{$vo.title}</a>
+                    </div>
+                    <ul class="ul_sub" style="display: none;">
+                        {volist name="$vo.item" id="vo2"}
+                        <li class="li-{$vo2.id}" data-id="{$vo2.id}">
+                            <div class="div2 li-div" data-id="{$vo2.id}" data-level="2">
+                                <div class="indent"></div>
+                                <div class="expandable tree-btn2"></div>
+                                <a autobypy="tyhs"><span class="font_pos"><i class="external_small"></i></span>{$vo2.title}</a>
+                            </div>
+                            <ul style="display: none;">
+                                {volist name="$vo2.pinpai" id="pp"}
+                                <li class="li-{$pp.id}" data-id="{$pp.id}">
+                                    <div class="div li-div" data-id="{$pp.id}" data-pid="{$pp.id}" data-fid="{$vo.id}" data-level="3">
+                                        <div class="indent"></div>
+                                        <div class="line"></div>
+                                        <div class="node"></div>
+                                        <a autobypy="cjbg" href="#">
+                                            <span class="font_pos"><i class="external_small"></i></span>
+                                            {$pp.title}
+                                        </a>
+                                    </div>
+                                </li>
+                                {/volist}
+                            </ul>
+                        </li>
+                        {/volist}
+                        <li>
+                            <div class="">
+                                <div class="indent"></div>
+                                <div class="expandable"></div>
+                                <a><span class="font_pos"><i class="external_small"></i></span>添加类别</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            {/volist}
+            <ul class="tree treeFolder collapse">
+                <li>
+                    <div class="">
+                        <span class="add-cat1"><i>添加专业</i></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="canshu-block">
+        <form action="{:url('addCanshu')}" method="post" id="canshu-form">
+            <div class="item model-block">
+                <div class="model-item">
+                    <input type="hidden" name="cid[]" value="">
+                    参数名：<input type="text" name="title[]" class="edit_input" size="10" value=""/>
+                    默认值：<input type="text" name="values[]" class="edit_input" size="20" value=""/>
+                    <i class="del-btn">删除</i>
+                </div>
+                <span class="btn btn-add" style="margin-top: 10px;">添加型号</span>
+            </div>
+
+            <div class="item">
+                <label></label>
+                <div class="i_bd">
+                    <input type="hidden" name="level" value="3">
+                    <input type="hidden" name="pid" class="pid-input" value="">
+                    <input type="hidden" name="fid" class="fid-input" value="">
+                    <input name="" class="btn" type="button" id="form_btn_canshu" value="提交" />
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div><!--v_bd-->
+
+{include file="common/foot" /}
+<script>
+    $(function () {
+        $(document).on('click', '.tree-btn', function () {
+            $(this).parents('div').next('ul.ul_sub').toggle();
+            if ($(this).hasClass('end_collapsable')) {
+                $(this).removeClass('end_collapsable');
+                $(this).addClass('end_expandable');
+            } else {
+                $(this).removeClass('end_expandable');
+                $(this).addClass('end_collapsable');
+            }
+        });
+        $(document).on('click','#form_btn_canshu',function(){
+            $("#canshu-form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+        $(document).on('click', '.tree-btn2', function () {
+            $(this).parents('div').next('ul').toggle();
+            if ($(this).hasClass('collapsable')) {
+                $(this).removeClass('collapsable');
+                $(this).addClass('expandable');
+            } else {
+                $(this).removeClass('expandable');
+                $(this).addClass('collapsable');
+            }
+        });
+        $(document).on('click','.btn-add',function(){
+            var _div = '<div class="model-item">' +
+                '<input type="hidden" name="cid[]">'+
+                '参数名：<input type="text" name="title[]" class="edit_input" size="10" value=""/>' +
+                '默认值：<input type="text" name="values[]" class="edit_input" size="20" value=""/>' +
+                '<i class="del-btn">删除</i>'+
+                '</div>';
+            $(this).before(_div);
+        });
+        $(document).on('click','.del-btn',function(){
+            $(this).parents('div.model-item').remove();
+        });
+        $(document).on('click', '.li-div', function () {
+            $('.active').removeClass('active');
+            $(this).addClass('active');
+            var level = $(this).data('level');
+            var id = $(this).data('id');
+            var pid = $(this).data('pid');
+            var fid = $(this).data('fid');
+            if(level == 3){
+                $('.canshu-block').show();
+                $.ajax({
+                    type: 'post',
+                    url: "{:url('getModel')}",
+                    data: {id: id},
+                    success: function (ret) {
+                        if(ret.code == 0){
+                            if(ret.data.length){
+                                $('.model-block').html('');
+                                $.each(ret.data,function(i,v){
+                                    var _div = '<div class="model-item">\n' +
+                                        '                    <input type="hidden" name="cid[]" value="'+v.id+'">\n' +
+                                        '                    参数名：<input type="text" name="title[]" class="edit_input" size="10" value="'+v.title+'"/>\n' +
+                                        '                    默认值：<input type="text" name="values[]" class="edit_input" size="20" value="'+v.values+'"/>\n' +
+                                        '                    <i class="del-btn">删除</i>\n' +
+                                        '                </div>';
+                                    $('.model-block').append(_div);
+                                    $('.pid-input').val(v.pid);
+                                    $('.fid-input').val(v.fid);
+                                })
+                                $('.model-block').append('<span class="btn btn-add" style="margin-top: 10px;">添加型号</span>');
+
+                            }else{
+                                $('.model-block').html('<div class="model-item">\n' +
+                                    '                    <input type="hidden" name="cid[]" value="">\n' +
+                                    '                    参数名：<input type="text" name="title[]" class="edit_input" size="10" value=""/>\n' +
+                                    '                    默认值：<input type="text" name="values[]" class="edit_input" size="20" value=""/>\n' +
+                                    '                    <i class="del-btn">删除</i>\n' +
+                                    '                </div>\n' +
+                                    '                <span class="btn btn-add" style="margin-top: 10px;">添加型号</span>');
+                                $('.pid-input').val(pid);
+                                $('.fid-input').val(fid);
+                            }
+                        }
+                    }
+                })
+            }else{
+                $('.canshu-block').hide();
+            }
+        });
+        $(document).on('click', '.move-up', function () {
+            if (!$('.active').length) {
+                alert('请选择节点');
+            }
+            var level = $('.active').data('level');
+            var sort = $('.active').data('id');
+            if (level == 1) {
+                var up_sort = $('.ul-' + sort).prev('ul.tree').find('li:first').data('id');
+            } else if (level == 2) {
+                var up_sort = $('.li-' + sort).prev('li').data('id');
+            } else if (level == 3) {
+                var up_sort = $('.li-' + sort).prev('li').data('id');
+            }
+            if (!up_sort) {
+                return false;
+            }
+            if (level == 1) {
+                var dom = $('.ul-' + sort);
+                $('.ul-' + sort).remove();
+                $('.ul-' + up_sort).before(dom);
+            } else {
+                var dom = $('.li-' + sort);
+                $('.li-' + sort).remove();
+                $('.li-' + up_sort).before(dom);
+            }
+            $.ajax({
+                type: 'post',
+                url: "{:url('changeSort')}",
+                data: {id: sort, id2: up_sort},
+                success: function (data) {
+                }
+            })
+
+        });
+        $(document).on('click', '.move-down', function () {
+            if (!$('.active').length) {
+                alert('请选择节点');
+            }
+            var level = $('.active').data('level');
+            var sort = $('.active').data('id');
+            if (level == 1) {
+                var up_sort = $('.ul-' + sort).next('ul.tree').find('li:first').data('id');
+            } else if (level == 2) {
+                var up_sort = $('.li-' + sort).next('li').data('id');
+            } else if (level == 3) {
+                var up_sort = $('.li-' + sort).next('li').data('id');
+            }
+            if (!up_sort) {
+                return false;
+            }
+            if (level == 1) {
+                var dom = $('.ul-' + sort);
+                $('.ul-' + sort).remove();
+                $('.ul-' + up_sort).after(dom);
+            } else {
+                var dom = $('.li-' + sort);
+                $('.li-' + sort).remove();
+                $('.li-' + up_sort).after(dom);
+            }
+            $.ajax({
+                type: 'post',
+                url: "{:url('changeSort')}",
+                data: {id: sort, id2: up_sort},
+                success: function (data) {
+                }
+            })
+        });
+        $(document).on('click', '.edit-cat', function () {
+            if (!$('.active').length) {
+                alert('请选择节点');
+            }
+            var id = $('.active').data('id');
+            var text = $('.active').find('a').text();
+            layer.prompt({
+                formType: 2,
+                title: '修改',
+                value:text,
+            }, function(value, index, elem){
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('editCat')}",
+                    dataType: 'json',
+                    data: {title:value,id:id},
+                    success: function (data) {
+                        if (data.code == 0) {
+                            layer.msg('添加成功', {
+                                icon: 1,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            }, function(){
+                                layer.close(index);
+                                window.location.reload();
+                            });
+                        }else{
+                            layer.msg(data.msg, {
+                                icon: 5,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                            //tishi('error', data.msg);
+                        }
+                    }
+                });
+            });
+        });
+        $(document).on('click', '.add-cat', function () {
+            if (!$('.active').length) {
+                alert('请选择节点');
+                return false;
+            }
+
+            var level = $('.active').data('level');
+            var id = $('.active').data('id');
+            if(level > 2){
+                return false;
+            }
+            layer.prompt({
+                formType: 2,
+                title: '添加',
+            }, function(value, index, elem){
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('addCat')}",
+                    dataType: 'json',
+                    data: {title:value,id:id,level:level},
+                    success: function (data) {
+                        if (data.code == 0) {
+                            layer.msg('添加成功', {
+                                icon: 1,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            }, function(){
+                                layer.close(index);
+                                window.location.reload();
+                            });
+                        }else{
+                            layer.msg(data.msg, {
+                                icon: 5,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                            //tishi('error', data.msg);
+                        }
+                    }
+                });
+            });
+        });
+        $(document).on('click', '.add-cat1', function () {
+            layer.prompt({
+                formType: 2,
+                title: '添加',
+            }, function(value, index, elem){
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('addCat')}",
+                    dataType: 'json',
+                    data: {title:value,level:0},
+                    success: function (data) {
+                        if (data.code == 0) {
+                            layer.msg('添加成功', {
+                                icon: 1,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            }, function(){
+                                layer.close(index);
+                                window.location.reload();
+                            });
+                        }else{
+                            layer.msg(data.msg, {
+                                icon: 5,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                            //tishi('error', data.msg);
+                        }
+                    }
+                });
+            });
+        });
+        $(document).on('click', '.del-cat', function () {
+            if (!$('.active').length) {
+                alert('请选择节点');
+            }
+            var id = $('.active').data('id');
+            layer.confirm('确认删除吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(index){
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('delCat')}",
+                    data: {id:id},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == 0) {
+                            layer.close(index);
+                            window.location.reload();
+                        }
+                    }
+                });
+            }, function(){
+                layer.close();
+            });
+        })
+    });
+</script>
+
+<script>
+    $(".chk_all").click(function () {
+        if (!$(this).attr("checked")) {
+            $("input[name='chk_list']").removeAttr("checked");
+        } else {
+            $("input[name='chk_list']").attr("checked", $(this).attr("checked"));
+        }
+    });
+    $(document).on('change', '.sortInput', function () {
+        var _sort = $(this).val();
+        var _id = $(this).data('id');
+        $.ajax({
+            type: 'post',
+            url: "{:url('setSort')}",
+            data: {id: _id, sort: _sort},
+            success: function (data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                }
+            }
+        })
+    });
+    $(document).on('click', '.yulan', function () {
+        var _id = $(this).data('id');
+        $.ajax({
+            type: 'post',
+            url: "{:url('yulan')}",
+            data: {id: _id},
+            success: function (ret) {
+                if (ret.code == 0) {
+                    $('.param-table tr:not(:first)').remove();
+                    var length = ret.data.length;
+                    if (length) {
+                        $('.param-table f').hide();
+                        $.each(ret.data, function (i, v) {
+                            var tr = '<tr>' +
+                                '<td>' + v.title + '</td>' +
+                                '<td>' + v.values + '</td>' +
+                                '</tr>';
+                            $('.param-table').append(tr);
+                        })
+                    } else {
+                        $('.param-table').append('<tr class="f" align="center">\n' +
+                            '                <td colspan="2">暂无数值</td>\n' +
+                            '            </tr>');
+                    }
+
+                }
+            }
+        })
+    })
+
+    function toggleTr(obj, a, b) {
+        if (b) {
+            $('.tr-' + a + '-' + b).toggle();
+        } else {
+            $('.tr-' + a).toggle();
+        }
+        if ($(obj).text() == '展开') {
+            $(obj).text('关闭');
+        } else {
+            $(obj).text('展开');
+        }
+
+    }
+
+
+    function del() {
+        if (!confirm("确定要删除选中项吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url('del')}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            }
+
+        })
+    }
+
+    function jinyong() {
+        if (!confirm("确定要选中项禁用吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url("
+        jinyong
+        ")}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+
+            }
+
+        })
+    }
+
+    function qiyong() {
+        if (!confirm("确定要选中项启用吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url("
+        qiyong
+        ")}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+
+            }
+
+        })
+    }
+
+    function paixu(id, type) {
+        var url = "{:url("
+        paixu
+        ")}";
+        $.ajax({
+            url: url,
+            data: "id=" + id + "&type=" + type,
+            success: function (txt) {
+                //alert(JSON.stringify(txt))
+                if (txt.code == 1) {
+                    window.location.href = window.location.href
+                }
+
+            }
+
+        })
+
+    }
+
+</script>

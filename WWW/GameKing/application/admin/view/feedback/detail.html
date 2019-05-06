@@ -1,0 +1,30 @@
+{include file="common:head"}
+<style>
+	p{line-height: 35px;}
+</style>
+<div class="v_bd"><!--v_bd-->
+	<form id="addform" method="post">
+		<div class="item">
+			<label>用户昵称:</label>
+			<div class="i_bd">
+				<p>{$data.nickname}</p>
+			</div>
+		</div>
+		<div class="item">
+			<label>反馈内容：</label>
+			<div class="i_bd">
+				<p>{$data.content}</p>
+			</div>
+		</div>
+
+		<div class="item">
+			<label>反馈时间：</label>
+			<div class="i_bd">
+				<p>{$data.createtime}</p>
+			</div>
+		</div>
+	</form>
+</div><!--v_bd-->	 
+{include file="common:foot"}
+
+

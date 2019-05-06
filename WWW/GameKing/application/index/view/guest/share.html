@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>创富天下</title>
+    <link href="/style/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/style/css/style.css"/>
+    <link href="/style/css/iconfont.css" rel="stylesheet"/>
+    <style type="text/css">
+        html,
+        body {
+            background: #f7f7f7;
+        }
+
+        .paihangbang ul li {
+            padding-right: 8px;
+        }
+
+        .paihangbang ul li p,
+        .paihangbang ul li span {
+            line-height: 45px;
+        }
+
+        .paihangbang ul li span.one {
+            margin-top: 9px;
+        }
+
+        .paihangbang ul li p.r {
+            font-size: 12px;
+        }
+
+        .paihangbang .paihang_box .today i {
+            font-size: 18px;
+        }
+
+        .month ul li:last-child {
+            border-bottom: 0;
+        }
+
+        .show_box,
+        .show_box2 {
+            position: absolute;
+            top: 55px;
+            right: 6px;
+            background: #fff;
+            z-index: 999;
+            transition: opacity .3s;
+            border-radius: 7px;
+            transition-property: opacity;
+            -webkit-transform: none;
+            transform: none;
+            padding: 10px;
+            height: 120px;
+            display: none;
+            width: 250px;
+        }
+
+        .show_box {
+            position: fixed;
+            top: 100px;
+            right: 6px;
+        }
+
+        .box-arrow {
+            left: auto;
+            right: 6px;
+            position: absolute;
+            z-index: 1000;
+            top: -25px;
+            overflow: hidden;
+            width: 26px;
+            height: 26px;
+        }
+
+        .box-arrow:after {
+            position: absolute;
+            top: 19px;
+            left: 0;
+            width: 26px;
+            height: 26px;
+            content: ' ';
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            border-radius: 3px;
+            background: #fff;
+        }
+
+        .show_box,
+        .show_box2 p {
+            line-height: 18px;
+            margin-bottom: 4px;
+        }
+
+        .mask {
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            top: 0;
+            position: fixed;
+            background: rgba(0, 0, 0, .3);
+            display: none;
+        }
+
+        /*收益*/
+        body,
+        html {
+            background: #f7f7f7;
+        }
+
+        .mui-bar-nav a i.icon-icon_title_fenxiang {
+            margin-right: 10px;
+        }
+
+        /*.mui-bar-nav.sy_rgba{background: rgba(0,0,0,0)!important;}*/
+
+        .sanji_box .dengji {
+            overflow: hidden;
+            border-bottom: 1px solid #efefef;
+            padding: 0 10px;
+            height: 44px;
+            background: #fff;
+            margin-top: 10px;
+            line-height: 44px;
+        }
+
+        .sanji_box .dengji p {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .sanji_box ul {
+            overflow: hidden;
+        }
+
+        .sanji_box ul li:nth-child(2) {
+            margin: 0 10px;
+            padding: 0
+        }
+    </style>
+</head>
+<body>
+{$content}
+<script type="text/javascript" src="/style/js/jquery.js"></script>
+<script type="text/javascript" src="/style/js/mui.min.js"></script>
+<script type="text/javascript" src="/style/js/common.js"></script>
+<script>
+    $('img').each(function () {
+        var src = $(this).attr('src').replace('../img', '/style/img');
+        $(this).attr('src', src);
+    });
+    $('.share').hide();    $('.share_box').hide();
+    $('.zhezhao').hide();
+    $('.tk_box').hide();
+    $('.shouyi_money').css('background', '/style/img/sy_bj.png');
+</script>
+</body>
+</html>

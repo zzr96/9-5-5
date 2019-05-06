@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="/static/mobile/css/mui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/style.css"/>
+    <link href="/static/mobile/css/iconfont.css" rel="stylesheet" />
+   <style type="text/css">
+   html,body{background: #f7f7f7;}
+   </style>
+</head>
+<body>
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">用户中心</h1>
+		<span class="loginout">退出登录</span>
+	</header>
+	<div class="header-counter qi-center">
+		<ul>
+			{switch name="$userInfo.vip" }
+			{case value="1"}
+			<li class="qiye">
+				<a href="{:url('mobile/member/qiye')}">
+					<div class="top">
+						<div class="left">
+							<p>企业</p>
+							<span></span>
+						</div>
+						<div class="right">
+
+						</div>
+					</div>
+					<div class="btm">
+						<span class="unverified">已购买</span>
+						<span>会员期限：2018.12.31到期</span>
+					</div>
+				</a>
+
+			</li>
+			{/case}
+			{case value="2"}
+			<li class="school">
+				<a href="{:url('mobile/member/school')}">
+					<div class="top">
+						<div class="left">
+							<p>学校</p>
+							<span></span>
+						</div>
+						<div class="right">
+						</div>
+					</div>
+					<div class="btm">
+						<span class="buyed">已购买</span>
+						<span>会员期限：2018.12.31到期</span>
+					</div>
+				</a>
+
+			</li>
+			{/case}
+			{case value="3"}
+			<li class="gongying">
+				<a href="{:url('mobile/member/gongying')}">
+					<div class="top">
+						<div class="left">
+							<p>供应商</p>
+							<span></span>
+						</div>
+						<div class="right">
+
+						</div>
+					</div>
+					<div class="btm">
+						<span class="not-opened">已购买</span>
+						<span>会员期限：2018.12.31到期</span>
+					</div>
+				</a>
+
+			</li>
+			{/case}
+			{default /}
+			{/switch}
+
+
+
+		</ul>
+	 </div>
+</body>
+
+<script type="text/javascript" src="/static/mobile/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.min.js"></script>
+ <script type="text/javascript">
+     $('.loginout').on('click',function(){
+         var vip = $(this).data('vip');
+         var btnArray = ['取消', '确定'];
+         mui.confirm('确认退出吗', '确认退出', btnArray, function(e) {
+             if (e.index == 1) {
+                 $.ajax({
+                     type: "POST",
+                     url: "{:url('apis/login/logout')}",
+                     dataType: 'json',
+                     success: function () {
+                         window.location.reload();
+                     }
+                 });
+             }
+         })
+     })
+</script>
+</html>

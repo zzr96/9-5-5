@@ -1,0 +1,222 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class="v_bd_tag">
+        <a href="{:url('index')}" status="all" class="{:input('status')==''&&input('top')==''?'focus':''} status">
+            全部商品<span>({$total.all})</span></a>|
+        <a href="{:url('index')}?status=1" class="{:input('status')==1?'focus':''} status">已上架<span>({$total.on})</span></a>|
+        <a href="{:url('index')}?status=2" class="{:input('status')==2?'focus':''} status">已下架<span>({$total.off})</span></a>|
+        <a href="{:url('index')}?top=2" class="{:input('top')==2?'focus':''} status">推荐商品<span>({$total.top})</span></a>|
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        商品搜索：
+        <input id="search" class="edit_input" value="" type="text"/>
+        <a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a><i class="huise">(请输入商品名称)</i>
+<!--         <p style='float:right;margin-top:4px;'>
+            <a href="{:url('index_list')}" class="btn btn-success">切换查看方式</a>
+        </p> -->
+        <p style='float:right;margin-top:4px;'>
+            <a href="{:url('add')}" class="btn btn-success">添加商品</a>
+        </p>
+    </div>
+    <style>
+        .table tr:hover {
+            background: #ffffff;
+        }
+    </style>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr>
+            <td colspan="5">
+                <div class="pic_list">
+                    <ul>
+                        {volist name="list" id="vo"}
+                        <li style="height: 300px;">
+
+                            <a href="javascript:;" class="pic" title="{$vo.id}" onclick="opennew(this)"
+                               data-url="{:url('edit')}?id={$vo.id}&nav=编辑信息&url=">
+                                <img src="{$vo.img1}" align="absmiddle" alt="{$vo.goods_name}"/>
+                            </a>
+                            <p class="pro-name">
+                                <a href="javascript:;" onclick="opennew(this)"
+                                   data-url="{:url('edit')}?id={$vo.id}&nav=编辑信息&url=">
+                                    {if condition='$vo.status eq 2'}
+                                    [<b>已下架</b>]
+                                    {/if}{$vo.goods_name}</a>
+                            </p>
+                            <p style='margin-bottom:-24px;height:50px;'>
+                                <input type="checkbox" name="chk_list" value="{$vo.id}"/> ID：{$vo.id}
+                            </p>
+                            <p>
+                                <span>
+                                    所属商城：{$vo.shop_name}
+                                </span>
+                            </p>
+                            <p><span>销量：{$vo.sales}</span></p>
+                        </li>
+                        {/volist}
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </td>
+        </tr>
+        <tr class="f">
+            <td><input name="" class="chk_all" type="checkbox" value=""/>全选</td>
+            <td>选中项 :
+                <a href="javascript:;" class="btn btn-danger" onclick="del();">删除</a>
+                <a href="javascript:;" class="btn btn-primary" onclick="upper_shelf();">上架</a>
+                <a href="javascript:;" class="btn btn-danger" onclick="lower_shelf();">下架</a>
+                <a href="javascript:;" class="btn btn-success" onclick="topon();">推荐</a>
+                <a href="javascript:;" class="btn btn-danger" onclick="topoff();">取消推荐</a>
+            </td>
+            <td align="right">{$page}</td>
+        </tr>
+    </table>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+    function change(th, key) {
+        window.location.href = "{:url('index')}?" + key + "=" + th.value;
+    }
+
+    function opennew(th) {
+        window.location.href = th.getAttribute('data-url') + window.location.href;
+    }
+
+    $(".chk_all").click(function () {
+        if (!$(this).attr("checked")) {
+            $("input[name='chk_list']").removeAttr("checked");
+        } else {
+            $("input[name='chk_list']").attr("checked", $(this).attr("checked"));
+        }
+    });
+
+    function del() {
+        var arrChk = $("input[name='chk_list']:checked");
+        var url = "{:url('del')}";
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("没有选中任何商品");
+            return false;
+        }
+        if (!confirm("确定要删除选中项吗？")) {
+            return false;
+        }
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi(txt.code == 1 ? 'success' : 'error', txt.msg, window.location.href)
+            }
+        });
+    }
+
+    //下架
+    function lower_shelf() {
+        var arrChk = $("input[name='chk_list']:checked");
+        var url = "{:url('lower_shelf')}";
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("没有选中任何商品");
+            return false;
+        }
+        if (!confirm("确定要选中项下架吗？")) {
+            return false;
+        }
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi(txt.code == 1 ? 'success' : 'error', txt.msg, window.location.href)
+            }
+        })
+    }
+    //上架
+    function upper_shelf() {
+        var arrChk = $("input[name='chk_list']:checked");
+        var url = "{:url('upper_shelf')}";
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("没有选中任何商品");
+            return false;
+        }
+        if (!confirm("确定要选中项上架吗？")) {
+            return false;
+        }
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            }
+        })
+    }
+
+    function topon() {
+        var arrChk = $("input[name='chk_list']:checked");
+        var url = "{:url('topon')}";
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("没有选中任何商品");
+            return false;
+        }
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            }
+        })
+    }
+
+    function topoff() {
+        var arrChk = $("input[name='chk_list']:checked");
+        var url = "{:url('topoff')}";
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("没有选中任何商品");
+            return false;
+        }
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            }
+        })
+    }
+    function look_cat(id) {
+        var $val = $(id).val();
+        var url = '{:url("index")}?scat=' + $val;
+        window.location.href = url;
+    }
+
+    function look_order(id) {
+        var $val = $(id).val();
+        var url = '{:url("index")}?order=' + $val;
+        window.location.href = url;
+    }
+
+    function searchs() {
+        var $val = $('#search').val();
+        var url = '{:url("index")}?search=' + $val;
+        window.location.href = url;
+    }
+</script>

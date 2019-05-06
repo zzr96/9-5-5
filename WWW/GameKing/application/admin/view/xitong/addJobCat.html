@@ -1,0 +1,94 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('addJobCat')}" method="post" id="form">
+
+        <div class="item">
+            <label>选择专业：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="pid" id="zyid" >
+                        <option value="0">请选择专业</option>
+                        {volist name="zhuanye" id="zy"}
+                        <option value="{$zy.id}">{$zy.name}</option>
+                        {/volist}
+                    </select>
+                </div>
+                <span class="btn btn-primary addZy">添加专业</span>
+            </div>
+        </div>
+        <div class="item">
+            <label>性质：</label>
+            <div class="i_bd">
+                <textarea name="name" style="width: 300px;height: 200px;padding: 7px;"></textarea>
+            </div>
+            <div class="i_bd">
+                <p>多个选项请回车换行</p>
+            </div>
+
+        </div>
+
+    <div class="item">
+        <label></label>
+        <div class="i_bd">
+            <input type="hidden" name="level" value="2">
+            <input name="" class="btn btn-success" type="button" id="form_btn" value="提交" />
+        </div>
+    </div>
+
+    </form>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+    var layer;
+    layui.use(['layer'], function(){
+        layer = layui.layer;
+    });
+    $(function () {
+        $("#form_btn").click(function () {
+            var _zhuanye = $('input[name=title]').val();
+            if(_zhuanye == ''){
+                tishi('error', '请填写名称');
+                return false;
+            }
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 0) {
+                    tishi('success', txt.msg, window.location.href);
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+    $('.addZy').on('click',function(){
+        layer.prompt({
+            formType: 2,
+            title: '添加专业',
+        }, function(value, index, elem){
+            $.ajax({
+                type: "POST",
+                url: "{:url('addJobCat')}",
+                dataType: 'json',
+                data: {name:value,level:1,pid:0},
+                success: function (data) {
+                    if (data.code == 0) {
+                        layer.msg('添加成功', {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            layer.close(index);
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg(data.msg, {
+                            icon: 5,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                        //tishi('error', data.msg);
+                    }
+                }
+            });
+        });
+    })
+</script>
+{include file="common/foot" /}

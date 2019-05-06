@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="/static/mobile/css/mui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/style.css"/>
+    <link href="/static/mobile/css/iconfont.css" rel="stylesheet" />
+   <style type="text/css">
+   	html,body{background: #fff;}
+.register-content{background: url(/static/mobile/img/bg6.png);background-size: cover;}
+.register-content .qiye-login{margin-top: 25%}
+   </style>
+</head>
+<body>
+	<div class="register-content">
+		<!--头 -->
+		<header class=" mui-bar mui-bar-nav ">
+			<a class="mui-pull-left"></a>
+			<h1 class="mui-title">忘记密码</h1>
+			<span></span>
+		</header>
+		<main>
+	        <div class="mui-input-row phone-li qiye-login">
+
+			    <input type="number" class="phone" value="" placeholder="请输入手机号" >
+			</div>
+			<input type="button" class="margin-btn"  value="下一步" />
+		</main>
+	</div>
+
+</body>
+<script type="text/javascript" src="/static/mobile/js/jquery-2.1.1.min.js" ></script>
+<script type="text/javascript" src="/static/mobile/js/mui.min.js"></script>
+<script type="text/javascript">
+$(document).on('click','.margin-btn',function(){
+    var phone = $('.phone').val();
+    if(!phone){
+        mui.toast('请填写手机号');
+	}
+    $.ajax({
+        type: "GET",
+        url: "{:url('apis/login/checkQiyeMobile')}",
+        dataType: 'json',
+        data: {phone: phone},
+        success: function (data) {
+            if(data.code == 1){
+                mui.toast(data.msg);
+                return false;
+            }else if(data.code == 2){
+                window.location.href = "{:url('mobile/login/forgetPass2')}?phone="+phone;
+            }else if(data.code == 3){
+                mui.toast(data.msg);
+                return false;
+            }
+        }
+    });
+})
+</script>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="/static/mobile/css/mui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/style.css"/>
+    <link href="/static/mobile/css/iconfont.css" rel="stylesheet" />
+   <style type="text/css">
+   	html,body{background: #fff;}
+.forget-pass{background: url(/static/mobile/img/bg6.png);background-size: cover;}
+.code-box{box-shadow: 0 0 2px 2px #58636d;background-color: rgba(199,197,197,.1);}
+.code-box .mui-input-row{border-color:#c3c2d6;color: #dddbea }
+   </style>
+</head>
+<body>
+	<div class="register-content forget-pass">
+		<!--头 -->
+		<header class=" mui-bar mui-bar-nav ">
+			<a class="mui-pull-left"> <i class="iconfont icon-fanhui"></i> </a>
+			<h1 class="mui-title">忘记密码</h1>
+			<span></span>
+		</header>
+		<main>
+			 <p class="sended">验证码已发送至{$phone}</p>
+			 <div class="code-box">
+				 <div class="mui-input-row" >
+				    <input type="number" class="code" value="" placeholder="请输入验证码" >
+				    <span class="getcode" style="display: none;">发送验证码</span>
+				    <span class="num"><m>60</m>s后重新发送</span>
+			    </div>
+				<div class="mui-input-row " >
+				    <input  value="" class="password" type="placeholder" placeholder="请输入新密码6-16位">
+				</div>
+				<div class="mui-input-row " >
+				    <input  value="" class="password1"  type="placeholder" placeholder="请确认新密码" >
+				</div>
+			 </div>
+
+			<input type="button" class="margin-btn"  value="下一步" />
+		</main>
+	</div>
+
+</body>
+<script type="text/javascript" src="/static/mobile/js/jquery-2.1.1.min.js" ></script>
+<script type="text/javascript" src="/static/mobile/js/mui.min.js"></script>
+<script type="text/javascript">
+	$('.margin-btn').on('click',function(){
+        var code = $('.code').val();
+        var password = $('.password').val();
+        var password1 = $('.password1').val();
+        if (!code) {
+            mui.toast('请填写验证码');
+            return false;
+        }
+        if (password != password1) {
+            mui.toast('两次填写的密码不一致');
+            return false;
+        }
+        $.ajax({
+            type: "GET",
+            url: "{:url('apis/login/resetPasswordPro')}",
+            dataType: 'json',
+            data: {phone: {$phone}, code: code, password: password, password1: password1,},
+            success: function (data) {
+                if(data.code == 0){
+                    mui.toast('修改成功');
+                    setTimeout(function(){
+                        window.location.href = "{:url('mobile/member/buy')}";
+					},1000)
+                }else if(data.code == 1){
+                    mui.toast(data.msg);
+                }
+            }
+        });
+	})
+
+    $('.getcode').on('click',function(){
+        $('.sended i').text({$phone});
+        $('.sended').show();
+        $(this).hide();
+        $('.num').show();
+        jishi(60);
+    })
+
+    jishi(60);
+	function jishi(sec){
+        var interval = setInterval(function() {
+            sec = sec - 1;
+            $('.num m').html(sec);
+            if (sec == 0) {
+                clearInterval(interval);
+                $('.num').hide();
+                $('.getcode').show();
+            }
+        }, 1000);
+	}
+
+
+
+</script>
+</html>

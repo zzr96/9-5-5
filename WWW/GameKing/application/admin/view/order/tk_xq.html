@@ -1,0 +1,113 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('tk_xq_do')}" method="post" id="form">
+        {volist name="$res" id="vo"}
+        <div class="item">
+            <label>订单编号：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                    {$vo.order_sn}
+            </div>
+        </div>
+        <div class="item">
+            <label>退款金额：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                    {$vo.price}
+            </div>
+        </div>
+        <div class="item">
+            <label>退款原因：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {if condition="$vo.content eq null"}
+                未填写原因
+                {else}
+                {$vo.content}
+                {/if}
+            </div>
+        </div>
+        <div class="item">
+            <label>退货图片：</label>
+            {volist name="$vo.img" id="vv"}
+            <img src="<?php echo json_decode($vv['img'],true)[0];?>" style="width:100px;">
+            {/volist}
+        </div>
+
+        <div class="item">
+            <label>当前状态：</label>
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {if condition="$vo.status eq 1"}
+                审核中
+                {elseif condition="$vo.status eq 2"}
+                 审核通过
+                {elseif condition="$vo.status eq 5"}
+                审核不通过
+                {elseif condition="$vo.status eq 9"}
+                已退款
+                {/if}
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">商家留言</label>
+            <div class="layui-input-block">
+                <textarea name="refund_desc" id="refund_desc_{$vo.id}" placeholder="请输入内容" class="layui-textarea">{$vo.refund_desc}</textarea>
+            </div>
+        </div>
+
+
+        <input type="hidden" name="id" value="{$vo.id}">
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                {if condition="$vo.status eq 2"}
+                <input name="" type="button" class="btn btn-success" id="form_btn1" value="待用户确认"/>
+                {elseif condition="$vo.status eq 3"}
+                <input name="" type="button" class="btn btn-success" id="form_btn" value="退款"/>
+                {elseif condition="$vo.status eq 9"}
+                <input name="" type="button" class="btn btn-success" value="已退款"/>
+                {elseif condition="$vo.status eq 1"}
+                <input name="" type="button" class="btn btn-success" onclick="agree(8,'{$vo.id}','{$vo.order_id}')" value="同意退款"/>
+                <input name="" type="button" class="btn btn-success" onclick="agree(7,'{$vo.id}','{$vo.order_id}')"  value="拒绝退款"/>
+                {/if}
+            </div>
+        </div>
+        {/volist}
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+       $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                /*if (txt.code == 1){
+                    tishi('success', txt.msg, '{:url("index")}');
+
+                } else {
+                    tishi('error', txt.msg);
+                }*/
+                console.log(txt);
+            });
+        })
+    });
+    //退款操作
+    function agree(status,back_id,order_id){
+        var url = '{:url("agree")}';
+        $.ajax({
+            url: url,
+            data: {back_id:back_id,status:status,order_id:order_id,refund_desc:$('#refund_desc_' + back_id).val()},
+            type: 'POST',
+            success: function (res){
+                 if(res.code==1){
+                    tishi('success', res.msg);
+                 window.location.reload();
+                }else{
+                    tishi('error', res.msg);
+                }
+
+            }
+        })
+    }
+</script>

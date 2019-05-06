@@ -1,0 +1,50 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('sendLetter')}" method="post" id="form">
+
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">系统通知</label>
+            <div class="layui-input-block">
+                <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <a href="javascript:;" id="form_btn" class="btn btn-success">提交</a>
+            </div>
+        </div>
+
+
+    </form>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 0) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+
+
+    });
+</script>
+{include file="common/foot" /}

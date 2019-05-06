@@ -1,0 +1,31 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr class="h">
+            <td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value="" />全选</td>
+            <td>轮播图名称</td>
+            <td>缩略图</td>
+            <td>所属模块</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr>
+            <td><input name="chk_list" type="checkbox" value="{$vo.id}" /></td>
+            <td><b>{$vo.title}</b></a></td>
+            <td><img src="{$vo.thumb}" width="80" height="80"></td>
+            <td>{$banner[$vo.module]}</td>
+            <td><a href="{:url("edit?id=$vo[id]")}">编辑</a> </td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+            <td>
+                选中项 :
+                <a href="javascript:;" class="v_btn" onclick="del();" >删除</a>
+            </td>
+            <td colspan="3">{$page}</td>
+        </tr>
+    </table>
+
+</div><!--v_bd-->
+{include file="common/foot" /}

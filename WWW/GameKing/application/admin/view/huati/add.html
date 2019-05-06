@@ -1,0 +1,91 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('add')}" method="post" id="form">
+        <input type="hidden" name="id" value="{$data['id']??''}">
+
+        <div class="item">
+            <label>图文展示：</label>
+                <div id="layer-photos-demo" class="layer-photos-demo" style="padding: 10px;">
+                    {if empty($data.res_url)}
+                    暂无图文
+                    {else}
+                    {volist name="$data.res_url" id="vo"}
+                    <img layer-src={$vo} src={$vo}
+                         width="200px" height="224px" style="margin: 3px; border: black 2px"  ;/>
+                    {/volist}
+                    {/if}
+
+                </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">内容详情</label>
+            <div class="layui-input-block">
+                <textarea name="content" placeholder="请输入内容" class="layui-textarea">{$data.content}</textarea>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+            <div class="i_bd">
+                <a href="javascript:history.back();" id="" class="btn btn-default">返回</a>
+            </div>
+        </div>
+
+
+    </form>
+
+</div><!--v_bd-->
+<script type="text/javascript" src="/static/manage/js/distpicker.data.js"></script>
+<script type="text/javascript" src="/static/manage/js/distpicker.js"></script>
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+        $(document).on('click','.match-block label',function(){
+            var _type = $(this).data('type');
+            if(_type == 'ppsj'){
+                $('.match-value').find('label').first().html('匹配时间：');
+            }
+            if(_type == 'pprs'){
+                $('.match-value').find('label').first().html('匹配人数：');
+            }
+        })
+        $(document).on('change','.areaSelect',function(){
+            var _proCode = $('#eprovinceName').find("option:selected").data('code');
+            var _cityCode = $('#ecityName').find("option:selected").data('code');
+            var _areaCode = $('#edistrictName').find("option:selected").data('code');
+            $('input[name=pro_code]').val(_proCode);
+            $('input[name=city_code]').val(_cityCode);
+            $('input[name=area_code]').val(_areaCode);
+        })
+    });
+    </script>
+
+<script>
+    var $;
+    var layer;
+    layui.use(['element', 'jquery', 'form', 'layer'], function() {
+        $ = layui.jquery;
+        layer = layui.layer;
+
+        layer.photos({
+            photos: '#layer-photos-demo',
+            shift: 3  //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
+</script>
+{include file="common/foot" /}

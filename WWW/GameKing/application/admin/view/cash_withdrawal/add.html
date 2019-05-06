@@ -1,0 +1,88 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('add')}" method="post" id="form">
+        <input type="hidden" name="id" value="{$data['id']??''}">
+        <div class="item">
+            <label>话题名称：</label>
+            <div class="i_bd">
+                <input class="edit_input" name="title" value="{$data['title']??''}" style="width:30%;" type="text"/>
+            </div>
+        </div>
+        <div class="item match-value">
+            <label>所属板块：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="htid" id="huatiList">
+                        {volist name='huatiList' id='ht' key="key"}
+                        <option value="0">请选择分类</option>
+                        {if condition="isset($data['htid']) and $data['htid'] eq $key"}
+                        <option value="{$key}" selected>{$ht.ht_title}</option>
+                        {else/}
+                        <option value="{$key}">{$ht.ht_title}</option>
+                        {/if}
+                        {/volist}
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="item">
+            <label>话题详情：</label>
+
+            <div class="i_bd">
+                <textarea name="content" id="editor_id" cols="30" rows="20">{$data['content']??''}</textarea>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+            <div class="i_bd">
+                <a href="javascript:;" id="form_btn" class="btn btn-success">提交</a>
+            </div>
+        </div>
+
+
+    </form>
+
+</div><!--v_bd-->
+<script type="text/javascript" src="/static/manage/js/distpicker.data.js"></script>
+<script type="text/javascript" src="/static/manage/js/distpicker.js"></script>
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+        $(document).on('click','.match-block label',function(){
+            var _type = $(this).data('type');
+            if(_type == 'ppsj'){
+                $('.match-value').find('label').first().html('匹配时间：');
+            }
+            if(_type == 'pprs'){
+                $('.match-value').find('label').first().html('匹配人数：');
+            }
+        })
+        $(document).on('change','.areaSelect',function(){
+            var _proCode = $('#eprovinceName').find("option:selected").data('code');
+            var _cityCode = $('#ecityName').find("option:selected").data('code');
+            var _areaCode = $('#edistrictName').find("option:selected").data('code');
+            $('input[name=pro_code]').val(_proCode);
+            $('input[name=city_code]').val(_cityCode);
+            $('input[name=area_code]').val(_areaCode);
+        })
+    });
+    </script>
+{include file="common/foot" /}

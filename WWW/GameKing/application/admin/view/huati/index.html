@@ -1,0 +1,167 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <div class="">
+        <form action="/admin/Huati/index.html" method="get" class="cl_form">
+            <div class="demoTable">
+                <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+                    <input type="text" value="{$start_time|default=''}" placeholder="请选择查询开始时间" name="start_time" class="layui-input" id="start_time">
+                </div>至
+                <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+                    <input type="text" placeholder="请选择查询结束时间" value="{$end_time|default=''}" class="layui-input" name="end_time" id="end_time">
+                </div>
+                <div class="layui-inline">
+                    <input class="layui-input" name="content" placeholder="请输入帖子内容" value="{$content|default=''}" id="demoReload" autocomplete="off">
+                </div>
+                <button class="layui-btn" data-type="reload">搜索</button>
+            </div>
+        </form>
+    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr class="h">
+            <td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value="" />全选</td>
+            <td>帖子内容</td>
+            <td>用户昵称</td>
+            <td>点赞数</td>
+            <td>评论数</td>
+            <td>转发数</td>
+            <td>收藏数</td>
+            <td>浏览数</td>
+            <td>发表时间</td>
+            <td>是否推荐</td>
+            <!--<td>操作</td>-->
+        </tr>
+        {volist name="list" id="vo"}
+        <tr>
+            <td><input name="chk_list" type="checkbox" value="{$vo.id}" /></td>
+            <td><b>{$vo.content}</b></td>
+            <td>
+                {$vo.nickname|default=''}
+            </td>
+            <td>{$vo.praises}</td>
+            <td>{$vo.comments}</td>
+            <td>{$vo.forwarding}</td>
+            <td>{$vo.collects}</td>
+            <td>{$vo.views}</td>
+            <td>{$vo.createtime|date='Y-m-d H:i:s',###}</td>
+            <td width="10%" class=" layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin: 0;">
+                        <input type="checkbox" name="open" {if condition="$vo.is_rem"}checked{/if} data-id="{$vo.id}" lay-skin="switch" lay-filter="tuijian" lay-text="开启|关闭">
+                    </div>
+                </div>
+            </td>
+           <!--<td>-->
+               <!--<a href="{:url("edit?id=$vo[id]")}" class="btn btn-primary">查看</a>-->
+           <!--</td>-->
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+            <td>
+                选中项 :
+                <a href="javascript:;" class="v_btn" onclick="del();" >删除</a>
+            </td>
+            <td colspan="9">{$page}</td>
+        </tr>
+    </table>
+
+</div><!--v_bd-->
+<script>
+    layui.use('form', function(){
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        form.render();
+        form.on('switch(tuijian)', function(data){
+            var _checked = this.checked;
+            var _id = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                url: "{:url('admin/Huati/tuijian')}",
+                dataType: 'json',
+                data: {id: _id},
+                success: function (data) {
+                    if(data.code){
+                        alert(data.msg);
+                    }else{
+                        if(_checked){
+                            layer.msg('推荐成功');
+                        }else{
+                            layer.msg('取消成功');
+                        }
+                    }
+                }
+            });
+        });
+    });
+    $(".chk_all").click(function(){
+        if(!$(this).attr("checked")){
+            $("input[name='chk_list']").removeAttr("checked");
+        }else{
+            $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+        }
+    });
+    function del(){
+        if(!confirm("确定要删除选中项吗？")){
+            return false;
+        }
+        var arrChk=$("input[name='chk_list']:checked");
+        var val='';
+        for (var i=0;i<arrChk.length;i++)
+        {
+            val=val+","+arrChk[i].value;
+        }
+        val = val.substr(1);
+        if(val==''){
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url="{:url("del")}";
+        $.ajax({
+            url:url,
+            data:"id="+val,
+            type:'post',
+            success:function(txt){
+                tishi('success',txt.msg,window.location.href)
+            }
+
+        })
+    }
+    layui.use('laydate', function datatime(){
+        var laydate = layui.laydate;
+        //日期时间
+        var start = laydate.render({
+            elem: '#start_time',
+            type: 'datetime',
+            // value: new Date(),
+            calendar: true,
+            done: function(value, date, endDate){
+                end.config.min = {
+                    year: date.year,
+                    month: date.month - 1,
+                    date: date.date,
+                    hours: date.hours,
+                    minutes: date.minutes,
+                    seconds: date.seconds
+                }
+            }
+
+        });
+        var end = laydate.render({
+            elem: '#end_time',
+            type: 'datetime',
+            // value: new Date(),
+            calendar: true,
+            done: function(value, date){
+                start.config.max = {
+                    year: date.year,
+                    month: date.month - 1,
+                    date: date.date,
+                    hours: date.hours,
+                    minutes: date.minutes,
+                    seconds: date.seconds
+                }
+            }
+        });
+    });
+
+</script>
+{include file="common/foot" /}

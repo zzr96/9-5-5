@@ -1,0 +1,171 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+	<span class="btn btn-primary addTag">添加职位亮点</span>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+			  <tr class="h">
+				<td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value="" />全选</td>
+				<td>职位亮点</td>
+				<td>操作</td>
+			  </tr>
+			  {volist name="list" id="vo"}
+			  <tr>
+				<td><input name="chk_list" type="checkbox" value="{$vo.id}" /></td>
+				<td><b>{$vo.title}</b></td>
+				<td><a href="{:url("addJobTag?id=$vo[id]")}">编辑</a></td>
+			  </tr>
+			  {/volist}
+			  <tr class="f">
+				<td><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+			    <td>
+					选中项 :
+					<a href="javascript:;" class="v_btn" onclick="del();" >删除</a> 
+			    <td colspan="3"></td>
+			  </tr>
+			</table>
+	 
+</div><!--v_bd-->	 
+{include file="common/foot" /}
+<script>
+    var layer;
+    layui.use(['layer'], function(){
+        layer = layui.layer;
+    });
+    $('.addTag').on('click',function(){
+        layer.prompt({
+            formType: 2,
+            title: '添加职位亮点',
+        }, function(value, index, elem){
+            $.ajax({
+                type: "POST",
+                url: "{:url('addJobTag')}",
+                dataType: 'json',
+                data: {title:value},
+                success: function (data) {
+                    if (data.code) {
+                        layer.msg('添加成功', {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            layer.close(index);
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.msg(data.msg, {
+                            icon: 5,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                        //tishi('error', data.msg);
+                    }
+                }
+            });
+        });
+    })
+</script>
+
+<script>
+$(".chk_all").click(function(){
+	if(!$(this).attr("checked")){
+		$("input[name='chk_list']").removeAttr("checked");
+	}else{
+     $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+	 }
+});
+
+
+
+function del(){
+if(!confirm("确定要删除选中项吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url('delTag')}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+					 }
+					
+		})
+}
+function jinyong(){
+	if(!confirm("确定要选中项禁用吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url("jinyong")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+
+					 }
+					
+		})
+}
+function qiyong(){
+	if(!confirm("确定要选中项启用吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url("qiyong")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+
+					 }
+					
+		})
+}
+
+function paixu(id,type){
+	var url="{:url("paixu")}";
+	$.ajax({
+		url:url,
+		data:"id="+id+"&type="+type,
+		success:function(txt){
+			//alert(JSON.stringify(txt))
+			if(txt.code==1){
+				window.location.href=window.location.href
+			}
+		
+		}
+	
+	})
+
+}
+
+</script>

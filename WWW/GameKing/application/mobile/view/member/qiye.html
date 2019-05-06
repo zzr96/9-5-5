@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="/static/mobile/css/mui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/style.css"/>
+    <link href="/static/mobile/css/iconfont.css" rel="stylesheet" />
+    <link href="/static/mobile/css/mui.picker.css" rel="stylesheet" />
+    <link href="/static/mobile/css/mui.poppicker.css" rel="stylesheet" />
+   <style type="text/css">
+.margin-btn-a{
+    width: 100%;
+    display: block;
+    font-weight: 1.42;
+    margin-top: 60px;
+    padding:6px 12px;
+    text-align: center;
+    line-height: 36px;
+    height: 44px;
+    background: #23B8FF;
+    color: #f7f7f7;
+    font-size: 15px;
+    border-radius: 4px;
+    border: 0;}
+   </style>
+</head>
+<body>
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-pull-left " onclick="javascript:history.go(-1)"><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">入驻</h1>
+	</header>
+	<div class="header-counter ruzhu-content">
+        <ul class="mui-table-view">
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">公司名称</label>
+               <input type="text" class="company_name" placeholder="请输入公司名称" value="{$renzheng['company_name']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">联系电话</label>
+               <input type="text" class="contact" placeholder="请输入联系电话" value="{$renzheng['contact']??''}">
+              </div>
+        	</li>
+            <li class="mui-table-view-cell">
+                <div class="mui-navigate-right">
+                    <label for="">公司地址</label>
+                    <input type="hidden" class="pro_code">
+                    <input type="hidden" class="city_code">
+                    <input type="hidden" class="area_code">
+                    <input type="text" class="" id="showCityPicker1" placeholder="请选择公司地址"  value="{$renzheng['addressText']??''}">
+                </div>
+            </li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">详细地址</label>
+
+               <input type="text" class="address" placeholder="请填写详细地址"  value="{$renzheng['address']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">法人姓名</label>
+               <input type="text" class="legal_person" placeholder="请输入真实姓名" value="{$renzheng['legal_person']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">QQ邮箱</label>
+               <input type="text" class="qq_email" placeholder="请输入QQ邮箱" value="{$renzheng['qq_email']??''}">
+              </div>
+        	</li>
+        </ul>
+        {if condition="isset($renzheng['company_name'])"}
+        <a class="margin-btn-a" href="{:url('mobile/member/qiye2')}">下一步</a>
+        {else}
+        <input type="button" class="margin-btn" value="下一步">
+        {/if}
+
+	 </div>
+</body>
+
+<script type="text/javascript" src="/static/mobile/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.picker.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.poppicker.js"></script>
+<script src="/static/mobile/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+ <script type="text/javascript">
+     $('.margin-btn').on('click',function(){
+         var company_name = $('.company_name').val();
+         var contact = $('.contact').val();
+         var address = $('.address').val();
+         var legal_person = $('.legal_person').val();
+         var qq_email = $('.qq_email').val();
+         var param = {
+             company_name:company_name,
+             contact:contact,
+             pro_code:$('.pro_code').val(),
+             city_code:$('.city_code').val(),
+             area_code:$('.area_code').val(),
+             address:address,
+             legal_person:legal_person,
+             qq_email:qq_email,
+         };
+         if(!company_name || !contact || !address || !legal_person || !qq_email){
+             mui.toast('请填写完整表单');
+             return false;
+         }
+         $.ajax({
+             type: "POST",
+             url: "{:url('mobile/member/qiye')}",
+             dataType: 'json',
+             data: param,
+             success: function (data) {
+                 if(data.code == 1){
+                     mui.toast(data.msg);
+                 }else{
+                     mui.toast('成功提交');
+                     setTimeout(function(){
+                         window.location.href = "{:url('mobile/member/qiye2')}";
+                     },1000)
+
+                 }
+             }
+         });
+
+     })
+</script>
+<script>
+    (function($, doc) {
+        $.init();
+        $.ready(function() {
+            /**
+             * 获取对象属性的值
+             * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+             * @param {Object} obj 对象
+             * @param {String} param 属性名
+             */
+            var _getParam = function(obj, param) {
+                return obj[param] || '';
+            };
+
+            //-----------------------------------------
+            //					//级联示例
+            var cityPicker3 = new $.PopPicker({
+                layer: 3
+            });
+            cityPicker3.setData(cityData3);
+            var showCityPickerButton = doc.getElementById('showCityPicker1');
+            showCityPickerButton.addEventListener('tap', function(event) {
+                cityPicker3.show(function(items) {
+                    showCityPickerButton.value =  _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                    jQuery('.pro_code').val(items[0].value);
+                    jQuery('.city_code').val(items[1].value);
+                    jQuery('.area_code').val(items[2].value);
+                });
+            }, false);
+        });
+    })(mui, document);
+
+</script>
+</html>

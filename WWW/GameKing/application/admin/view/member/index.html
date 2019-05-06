@@ -1,0 +1,228 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="">
+        <form action="/admin/member/index.html" method="get" class="cl_form">
+            <div class="demoTable">
+                <div class="layui-inline">
+                    <select class="layui-select" name="time" id="demoReloads" autocomplete="off">
+                    <option value="3" {if $time == 3 }selected{/if}>全部</option>
+                    <option value="1" {if $time == 1 }selected{/if}>今日新增</option>
+                    <option value="2" {if $time == 2 }selected{/if}>近七日新增</option>
+                    </select>
+                </div>
+                <div class="layui-inline">
+                    <input class="layui-input" name="phone" placeholder="请输入手机号" value="{$phone}" id="demoReload" autocomplete="off">
+                </div>
+                <button class="layui-btn" data-type="reload">搜索</button>
+            </div>
+        </form>
+    </div>
+    <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+        <tr class="h">
+            <td >序号</td>
+            <td >用户</td>
+            <td >电话号码</td>
+            <td >性别</td>
+            <td >余额</td>
+            <td >注册时间</td>
+            <td >客服</td>
+            <td >操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr id="item{$vo.uid}">
+            <td>{$key + 1}</td>
+            <td><img src="{$vo.avatar}" style="height: 50px;width: 60px" alt="">{$vo.nickname}</td>
+            <td>{$vo.phone}</td>
+            <td>{$vo.sex==1?'男':'女'}</td>
+            <td>{$vo.balance/100}</td>
+            <td>{$vo.createtime}</td>
+            <td width="10%" class=" layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin: 0;">
+                        <input type="checkbox" name="open" {if condition="$vo.is_customer"}checked{/if} data-uid="{$vo.uid}" lay-skin="switch" lay-filter="tuijian" lay-text="是|否">
+                    </div>
+                </div>
+            </td>
+            <td width="10%" class=" layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin: 0;">
+                        <a href="{:url("viewUser?uid=$vo[uid]")}" class="layui-btn layui-btn-success layui-btn-s" lay-event="detail" >查看</a>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td colspan="8">{$page}</td>
+        </tr>
+    </table>
+</div>
+{include file="common:foot"}
+<script>
+
+    layui.use(['form','jquery','layer'], function () {
+        var form = layui.form;
+        var jquery = layui.jquery;
+        var layer = layui.layer;
+        //监听提交
+        form.on('switch(tuijian)', function (data) {
+            console.log(data.elem.checked); //开关是否开启，true或者false
+            console.log(data.value); //开关value值，也可以通过data.elem.value得到
+            var x=data.elem.checked;
+            if(!x){
+                layer.msg('有且只有一位客服哟！');
+                data.elem.checked=!x;
+                form.render();
+                return false;
+            }
+            var _uid = $(this).data('uid');
+            $.ajax({
+                type: "GET",
+                url: "{:url('admin/member/setCustomer')}",
+                dataType: 'json',
+                data: {uid: _uid},
+                success: function (data) {
+                    layer.msg('设置成功');
+                    window.location.reload();
+                }
+            });
+
+        });
+    });
+
+
+
+    // layui.use('form', function(){
+    //     var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+    //     form.on('switch(tuijian)', function(data){
+    //         var _checked = this.checked;
+    //         var _uid = $(this).data('uid');
+    //         var x=data.elem.checked;
+    //         $.ajax({
+    //             type: "GET",
+    //             url: "{:url('admin/member/setCustomer')}",
+    //             dataType: 'json',
+    //             data: {uid: _uid},
+    //             success: function (data) {
+    //                 if(data.code){
+    //                     alert(data.msg);
+    //                     data.elem.checked = x;
+    //                     form.render();
+    //                     return false;
+    //                 }else {
+    //                     if(_checked){
+    //                         layer.msg('设置成功');
+    //                     }else{
+    //                         layer.msg('取消成功');
+    //                     }
+    //                 }
+    //             }
+    //         });
+    //     });
+    // });
+
+    $(".chk_all").click(function(){
+    if(!$(this).attr("checked")){
+        $("input[name='chk_list']").removeAttr("checked");
+    }else{
+     $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+     }
+});
+    function lookCate(obj) {
+        var val = obj.value;
+        window.location.href = '{:url("index")}?key={:input("key")}&qiyong=' + val;
+    }
+
+    //余额保存
+    $('.baocun').click(function(){
+        var id=$(this).attr('data-id');
+            var yue=$(this).prev().val();
+        var url='{:url("updata_yue")}?id='+id+'&yue='+yue;
+ 
+        $.ajax({
+            url:url,
+            success:function(txt){
+                if(txt.code==1){
+                    alert(txt.msg)
+                   // window.location.href=window.location.href;
+                }else{
+                    alert(txt.msg)
+                }
+            }
+        })
+    })
+    //删除
+    function onexinxi_del(id){
+        if(!confirm("确定要删除这条信息吗？")){
+        return false;
+    }
+    var url="{:url("xinxi_del")}";
+    $.ajax({
+        url:url,
+        data:"id="+id,
+        type:'post',
+        success:function(txt){
+          alert(txt.msg);
+            if(txt.ret==1){
+                window.location.href=window.location.href
+            }
+        }
+    })
+    }
+    //多选删除
+    function xinxi_del() {
+        if (!confirm("此操作不能撤销，确定要删除选中项吗？")) {
+            return false;
+        }
+
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url('xinxi_del')}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                alert(txt.msg);
+                if (txt.ret == 1) {
+                    window.location.href = window.location.href;
+                }
+            }
+        })
+    }
+    function searchs() {
+        var val = $("#name").val();
+        if (val.replace(/ /g, '') == "") {
+            return alert("请输入正确用户手机号");
+        }
+        window.location.href = '{:url("index")}?key=' + val + '&qiyong={:input("qiyong")}';
+    }
+
+    function status(uid, status) {
+        var data = 'id=' + uid + '&status=' + status;
+        var url = '{:url("status")}';
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                if (data.code == 0) {
+                    alert(data.msg);
+                    window.location.href = window.location.href;
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+    }
+   
+
+</script>

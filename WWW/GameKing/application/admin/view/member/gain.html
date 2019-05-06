@@ -1,0 +1,112 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="v_bd_tag">
+        <a href="{:url('caiwu')}"><span class="focus">全部流水({$total})</span></a>
+		<span>会员搜索：
+			<input name="email" id="name" class="edit_input" value="{:input('name')}" type="text"/>
+			<a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a>
+            <i class="huise"> ( 输入用户手机号 ) </i>
+		</span>
+    </div>
+    <br/>
+
+    <div class="bd">
+        <?php
+			if(!$list){
+		?>
+        <div class="none_list">暂无任何收益</div>
+        <?php
+			}else{
+		?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>Id</td>
+                <td>用户</td>
+                <td>金额</td>
+                <td>类型</td>
+                <td>日期</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr id="item{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.uname}</td>
+                <td>${$vo.money}</td>
+                <td>{$vo.type==1?'推广机器':($vo.type==2?'分润金额':'奖励金额')}</td>
+                <td>{$vo.datetime}</td>
+                <td>
+                    <a href="javascript:;" class="v_btn" onclick="Del('{$vo.id}');">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+    function searchs() {
+        var val = $("#name").val();
+        if (val.replace(/ /g, '') == "") {
+            return alert("搜索内容不能为空");
+        }
+        window.location.href = '?key=' + val;
+    }
+
+    function status(uid, status) {
+        var data = 'id=' + uid + '&status=' + status;
+        var url = '{:url("status")}';
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                if (data.code == 0) {
+                    alert(data.msg);
+                    window.location.href = window.location.href;
+                } else {
+                    alert(data.msg);
+                }
+            }
+        })
+    }
+
+    function renzheng(id, status) {
+
+        $.ajax({
+            type: 'post',
+            url: '{:url("renzheng")}',
+            data: {
+                id: id,
+                status: status,
+            },
+
+            success: function (txt) {
+                alert(txt.msg)
+                if (txt.code == 0) {
+                    window.location.href = window.location.href
+                }
+            }
+        })
+    }
+
+    function Del(id) {
+        if (!confirm("确定要删除此条数据吗？")) {
+            return false;
+        }
+        var url = '/admin/user/dele.html?id=' + id;
+        $.ajax({
+            url: url,
+            success: function (txt) {
+                alert(txt.msg)
+
+                if (txt.code == 1) {
+                    //  alert('33')
+                    window.location.href = window.location.href
+                }
+            }
+        })
+    }
+
+</script>

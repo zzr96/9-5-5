@@ -1,0 +1,70 @@
+{include file="common:head"}
+<div class="v_bd">
+    <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+        <tr class="h">
+            <td ><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+            <td >用户</td>
+            <td >电话号码</td>
+            <td >性别</td>
+            <td >余额</td>
+            <td >注册时间</td>
+            <td >操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr id="item{$vo.uid}">
+            <td><input name="chk_list"   type="checkbox" value="{$vo.uid}" /> </td>
+            <td><img src="{$vo.avatar}" style="height: 50px;width: 60px" alt="">{$vo.nickname}</td>
+            <td>{$vo.phone}</td>
+            <td>{$vo.sex==1?'男':'女'}</td>
+            <td>{$vo.balance}</td>
+            <td>{$vo.createtime|date="Y-m-d H:i:s",###}</td>
+            <td>
+                {if condition="$vo.has_rz_info"}
+                <a href="{:url('admin/member/qiyeUserInfo',['uid'=>$vo.uid])}" class="btn btn-primary">查看认证信息</a>
+                {/if}
+            </td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td colspan="7">{$page}</td>
+        </tr>
+    </table>
+</div>
+{include file="common:foot"}
+<script>
+    layui.use('form', function(){
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        form.render();
+        form.on('switch(tuijian)', function(data){
+            var _checked = this.checked;
+            var _uid = $(this).data('uid');
+            $.ajax({
+                type: "GET",
+                url: "{:url('admin/member/tuijian')}",
+                dataType: 'json',
+                data: {uid: _uid},
+                success: function (data) {
+                    if(data.code){
+                        alert(data.msg);
+                    }else{
+                        if(_checked){
+                            layer.msg('推荐成功');
+                        }else{
+                            layer.msg('取消成功');
+                        }
+                    }
+                }
+            });
+        });
+    });
+    $(".chk_all").click(function(){
+    if(!$(this).attr("checked")){
+        $("input[name='chk_list']").removeAttr("checked");
+    }else{
+     $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+     }
+});
+
+
+
+</script>

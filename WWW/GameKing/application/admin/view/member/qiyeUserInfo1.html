@@ -1,0 +1,113 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+	<form id="addform" method="post">
+		<div class="item">
+			<label>公司名称:</label>
+			<div class="i_bd">
+				<p>{$data.company_name}</p>
+			</div>
+		</div>
+		<div class="item">
+		<label>联系电话：</label>
+		<div class="i_bd">
+			<p>{$data.contact}</p>
+		</div>
+		</div>
+		<div class="item">
+		<label>公司地址：</label>
+		<div class="i_bd" id="price">
+			<p>{$data.area_text}{$data.address}</p>
+		</div>
+		</div>
+		<div class="item">
+			<label>法人姓名:</label>
+			<div class="i_bd">
+				<p>{$data.legal_person}</p>
+			</div>
+		</div>
+		<div class="item">
+			<label>QQ邮箱:</label>
+			<div class="i_bd">
+				<p>{$data.qq_email}</p>
+			</div>
+		</div>
+		<div class="item">
+			<label>身份证正面:</label>
+			<div class="i_bd">
+				<img src="/{$data.idcard_front}" width="300" alt="">
+			</div>
+		</div>
+		<div class="item">
+			<label>身份证反面:</label>
+			<div class="i_bd">
+				<img src="/{$data.idcard_back}" width="300" alt="">
+			</div>
+		</div>
+		<div class="item">
+			<label>营业执照:</label>
+			<div class="i_bd">
+				<img src="/{$data.license}" width="300" alt="">
+			</div>
+		</div>
+
+
+		<div class="item">
+			<label></label>
+			<div class="i_bd">
+				{if condition="$data.status eq 0"}
+				<input class="btn btn-success"  type="button" value="通过" />
+				<input class="btn btn-danger"  type="button" value="拒绝" />
+				{/if}
+			</div>
+		</div>
+	</form>
+</div><!--v_bd-->	 
+{include file="common:foot"}
+<script>
+$(document).ready(function(){
+  $('#addformbtn').click(function(){
+    $('#addform').ajaxSubmit(function(data){
+      if(data.code==0){
+			  tishi("success",data.msg)
+				window.location.href='{:url("index")}'
+			}else{
+				$("#reerror").html(data.msg).show();
+			}
+    });
+    return false;
+  });
+});
+$('.btn-success').on('click',function(){
+    var uid = {$data.uid};
+    $.ajax({
+        type: "GET",
+        url: "{:url('admin/member/qiyeShenhe')}",
+        dataType: 'json',
+        data: {uid: uid,type:1},
+        success: function (data) {
+            if(data.code){
+                alert(data.msg);
+            }else{
+                tishi("success",'审核通过')
+            }
+        }
+    });
+})
+$('.btn-danger').on('click',function(){
+    var uid = {$data.uid};
+    $.ajax({
+        type: "GET",
+        url: "{:url('admin/member/qiyeShenhe')}",
+        dataType: 'json',
+        data: {uid: uid,type:2},
+        success: function (data) {
+            if(data.code){
+                alert(data.msg);
+            }else{
+                tishi("error",'审核拒绝')
+            }
+        }
+    });
+})
+</script>
+

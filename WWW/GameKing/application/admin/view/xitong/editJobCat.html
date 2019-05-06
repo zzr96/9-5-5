@@ -1,0 +1,75 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('editJobCat')}" method="post" id="form">
+
+        {if condition="$data.level eq 1"}
+        <input type="hidden" name="level" value="1">
+        <div class="item">
+            <label>专业名称：</label>
+            <div class="i_bd">
+                <input type="text" name="name" class="edit_input" size="60" value="{$data.name}" />
+            </div>
+        </div>
+        {else condition="$data.level eq 2"}
+        <div class="item">
+            <input type="hidden" name="level" value="2">
+            <label>选择专业：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="pid" id="pid" >
+                        {volist name="zhuanye" id="zy"}
+                        {if condition="$zy.id eq $data.pid"}
+                        <option value="{$zy.id}" selected>{$zy.name}</option>
+                        {else/}
+                        <option value="{$zy.id}">{$zy.name}</option>
+                        {/if}
+                        {/volist}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <label>专业性质：</label>
+            <div class="i_bd">
+                <input type="text" name="name" class="edit_input" size="60" value="{$data.name}" />
+            </div>
+        </div>
+        {/if}
+
+
+
+
+    <div class="item">
+        <label></label>
+        <div class="i_bd">
+            <input type="hidden" name="id" value="{$data.id}">
+            <input name="" class="btn btn-success" type="button" id="form_btn" value="提交" />
+        </div>
+    </div>
+
+    </form>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+
+    $(function () {
+        $("#form_btn").click(function () {
+            var _zhuanye = $('input[name=name]').val();
+            if(_zhuanye == ''){
+                tishi('error', '请填写类别');
+                return false;
+            }
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 0) {
+                    tishi('success', txt.msg, "{:url('admin/xitong/jobcatlist')}");
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+
+
+    });
+</script>
+{include file="common/foot" /}

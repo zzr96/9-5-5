@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="/static/mobile/css/mui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/style.css"/>
+    <link href="/static/mobile/css/iconfont.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/swiper.min.css"/>
+   <style type="text/css">
+   html,body{background: #fff;}
+   .mui-bar-nav .mui-title{color: #fff}
+   .mui-pull-left i{color: #fff}
+   .mui-bar-nav span{color:#D1F6FD;font-size: 15px }
+
+   #box{
+  margin: 20px auto;
+}
+.swiper-container {
+  width: 100%;
+ /*下面的padding 一定要加 （因为容器多余的部分被隐藏啦）*/
+  padding-top: 140px;
+  padding-bottom: 50px;
+}
+.qy-home img{width: 45px}
+.swiper-slide {
+  width: 50%;
+  height: 300px;
+  transition: all 0.5s;
+  background:#2392EB;
+  text-align: center;
+  border-radius: 6px;
+  overflow: hidden;
+  
+}
+.qy-home .commond-wrap .p3{margin-top: 20px;color: #AFF4FE}
+ /*激活的样式（选中的当前项）*/
+
+.swiper-slide.swiper-slide-active{
+  transform: scale(1);
+  z-index: 2;
+
+}
+.swiper-slide .btm img{float: right;width:55px;height:55px;}
+@media only screen and (max-width:380px ) {
+	.swiper-slide{height:280px}
+}
+@media only screen and (max-width:360px ) {
+	.swiper-slide{height:270px}
+	.qy-home .commond-wrap .p3{margin-top: 10px}
+}
+@media only screen and (max-width:340px ) {
+	.swiper-slide{height:250px}
+	.swiper-container{padding-top: 80px}
+	.qy-home img{width: 40px}
+	.qy-home .commond-wrap .p1{margin: 6px 0}
+	.qy-home .commond-wrap .p3{margin-top: 6px}
+	.qy-home .commond-wrap .btm{line-height: 38px;height: 38px}
+	
+}
+.commond-content>p{;font-size:14px;color: #A79683;text-align: center;}
+.commond-content input[type=button]{width:94%;height:44px;background: #CCC0B2;color: #f7f7f7;font-size: 16px;
+border: 0;border-radius: 22px;margin-top:3%;margin-left: 3%;}
+.swiper-pagination-bullet{background-color: #01b0f3;border:2px solid #01b0f3;}
+.swiper-pagination-bullet-active{background-color: #fff;border:2px solid #01b0f3;width:9px;height: 9px;}
+
+</style>
+
+
+</head>
+<body>
+		<!--头 -->
+	
+	<div class=" qy-home">
+		<header class=" mui-bar mui-bar-nav ">
+		<a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">vip充值</h1>
+		<span class="loginout">退出登录</span>
+	</header>
+	  <div id="box">
+       <div class="swiper-container index-container">
+		    <div class="swiper-wrapper">
+		      <div class="swiper-slide">
+		      	<div class="commond-wrap">
+		      
+		      		<img src="/static/mobile/img/school3.png"/>
+		      
+		      	    <p class="p1">学校</p>
+		      	     <p class="p2"><i>￥</i> <m>1500</m>/年</p>
+		      	     <p class="p3">软文<br/>
+		      	     	工程造价
+		      	     </p>
+		      	    <div class="btm" data-vip="2">
+		      	    立即购买	    
+		      	    </div>
+		      	</div>
+		      </div>
+		     <div class="swiper-slide">
+		      	<div class="commond-wrap">
+		      		<img src="/static/mobile/img/school1.png"/>
+		      
+		      	    <p class="p1">企业</p>
+		      	     <p class="p2"><i>￥</i> <m>1800</m>/年</p>
+		      	     <p class="p3">软文<br/>
+		      	     	工程造价
+		      	     </p>
+		      	    <div class="btm" data-vip="1">
+		      	    立即购买	    
+		      	    </div>
+		      	</div>
+		      </div>
+		       <div class="swiper-slide">
+		      	<div class="commond-wrap">
+		      		<img src="/static/mobile/img/school2.png"/>
+		      
+		      	    <p class="p1">供应商</p>
+		      	     <p class="p2"><i>￥</i> <m>2000</m>/年</p>
+		      	     <p class="p3">软文<br/>
+		      	     	工程造价
+		      	     </p>
+		      	    <div class="btm" data-vip="3">
+		      	    立即购买	    
+		      	    </div>
+		      	</div>
+		      </div>
+				<div class="swiper-slide">
+					<div class="commond-wrap">
+						<img src="/static/mobile/img/school2.png"/>
+
+						<p class="p1">租赁商</p>
+						<p class="p2"><i>￥</i> <m>2000</m>/年</p>
+						<p class="p3">软文<br/>
+							工程造价
+						</p>
+						<div class="btm" data-vip="4">
+							立即购买
+						</div>
+					</div>
+				</div>
+		      
+		    </div>
+    <!-- Add Pagination -->
+		    <div class="swiper-pagination index-pgt"></div>
+	    </div>
+	        </div>
+	       
+	 </div>
+</body>
+
+<script type="text/javascript" src="/static/mobile/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/swiper.min.js">
+
+</script>
+ <script type="text/javascript">
+ 	  var swiper = new Swiper('.index-container', {
+ 	  	   loop:true,
+          spaceBetween: 30,
+       //根据slider的宽度自动分布
+	  slidesPerView: 'auto',
+
+	  // active下 居中显示
+	  centeredSlides: true,
+	   pagination: {
+	        el: '.index-pgt',
+	        clickable: true,
+	      }
+		});
+ 	  //默认微信支付，暂时缺少支付选择页面
+ 	  $('.btm').on('click',function(){
+ 	      var vip = $(this).data('vip');
+          $.ajax({
+              type: "get",
+              url: "{:url('apis/pay/alipayWap')}",
+              dataType: 'json',
+              data: {vip:vip},
+              success: function (data) {
+                  console.log(JSON.stringify(data));
+                  window.location.href = data.url;
+              }
+          });
+	  });
+	 $('.loginout').on('click',function(){
+         var vip = $(this).data('vip');
+         var btnArray = ['取消', '确定'];
+         mui.confirm('确认退出吗', '确认退出', btnArray, function(e) {
+             if (e.index == 1) {
+                 $.ajax({
+                     type: "POST",
+                     url: "{:url('apis/login/logout')}",
+                     dataType: 'json',
+                     success: function () {
+                         window.location.reload();
+                     }
+                 });
+             }
+         })
+	 })
+</script>
+</html>

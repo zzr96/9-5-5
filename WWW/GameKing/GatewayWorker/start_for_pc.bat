@@ -1,0 +1,2 @@
+php Applications\pcChat\start_register.php Applications\pcChat\start_gateway.php Applications\pcChat\start_businessworker.php
+pause

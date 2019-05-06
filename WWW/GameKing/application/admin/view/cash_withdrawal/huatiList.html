@@ -1,0 +1,116 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr class="h">
+            <td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value="" />全选</td>
+            <td>话题名称</td>
+            <td>添加时间</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr>
+            <td><input name="chk_list" type="checkbox" value="{$vo.htid}" /></td>
+            <td><b>{$vo.ht_title}</b></td>
+            <td>{$vo.addtime|date='Y-m-d H:i:s',###}</td>
+            <td><a href="{:url("editHuati?id=$vo[htid]")}">编辑</a> </td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+            <td>
+                选中项 :
+                <a href="javascript:;" class="v_btn" onclick="del();" >删除</a>
+            </td>
+            <td colspan="8">{$page}</td>
+        </tr>
+    </table>
+
+</div><!--v_bd-->
+<script>
+    $(".chk_all").click(function(){
+        if(!$(this).attr("checked")){
+            $("input[name='chk_list']").removeAttr("checked");
+        }else{
+            $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+        }
+    });
+    function del(){
+        if(!confirm("确定要删除选中项吗？")){
+            return false;
+        }
+        var arrChk=$("input[name='chk_list']:checked");
+        var val='';
+        for (var i=0;i<arrChk.length;i++)
+        {
+            val=val+","+arrChk[i].value;
+        }
+        val = val.substr(1);
+        if(val==''){
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url="{:url('delHuati')}";
+        $.ajax({
+            url:url,
+            data:"id="+val,
+            type:'post',
+            success:function(txt){
+                tishi('success',txt.msg,window.location.href)
+            }
+
+        })
+    }
+    function indexShow(){
+        if(!confirm("确定要设置首页推荐吗？")){
+            return false;
+        }
+        var arrChk=$("input[name='chk_list']:checked");
+        var val='';
+        for (var i=0;i<arrChk.length;i++)
+        {
+            val=val+","+arrChk[i].value;
+        }
+        val = val.substr(1);
+        if(val==''){
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url="{:url('indexShow')}";
+        $.ajax({
+            url:url,
+            data:"id="+val,
+            type:'post',
+            success:function(txt){
+                tishi('success',txt.msg,window.location.href)
+            }
+
+        })
+    }
+    function indexShowDel(){
+        if(!confirm("确定要取消首页推荐吗？")){
+            return false;
+        }
+        var arrChk=$("input[name='chk_list']:checked");
+        var val='';
+        for (var i=0;i<arrChk.length;i++)
+        {
+            val=val+","+arrChk[i].value;
+        }
+        val = val.substr(1);
+        if(val==''){
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url="{:url('indexShowDel')}";
+        $.ajax({
+            url:url,
+            data:"id="+val,
+            type:'post',
+            success:function(txt){
+                tishi('success',txt.msg,window.location.href)
+            }
+
+        })
+    }
+</script>
+{include file="common/foot" /}

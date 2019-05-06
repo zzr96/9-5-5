@@ -1,0 +1,60 @@
+{include file="common:head"}
+<style type="text/css">
+	.item1{
+		width: 350px;
+		height: 150px;
+		margin: 5px;
+	    border: 1px solid #dce4ec;
+	    padding: 1px;
+	    margin-bottom: 1px;
+	    background: #f3f3f3;
+	}
+</style>
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('skills_edit_do')}" method="post" id="form">
+    	 <div class="item">
+            <label>标题：</label>
+
+            <div class="i_bd">
+                <input type="txt" name="title" id="title" value="{$find.title}" style="height:28.8px;">
+            </div>
+        </div>
+        <div class="item">
+            <label>内容：</label>
+
+            <div class="i_bd">
+                <textarea name="content" id="editor_id" cols="30" rows="20">{$find.content}</textarea>
+            </div>
+        </div>
+        <input type="hidden" name="id" value="{$find.id}">
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" type="button" id="form_btn" class="btn btn-success" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+	   KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+    $(function (){
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("skills")}');
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+</script>

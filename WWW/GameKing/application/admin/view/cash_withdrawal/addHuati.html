@@ -1,0 +1,61 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('addHuati')}" method="post" id="form">
+        <input type="hidden" name="htid" value="{$data['htid']??''}">
+        <div class="item">
+            <label>话题名称：</label>
+            <div class="i_bd">
+                <input class="edit_input" name="ht_title" value="{$data['ht_title']??''}" style="width:30%;" type="text"/>
+            </div>
+        </div>
+        <div class="item match-block">
+            <label>是否热门：</label>
+            <div class="i_bd">
+                <label for="is_hot" data-type="ppsj"><input type="radio" id="is_hot" name="is_hot" value="1" {if condition="isset($data) and $data.is_hot"}checked{/if}>是否热门</label>
+
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+            <div class="i_bd">
+                <a href="javascript:;" id="form_btn" class="btn btn-success">提交</a>
+            </div>
+        </div>
+
+
+    </form>
+
+</div><!--v_bd-->
+<script type="text/javascript" src="/static/manage/js/distpicker.data.js"></script>
+<script type="text/javascript" src="/static/manage/js/distpicker.js"></script>
+<script>
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+        $(document).on('click','.match-block label',function(){
+            var _type = $(this).data('type');
+            if(_type == 'ppsj'){
+                $('.match-value').find('label').first().html('匹配时间：');
+            }
+            if(_type == 'pprs'){
+                $('.match-value').find('label').first().html('匹配人数：');
+            }
+        })
+        $(document).on('change','.areaSelect',function(){
+            var _proCode = $('#eprovinceName').find("option:selected").data('code');
+            var _cityCode = $('#ecityName').find("option:selected").data('code');
+            var _areaCode = $('#edistrictName').find("option:selected").data('code');
+            $('input[name=pro_code]').val(_proCode);
+            $('input[name=city_code]').val(_cityCode);
+            $('input[name=area_code]').val(_areaCode);
+        })
+    });
+    </script>
+{include file="common/foot" /}

@@ -1,0 +1,1240 @@
+2018-11-14 01:10:37 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2018-11-14 01:10:37 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2018-11-14 01:10:38 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2018-11-14 01:10:38 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2018-11-14 01:10:39 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2018-11-14 01:23:45 Error: Call to undefined method GatewayWorker\Lib\Gateway::getUidByClientId() in D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\Events.php:28
+Stack trace:
+#0 [internal function]: Events::onMessage('7f0000010b54000...', 's')
+#1 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', 's')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2018-11-15 08:35:33 PDOException: SQL:SELECT * FROM `user` WHERE uid=1 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chat.user' doesn't exist in D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php:1766
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\Events.php(43): GatewayWorker\Lib\DbConnection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"bind",...')
+#3 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"bind",...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2018-11-15 08:36:06 PDOException: SQL:SELECT * FROM `user` WHERE uid=1 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chat.user' doesn't exist in D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php:1766
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\Events.php(43): GatewayWorker\Lib\DbConnection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"bind",...')
+#3 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"bind",...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2018-11-15 08:36:09 PDOException: SQL:SELECT * FROM `user` WHERE uid=1 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chat.user' doesn't exist in D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php:1766
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\Events.php(43): GatewayWorker\Lib\DbConnection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"bind",...')
+#3 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"bind",...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2018-11-15 08:36:56 PDOException: SQL:SELECT * FROM `user` WHERE uid=1 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chat.user' doesn't exist in D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php:1766
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\Events.php(43): GatewayWorker\Lib\DbConnection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"bind",...')
+#3 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"bind",...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2018-11-15 08:59:10 PDOException: SQL:SELECT * FROM `im_history` WHERE uid= :uid and to_uid=:to_uid SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php:1766
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php(1894): GatewayWorker\Lib\DbConnection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\Events.php(58): GatewayWorker\Lib\DbConnection->row()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"say","...')
+#3 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"say","...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\PHPTutorial\WWW\GatewayWorker\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2018-12-18 00:47:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:47:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:48:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:49:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:50:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:51:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:52:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:53:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:54:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:25 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:26 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:27 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 00:55:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2018-12-18 01:07:05 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://wiki.workerman.net/Error3 for detail
+2018-12-18 01:07:05 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://wiki.workerman.net/Error3 for detail
+2018-12-18 01:07:50 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://wiki.workerman.net/Error3 for detail
+2018-12-18 01:07:50 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://wiki.workerman.net/Error3 for detail
+2018-12-18 06:19:25 PDOException: SQL:SELECT * FROM `gc_chat_history` WHERE uid= :uid and to_uid=:to_uid SQLSTATE[42S22]: Column not found: 1054 Unknown column 'to_uid' in 'where clause' in D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php:1766
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php(1894): GatewayWorker\Lib\DbConnection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\PHPTutorial\admin\GatewayWorker\Applications\apiChat\Events.php(46): GatewayWorker\Lib\DbConnection->row()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"say","...')
+#3 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"say","...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\PHPTutorial\admin\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2018-12-19 01:14:30 PDOException: SQL:INSERT INTO `gc_chat_history` ( `uid`,`other_uid`,`addtime`) VALUES ( :uid,:other_uid,:addtime) SQLSTATE[HY000]: General error: 1366 Incorrect integer value: 'undefined' for column 'other_uid' at row 1 in D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php:1766
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\Lib\DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `gc...', Array)
+#1 D:\phpStudy\PHPTutorial\admin\GatewayWorker\Applications\apiChat\Events.php(54): GatewayWorker\Lib\DbConnection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"say","...')
+#3 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"say","...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\PHPTutorial\admin\GatewayWorker\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\PHPTutorial\admin\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2019-04-23 12:31:04 pid:1 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'yingtao'@'localhost' (using password: YES) in D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php:1708
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1708): PDO->__construct('mysql:dbname=yi...', 'yingtao', 'yingtao', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\Events.php(14): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'yingtao', 'yingtao', 'yingtao')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(2306): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1315): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#10 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#11 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-04-23 12:31:05 pid:1 Worker process terminated
+2019-04-23 12:32:12 pid:1 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'game'@'localhost' (using password: YES) in D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php:1708
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1708): PDO->__construct('mysql:dbname=ad...', 'game', 'admin', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\Events.php(14): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'game', 'admin', 'admin123')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(2306): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1315): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#10 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#11 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-04-23 12:32:13 pid:1 Worker process terminated
+2019-04-23 12:32:19 pid:1 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'game'@'localhost' (using password: YES) in D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php:1708
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1708): PDO->__construct('mysql:dbname=ad...', 'game', 'admin', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\Events.php(14): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'game', 'admin', 'admin123')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(2306): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1315): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#10 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#11 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-04-23 12:33:06 pid:1 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'game'@'localhost' (using password: YES) in D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php:1708
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1708): PDO->__construct('mysql:dbname=ad...', 'game', 'admin', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\Events.php(14): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'game', 'admin', 'admin123')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(2306): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1315): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#10 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#11 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-04-23 12:33:07 pid:1 Worker process terminated
+2019-04-23 12:33:16 pid:1 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2019-04-23 12:33:18 pid:1 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'game'@'localhost' (using password: YES) in D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php:1708
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1708): PDO->__construct('mysql:dbname=ad...', 'game', 'admin', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\Events.php(14): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'game', 'admin', 'admin123')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(2306): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1315): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#10 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#11 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-04-23 12:33:29 pid:1 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'game'@'localhost' (using password: YES) in D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php:1708
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1708): PDO->__construct('mysql:dbname=ad...', 'game', 'root', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\Events.php(14): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'game', 'root', 'admin123')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(2306): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1315): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#10 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#11 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-04-23 12:33:30 pid:1 Worker process terminated
+2019-04-23 12:33:39 pid:1 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2019-04-23 12:33:40 pid:1 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'game'@'localhost' (using password: YES) in D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php:1708
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1708): PDO->__construct('mysql:dbname=ad...', 'game', 'root', Array)
+#1 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\Lib\DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\Events.php(14): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'game', 'root', 'admin123')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(2306): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1315): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#10 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\vendor\workerman\workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#11 D:\phpStudy\PHPTutorial\WWW\GameKing\GatewayWorker\Applications\apiChat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}

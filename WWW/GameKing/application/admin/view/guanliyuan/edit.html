@@ -1,0 +1,84 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+	<form action="{:url("edit_do")}" method="post" id="form">
+	  <input name="id" type="hidden" value="{$view.id}" />
+	  			<div class="item">
+					<label>用户名：</label>
+					<div class="i_bd">
+					<input type="text"  value="{$view.name}" disabled="disabled" class="edit_input" size="60" /> 
+					</div>
+				</div>
+				
+				<div class="item">
+					<label>所属角色：</label>
+					<div class="i_bd">
+					<select name="cat" id="cat" >
+					  <option value="">选择角色</option>
+					  {volist name="cat" id="vo"}
+					  <option value="{$vo.id}"  <?php if($view["cat"]==$vo["id"]){echo 'selected="selected"';} ?> >{$vo.name}</option>
+					  {/volist}
+					</select>
+					</div>
+				</div>
+				
+				<div class="item">
+					<label>密码：</label>
+					<div class="i_bd">
+					<input type="password" id="password" name="password" class="edit_input" size="60" /> <span>（留空不做修改）</span>
+					</div>
+				</div>
+				
+				<div class="item">
+					<label>确认密码：</label>
+					<div class="i_bd">
+					<input type="password" id="title" name="repassword" class="edit_input" size="60" />
+					</div>
+				</div>
+				
+				
+				
+				<div class="item">
+					<label>姓名：</label>
+					<div class="i_bd">
+					<input type="text" id="title" name="xingming" value="{$view.xingming}" class="edit_input" size="60" /> 
+					</div>
+				</div>
+				<div class="item">
+					<label>电话：</label>
+					<div class="i_bd">
+					<input type="text" id="title" name="dianhua" value="{$view.dianhua}" class="edit_input" size="60" /> 
+					</div>
+				</div>
+				
+				<div class="item">
+					<label>启用：</label>
+					<div class="i_bd">
+					是<input name="status" type="radio" value="1"  <?php if($view['status']==1){echo 'checked="checked"';} ?> /> 否<input name="status" type="radio" value="2"  <?php if($view['status']==2){echo 'checked="checked"';} ?>  />
+					</div>
+				</div>
+				
+				<div class="item">
+					<label></label>
+					<div class="i_bd">
+						<input name="" class="btn btn-success" type="button" id="form_btn" value="提交" />
+					</div>
+				</div>
+	  		
+				
+			</form>
+	 
+</div><!--v_bd-->	 
+<script>
+$(function(){
+	$("#form_btn").click(function(){
+		$("#form").ajaxSubmit(function(txt){
+			if(txt.code==1){
+				tishi('success',txt.msg,"{:url("index")}")
+			}else{
+				tishi('error',txt.msg)
+			}
+		});
+	})
+})
+</script>
+{include file="common/foot" /}

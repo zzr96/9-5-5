@@ -1,0 +1,83 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class='bd'>
+        <div class="v_tishi">
+            <div style='float:left;margin-top:7px; '>您可通过右侧添加按钮进行属性添加!</div>
+            <p style='float:right;margin-top:4px;'>
+                <a href="{:url('next_cate_add')}?nav=添加二级属性" class="btn btn-success">添加</a>
+            </p>
+            <div style='clear:both;'></div>
+        </div>
+        <?php
+            if(!$list){
+        ?>
+         <div class="none_list">暂未添加店铺属性</div>
+        <?php
+            }else{
+        ?>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+            <tr class="h">
+                <td valign="middle">ID</td>
+                <td>名称</td>
+                <td>图标</td>
+                <td>排序</td>
+                <td>时间</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td><b>{$vo.name}</b></td>
+                <td><img src="{$vo.img}" height="50"/></td>
+                <td>
+                    <a href="javascript:;" onclick="paixu({$vo.id},'up')"><img src="__STATIC__/manage/images/up.png" /></a>
+                    <a href="javascript:;" onclick="paixu({$vo.id},'down')"><img src="__STATIC__/manage/images/down.png" /></a>
+                </td>
+                <td>{$vo.dateline}</td>
+                <td>
+                    <a href="{:url('cate_edit')}?id={$vo.id}&nav=修改" class="btn btn-success">修改</a>
+                    <a href="javascript:;" class="btn btn-danger" onclick="del('{$vo.id}');">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+            <div class="page">{$page}</div>
+        <?php
+            }
+        ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script type="text/javascript">
+     function del(id){
+        if (!confirm('此操作不能撤销，确定要删除该开店技巧吗?')) {
+            return false;
+        }
+        $.ajax({
+            url: "{:url('skills_del')}",
+            data: "id=" + id,
+            type: 'post',
+            success: function (ret) {
+                if (ret.code == 1) {
+                    tishi('success', ret.msg, window.location.href)
+                }
+            }
+        })
+    }
+    function paixu(id,type){
+        var url="{:url('paixu')}";
+        $.ajax({
+            url:url,
+            data:"id="+id+"&type="+type,
+            success:function(txt){
+                if(txt.code==1){
+                    window.location.href=window.location.href
+                }else{
+                     tishi('error',txt.msg);
+                }
+
+            }
+
+        })
+    }
+</script>

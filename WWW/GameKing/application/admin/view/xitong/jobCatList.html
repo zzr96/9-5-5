@@ -1,0 +1,159 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <a href="{:url('admin/xitong/addjobcat')}" class="btn btn-primary">添加职位类别</a>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr class="h">
+            <td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value=""/>全选</td>
+            <td>类别名称</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr>
+            <td><input name="chk_list" type="checkbox" value="{$vo.id}"/></td>
+            <td><b>{$vo.name}</b></td>
+            <td><a href="{:url("editJobCat?id=$vo[id]")}">编辑</a></td>
+        </tr>
+        {if condition="isset($vo['item'])"}
+            {volist name="vo.item" id="vo2"}
+            <tr class="child">
+                <td><input name="chk_list" type="checkbox" value="{$vo2.id}"/></td>
+                <td>┠ {$vo2.name}</td>
+                <td><a href="{:url("editJobCat?id=$vo2[id]")}">编辑</a></td>
+            </tr>
+            {/volist}
+        {/if}
+        {/volist}
+        <tr class="f">
+            <td><input name="" class="chk_all" type="checkbox" value=""/>全选</td>
+            <td>
+                选中项 :
+                <a href="javascript:;" class="v_btn" onclick="del();">删除</a>
+            <td colspan="5"></td>
+        </tr>
+    </table>
+
+</div><!--v_bd-->
+{include file="common/foot" /}
+
+<script>
+    $(".chk_all").click(function () {
+        if (!$(this).attr("checked")) {
+            $("input[name='chk_list']").removeAttr("checked");
+        } else {
+            $("input[name='chk_list']").attr("checked", $(this).attr("checked"));
+        }
+    });
+    function toggleTr(obj,a,b){
+        if(b){
+            $('.tr-'+a+'-'+b).toggle();
+        }else{
+            $('.tr-'+a).toggle();
+        }
+        if($(obj).text() == '展开'){
+            $(obj).text('关闭');
+        }else{
+            $(obj).text('展开');
+        }
+
+    }
+
+
+    function del() {
+        if (!confirm("确定要删除选中项吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url('delJobCat')}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            }
+
+        })
+    }
+
+    function jinyong() {
+        if (!confirm("确定要选中项禁用吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url('jinyong')}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+
+            }
+
+        })
+    }
+
+    function qiyong() {
+        if (!confirm("确定要选中项启用吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url("
+        qiyong
+        ")}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+
+            }
+
+        })
+    }
+
+    function paixu(id, type) {
+        var url = "{:url("
+        paixu
+        ")}";
+        $.ajax({
+            url: url,
+            data: "id=" + id + "&type=" + type,
+            success: function (txt) {
+                //alert(JSON.stringify(txt))
+                if (txt.code == 1) {
+                    window.location.href = window.location.href
+                }
+
+            }
+
+        })
+
+    }
+
+</script>

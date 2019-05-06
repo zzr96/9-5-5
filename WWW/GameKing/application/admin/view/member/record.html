@@ -1,0 +1,54 @@
+{include file="common:head"}
+<div class="v_bd">
+    <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+        <tr class="h">
+            <td >序号</td>
+            <td >昵称</td>
+            <td >电话号码</td>
+            <td >消费总额</td>
+            <td >操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr id="item{$vo.uid}">
+            <td>{$key + 1}</td>
+            <td>{$vo.userinfo.nickname}</td>
+            <td>{$vo.userinfo.phone}</td>
+            <td>{$vo.total/100}</td>
+            <td><a href="{:url("viewRecord?uid=$vo[uid]")}" class="layui-btn layui-btn-primary layui-btn-s" lay-event="detail">查看详情</a></td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td colspan="7">{$page}</td>
+        </tr>
+    </table>
+</div>
+{include file="common:foot"}
+<script>
+
+    $(".chk_all").click(function(){
+    if(!$(this).attr("checked")){
+        $("input[name='chk_list']").removeAttr("checked");
+    }else{
+     $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+     }
+});
+
+    //删除
+    function onexinxi_del(id){
+        if(!confirm("确定要删除这条信息吗？")){
+        return false;
+    }
+        var url="{:url("xinxi_del")}";
+        $.ajax({
+            url:url,
+            data:"id="+id,
+            type:'post',
+            success:function(txt){
+              alert(txt.msg);
+                if(txt.ret==1){
+                    window.location.href=window.location.href
+                }
+            }
+        })
+    }
+</script>

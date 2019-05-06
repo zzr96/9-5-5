@@ -1,0 +1,104 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="v_bd_tag">
+        <a href="{:url('pos')}"><span class="focus">全部({$total})</span></a>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span>分状态查看：
+			<div class="select_style">
+                <select id="status" name="status" onChange="lookCate(this)" style='height:28.5px;line-height:28.5px;'>
+                    <option value="">全部</option>
+                    {if condition = "input('status') eq 1"}
+                    <option value="1" selected="selected">已激活</option>
+                    {else/}
+                    <option value="1">已激活</option>
+                    {/if}
+                    {if condition = "input('status') eq -1"}
+                    <option value="-1" selected="selected">已过期</option>
+                    {else/}
+                    <option value="-1">已过期</option>
+                    {/if}
+                </select>
+            </div>
+		</span>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span>搜索：
+			<input name="email" id="name" class="edit_input" value="{:input('key')}" type="text"/>
+			<a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a>
+            <i class="huise"> ( 输入POS机序列号 ) </i>
+		</span>
+
+    </div>
+    <br/>
+
+    <div class="bd">
+        <?php
+			if(!$list){
+		?>
+        <div class="none_list">没有任何会员</div>
+        <?php
+			}else{
+		?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>Id</td>
+                <td>姓名</td>
+                <td>电话</td>
+                <td>POS机</td>
+                <td>序列号</td>
+                <td>购买时间</td>
+                <td>激活截止时间</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr id="item{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.bindname}</td>
+                <td>{$vo.bindphone}</td>
+                <td>{$vo.pname}</td>
+                <td>{$vo.sn}</td>
+                <td>{$vo.datetime}</td>
+                <td>{$vo.enddate}</td>
+                <td>{$vo.status==-1?'已过期':$statuslist[$vo.status]}</td>
+                <td>
+                    {if condition = '$vo.status neq 3'}
+                    <a href="javascript:;" onClick="status('{$vo.id}',3)" class="v_btn">变更为已激活</a>
+                    {/if}
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+    function lookCate(obj) {
+        window.location.href = '{:url("pos")}?key={:input("key")}&status=' + obj.value;
+    }
+
+    function searchs() {
+        window.location.href = '{:url("pos")}?key=' + $("#name").val() + '&status={:input("status")}';
+    }
+
+    function status(uid, status) {
+        $.ajax({
+            url: '{:url("pos_status")}',
+            data: {
+                id: uid,
+                status: status
+            },
+            success: function (ret) {
+                if (ret.code == 1) {
+                    tishi('success', ret.msg, window.location.href);
+                } else {
+                    tishi('error', ret.msg);
+                }
+            }
+        });
+    }
+
+</script>

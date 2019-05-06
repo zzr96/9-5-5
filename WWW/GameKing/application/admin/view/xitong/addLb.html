@@ -1,0 +1,64 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('addLb')}" method="post" id="form">
+
+    <div class="item">
+        <label>供应专业：</label>
+        <div class="i_bd">
+            <div class="select_style">
+                <select name="pid" id="pid" >
+                    {volist name="zhuanye" id="zy"}
+                    {if condition="$zy.id eq $leibie.pid"}
+                    <option value="{$zy.id}" selected>{$zy.title}</option>
+                    {else/}
+                    <option value="{$zy.id}">{$zy.title}</option>
+                    {/if}
+                    {/volist}
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="item">
+        <label>供应类别：</label>
+        <div class="i_bd">
+            <input type="text" name="title" class="edit_input" size="60" value="{$leibie.title}" />
+        </div>
+    </div>
+
+    <div class="item">
+        <label></label>
+        <div class="i_bd">
+            <input type="hidden" name="level" value="2">
+            <input type="hidden" name="id" value="{$leibie.id}">
+            <input name="" class="btn btn-success" type="button" id="form_btn" value="提交" />
+        </div>
+    </div>
+
+    </form>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+
+    $(function () {
+        $("#form_btn").click(function () {
+            var _zhuanye = $('input[name=title]').val();
+            if(_zhuanye == ''){
+                tishi('error', '请填写类别');
+                return false;
+            }
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href);
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+
+
+    });
+</script>
+{include file="common/foot" /}

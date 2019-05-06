@@ -1,0 +1,38 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('addsave')}" method="post" id="form">
+        <div class="item">
+            <label>竞拍价格：</label>
+
+            <div class="i_bd">
+                <input name="price" class="edit_input" type="text" size="40"/>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" type="button" class="btn btn-success" id="form_btn" value="提交"/>
+                <input name="gg_id" type="hidden" class="btn btn-success" value="{$id}"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+{load href="__STATIC__/manage/editor/kindeditor.js"}
+<script>
+       $(function () {
+        $("#form_btn").click(function () {
+            //$("#form").submit();
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("index")}');
+
+                } else {
+                    tishi('error', txt.msg);
+                }
+                //console.log(txt);
+            });
+        })
+    });
+</script>

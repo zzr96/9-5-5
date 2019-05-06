@@ -1,0 +1,65 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="bd">
+        <?php
+            if(!$arr){
+        ?>
+        <div class="none_list">暂无数据</div>
+        <?php
+            }else{
+        ?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>ID</td>
+                <td>广告位置</td>
+                <td>起步价格</td>
+                <td>广告开始时间</td>
+                <td>广告结束时间</td>
+                <td>报价截至时间</td>
+                <td>中标商铺</td>
+                <td>操作</td>
+            </tr>
+            {volist name="arr" id="vo"}
+            <tr id="item{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.gg_wz}</td>
+                <td>{$vo.price}</td>
+                <td>{$vo.b_time}</td>
+                <td>{$vo.l_time}</td>
+                <td>{$vo.j_time}</td>
+                <td>{$vo.shop_name}</td>
+                <td>
+                    {if condition="$vo.shop_name eq ''"}
+                    <a href="{:url('add')}?id={$vo.id}" class="btn btn-success">竞价</a>
+                    {/if}
+                    {if condition="$vo.shop_id eq $shop_id"}
+                    <a href="{:url('select_good')}?id={$vo.id}" class="btn btn-success">选择商品</a>
+                    {/if}
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+
+    function del(id){
+        var r = confirm("您确定要删除该用户吗？");
+        if (!r) {
+            return false;
+        }
+        var url = '{:url("delete")}?id=' + id;
+        $.ajax({
+            url: url,
+            success: function (txt){
+                if (txt.code == 0){
+                   tishi('success', txt.msg, '{:url("index")}');
+                } else {
+                   tishi('error', txt.msg);
+                }
+            }
+        })
+    }
+</script>

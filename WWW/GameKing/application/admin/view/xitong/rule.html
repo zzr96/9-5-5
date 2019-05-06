@@ -1,0 +1,51 @@
+{include file="common:head"}
+<style>
+    .v_col .v_bd .item .size{margin-top: 5px;}
+</style>
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('rule')}" method="post" id="form">
+        <div class="item">
+            <label>规则详情：</label>
+
+            <div class="i_bd">
+                <textarea id="content" name="content" style="width:700px;height:300px;" cols="" rows="" >{$view.content}</textarea>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+            <div class="i_bd">
+                <input name="" type="button" id="form_btn" class="btn btn-success" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+{load href="__STATIC__/manage/editor/kindeditor.js"}
+<script>
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#content', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+    $(function () {
+        $("#form_btn").click(function () {
+            var content=$('#content').val();
+            if(!content){
+                tishi('error','推广规则不能为空');
+                return false;
+            }
+
+            $("#form").ajaxSubmit(function (txt){
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("rule")}');
+                } else {
+                    tishi('error', txt.msg);
+                }
+                //console.log(txt);
+            });
+        })
+    });
+
+</script>

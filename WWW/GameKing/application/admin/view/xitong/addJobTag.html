@@ -1,0 +1,45 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('addJobTag')}" method="post" id="form">
+
+    <div class="item">
+        <label>职位亮点：</label>
+        <div class="i_bd">
+            <input type="text" name="title" class="edit_input" size="60" value="{$tag['title']}" />
+        </div>
+    </div>
+
+    <div class="item">
+        <label></label>
+        <div class="i_bd">
+            <input type="hidden" name="id" value="{$tag['id']}">
+            <input name="" class="btn btn-success" type="button" id="form_btn" value="提交" />
+        </div>
+    </div>
+
+    </form>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+
+    $(function () {
+        $("#form_btn").click(function () {
+            var _zhuanye = $('input[name=title]').val();
+            if(_zhuanye == ''){
+                tishi('error', '请填写名称');
+                return false;
+            }
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href);
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+
+
+    });
+</script>
+{include file="common/foot" /}

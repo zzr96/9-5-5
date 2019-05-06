@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="/static/mobile/css/mui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/style.css"/>
+    <link href="/static/mobile/css/iconfont.css" rel="stylesheet" />
+   <style type="text/css">
+   	html,body{background: #fff;}
+	.mui-toast-container {bottom: 50% !important;}
+   </style>
+</head>
+<body>
+	<div class="register-content">
+		<!--头 -->
+		<header class=" mui-bar mui-bar-nav ">
+			<a class="mui-pull-left"></a>
+			<h1 class="mui-title">登录注册</h1>
+			<span></span>
+		</header>
+		<div class="tab">
+	
+		</div>
+		<main >
+		   <div class="tablist" style="display: block">
+		        <div class="mui-input-row phone-li">
+				    <input type="number" class="phone"   value="" placeholder="请输入手机号" >
+				</div>
+				<input type="button" class="margin-btn"  value="下一步" />
+				<p class="forget"><a href="{:url('mobile/login/forgetPass')}">忘记密码</a></p>
+		   </div>
+		</main>
+		<p class="register-pg"><em>
+		</em>我已阅读并同意<span>《用户协议》</span></p>
+	</div>
+
+</body>
+<script type="text/javascript" src="/static/mobile/js/jquery-2.1.1.min.js" ></script>
+<script type="text/javascript" src="/static/mobile/js/mui.min.js"></script>
+<script type="text/javascript">
+$(document).on('click','.margin-btn',function(){
+    var _phone = $('.phone').val();
+    if(!_phone){
+        mui.toast('请填写手机号');
+        return false;
+	}
+    $.ajax({
+        type: "GET",
+        url: "{:url('apis/login/checkQiyeMobile')}",
+        dataType: 'json',
+        data: {phone: _phone},
+        success: function (data) {
+            if(data.code == 1){
+                mui.toast(data.msg);
+			}else if(data.code == 2){
+                window.location.href = "{:url('mobile/login/password')}?phone="+_phone;
+			}else if(data.code == 3){
+                window.location.href = "{:url('mobile/login/register')}?phone="+_phone;
+			}
+        }
+    });
+})
+
+$(".register-pg").on("click",function(){
+	$(this).toggleClass('read-active')
+})
+</script>
+</html>

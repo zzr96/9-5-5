@@ -1,0 +1,68 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class="v_bd_tag">
+        <a href="{:url('feedback')}"><span class="focus">全部意见反馈({$total.all})</span></a>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span>
+            反馈搜索：
+            <input name="email" id="name" class="edit_input" value="{:input('key')}" type="text"/>
+            <a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a> <i class="huise"> ( 输入反馈人 ) </i>
+        </span>
+
+    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr class="h">
+            <td valign="middle">ID</td>
+            <td>反馈内容</td>
+            <td>反馈人</td>
+            <td>反馈时间</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.content}</td>
+            <td>{$vo.name}</td>
+            <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+            <td>
+                <a href="javascript:;" class="v_btn" onclick="single_del('{$vo.id}');">删除</a>
+            </td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td align="right"  colspan="10">{$page}</td>
+        </tr>
+    </table>
+</div>
+
+{include file="common:foot"}
+<script>
+    //搜索
+    function searchs() {
+        var key = $("#name").val();
+        if (key == "") {
+            alert("请输入反馈人");
+            return false
+        }
+        var url = '{:url("feedback")}?key=' + key;
+        window.location.href = url;
+    }
+    //单个删除数据
+    function single_del(id) {
+        if (!confirm('此操作不能撤销，确定要删除该反馈意见吗?')) {
+            return false;
+        }
+        $.ajax({
+            url: "{:url('feedback_del')}",
+            data: "id=" + id,
+            type: 'post',
+            success: function (ret) {
+                alert(ret.msg);
+                if (ret.code == 1) {
+                    window.location.href = window.location.href
+                }
+            }
+        })
+    }
+</script>		

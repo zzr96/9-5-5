@@ -1,0 +1,105 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="v_bd_tag">
+        <a href="{:url('real')}"><span class="focus">总计({$total})</span></a>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span>分状态查看：
+			<div class="select_style">
+                <select id="status" name="status" onChange="lookCate(this)" style='height:28.5px;line-height:28.5px;'>
+                    <option value="0">全部用户</option>
+                    {if condition = "input('status') eq 1"}
+                    <option value="1" selected="selected">正常使用</option>
+                    {else/}
+                    <option value="1">正常使用</option>
+                    {/if}
+                    {if condition = "input('status') eq -1"}
+                    <option value="-1" selected="selected">禁止使用</option>
+                    {else/}
+                    <option value="-1">禁止使用</option>
+                    {/if}
+                </select>
+            </div>
+		</span>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span>会员搜索：
+			<input name="email" id="name" class="edit_input" value="{:input('key')}" type="text"/>
+			<a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a>
+            <i class="huise"> ( 输入用户手机号 ) </i>
+		</span>
+    </div>
+    <br/>
+
+    <div class="bd">
+        <?php
+			if(!$list){
+		?>
+        <div class="none_list">没有任何会员</div>
+        <?php
+			}else{
+		?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>用户</td>
+                <td>真实姓名</td>
+                <td>身份证号码</td>
+                <td>银行卡号</td>
+                <td>电话</td>
+                <td>申请时间</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr>
+                <td>{$vo.uname}</td>
+                <td>{$vo.name}</td>
+                <td>{$vo.idnum}</td>
+                <td>{$vo.bankcard}</td>
+                <td>{$vo.phone}</td>
+                <td>{$vo.datetime}</td>
+                <td>{$vo.status==2?'已通过':($vo.status==-1?'不通过':'待审核')}</td>
+                <td>
+                    {if condition = '$vo.status eq 2'}
+                    <a href="javascript:;" onClick="status('{$vo.uid}',-1)" class="btn btn-default">不通过</a>
+                    {else/}
+                    <a href="javascript:;" onClick="status('{$vo.uid}',2)" class="btn btn-default">通过</a>
+                    {/if}
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+    function lookCate(obj) {
+        window.location.href = '{:url("real")}?key={:input("key")}&status=' + obj.value;
+    }
+
+    function searchs() {
+        window.location.href = '{:url("real")}?key=' + $("#name").val() + '&status={:input("status")}';
+    }
+
+    function status(uid, status) {
+        note = status == -1 ? prompt("请输入不通过理由", "") : '';
+        $.ajax({
+            url: '{:url("real_status")}',
+            data: {
+                id: uid,
+                note: note,
+                status: status
+            },
+            success: function (ret) {
+                if (ret.code == 1) {
+                    tishi('success', ret.msg, window.location.href);
+                } else {
+                    tishi('error', ret.msg);
+                }
+            }
+        });
+    }
+
+</script>

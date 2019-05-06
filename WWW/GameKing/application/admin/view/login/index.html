@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>后台管理 - 登录</title>
+    {load href="/static/manage/css/style.css" /}
+    {load href="/static/manage/js/jquery.js" /}
+    {load href="/static/manage/js/jquery.form.js" /}
+    {load href="/static/manage/js/common.js" /}
+</head>
+
+<body>
+<div class="index_login" id="login">
+    <div class="head">
+        <div class="logo"><a href="#"></a></div>
+    </div>
+    <div class="login_box">
+        <form action="{:url('login_do')}" method="post" id="form">
+            <span>用户名：<input class='input' name="name" type="text"/></span>
+            <span>密码：<input class='input' name="password" type="password"/></span>
+            <span><input class='index_btn' name="提交" type="button" id="form_btn"/></span>
+
+        </form>
+    </div>
+</div>
+<div class="foot">版权所有：图钉工程</div>
+<script>
+    function refreshVerify() {
+        var ts = Date.parse(new Date()) / 1000;
+        var img = document.getElementById('verify_img');
+        // img.src = '{:captcha_src()}' + '?id='+ts;
+    }
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                //alert(JSON.stringify(txt))
+                if (txt.code == 1) {
+                    window.location.href = '{:url("/admin/index/index")}'
+                } else {
+                    refreshVerify();
+                    alert(txt.msg)
+                }
+            });
+        })
+    })
+</script>
+
+</body>
+</html>

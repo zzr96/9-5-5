@@ -1,0 +1,50 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('addVersionContent')}" method="post" id="form">
+
+        <div class="item">
+            <label>新版本介绍：</label>
+
+            <div class="i_bd">
+                <textarea name="content" id="editor_id" cols="30" rows="20">{$content}</textarea>
+            </div>
+        </div>
+
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <a href="javascript:;" id="form_btn" class="btn btn-success">提交</a>
+            </div>
+        </div>
+
+
+    </form>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 0) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+
+
+    });
+</script>
+{include file="common/foot" /}

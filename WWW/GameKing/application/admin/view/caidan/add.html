@@ -1,0 +1,75 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+	<form action="{:url("add_do")}" method="post" id="form">
+	  
+	  			<div class="item">
+					<label>菜单名：</label>
+					<div class="i_bd">
+					<input type="text" name="name" class="edit_input" size="60" />
+					</div>
+				</div>
+				
+				<div class="item">
+					<label>所属菜单：</label>
+					<div class="i_bd">
+					<select name="fid" id="cat" >
+					  <option value="0">顶级菜单</option>
+					  {volist name="cat" id="vo"}
+					  <option value="{$vo.id}">{$vo.name}</option>
+					  {/volist}
+					</select>
+					</div>
+				</div>
+
+				<div class="item">
+					<label>控制器：</label>
+					<div class="i_bd">
+					<input type="text" name="m" class="edit_input" size="60" /> 
+					</div>
+				</div>
+				<div class="item">
+					<label>方法：</label>
+					<div class="i_bd">
+					<input type="text" name="a" class="edit_input" size="60" /> 
+					</div>
+				</div>
+				
+				<div class="item">
+					<label>排序：</label>
+					<div class="i_bd">
+					  <input type="text" name="position" class="edit_input" size="60" /> 
+					</div>
+				</div>
+				
+				<div class="item">
+					<label>图标：</label>
+					<div class="i_bd">
+					  <input type="text" name="icon" class="edit_input" size="60" /> 
+					</div>
+				</div>
+				
+				
+				<div class="item">
+					<label></label>
+					<div class="i_bd">
+						<input name="" class="btn btn-success" type="button" id="form_btn" value="提交" />
+					</div>
+				</div>
+
+			</form>
+	 
+</div><!--v_bd-->	 
+<script>
+$(function(){
+	$("#form_btn").click(function(){
+		$("#form").ajaxSubmit(function(txt){
+			if(txt.code==1){
+				tishi('success',txt.msg,"{:url("index")}")
+			}else{
+				tishi('error',txt.msg)
+			}
+		});
+	})
+})
+</script>
+{include file="common/foot" /}

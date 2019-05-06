@@ -1,0 +1,69 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="bd">
+         <div class="v_tishi">
+                <div style='float:left;margin-top:8px;'>您可通过右侧的添加按钮来添加排行榜。</div>
+                <p style='float:right;margin-top:4px;'>
+                    <a href="{:url('add')}?nav=添加排行榜" class="btn btn-success">添加排行榜</a>
+                </p>
+
+                <div style='clear:both;'></div>
+        </div>
+        <?php
+            if(!$arr){
+        ?>
+        <div class="none_list">暂无数据</div>
+        <?php
+            }else{
+        ?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>ID</td>
+                <td>广告位置</td>
+                <td>起步价格</td>
+                <td>广告开始时间</td>
+                <td>广告结束时间</td>
+                <td>报价截至时间</td>
+                <td>中标商铺</td>
+                <td>操作</td>
+            </tr>
+            {volist name="arr" id="vo"}
+            <tr id="item{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.gg_wz}</td>
+                <td>{$vo.price}</td>
+                <td>{$vo.b_time}</td>
+                <td>{$vo.l_time}</td>
+                <td>{$vo.j_time}</td>
+                <td>{$vo.shop_name}</td>
+                <td>
+                    <a href="javascript:;" onClick="del({$vo.id})" class="btn btn-danger">删除</a>
+                    <a href="{:url('look')}?id={$vo.id}" class="btn btn-success">详情</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+
+    function del(id){
+        var r = confirm("您确定要删除该用户吗？");
+        if (!r) {
+            return false;
+        }
+        var url = '{:url("delete")}?id=' + id;
+        $.ajax({
+            url: url,
+            success: function (txt){
+                if (txt.code == 0){
+                   tishi('success', txt.msg, '{:url("index")}');
+                } else {
+                   tishi('error', txt.msg);
+                }
+            }
+        })
+    }
+</script>

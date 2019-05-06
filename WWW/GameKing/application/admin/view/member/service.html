@@ -1,0 +1,99 @@
+{include file="common:head"}
+	<style type="text/css">#pic img{cursor: pointer;transition: all 0.6s;}#pic img:hover{transform: scale(8);}</style>
+<div class="v_bd" id="v_bd">
+	<div class="v_bd_tag"><span class="focus">全部审核申请({$num})</span>
+		<span>审核搜索：
+			<input name="email" id="name" name="name" class="edit_input" value="{:input("name")}" type="text" />
+			<a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a> <i class="huise"> ( 输入加盟商名称 ) </i>
+		</span>
+	</div><br />
+	<div class="bd">
+		<?php
+			if(!$list){
+		?>
+			<div class="none_list">没有任何申请</div>
+		<?php
+			}else{
+		?>
+			<table width="100%" border="0" cellpadding="0"  class="table" cellspacing="0">
+				<tr class="h">	 
+					<td>用户</td>
+					<td>商品id</td>
+					 
+					<td>申请内容</td>
+			 		<td>图片</td>
+					<td>申请时间</td>
+					<td>操作</td>
+				</tr>
+				 {volist name="list" id="vo"}
+					<tr   class="reds">
+				 		<td>{$vo.nicheng}</td>
+				 		<td>{$vo.orderid}</td>						 		
+				 									 
+						<td>{$vo.content}</td>	
+
+						<td id="pic" >
+						  <?php  $pic=explode(',',$vo['pic']); $pnum=count($pic);  for($i=0; $i< $pnum-1; $i++){?>
+						  
+						   		<img src="{$pic[$i]}" width="50" height="50"/>	
+						  	<?php } ?>
+						   
+						</td>		
+							 	 
+						<td>
+							{$vo.createtime}
+						</td>
+						<td width="15%">
+							{if condition="$vo['status'] eq 0"}
+								<a href="javascript:;" onClick="shenhe_do({$vo.id},1)" class="v_btn">通过</a>
+								<a href="javascript:;" onClick="shenhe_do({$vo.id},'-1')" class="v_btn">拒绝</a>
+							{elseif condition="$vo['status'] eq 1"}
+								<a href="javascript:;"  class="btn btn-success">已通过</a>
+ 								<a href="javascript:;" onClick="shenhe_do({$vo.id},'-1')" class="v_btn">拒绝</a>
+							{elseif if condition="$vo['status'] eq '-1'"}
+								<a href="javascript:;" onClick="shenhe_do({$vo.id},1)" class="v_btn">通过</a>
+								<a href="javascript:;"  class="btn btn-success">已拒绝</a>
+							 
+							{/if}
+							 
+						</td>
+
+					</tr>
+				{/volist}
+				<tr class="f">
+		            <td colspan="13">{$page}</td>
+        		</tr>
+			</table>
+		<?php } ?>
+	</div>
+</div>
+{include file="common:foot"}
+<script>
+ 
+function searchs(){
+	var name=$("#name").val();
+	var url='{:url("index")}?name='+name;
+	window.location.href=url;
+}
+function shenhe_do(uid,status){
+	var data='id='+uid+'&status='+status;
+	var url='{:url("shenhe_do")}';
+	$.ajax({
+		url:url,
+		data:data,
+		type:'POST',
+		success: function(data){
+			if(data.code==1){
+				tishi('success',data.msg,window.location.href);
+			}else{
+				alert(data.msg);
+			}
+		}
+	})
+}
+function group_des(id) {
+    var html = '<iframe id="iframe" frameborder="0" marginheight="0" marginwidth="0" height="140" width="100%" src="{:url("group_des")}?id=' + id + '" ></iframe>';
+    tanchuang("apic", 600, '群介绍', html);
+}
+ 
+</script>

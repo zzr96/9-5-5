@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>赟个车</title>
+    <link rel="stylesheet" href="/style/css/mui.css"/>
+    <link rel="stylesheet" type="text/css" href="/style/css/iconfont.css"/>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        li {
+            list-style: none;
+            font-style: normal;
+        }
+
+        a, span {
+            text-decoration: none;
+            color: inherit
+        }
+
+        a:focus {
+            outline: none;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input {
+            border: none;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        em, i {
+            font-style: normal;
+        }
+
+        b {
+            font-weight: 100;
+        }
+
+        a:active {
+            color: inherit;
+        }
+
+        html, body {
+            height: 100%;
+            color: #0d0d0d;
+            background: #f8f8f8;
+            font-size: 14px;
+        }
+
+        p {
+            color: #333;
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .mui-bar {
+            background: #fff;
+        }
+
+        header input[type='text'] {
+            border: 0;
+            margin-bottom: 0;
+            border-radius: 6px;
+            height: 36px;
+            background: #F7F7F7;
+        }
+
+        header .icon-sousuo {
+            font-size: 18px;
+            color: #000;
+        }
+
+        .mui-bar-nav {
+            box-shadow: none;
+            border-bottom: 1px solid #eee;
+        }
+
+        .car_content {
+            padding-top: 54px;
+        }
+
+        .car_content ul {
+            background: #fff;
+        }
+
+        .car_content ul li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .car_content p {
+            color: #999;
+            font-size: 12px;
+            line-height: 24px;
+        }
+
+        .car_content p:nth-child(1) {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .car_content p:nth-child(1) span:first-child {
+            float: left;
+        }
+
+        .car_content p:nth-child(1) span:last-child {
+            float: right;
+            margin-right: 10px;
+        }
+
+        .car_content p:nth-child(2) {
+            color: #999;
+        }
+
+        .car_content p:nth-child(3) {
+            color: #EC8486;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<!--头 -->
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-pull-left"><i class="iconfont icon-sousuo"></i></a>
+
+    <h1 class="mui-title"><input type="text" name="" id="search" value="{:input('search')}" placeholder="请输入团购编号或团长手机号"/></h1>
+    <a class="mui-icon mui-pull-right"></a>
+</header>
+<div class="car_content">
+    <ul>
+        {volist name="list" id="vo" key="f"}
+        <li>
+            <p class="mui-clearfix"><span>团长：<m>{$vo.logo}</m></span> <span>{$vo.title}</span></p>
+            <p>车型：
+                <m>{$vo.content}</m>
+            </p>
+            <p>报价：
+                <m>{$vo.from}</m>
+            </p>
+            <p>参团人数：
+                <m>{$vo.date}</m>
+            </p>
+            <p>{$vo.paytime}</p>
+        </li>
+        {/volist}
+    </ul>
+</div>
+
+<script src="/style/js/jquery.js"></script>
+
+<script>
+    $('#search').blur(function () {
+        window.location.href = '{:url("car")}?search=' + $(this).val();
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{include file="common:head"}
+<form action="{:url('add_do')}" method="post" id="form">
+ <div class="item">
+            <label>排行榜规则：</label>
+
+            <div class="i_bd">
+                <textarea id="content" name="content" style="width:700px;height:300px;" cols="" rows="">{$arr.content}</textarea>
+            </div>
+</div>
+<div class="item">
+            <label></label>
+            <div class="i_bd">
+                <input name="" type="button" id="form_btn" class="btn btn-success" value="提交" "/>
+            </div>
+</div>
+</form>
+{load href="__STATIC__/manage/editor/kindeditor.js"}
+{include file="common:foot"}
+<script>
+     KindEditor.ready(function (K) {
+        window.editor = K.create('#content', {
+             height : "600px",
+             width : "800px",
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+      $("#form_btn").click(function () {
+        $("#form").ajaxSubmit(function (txt){
+            //console.log(txt);
+            if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("index")}');
+                } else {
+                    tishi('error', txt.msg);
+                }
+        })
+      })
+</script>

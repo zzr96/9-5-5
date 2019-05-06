@@ -1,0 +1,60 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class='bd'>
+        <div class="v_tishi">
+            <div style='float:left;margin-top:8px;'>您可通过右侧的添加联系方式。</div>
+            <p style='float:right;margin-top:4px;'>
+                <a href="{:url('link_add')}?nav=添加" class="btn btn-success">添加</a>
+            </p>
+            <div style='clear:both;'></div>
+        </div>
+         <?php
+            if(!$find){
+        ?>
+        <div class="none_list">暂未添加任何内容</div>
+        <?php
+            }else{
+        ?>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+            <tr class="h">
+                <td valign="middle">ID</td>
+                <td>标题</td>
+                <td>联系方式</td>
+                <td>操作</td>
+            </tr>
+            {volist name="find" id="vo"}
+            <tr>
+                <td>{$key + 1}</td>
+                <td>{$vo.title}</td>
+                <td>{$vo.content}</td>
+                <td>
+                    <a href="{:url('edit_link')}?id={$vo.id}&nav=编辑" class="btn btn-primary">编辑</a>
+                    <a href="javascript:;" class="btn btn-danger" onclick="del('{$vo.id}');">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+
+<script>
+    function del(id){
+        if (!confirm('此操作不能撤销，确定要删除吗')){
+            return false;
+        }
+        $.ajax({
+            url: "{:url('del')}",
+            data: "id=" + id,
+            type: 'post',
+            success: function (ret) {
+                if (ret.code == 1) {
+                    tishi('success', ret.msg, window.location.href)
+                }else{
+                    tishi('error',ret.msg);
+                }
+            }
+        })
+    }
+</script>

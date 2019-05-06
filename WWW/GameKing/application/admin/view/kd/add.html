@@ -1,0 +1,84 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('addsave')}" method="post" id="form">
+        <div class="item">
+            <label>快递别名：</label>
+
+            <div class="i_bd">
+                <input name="b_name" class="edit_input" type="text" size="40"/>
+            </div>
+        </div>
+        <div class="item">
+            <label>快递名称：</label>
+
+            <div class="i_bd">
+                <input name="name" class="edit_input" type="text" size="40"/>
+            </div>
+        </div>
+        <div class="item">
+            <label>轮播图：</label>
+
+            <div class="i_bd">
+                <div class="chanpin_pic_list" style='height:140px;'>
+
+                    <div class="iitem">
+                        <input name="logo" id="picval_5" type="hidden"/>
+
+                        <div class="pic" id="pic_5">
+                            <a onclick="addpic(5);" title="上传图片">
+                                <img id="pic_yl_5" width="100" height="100"
+                                     src="__STATIC__/manage/images/add_fpic.gif"/></a>
+                        </div>
+                        <div id='pic_btn_5' style='margin-top:10px;text-align:center;display:none;'>
+                            <a onclick='del_pic(5)' class="btn btn-success">删除</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div style='margin-top:10px;color:red;'>请上传图片尺寸为 100px x 100px 的图片!</div>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" type="button" class="btn btn-success" id="form_btn" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+{load href="__STATIC__/manage/editor/kindeditor.js"}
+<script>
+
+       $(function () {
+        $("#form_btn").click(function () {
+            //$("#form").submit();
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("index")}');
+
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+    function addpic(id) {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("/admin/upload/img")}?pid=' + id + '" ></iframe>';
+        tanchuang("apppic", 700, '上传图片', html)
+    }
+
+    function addpic_do(pic, pid) {
+        re_tanchuang('apppic');
+        $("#pic_yl_" + pid).attr('src', pic);
+        $("#picval_" + pid).val(pic);
+        $('#pic_btn_' + pid).show();
+    }
+
+    function del_pic(id) {
+        $('#pic_yl_' + id).attr('src', '__STATIC__/manage/images/add_fpic.gif');
+        $('#picval_' + id).val('');
+        $('#pic_btn_' + id).hide();
+    }
+</script>

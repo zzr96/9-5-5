@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="/static/mobile/css/mui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/style.css"/>
+    <link href="/static/mobile/css/iconfont.css" rel="stylesheet" />
+    <link href="/static/mobile/css/mui.picker.css" rel="stylesheet" />
+    <link href="/static/mobile/css/mui.poppicker.css" rel="stylesheet" />
+   <style type="text/css">
+.margin-btn-a{
+    width: 100%;
+    display: block;
+    font-weight: 1.42;
+    margin-top: 60px;
+    padding:6px 12px;
+    text-align: center;
+    line-height: 36px;
+    height: 44px;
+    background: #23B8FF;
+    color: #f7f7f7;
+    font-size: 15px;
+    border-radius: 4px;
+    border: 0;}
+#shop_coupon{width: 100%;background-color: #fff;z-index: 999;height:40%; font-size: 14px;max-height: 60%;bottom:0;top:inherit;}
+       #shop_coupon span{border-radius: 3px;border:1px solid #f5f5f5;}
+       #shop_coupon .queding{float: right;height: 29px;background-color: #007aff;color: #fff;line-height: 29px;padding: 0 7px;border-radius: 4px;margin:8px 10px 0 0;}
+       #shop_coupon span.active{padding: 2px 5px;border-radius: 3px;border:1px solid #f5f5f5;background-color:#007aff;color: #fff;}
+   .span-block span{float:left;border-radius: 3px;line-height: 27px;margin:8px 0 0 8px;background-color: #f0f0f0;padding: 2px 5px;}
+   </style>
+</head>
+<body>
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-pull-left " onclick="javascript:history.go(-1)"><i class="iconfont icon-fanhui"></i></a>
+	</header>
+	<div class="header-counter ruzhu-content">
+        <ul class="mui-table-view">
+            <a > </a>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">公司名称</label>
+               <input type="text" class="company_name" placeholder="请输入公司名称" value="{$renzheng['company_name']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">联系电话</label>
+               <input type="text" class="contact" placeholder="请输入联系电话" value="{$renzheng['contact']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">公司地址</label>
+                    <input type="hidden" class="pro_code">
+                    <input type="hidden" class="city_code">
+                    <input type="hidden" class="area_code">
+               <input type="text" class="" id="showCityPicker1" placeholder="请选择公司地址"  value="{$renzheng['addressText']??''}">
+              </div>
+        	</li>
+            <li class="mui-table-view-cell">
+                <div class="mui-navigate-right">
+                    <label for="">公司地址</label>
+                    <input type="text" class="address" placeholder="请选择详细地址"  value="{$renzheng['address']??''}">
+                </div>
+            </li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">法人姓名</label>
+               <input type="text" class="legal_person" placeholder="请输入真实姓名" value="{$renzheng['legal_person']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">QQ邮箱</label>
+               <input type="text" class="qq_email" placeholder="请输入QQ邮箱" value="{$renzheng['qq_email']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">供应地址</label>
+               <input type="text" class="supply_address" id="showCityPicker2" placeholder="请选择供应地址" value="{$renzheng['supply_address']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">供应专业</label>
+               <input type="text" id="demo1" class="supply_specialty_text" placeholder="请选择专业" value="{$zyText?="$zyText $lbText"}">
+                    <input type="hidden" class="supply_specialty" value="{$renzheng['supply_specialty']??''}">
+                    <input type="hidden" class="supply_type" value="{$renzheng['supply_type']??''}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">供应类别</label>
+                    <input type="hidden" class="leibie3" value="{$renzheng['leibie3']??''}">
+               <input type="text" class="leibie3-text" readonly placeholder="请选择类别" value="{$leibieText?=$leibieText}">
+              </div>
+        	</li>
+        	<li class="mui-table-view-cell">
+        		<div class="mui-navigate-right">
+               <label for="">品牌</label>
+               <input type="text" class="brand" placeholder="请填写品牌"value="{$renzheng['brand']??''}">
+              </div>
+        	</li>
+        </ul>
+        {if condition="isset($renzheng['company_name'])"}
+        <a class="margin-btn-a" href="{:url('mobile/member/gongying2')}">下一步</a>
+        {else}
+        <input type="button" class="margin-btn" value="下一步">
+        {/if}
+
+	 </div>
+    <!--优惠券弹出框区域-->
+    <div id="shop_coupon" class="box mui-popover mui-popover-action mui-popover-top mui-scroll-wrapper">
+        <div style="height: 44px;border-bottom:1px solid #ccc;width: 100%;background-color: #eee;"><span class="queding">确定</span></div>
+        <div class="span-block">
+
+        </div>
+    </div>
+<div class="mask" style="width: 100%;height: 100%;position: absolute;top:0;left:0;background-color: #000;opacity: 0.3">
+
+</div>
+</body>
+
+<script type="text/javascript" src="/static/mobile/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.picker.js"></script>
+<script type="text/javascript" src="/static/mobile/js/mui.poppicker.js"></script>
+<script src="/static/mobile/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+ <script type="text/javascript">
+     var idArr = [];
+     var textArr = [];
+     $('.margin-btn').on('click',function(){
+         var company_name = $('.company_name').val();
+         var contact = $('.contact').val();
+         var address = $('.address').val();
+         var legal_person = $('.legal_person').val();
+         var qq_email = $('.qq_email').val();
+         var supply_address = $('.supply_address').val();
+         var supply_specialty = $('.supply_specialty').val();
+         var supply_type = $('.supply_type').val();
+         var leibie3 = $('.leibie3').val();
+         var brand = $('.brand').val();
+         var param = {
+             company_name:company_name,
+             contact:contact,
+             pro_code:$('.pro_code').val(),
+             city_code:$('.city_code').val(),
+             area_code:$('.area_code').val(),
+             address:$('#showCityPicker1').val()+address,
+             legal_person:legal_person,
+             qq_email:qq_email,
+             supply_address:supply_address,
+             supply_specialty:supply_specialty,
+             supply_type:supply_type,
+             leibie3:leibie3,
+             brand:brand,
+         };
+         console.log(param);
+         if(!company_name || !contact || !address || !legal_person || !qq_email || !supply_address || !supply_specialty || !supply_type || !brand){
+             mui.toast('请填写完整表单');
+             return false;
+         }
+         $.ajax({
+             type: "POST",
+             url: "{:url('mobile/member/gongying')}",
+             dataType: 'json',
+             data: param,
+             success: function (data) {
+                 if(data.code == 1){
+                     mui.toast(data.msg);
+                 }else{
+                     mui.toast('成功提交');
+                     setTimeout(function(){
+                         window.location.href = "{:url('mobile/member/gongying2')}";
+                     },1000)
+
+                 }
+             }
+         });
+
+     })
+</script>
+<script>
+    (function($, doc) {
+        $.init();
+        $.ready(function() {
+            /**
+             * 获取对象属性的值
+             * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+             * @param {Object} obj 对象
+             * @param {String} param 属性名
+             */
+            var _getParam = function(obj, param) {
+                return obj[param] || '';
+            };
+            //供应专业
+            var picker1 = new $.PopPicker({
+                layer:2
+            });
+            picker1.setData({$zhuanye});
+            var demo1 = doc.getElementById('demo1');
+            demo1.addEventListener('tap', function(event) {
+                picker1.show(function(items) {
+                    // cityResult.innerText = "你选择的城市是:" + items[0].text + " " + items[1].text;
+                    demo1.value = items[0].text + " " + items[1].text;
+                    jQuery('.supply_specialty').val(items[0].value);
+                    jQuery('.supply_type').val(items[1].value);
+                    mui.ajax({
+                        type: "get",
+                        url: "{:url('mobile/member/getLb')}",
+                        dataType: 'json',
+                        data: {lbid:items[1].value},
+                        success: function (data) {
+                            if(data.code == 0){
+                                idArr = [];
+                                textArr = [];
+                                jQuery('#shop_coupon').find('.span-block').html('');
+                                $.each(data.data,function(i,v){
+                                    var _span = '<span data-val="'+i+'">'+v+'</span>';
+                                    jQuery('#shop_coupon').find('.span-block').append(_span);
+                                })
+                            }
+                        }
+                    });
+
+                    jQuery("#shop_coupon").show();
+                    jQuery(".mask").show();
+                    jQuery("#shop_coupon").addClass('mui-active');
+
+                });
+            }, false);
+
+
+            //-----------------------------------------
+            //					//级联示例
+            var cityPicker3 = new $.PopPicker({
+                layer: 3
+            });
+            cityPicker3.setData(cityData3);
+            var showCityPickerButton = doc.getElementById('showCityPicker1');
+            showCityPickerButton.addEventListener('tap', function(event) {
+                cityPicker3.show(function(items) {
+                    showCityPickerButton.value =  _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                    jQuery('.pro_code').val(items[0].value);
+                    jQuery('.city_code').val(items[1].value);
+                    jQuery('.area_code').val(items[2].value);
+                });
+            }, false);
+
+            //-----------------------------------------
+            //					//级联示例
+            var cityPicker4 = new $.PopPicker({
+                layer: 3
+            });
+            cityPicker4.setData(cityData3);
+            var showCityPickerButton2 = doc.getElementById('showCityPicker2');
+            showCityPickerButton2.addEventListener('tap', function(event) {
+                cityPicker4.show(function(items) {
+                    showCityPickerButton2.value =  _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+                });
+            }, false);
+
+        });
+    })(mui, document);
+    $('.queding').on('click',function(){
+        $('.mask').hide();
+        $('#shop_coupon').hide();
+    })
+
+    $(document).on('click','#shop_coupon .span-block span',function(){
+        var id = $(this).data('val');
+        var text = $(this).text();
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            removeByValue(idArr,id);
+            removeByValue(textArr,text);
+        }else{
+            if(idArr.length >= 5){
+                mui.toast("最多添加5个类型");
+                return false;
+            }
+            $(this).addClass('active');
+            idArr.push(id);
+            textArr.push(text);
+        }
+        var idStr = idArr.join(',');
+        var textStr = textArr.join(' ');
+        $('.leibie3').val(idStr);
+        $('.leibie3-text').val(textStr);
+        console.log(idArr);
+        console.log(textArr);
+    })
+    function removeByValue(arr, val) {
+        for(var i = 0; i < arr.length; i++) {
+            if(arr[i] == val) {
+                arr.splice(i, 1);
+                break;
+            }
+        }
+    }
+</script>
+</html>

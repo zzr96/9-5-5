@@ -1,0 +1,72 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('edit_about_do')}" method="post" id="form">
+        <input name="id" type="hidden" value="{$view.id}"/>
+         <div class="item">
+            <label>图片：</label>
+
+            <div class="i_bd">
+                <input id="imgv1" name="pic" type="hidden" value="{$view.pic}">
+                <a onclick="upimg(1);" class="upload_pic" title="上传图片">
+                    <img class='imgsrc1' src="{$view.pic?$view.pic:'/static/manage/images/addpic.gif'}"
+                         width="100" height="100"/>
+                </a>
+            </div>
+
+        </div>
+        <div class="item">
+            <label>关于我们：</label>
+
+            <div class="i_bd">
+                <textarea name="content" id="editor_id" cols="30" rows="20">{$view.content}</textarea>
+            </div>
+        </div>
+
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <a href="javascript:;" id="form_btn" class="btn btn-success">提交</a>
+            </div>
+        </div>
+
+
+    </form>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+
+
+    });
+    function upimg(id) {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("/admin/upload/img")}?pid=' + id + '" ></iframe>';
+        tanchuang("apppic", 700, '上传图片', html);
+    }
+
+    function addpic_do(pic, pid) {
+        re_tanchuang('apppic');
+        $(".imgsrc" + pid).attr('src', pic);
+        $("#imgv" + pid).val(pic);
+    }
+</script>
+{include file="common/foot" /}

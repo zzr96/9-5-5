@@ -1,0 +1,120 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('edit_do')}" method="post" id="form">
+        <input name="id" type="hidden" value="{$view.id}"/>
+
+        <div class="item">
+            <label>LOGO：</label>
+
+            <div class="i_bd">
+                <div class="chanpin_pic_list" style='height:140px;'>
+
+                    <div class="item">
+                        <input name="logo" id="picval_5" type="hidden" value="{$view.logo}"/>
+
+                        <div class="pic" id="pic_5">
+                            <a onclick="addpic(5);" title="上传图片">
+                                {if condition='$view.logo'}
+                                <img id="pic_yl_5" width="100" height="100"
+                                     src="{$view.logo}"/></a>
+                            {else/}
+                            <img id="" width="100" height="100"
+                                 src="__STATIC__/manage/images/add_fpic.gif"/>
+                            {/if}
+                            </a>
+                        </div>
+                        <div id='pic_btn_5' style='margin-top:10px;text-align:center;display:none;'>
+                            <a onclick='del_pic(5)' class="btn btn-success">删除</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div style='color:red;'>请上传图片尺寸为 750px x 430px 的图片!</div>
+            </div>
+        </div>
+
+        <div class="item">
+            <label>备案：</label>
+
+            <div class="i_bd">
+                <input class="edit_input" name="copyright" value="{$view.copyright}" style="width:30%;"
+                       type="text"/>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">服务协议</label>
+            <div class="layui-input-block">
+                <textarea name="service" placeholder="请输入内容" class="layui-textarea">{$view.service}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">隐私协议</label>
+            <div class="layui-input-block">
+                <textarea name="privacy" placeholder="请输入内容" class="layui-textarea">{$view.privacy}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">其他备注</label>
+            <div class="layui-input-block">
+                <textarea name="remark" placeholder="请输入内容" class="layui-textarea">{$view.remark}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">关于我们</label>
+            <div class="layui-input-block">
+                <textarea name="content" placeholder="请输入内容" class="layui-textarea">{$view.content}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">平台介绍</label>
+            <div class="layui-input-block">
+                <textarea name="introduction" placeholder="请输入内容" class="layui-textarea">{$view.introduction}</textarea>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <a href="javascript:;" id="form_btn" class="btn btn-success">保存</a>
+            </div>
+        </div>
+
+
+    </form>
+
+</div><!--v_bd-->
+<script>
+
+    function addpic(id) {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("/admin/upload/img")}?pid=' + id + '" ></iframe>';
+        tanchuang("apppic", 700, '上传图片', html)
+    }
+    function addpic_do(pic, pid) {
+        re_tanchuang('apppic');
+        $("#pic_yl_" + pid).attr('src', pic);
+        $("#picval_" + pid).val(pic);
+        $('#pic_btn_' + pid).show();
+    }
+
+    function del_pic(id) {
+        $('#pic_yl_' + id).attr('src', '__STATIC__/manage/images/add_fpic.gif');
+        $('#picval_' + id).val('');
+        $('#pic_btn_' + id).hide();
+    }
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+
+
+    });
+</script>
+{include file="common/foot" /}

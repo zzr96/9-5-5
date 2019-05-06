@@ -1,0 +1,66 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr class="h">
+            <td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value="" />全选</td>
+            <td>发送人</td>
+            <td>接收人</td>
+            <td>内容</td>
+            <td>发送时间</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr>
+            <td><input name="chk_list" type="checkbox" value="{$vo.id}" /></td>
+            <td><b>admin</b></a></td>
+            <td>全部用户</td>
+            <td>{$vo.content}</td>
+            <td>{$vo.createtime}</td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+            <td>
+                选中项 :
+                <a href="javascript:;" class="v_btn" onclick="del();" >删除</a>
+            </td>
+            <td colspan="3">{$page}</td>
+        </tr>
+    </table>
+
+</div><!--v_bd-->
+<script>
+    $(".chk_all").click(function(){
+        if(!$(this).attr("checked")){
+            $("input[name='chk_list']").removeAttr("checked");
+        }else{
+            $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+        }
+    });
+    function del(){
+        if(!confirm("确定要删除选中项吗？")){
+            return false;
+        }
+        var arrChk=$("input[name='chk_list']:checked");
+        var val='';
+        for (var i=0;i<arrChk.length;i++)
+        {
+            val=val+","+arrChk[i].value;
+        }
+        val = val.substr(1);
+        if(val==''){
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url="{:url("del")}";
+        $.ajax({
+            url:url,
+            data:"id="+val,
+            type:'post',
+            success:function(txt){
+                tishi('success',txt.msg,window.location.href)
+            }
+
+        })
+    }
+</script>
+{include file="common/foot" /}

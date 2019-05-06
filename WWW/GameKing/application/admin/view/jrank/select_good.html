@@ -1,0 +1,84 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class="v_bd_tag">
+        商品选择：
+
+        <a href="javascript:;" onclick="del();" class="btn btn-success">提交</a><i class="huise">(请勾选三个展示商品)</i>
+<!--         <p style='float:right;margin-top:4px;'>
+            <a href="{:url('index_list')}" class="btn btn-success">切换查看方式</a>
+        </p> -->
+    </div>
+    <style>
+        .table tr:hover {
+            background: #ffffff;
+        }
+    </style>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr>
+            <td colspan="5">
+                <div class="pic_list">
+                    <ul>
+                        {volist name="list" id="vo"}
+                        <li style="height: 300px;">
+
+                            <a href="javascript:;" class="pic" title="{$vo.id}">
+                                <img src="{$vo.img1}" align="absmiddle" alt="{$vo.goods_name}"/>
+                            </a>
+                            <p class="pro-name">
+                                {$vo.goods_name}
+                            </p>
+                            <p style='margin-bottom:-24px;height:50px;'>
+                            {in name="$vo.id" value="$ids"}
+                                <input type="checkbox" name="chk_list" value="{$vo.id}" checked/> ID：{$vo.id}
+                            {else/}
+                            <input type="checkbox" name="chk_list" value="{$vo.id}" /> ID：{$vo.id}
+                            {/in}
+                            </p>
+                            <p>
+                                <span>
+                                    所属商城：{$vo.shop_name}
+                                </span>
+                            </p>
+                            <p><span>销量：{$vo.sales}</span></p>
+                        </li>
+                        {/volist}
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+
+    function del() {
+        var arrChk = $("input[name='chk_list']:checked");
+        var url = "{:url('add_goodsid')}";
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        val=val.substr(1);
+        id={$id};
+        $.ajax({
+            url: url,
+            data:{goods_id:val,id:id},
+            type: 'post',
+            success: function (txt) {
+                 if (txt.code == 1){
+                   tishi('success', txt.msg, '{:url("index")}');
+                } else {
+                   tishi('error', txt.msg);
+                }
+            }
+        });
+    }
+
+
+    function searchs() {
+        var val = $('#search').val();
+        var url = '{:url("select_good")}?search=' + val;
+        window.location.href = url;
+    }
+</script>

@@ -1,0 +1,24 @@
+{include file="common:head"}
+<div class="v_bd">
+    <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+        <tr class="h">
+            <td >序号</td>
+            <td >消费金额</td>
+            <td >备注</td>
+            <td >消费时间</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr id="item{$vo.uid}">
+            <td>{$key + 1}</td>
+            <td>{$vo.amount/100}</td>
+            <td>{$vo.mark}</td>
+            <td>{$vo.createtime}</td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td colspan="7">{$page}</td>
+        </tr>
+    </table>
+</div>
+{include file="common:foot"}
+

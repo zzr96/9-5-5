@@ -1,0 +1,54 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="bd">
+        <?php
+            if(!$arr){
+        ?>
+        <div class="none_list">暂无数据</div>
+        <?php
+            }else{
+        ?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>ID</td>
+                <td>价格</td>
+                <td>店铺名称</td>
+                <td>操作</td>
+            </tr>
+            {volist name="arr" id="vo"}
+            <tr id="item{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.price}</td>
+                <td>{$vo.shop_name}</td>
+                <td>
+                    {if condition="$ids eq 0"}
+                    <a href="javascript:;" onClick="del({$vo.gg_id},{$vo.shop_id})" class="btn btn-danger">选择</a>
+                    {/if}
+                    {if condition="$ids eq $vo.shop_id"}
+                    <a href="javascript:;"  class="btn btn-danger">中标</a>
+                    {/if}
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+
+    function del(id,shop_id){
+        var url = '{:url("zhongbiao")}?id=' + id+'&shop_id='+shop_id;
+        $.ajax({
+            url: url,
+            success: function (txt){
+                if (txt.code == 1){
+                   tishi('success', txt.msg, '{:url("index")}');
+                } else {
+                   tishi('error', txt.msg);
+                }
+                //console.log(txt);
+            }
+        })
+    }
+</script>

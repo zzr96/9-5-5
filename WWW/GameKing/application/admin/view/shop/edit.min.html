@@ -1,0 +1,18 @@
+{include file="common:head"} <div class=v_bd><!--v_bd--> <form action="{:url('edit_do')}" method=post id=form> <input type=hidden name=id value={$list.id}> <div class=item> <label>姓名：</label> <div class=i_bd> <input type=text name=name class=edit_input size=20 value={$list.name} disabled=disabled> <span>(*必填)</span> </div> </div> <div class=item> <label>手机号码：</label> <div class=i_bd> <input type=text name=mobile class=edit_input size=20 value={$list.mobile} disabled=disabled> <span>(*必填)</span> </div> </div> <div class=item> <label>身份证号：</label> <div class=i_bd> <input type=text name=id_card class=edit_input size=20 value={$list.id_card} disabled=disabled> <span>(*必填)</span> </div> </div> <div class=item> <label>住址：</label> <div class=i_bd> <input type=text name=u_addr class=edit_input size=20 value={$list.u_addr} disabled=disabled> <span>(*必填)</span> </div> </div> <div class=item> <label>店铺所属分类：</label> <div class=i_bd> <input type=text name=cat_name class=edit_input size=20 value={$list.cat_name} disabled=disabled> <span>(*必填)</span> </div> </div> <div class=item> <label>店铺名称：</label> <div class=i_bd> <input type=text name=shop_name class=edit_input size=20 value={$list.shop_name} disabled=disabled> <span>(*必填)</span> </div> </div> <div class=item> <label>身份证正面：</label> <div class=i_bd> <div class=chanpin_pic_list> <div class=iitem> <input name=zid_card id=picval_logo type=hidden value={$list.zid_card}> <div class=pic id=logo> <a onclick=addpic_logo(); class=upload_pic title=上传图片><img id=pic_yl_logo src=/public_html{$list.zid_card} width=100 height=100></a> </div> </div> </div> </div> </div> <div class=item> <label>身份证反面：</label> <div class=i_bd> <div class=chanpin_pic_list> <div class=iitem> <input name=fid_card id=picval_logo type=hidden value={$list.fid_card}> <div class=pic id=logo> <a onclick=addpic_logo(); class=upload_pic title=上传图片><img id=pic_yl_logo src=/public_html{$list.fid_card} width=100 height=100></a> </div> </div> </div> </div> </div> <div class=item> <label>营业执照：</label> <div class=i_bd> <div class=chanpin_pic_list> <div class=iitem> <input name=license id=picval_logo type=hidden value={$list.license}> <div class=pic id=logo> <a onclick=addpic_logo(); class=upload_pic title=上传图片><img id=pic_yl_logo src=/public_html{$list.license} width=100 height=100></a> </div> </div> </div> </div> </div> <div class=item> <label>店铺地址：</label> <div class=i_bd> <input type=text name=s_addr class=edit_input size=20 value={$list.s_addr} disabled=disabled> <span>(*必填)</span> </div> </div> <div class=item> <label></label> <div class=i_bd> {if condition="$list.status eq 1"} <a href=javascript:; onclick="status('{$list.id}',2)" class="btn btn-success">审核</a> {else} <a href=javascript:; onclick="status('{$list.id}',3)" class="btn btn-danger">禁用</a> {/if} </div> </div> </form> </div><!--v_bd--> {include file="common:foot"} <script>
+    function status(id, status) {
+        var data = 'id=' + id + '&status=' + status;
+        var url = '{:url("status")}';
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                if (data.code == 1) {
+                    tishi('success', data.msg, '{:url("index")}');
+                } else {
+                    tishi('error', data.msg);
+                }
+            }
+        })
+    }
+</script>

@@ -1,0 +1,84 @@
+{include file="common/head" /}
+<style>
+.q_item{ padding:5px 10px;}
+.q_item span{ margin:0 10px 0 0;}
+</style>
+<div class="v_bd"><!--v_bd-->
+	<div class="v_tishi">
+		您正在为角色<b>{$view.name}</b>管理授权！
+	</div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+			  <tr class="h">
+				<td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value="" />全选</td>
+				<td>权限选择</td>
+			  </tr>
+			  {volist name="list" id="vo"}
+			  <tr>
+				<td></td>
+				<td><b>{$vo.name}</b><input name="chk_list" class="check_item"  <?php if($vo['is']){echo 'checked="checked"';} ?> type="checkbox" value="{$vo.id}" />
+					<div class="q_item">
+						{volist name="vo['item']" id="vo2"}
+							<span>{$vo2.name} <input name="chk_list" type="checkbox" <?php if($vo2['is']){echo 'checked="checked"';} ?> value="{$vo2.id}" /></span>
+						{/volist}
+					</div>
+				 </td>
+			  </tr>
+			  {/volist}
+			  <tr class="f">
+				<td><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+			    <td>
+					选中项 :
+					<a href="javascript:;" class="v_btn" onclick="shouquan();" >授权</a> 
+					</td>
+			  </tr>
+			</table>
+	 
+</div><!--v_bd-->	 
+{include file="common/foot" /}
+
+<script>
+$(".chk_all").click(function(){
+	if(!$(this).attr("checked")){
+		$("input[name='chk_list']").removeAttr("checked");
+	}else{
+     $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+	 }
+});
+
+$(".check_item").click(function(){
+	if(!$(this).attr("checked")){
+		$(this).next("div").find("input[name='chk_list']").removeAttr("checked");
+	}else{
+		$(this).next("div").find("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+	}
+
+})
+
+function shouquan(){
+	if(!confirm("确定要授权选中项吗？")){
+		return false;
+	}
+	var arrChk=$("input[name='chk_list']:checked");
+	var val='';
+		for (var i=0;i<arrChk.length;i++)
+		{
+			 val=val+","+arrChk[i].value;
+		}
+		if(val==''){
+			alert("请选择需要操作的信息")
+			return false;
+		}
+		var url="{:url("shouquan")}";
+		
+			$.ajax({
+					 url:url,
+					 data:"role_id={$view.id}&ids="+val,
+					 type:'post',
+						success:function(txt){
+							tishi('success',txt.msg,window.location.href)
+						 }
+						
+			})
+}
+
+</script>

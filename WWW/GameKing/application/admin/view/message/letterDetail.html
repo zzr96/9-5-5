@@ -1,0 +1,38 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+
+        <div class="item">
+            <label>发送人：</label>
+            <div class="i_bd">
+                    <p>{$detail.sendName}</p>
+            </div>
+        </div>
+        <div class="item">
+            <label>消息标题：</label>
+
+            <div class="i_bd">
+                <p>{$detail.title}</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <label>消息内容：</label>
+
+            <div class="i_bd">
+                {$detail.content}
+            </div>
+        </div>
+
+</div><!--v_bd-->
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+</script>
+{include file="common/foot" /}

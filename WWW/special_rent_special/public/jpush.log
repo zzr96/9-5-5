@@ -1,0 +1,4 @@
+Send GET https://api.jpush.cn/v3/schedules/?page=1, body:null, times:1
+Send GET https://device.jpush.cn/v3/tags/, body:null, times:1
+Send GET https://api.jpush.cn/v3/schedules/?page=1, body:null, times:1
+Send GET https://api.jpush.cn/v3/schedules/?page=1, body:null, times:1

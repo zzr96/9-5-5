@@ -1,0 +1,238 @@
+{include file="common/head" /}
+<style>
+    .table td{border:1px solid #dce4ec;}
+    .param-list{float: left;width: 40%;padding-left: 50px;}
+    .param-list h1{font-size: 16px;}
+</style>
+<div class="v_bd" style="overflow: hidden;"><!--v_bd-->
+
+    <table width="50%" border="0" cellpadding="0" cellspacing="0" class="table" style="float: left;">
+        <tr class="h">
+            <td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value=""/>全选</td>
+            <td>菜单名</td>
+            <td>排序</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr>
+            <td><input name="chk_list" type="checkbox" value="{$vo.id}"/></td>
+            <td><b>{$vo.title}</b><span class="v_btn" onclick="toggleTr(this,{$vo.id},0)">展开</span></td>
+            <td>
+                <input data-id="{$vo.id}" type="number" size="1" name="sort" value="{$vo.sort}" class="layui-input sortInput" style="width: 60px;">
+            </td>
+            <td><a href="{:url("addZy?id=$vo[id]")}">编辑</a></td>
+        </tr>
+
+        {volist name="vo['item']" id="vo2"}
+        <tr class="child tr-{$vo2.pid}" style="display: none">
+            <td><input name="chk_list" type="checkbox" value="{$vo2.id}"/></td>
+            <td>┠ {$vo2.title} <span class="v_btn" onclick="toggleTr(this,{$vo.id},{$vo2.id})">展开</span></td>
+            <td>
+                <input data-id="{$vo2.id}" type="number" size="1" name="sort" value="{$vo2.sort}" class="layui-input sortInput" style="width: 60px;">
+            </td>
+            <td><a href="{:url("addLb?id=$vo2[id]")}">编辑</a></td>
+        </tr>
+            {volist name="vo2.pinpai" id="pp"}
+            <tr class="child tr-{$pp.fid}-{$pp.pid}"  style="display: none">
+                <td><input name="chk_list" type="checkbox" value="{$pp.id}"/></td>
+                <td>└<span data-id="{$pp.id}" class="yulan">{$pp.title}</span><p style="font-size: 12px;color: #ccc;display: inline-block;padding-left: 15px;">(点击右侧预览模型参数)</p></td>
+                <td>
+                    <input data-id="{$pp.id}" type="number" size="1" name="sort" value="{$pp.sort}" class="layui-input sortInput" style="width: 60px;">
+                </td>
+                <td><a href="{:url("addModel?id=$pp[id]")}">编辑</a></td>
+            </tr>
+            {/volist}
+        {/volist}
+        {/volist}
+        <tr class="f">
+            <td><input name="" class="chk_all" type="checkbox" value=""/>全选</td>
+            <td>
+                选中项 :
+                <a href="javascript:;" class="v_btn" onclick="del();">删除</a>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+    <div class="param-list">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table param-table" style="float: right;">
+            <tr class="h">
+                <td>参数名</td>
+                <td>默认值</td>
+            </tr>
+            <tr class="f" align="center">
+                <td colspan="2">暂无数值</td>
+            </tr>
+        </table>
+
+
+    </div>
+
+</div><!--v_bd-->
+{include file="common/foot" /}
+
+<script>
+    $(".chk_all").click(function () {
+        if (!$(this).attr("checked")) {
+            $("input[name='chk_list']").removeAttr("checked");
+        } else {
+            $("input[name='chk_list']").attr("checked", $(this).attr("checked"));
+        }
+    });
+    $(document).on('change','.sortInput',function(){
+        var _sort = $(this).val();
+        var _id = $(this).data('id');
+        $.ajax({
+            type:'post',
+            url:"{:url('setSort')}",
+            data:{id:_id,sort:_sort},
+            success:function(data){
+                if(data.code == 0){
+                    layer.msg(data.msg);
+                }
+            }
+        })
+    });
+    $(document).on('click','.yulan',function(){
+        var _id = $(this).data('id');
+        $.ajax({
+            type:'post',
+            url:"{:url('yulan')}",
+            data:{id:_id},
+            success:function(ret){
+                if(ret.code == 0){
+                    $('.param-table tr:not(:first)').remove();
+                    var length = ret.data.length;
+                    if(length){
+                        $('.param-table f').hide();
+                        $.each(ret.data,function(i,v){
+                            var tr = '<tr>' +
+                                '<td>'+v.title+'</td>' +
+                                '<td>'+v.values+'</td>' +
+                                '</tr>';
+                            $('.param-table').append(tr);
+                        })
+                    }else{
+                        $('.param-table').append('<tr class="f" align="center">\n' +
+                            '                <td colspan="2">暂无数值</td>\n' +
+                            '            </tr>');
+                    }
+
+                }
+            }
+        })
+    })
+    function toggleTr(obj,a,b){
+        if(b){
+            $('.tr-'+a+'-'+b).toggle();
+        }else{
+            $('.tr-'+a).toggle();
+        }
+        if($(obj).text() == '展开'){
+            $(obj).text('关闭');
+        }else{
+            $(obj).text('展开');
+        }
+
+    }
+
+
+    function del() {
+        if (!confirm("确定要删除选中项吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url('del')}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            }
+
+        })
+    }
+
+    function jinyong() {
+        if (!confirm("确定要选中项禁用吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url("
+        jinyong
+        ")}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+
+            }
+
+        })
+    }
+
+    function qiyong() {
+        if (!confirm("确定要选中项启用吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url("
+        qiyong
+        ")}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+
+            }
+
+        })
+    }
+
+    function paixu(id, type) {
+        var url = "{:url("
+        paixu
+        ")}";
+        $.ajax({
+            url: url,
+            data: "id=" + id + "&type=" + type,
+            success: function (txt) {
+                //alert(JSON.stringify(txt))
+                if (txt.code == 1) {
+                    window.location.href = window.location.href
+                }
+
+            }
+
+        })
+
+    }
+
+</script>
