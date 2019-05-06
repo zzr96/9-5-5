@@ -1,0 +1,44 @@
+{include file="common:head"}
+<style>
+    span {
+        padding-right: 30px;
+    }
+</style>
+<div class="v_bd">
+    <div class="col2">
+        <div class="v_box">
+            <div class="hd"><h3>销售与订单统计</h3></div>
+            <div class="bd">
+                <p>今日销售额(元)：<span>{$data.today_sales}</span></p>
+                <p>今日订单数(单)：<span>{$data.today_order_nums}</span></p>
+                <p>月销售额统计(元)：<span>{$data.month_sales}</span></p>
+                <p>月订单数统计(单)：<span>{$data.month_order_nums}</span></p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col2">
+        <div class="v_box">
+            <div class="hd"><h3>服务器信息</h3></div>
+            <div class="bd">
+                <p>操作系统：<span>{$server.os}</span></p>
+
+                <p>系统版本：<span>{$server.os_version}</span></p>
+
+                <p>PHP运行方式：<span>{$server.sapi}</span></p>
+
+                <p>Zend版本：<span>{$server.os_version}</span></p>
+
+                <p>PHP版本：<span>{$server.php_version}</span></p>
+
+                <p>服务器类型：<span>{$server.apache_version}</span></p>
+
+                <p>网站IP：<span>{$server.ip}</span></p>
+
+                <p>网站域名：<span>{$server.host}</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+{include file="common:foot"}

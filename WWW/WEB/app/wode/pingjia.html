@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            background: #fff;
+        }
+
+        .dingdan-content .all-dingdan ul li .mid {
+            border: 0
+        }
+
+        .pingjia-content .add-photo .icon-tianjiatupian {
+            margin-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .add_tupian {
+            width: 80px;
+            height: 80px;
+            float: left;
+            margin-top: 10px;
+            padding-top: 18px;
+            text-align: center;
+            border: 1px dotted #aaa;
+        }
+
+        .pingjia-content .ni i {
+            margin-right: 5px
+        }
+
+        .icon-xuanzhong {
+            color: #01c65d;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">评价</h1>
+        <span class="subbtn">提交</span>
+    </header>
+    <div class="header-counter pingjia-content dingdan-content">
+        <div class="all-dingdan clearfix ">
+            <ul class="padd10">
+                <li>
+                    <div class="list">
+                        <!-- <div class="mid clearfix">
+                            <div class="img-box">
+                                <img src="../img/img02.jpg" />
+                            </div>
+                            <div class="right">
+                                <p class="name twoline">品牌一品牌一一品牌一品牌一</p>
+                                <p class="price clearfix">
+                                    <span>￥<m>9.22</m></span>
+                                    <span>X2</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mid clearfix">
+                            <div class="img-box">
+                                <img src="../img/img02.jpg" />
+                            </div>
+                            <div class="right">
+                                <p class="name twoline">品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一</p>
+                                <p class="price clearfix">
+                                    <span>￥<m>9.22</m></span>
+                                    <span>X2</span>
+                                </p>
+                            </div>
+                        </div> -->
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="content padd10">
+            <textarea name="" rows="" id="content" cols="" placeholder="分享此次购物体验,2-256个字"></textarea>
+            <div class="photo-wrap clearfix ">
+                <ul class="add-photo clearfix " id="img_box">
+                    <!-- <li>
+                        <div class="img-box"><img src="../img/img02.jpg" /></div> <span class="shan">x</span>
+                    </li>
+                    <li>
+                        <div class="img-box"><img src="../img/img01.jpg" /></div> <span class="shan">x</span>
+                    </li> -->
+                </ul>
+                <p class="add_tupian" id="headimg">
+                    <span class="iconfont icon-tianjiatupian" style="font-size:30px"></span><br/> 添加图片
+                </p>
+            </div>
+
+            <!-- <i class="iconfont icon-xuanzhong"> </i>-->
+            <div class="ni padd10 is_niming"> <i data-status="0" class="iconfont icon-iconfontico2"></i>匿名
+                <m>您的评价可以帮助其他小伙伴哟</m>
+            </div>
+        </div>
+        <div class="pingfen padd10 clearfix">
+            <m>评分</m>
+            <p>
+                <span class="iconfont icon-wodeshoucang active"></span>
+                <span class="iconfont icon-wodeshoucang active"></span>
+                <span class="iconfont icon-wodeshoucang active"></span>
+                <span class="iconfont icon-wodeshoucang active"></span>
+                <span class="iconfont icon-wodeshoucang active"></span>
+            </p>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+    var order_num;
+    var content;
+    var headimg = new Array();
+    var nice;
+    var is_niming;
+
+    function api_init() {
+        order_num = api.pageParam.order_num;
+        getOrderInfo();
+    }
+    //获取订单信息
+    function getOrderInfo() {
+        api.ajax({
+            url: apis + 'order/info',
+            method: 'post',
+            data: {
+                values: {
+                    order_num: order_num
+                }
+            }
+        }, function(ret, err) {
+            if (ret) {
+                console.log(JSON.stringify(ret));
+                if (ret.code == 1) {
+                    var html = '';
+                    $.each(ret.data.goods, function(k, v) {
+                        html += '<div class="mid clearfix">' +
+                            '<div class="img-box"><img src="' + iapi + v.img1 + '" /></div>' +
+                            '<div class="right"><p class="name twoline">' + v.name + '</p>' +
+                            '<p class="price clearfix"><span>￥<m>' + v.price + '</m></span><span>X' + v.num + '</span></p></div></div>';
+                    });
+                    $('.list').html(html);
+                }
+            } else {
+                console.log(JSON.stringify(err));
+            }
+        });
+    }
+
+    //是否匿名
+    $('.is_niming').on('tap', function() {
+        var status = $('.is_niming i').attr('data-status');
+        if (status == 0) {
+            $('.is_niming i').attr('data-status', 1);
+            $('.is_niming i').addClass('icon-xuanzhong');
+            $('.is_niming i').removeClass('icon-iconfontico2');
+            is_niming = 1;
+        } else {
+            $('.is_niming i').attr('data-status', 0);
+            $('.is_niming i').removeClass('icon-xuanzhong');
+            $('.is_niming i').addClass('icon-iconfontico2');
+            is_niming = 2;
+        }
+    });
+
+    $(".pingfen p").on("click", 'span', function() {
+        $(this).prevAll().addClass("active");
+        $(this).nextAll().removeClass('active');
+        $(this).addClass("active")
+    })
+
+    //点击提交
+    $('.subbtn').on('tap', function() {
+        content = $('#content').val();
+        nice = $('.pingfen p .active').length;
+        if (!content) {
+            api.toast({
+                msg: '请输入内容',
+                duration: 2000,
+                location: 'bottom'
+            });
+            return false;
+        }
+        if (content.length > 256) {
+            api.toast({
+                msg: "内容太长了，1-256之间",
+                duration: 2000,
+                location: 'bottom'
+            });
+            return false;
+        }
+        pingjia();
+    });
+
+    //评价
+    function pingjia() {
+        api.ajax({
+            url: apis + 'order/fbadd',
+            method: 'post',
+            data: {
+                values: {
+                    order_num: order_num,
+                    content: content,
+                    img: JSON.stringify(headimg),
+                    nice: nice,
+                    is_niming: is_niming
+                }
+            }
+        }, function(ret, err) {
+            if (ret) {
+                console.log(JSON.stringify(ret));
+                if (ret.code == 1) {
+                    api.toast({
+                        msg: ret.msg,
+                        duration: 2000,
+                        location: 'bottom'
+                    });
+                    api.execScript({
+                        name: 'my_order',
+                        script: 'refresh_order();'
+                    });
+
+                    setTimeout(function() {
+                        api.closeWin();
+                    }, 2000);
+                }
+                if (ret.code == 0) {
+                    api.toast({
+                        msg: ret.msg,
+                        duration: 2000,
+                        location: 'bottom'
+                    });
+                }
+            } else {
+                console.log(JSON.stringify(err));
+            }
+        });
+    }
+
+    //上传图片
+    $('#headimg').on('tap', function() {
+        api.actionSheet({
+            cancelTitle: '取消',
+            buttons: ['拍照', '相册']
+        }, function(ret, err) {
+            if (ret) {
+                console.log(JSON.stringify(ret));
+                var index = ret.buttonIndex;
+                var type;
+                if (index == 1) {
+                    type = 'camera';
+                }
+                if (index == 2) {
+                    type = 'album';
+                }
+                if (index == 3) {
+                    return;
+                }
+                getPicture(type);
+            } else {
+                console.log(JSON.stringify(err));
+                api.alert({
+                    msg: err.msg
+                });
+            }
+        });
+    });
+
+    //头像获取
+    function getPicture(type) {
+        api.getPicture({
+            sourceType: type,
+            encodingType: 'jpg',
+            mediaValue: 'pic',
+            destinationType: 'url',
+            quality: 100
+        }, function(ret, err) {
+            if (ret) {
+                console.log(JSON.stringify(ret));
+                api.showProgress({
+                    title: '努力加载中...',
+                    modal: true
+                });
+
+                api.ajax({
+                    url: apis + 'upload/img',
+                    method: 'post',
+                    data: {
+                        files: {
+                            file: ret.data
+                        }
+                    }
+                }, function(ret, err) {
+                    if (ret) {
+                        console.log(JSON.stringify(ret));
+                        if ($('#img_box li').length < 3) {
+                            var html = '';
+                            html += '<li><div class="img-box"><img src="' + iapi + ret.pic + '" data-src="' + ret.pic +
+                                '"/></div> <span class="shan">x</span></li>';
+
+                            $('#img_box').append(html);
+
+                            $('#img_box').on('tap', ".shan", function() {
+                                $(this).closest('li').remove();
+                                headimg.splice($.inArray(ret.pic, headimg), 1);
+                                if ($('#img_box li').length < 3) {
+                                    $('#headimg').show();
+                                }
+                            });
+                        }
+                        if ($('#img_box li').length >= 3) {
+                            $('#headimg').hide();
+                        }
+                        headimg.push(ret.pic);
+                    } else {
+                        console.log(JSON.stringify(err));
+                    }
+                    api.hideProgress();
+                });
+            } else {
+                console.log(JSON.stringify(err));
+            }
+        });
+    }
+
+    $('#content').on("input", function() {
+        var len = $(this).val().length;
+        if (len > 256) {
+            $(this).val($(this).val().substring(0, 256));
+        }
+    });
+</script>
+
+</html>

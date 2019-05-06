@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<link href="../css/style.css" rel="stylesheet" />
+	<link href="../css/iconfont.css" rel="stylesheet" />
+	<style type="text/css">
+		html,
+		body {
+			background: #fff;
+		}
+	</style>
+
+
+</head>
+
+<body>
+
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav ">
+		<a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">支付成功</h1>
+		<a href="#" class=" mui-pull-right">
+			<span class="iconfont"></span>
+		</a>
+	</header>
+	<div class="pay-order header-counter">
+		<h1><img src="../img/success1.png"/>
+			</h1>
+		<h3>支付成功!</h3>
+		<p class="pay-money">支付金额：
+			<m>￥<em class="pay_money"></em></m>
+		</p>
+		<p class="pay-way">支付类型：<span class="payway"></span></p>
+
+		<div class="btn-wrap">
+			<button class="btn-1 backToIndex" >返回首页</button>
+			<button class="btn-2 checkOrderDetail">查看订单</button>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/api.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript">
+		var order_num;
+		function api_init(){
+			order_num = api.pageParam.order_num;
+			getOrderInfo();
+		}
+		//获取订单详情
+		function getOrderInfo(){
+			api.ajax({
+			    url: apis + 'order/info',
+			    method: 'post',
+			    data: {
+			        values: {
+			            order_num: order_num
+			        }
+			    }
+			},function(ret, err){
+			    if (ret) {
+			        console.log( JSON.stringify( ret ) );
+							if(ret.code == 1){
+								$('.payway').html(ret.data.payway);
+								$('.pay_money').html(ret.data.paymoney);
+							}
+			    } else {
+			        console.log( JSON.stringify( err ) );
+			    }
+			});
+		}
+		//点击查看订单
+		$('.checkOrderDetail').on('tap',function(){
+			api.openWin({
+			    name: 'order_detail',
+			    url: './order_detail.html',
+			    pageParam: {
+			        order_num: order_num
+			    }
+			});
+		});
+		//返回首页
+		$('.backToIndex').on('tap',function(){
+			api.execScript({
+			    name: 'root',
+			    script: 'change(0);'
+			});
+			setTimeout(function(){
+				api.closeToWin({
+						name: 'root'
+				});
+				api.closeWin();
+			},1000);
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class='bd'>
+        <div class="v_bd_tag">
+            <a href="{:url('index')}"><span class="focus">全部群组({$data.total})</span></a>
+
+
+            <span>搜索：
+			    <input name="key" id="key" class="edit_input" value="{:input('key')}" type="text"/>
+			    <a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a>
+                <i class="huise"> ( 输入群组名称 ) </i>
+		    </span>
+
+            <p style='float:right;margin-top:4px;'>
+                <a href="{:url('add')}" class="btn btn-success">添加群组</a>
+            </p>
+
+            <div style='clear:both;'></div>
+        </div>
+
+        <?php
+			if(!$data['items']){
+		?>
+        <div class="none_list">没有内容 </div>
+        <?php
+			}else{
+		?>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+            <tr class="h">
+                <td valign="middle">ID</td>
+                <td>Logo</td>
+                <td>名称</td>
+                <td>所属地</td>
+                <td>人数</td>
+                <td>创建时间</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            {volist name="data.items" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td><img src="{$vo.logo}" height="50"/></td>
+                <td><b>{$vo.name}</b></td>
+                <td>{$vo.address}</td>
+                <td>{$vo.num}</td>
+                <td>{$vo.createdate}</td>
+                <td>
+                    {if condition='$vo.status>0'}
+                    <a href="javascript:;" class="btn btn-primary" onclick="setStatus('{$vo.id}',0);">已审核</a>
+                    {else/}
+                    <a href="javascript:;" class="btn btn-success" onclick="setStatus('{$vo.id}',1);">未审核</a>
+                    {/if}
+                </td>
+                <td>
+                    <a href="{:url('edit')}?id={$vo.id}&nav=编辑信息" class="btn btn-primary">编辑</a>
+                    <a href="javascript:;" class="btn btn-danger" onclick="single_del('{$vo.id}');">删除</a>
+                </td>
+            </tr>
+            {/volist}
+            <tr class="f">
+                <td align="right">{$data.render}</td>
+            </tr>
+        </table>
+
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+    $('.f td').attr('colspan', $('.h td').length);
+    $(".chk_all").click(function () {
+        if (!$(this).attr("checked")) {
+            $("input[name='chk_list']").removeAttr("checked");
+        } else {
+            $("input[name='chk_list']").attr("checked", $(this).attr("checked"));
+        }
+    });
+    function single_del(id) {
+        if (!confirm('此操作不能撤销，确定要删除该群组吗?')) {
+            return false;
+        }
+        $.ajax({
+            url: "{:url('del')}",
+            data: "id=" + id,
+            type: 'post',
+            success: function (ret) {
+                alert(ret.msg);
+                if (ret.code == 1) {
+                    window.location.href = window.location.href
+                }
+            }
+        })
+    }
+
+    function searchs() {
+        window.location.href = "{:url('index')}?key=" + $('#key').val();
+    }
+
+    function setStatus(id, status) {
+        var url = '{:url("setStatus")}';
+        $.ajax({
+            url: url,
+            data: 'id=' + id + '&status=' + status,
+            success: function (ret) {
+                if (ret.code == 1) {
+                    tishi('success', ret.msg, window.location.href);
+                } else {
+                    tishi('error', ret.msg)
+                }
+            }
+        });
+    }
+
+
+    function xinxi_del() {
+        if (!confirm("此操作不能撤销，确定要删除选中项吗？")) {
+            return false;
+        }
+
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url('del')}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                alert(txt.info);
+                if (txt.ret == 0) {
+                    window.location.href = '#';
+                }
+            }
+        })
+    }
+</script>		

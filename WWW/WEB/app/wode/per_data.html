@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <link href="../css/mui.picker.css" rel="stylesheet" />
+    <link href="../css/mui.poppicker.css" rel="stylesheet" />
+    <style type="text/css">
+        .mui-content>.mui-table-view:first-child {
+            margin-top: 0;
+        }
+
+        .mui-table-view:before {
+            height: 0;
+        }
+
+        .mui-table-view:after {
+            background-color: #efefef;
+        }
+
+        .mui-table-view-cell:after {
+            left: 15px;
+            background-color: #e6e6e6;
+            right: 0
+        }
+
+        .mui-table-view-cell {
+            padding: 11px 12px;
+        }
+
+        .mui-navigate-right:after {
+            color: #999;
+            font-size: 18px;
+            right: 6px;
+            top: 27px
+        }
+
+        .mui-table-view {
+            background: #f8f8f8;
+        }
+
+        .mui-table-view-cell>a:not(.mui-btn) {
+            margin: -11px -10px;
+        }
+
+        .per-data-content .head-li {
+            padding-bottom: 0;
+        }
+
+        .per-data-content li input {
+            width: 65%
+        }
+
+        .mui-btn-blue {
+            background: #F58A01;
+            border: 0
+        }
+
+        .setting-content li:nth-child(3) {
+            margin-bottom: 0;
+        }
+
+        .setting-content li:nth-child(3):after {
+            height: 1px
+        }
+
+        .head-li .mui-navigate-right:after {
+            top: 34px
+        }
+
+        .mui-btn-blue {
+            background: #00C55B;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left"><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">个人资料</h1>
+        <span class="baocun">保存</span>
+    </header>
+    <div class="setting-content per-data-content header-counter">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell  head-li">
+                <a class="mui-navigate-right" >
+                  <label for="">头像</label>
+                  <div class="head-box"><img data-src="" src=""/></div>
+                </a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a><label for="">昵称</label><input type="text" class='user_nick' placeholder="请输入昵称" /></a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a><label for="">姓名</label><input type="text" class="user_name" placeholder="请输入您的真实姓名" /></a>
+            </li>
+            <li class="mui-table-view-cell" id="showSexPicker">
+                <a class="mui-navigate-right">
+                  <label for="">性别</label>
+                  <input type="text" id="sexResult" readonly="" placeholder="请选择性别" />
+                </a>
+            </li>
+            <li class="mui-table-view-cell">
+              <a class="mui-navigate-right">
+                  <label for="">绑定手机</label>
+                  <input type="text" class="phone" readonly="" placeholder="请输入您要绑定的手机" value=""/>
+                </a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a class="mui-navigate-right">
+                  <label for="">绑定邮箱</label>
+                  <input type="text" class="email" readonly="" placeholder="请输入您要绑定的邮箱" value=""/>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script src="../js/mui.picker.js"></script>
+    <script src="../js/mui.poppicker.js"></script>
+    <script type="text/javascript" src="../js/city.data-3.js"></script>
+    <script type="text/javascript">
+      var headimg;
+      var nick;
+      var name;
+      var sex;
+      var phone;
+      var email;
+
+      function api_init(){
+        getUserInfo();
+      }
+      //获取用户信息
+      function getUserInfo(){
+        api.ajax({
+            url: apis + 'user/info',
+            method: 'post'
+        },function(ret, err){
+            if (ret) {
+                console.log( JSON.stringify( ret ) );
+                if(ret.code == 1){
+                  $('.head-box img').attr('src',iapi + ret.data.headimg);
+                  $('.head-box img').attr('data-src',ret.data.headimg);
+                  $('.user_nick').val(ret.data.nick);
+                  $('.user_name').val(ret.data.name);
+                  if(ret.data.sex == 1){
+                    $('#sexResult').val('男');
+                  }else if(ret.data.sex == 2){
+                    $('#sexResult').val('女');
+                  }
+                  $('.phone').val(ret.data.phone);
+                  $('.email').val(ret.data.email);
+                }
+            } else {
+                console.log( JSON.stringify( err ) );
+            }
+        });
+      }
+      //点击保存
+      $('.baocun').on('tap',function(){
+        nick = $('.user_nick').val();
+        name = $('.user_name').val();
+        headimg = $('.head-box img').attr('data-src');
+        if($('#sexResult').val() == '男'){
+          sex = 1;
+        }else{
+          sex = 2;
+        }
+        phone = $('.phone').val();
+        email = $('.email').val();
+console.log(headimg);
+        api.ajax({
+            url: apis + 'user/setInfo',
+            method: 'post',
+            data: {
+                values: {
+                    headimg: headimg,
+                    nick: nick,
+                    name: name,
+                    sex: sex,
+                    phone: phone,
+                    email: email
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+                console.log( JSON.stringify( ret ) );
+                if(ret.code == 1){
+                  api.toast({
+                      msg: ret.msg,
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                  api.execScript({
+                      name: 'root',
+                      frameName: 'wode',
+                      script: 'getUserInfo();'
+                  });
+
+                  setTimeout(function(){
+                    api.closeWin();
+                  },2000);
+                }
+                if(ret.code == 0){
+                  api.toast({
+                      msg: ret.msg,
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                  return false;
+                }
+            } else {
+                console.log( JSON.stringify( err ) );
+            }
+        });
+      });
+
+      //点击上传头像
+      $('.head-li').on('tap', function() {
+          api.actionSheet({
+              title: '上传图片',
+              cancelTitle: '取消',
+              buttons: ['拍照', '相册']
+          }, function(ret, err) {
+              if (ret) {
+                  // console.log(ret.buttonIndex);
+                  if (ret.buttonIndex == 1) {
+                      type = 'camera'; //相机
+                  }
+                  if (ret.buttonIndex == 2) {
+                      type = 'library'; //图片库
+                  }
+                  if (ret.buttonIndex == 3) {
+                      return; //取消
+                  }
+                  getPicture(type);
+              }
+              if (err) {
+                  console.log(JSON.stringify(err));
+              }
+          });
+      });
+
+      //头像获取
+      function getPicture(type) {
+          api.getPicture({
+              sourceType: type,
+              encodingType: 'jpg',
+              mediaValue: 'pic',
+              destinationType: 'url',
+              quality: 100
+          }, function(ret, err) {
+              if (ret) {
+                  console.log(JSON.stringify(ret));
+                  if (ret.data) {
+                      api.openWin({
+                          name: 'clip',
+                          url: './clip.html',
+                          pageParam: {
+                              from: '../wode/per_data.html',
+                              file: ret.data
+                          }
+                      });
+                  } else {
+                      console.log(JSON.stringify(err));
+                  }
+              }
+              if(err) {
+                  console.log(JSON.stringify(err));
+              }
+          });
+      }
+
+      function upload(path) {   //执行回调
+    		api.showProgress({
+    			style: 'default',
+    			animationType: 'fade',
+    			title: '正在上传...',
+    			text: '请稍候...',
+    			modal: false
+    		});
+    		console.log(path);
+    		api.ajax({
+    			url: apis + '/upload/img',
+    			method: 'post',
+    			data: {
+    				files: {
+    					file: path
+    				}
+    			}
+    		}, function(ret, err) {
+    			if (ret) {
+    				hideProgress();
+    				console.log(JSON.stringify(ret));
+            $('.head-box img').attr('src', iapi + ret.pic);
+            $('.head-box img').attr('data-src',ret.pic);
+    				api.closeWin({
+    					name: 'clip'
+    				});
+    			} else {
+    				console.log(JSON.stringify(err));
+    			}
+    		});
+    	}
+
+      //点击绑定手机
+      $('.phone').on('tap',function(){
+          api.openWin({
+              name: 'bangding_phone',
+              url: '../public/bangding_phone.html',
+              pageParam: {
+                  type: 'phone'
+              }
+          });
+      });
+
+      //点击绑定邮箱
+      $('.email').on('tap',function(){
+          api.openWin({
+              name: 'bangding_phone',
+              url: '../public/bangding_phone.html',
+              pageParam: {
+                  type: 'email'
+              }
+          });
+      });
+
+      (function($, doc) {
+          $.ready(function() {
+              //选择性别
+              var sexPicker = new $.PopPicker();
+              sexPicker.setData([{
+                  value: 'ywj',
+                  text: '男'
+              }, {
+                  value: 'aaa',
+                  text: '女'
+              }]);
+              var showSexPickerButton = doc.getElementById('showSexPicker');
+              var sexResult = doc.getElementById('sexResult');
+              showSexPickerButton.addEventListener('tap', function(event) {
+                  sexPicker.show(function(items) {
+                      var sex = JSON.stringify(items[0].text)
+                      console.log(sex)
+                      sexResult.value = sex.substring(1, (sex.length - 1))
+                          //返回 false 可以阻止选择框的关闭
+                          //return false;
+                  });
+              }, false);
+              //三级联示例
+              //					var _getParam = function(obj, param) {
+              //					return obj[param] || '';
+              //				     };
+              //					var cityPicker3 = new $.PopPicker({
+              //						layer: 3
+              //					});
+              //					cityPicker3.setData(cityData3);
+              //					var showCityPickerButton = doc.getElementById('showCityPicker3');
+              //					var cityResult3 = doc.getElementById('cityResult3');
+              //					showCityPickerButton.addEventListener('tap', function(event) {
+              //						cityPicker3.show(function(items) {
+              //				        cityResult3.value = _getParam(items[0] ,'text')+ " " + _getParam(items[1],'text')
+              //                 + " " + _getParam(items[2],'text');
+              //							//返回 false 可以阻止选择框的关闭
+              //							//return false;
+              //						});
+              //					}, false);
+              //
+          });
+      })(mui, document);
+    </script>
+</body>
+
+</html>

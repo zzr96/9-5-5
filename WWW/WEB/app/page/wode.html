@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body,
+        .line {
+            background: #f7f7f7;
+            height: 10px
+        }
+
+        .mui-table-view:before,
+        .mui-table-view:after {
+            height: 0;
+        }
+
+        .mui-table-view-cell:after {
+            left: 10px;
+            background-color: #e6e6e6;
+            right: 0px
+        }
+
+        .first-li:after {
+            height: 1px;
+            left: 0;
+            background-color: #e6e6e6;
+            right: 0
+        }
+
+        .mui-table-view-cell {
+            padding: 13px 10px;
+            height: 50px;
+        }
+
+        .mui-navigate-right:after {
+            color: #bdbdbd;
+            font-size: 15px;
+            right: 7px;
+            font-weight: 100;
+        }
+
+        .mui-btn-outlined.mui-btn-primary {
+            border: 0;
+            color: #333;
+        }
+
+        .mui-table-view-cell>a:not(.mui-btn) {
+            margin: -11px -10px;
+        }
+
+        .li-four:after,
+        .li-eight:after {
+            height: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <div class="wode-content">
+
+        <div class="wode-header">
+            <div class="right newactlogin" url="../wode/setting.html">
+                <span class="iconfont icon-shezhi"></span>
+            </div>
+            <div class="head-box newactlogin" url="../wode/per_data.html">
+                <div class="header-left user_headimg"><img src="" /></div>
+                <p class="name user_nick"></p>
+            </div>
+        </div>
+        <div class="wode-main">
+            <ul class="mui-table-view wode-list">
+                <li class="mui-table-view-cell first-li all_order">
+                    <a class="">我的订单<span>查看全部订单</span></a>
+                </li>
+                <li class="fuli">
+                    <div class="left" data-status="1">
+                        <p class="iconfont icon-daifukuan"></p>
+                        <p>待付款</p>
+                    </div>
+                    <div class="left" data-status="2">
+                        <p class="iconfont icon-daifahuo"></p>
+                        <p>待发货</p>
+                    </div>
+                    <div class="left" data-status="3">
+                        <p class="iconfont icon-daishouhuo"></p>
+                        <p>待收货</p>
+                    </div>
+                    <div class="left" data-status="4">
+                        <p class="iconfont icon-yiwancheng"></p>
+                        <p>已完成</p>
+                    </div>
+
+                    <div class="left" data-status="5">
+                        <p class="iconfont icon-tuihuo"></p>
+                        <p>退换货</p>
+                    </div>
+                </li>
+                <p class="line"></p>
+                <li class="mui-table-view-cell newactlogin" url="../wode/vip_list.html">
+                    <a class="mui-navigate-right ">
+                        <em class="iconfont icon-youhuiquan1" style=""></em>我的优惠券
+                        <span class="coupon_num" style="color: #00C55B;float: right;margin-right: 15px;"></span>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell newactlogin" url="../wode/my_shoucang.html">
+                    <a class="mui-navigate-right ">
+                      <em class="iconfont icon-wodeshoucang1"></em>我的收藏
+                    </a>
+                </li>
+                <li class="mui-table-view-cell newactlogin" url="../wode/my_pingjia.html">
+                    <a class="mui-navigate-right ">
+                      <em class="iconfont icon-pingjia" style="font-size: 20px;margin-right:11px;margin-left: 1px;"></em>我的评价
+                    </a>
+                </li>
+                <li class="mui-table-view-cell newactlogin" url="../wode/my_foot.html">
+                    <a class="mui-navigate-right ">
+                      <em class="iconfont icon-lishijilu" style="font-size: 20px;margin-right:11px;margin-left: 1px;"></em>我的足迹
+                    </a>
+                </li>
+                <li class="mui-table-view-cell" id="address">
+                    <a class="mui-navigate-right">
+                        <em class="iconfont icon-dizhi1" style="margin-right:9px;margin-left: -1px;"></em>地址管理
+                    </a>
+                </li>
+                <li class="mui-table-view-cell newactlogin" url="../wode/erweima.html">
+                    <a class="mui-navigate-right">
+                        <em class="iconfont icon-erweima" style="margin-right:9px;margin-left: -1px;"></em>我的二维码
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript">
+        var userId;
+
+        function api_init() {
+            getUserInfo();
+            getUserCoupon();
+        }
+
+        //获取用户信息
+        function getUserInfo() {
+            api.ajax({
+                url: apis + 'user/info',
+                method: 'post'
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    if (ret.code == 1) {
+                        $('.user_headimg img').attr('src', iapi + ret.data.headimg);
+                        $('.user_nick').html(ret.data.nick);
+                    }
+                    if (ret.data == 0) {
+                        $('.user_headimg img').attr('src', '../img/head.png');
+                        $('.user_nick').html('请登录');
+                    }
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+        //获取我的优惠券
+        function getUserCoupon() {
+            api.ajax({
+                url: apis + 'user/myCoupon',
+                method: 'post'
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    if (ret.code == 1) {
+                        $('.coupon_num').html(ret.data.total + '张');
+                    }
+                    if (ret.code == 0) {
+                        $('.coupon_num').html('0张');
+                    }
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+
+        $('.fuli').on('tap','.left',function(){
+          var order_status = $(this).attr('data-status');
+          userId = $api.getStorage('userId');
+          if(!userId){
+            checkLogin();
+            return false;
+          }
+          api.openWin({
+              name: 'my_order',
+              url: '../wode/my_order.html',
+              pageParam: {
+                  status: order_status
+              }
+          });
+        });
+        //查看全部订单
+        $('.all_order').on('tap',function(){
+          userId = $api.getStorage('userId');
+          if(!userId){
+            checkLogin();
+            return false;
+          }
+          api.openWin({
+              name: 'my_order',
+              url: '../wode/my_order.html',
+              pageParam: {
+                  status: 0
+              }
+          });
+        });
+
+        //点击地址管理
+        $('#address').on('tap',function(){
+          userId = $api.getStorage('userId');
+          if(!userId){
+            api.openWin({
+                name: 'login',
+                url: '../public/login.html',
+                pageParam: {
+                    name: 'login'
+                },
+                animation: 'none'
+            });
+          }
+          api.openWin({
+              name: 'address',
+              url: '../wode/address.html'
+          });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<!--头 -->
+	<header class=" mui-bar mui-bar-nav ">
+		<a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">地址管理</h1>
+	</header>
+	<div class="mui-content address-content">
+		<ul class="address-cont">
+			<!-- <li class="">
+				<div class="address-num">
+					<p class="address-name clearfix">
+						<m>毛不易</m><span>13256565656</span></p>
+					<p class="address-dz">河南省郑州市二七区大学北路华城国际中心13楼 1317室</p>
+				</div>
+				<div class="address-main">
+					<p class="address-pc active" id="check"><em class="iconfont"></em>
+						<span>默认地址</span></p>
+					<p class="address-sc"><em class="iconfont icon-shanchu"></em><span>删除</span></p>
+					<p class="address-bj"><em class="iconfont icon-bianji"></em><span>编辑</span></p>
+				</div>
+			</li>
+			<li class="">
+				<div class="address-num">
+					<p class="address-name clearfix">
+						<m>毛不易</m><span>13256565656</span></p>
+					<p class="address-dz">河南省郑州市二七区大学北路华城国际中心13楼 1317室</p>
+				</div>
+				<div class="address-main">
+					<p class="address-pc " id="check"><em class="iconfont"></em>
+						<span>默认地址</span></p>
+					<p class="address-sc"><em class="iconfont icon-shanchu"></em><span>删除</span></p>
+					<p class="address-bj"><em class="iconfont icon-bianji"></em><span>编辑</span></p>
+				</div>
+			</li>
+			<li class="">
+				<div class="address-num">
+					<p class="address-name clearfix">
+						<m>毛不易</m><span>13256565656</span></p>
+					<p class="address-dz">河南省郑州市二七区大学北路华城国际中心13楼 1317室</p>
+				</div>
+				<div class="address-main">
+					<p class="address-pc " id="check"><em class="iconfont"></em>
+						<span>默认地址</span></p>
+					<p class="address-sc"><em class="iconfont icon-shanchu"></em><span>删除</span></p>
+					<p class="address-bj"><em class="iconfont icon-bianji"></em><span>编辑</span></p>
+				</div>
+			</li>
+			<li class="">
+				<div class="address-num">
+					<p class="address-name clearfix">
+						<m>毛不易</m><span>13256565656</span></p>
+					<p class="address-dz">河南省郑州市二七区大学北路华城国际中心13楼 1317室</p>
+				</div>
+				<div class="address-main">
+					<p class="address-pc " id="check"><em class="iconfont"></em>
+						<span>默认地址</span></p>
+					<p class="address-sc"><em class="iconfont icon-shanchu"></em><span>删除</span></p>
+					<p class="address-bj"><em class="iconfont icon-bianji"></em><span>编辑</span></p>
+				</div>
+			</li>
+			<li class="">
+				<div class="address-num">
+					<p class="address-name clearfix">
+						<m>毛不易</m><span>13256565656</span></p>
+					<p class="address-dz">河南省郑州市二七区大学北路华城国际中心13楼 1317室</p>
+				</div>
+				<div class="address-main">
+					<p class="address-pc " id="check"><em class="iconfont"></em>
+						<span>默认地址</span></p>
+					<p class="address-sc"><em class="iconfont icon-shanchu"></em><span>删除</span></p>
+					<p class="address-bj"><em class="iconfont icon-bianji"></em><span>编辑</span></p>
+				</div>
+			</li> -->
+		</ul>
+		<div class="wu" style="display:none">
+			<i class="iconfont icon-wudizhi" style="color:#01c65d"></i>
+			<p>赶快去添加收获地址吧!</p>
+		</div>
+		<div class="dzinput-wrap">
+			<input type="button" name="" value="+新增收货地址" class="add-btn" id="add-btn"/>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/api.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript">
+		var id;
+		var from;
+		function api_init(){
+			console.log(api.winName);
+			from = api.pageParam.from;
+			if(from == 'tijiao_order'){
+				changeUserAddress();
+			}
+			getUserAddress();
+		}
+		//获取用户地址
+		function getUserAddress(){
+			api.ajax({
+			    url: apis + 'address/get',
+			    method: 'post'
+			},function(ret, err){
+			    if (ret) {
+			        console.log( JSON.stringify( ret ) );
+							if(ret.code == 0){
+								$('.address-content ul').html('');
+								$('.wu').show();
+							}
+							if(ret.code == 1){
+								$('.wu').hide();
+								var html = '';
+								$.each(ret.data,function(k,v){
+									html += '<li class="" data-id="'+ v.id +'"><div class="address-num">'
+											+'<p class="address-name clearfix"><m>'+v.name+'</m><span>'+v.phone+'</span></p>'
+											+'<p class="address-dz">'+v.areap+v.areac+v.areax+v.address+'</p>'
+											+'</div><div class="address-main">'
+											+'<p class="address-pc '+ (v.status ? 'active' : "") +'" id="check">'
+											+'<em class="iconfont"></em><span>'+ (v.status ? "默认地址" : "设为默认地址") +'</span></p>'
+											+'<p class="address-sc"><em class="iconfont icon-shanchu"></em><span>删除</span></p>'
+											+'<p class="address-bj"><em class="iconfont icon-bianji"></em><span>编辑</span></p>'
+											+'</div></li>';
+								});
+								$('.address-content ul').html(html);
+							}
+			    } else {
+			        console.log( JSON.stringify( err ) );
+			    }
+			});
+		}
+
+		//修改提交订单页面的地址
+		function changeUserAddress(){
+			$('.address-cont').on('tap','li',function(){
+				id = $(this).attr('data-id');
+				api.execScript({
+				    name: 'tijiao_order',
+				    script: 'changeAddress("'+id+'");'
+				});
+				api.closeWin();
+			});
+		}
+		//新增地址
+		$('#add-btn').on('tap',function(){
+			api.openWin({
+			    name: 'add_address',
+			    url: './add_address.html'
+			});
+		});
+
+		//编辑地址
+		$('.address-cont').on('tap','.address-bj',function(){
+			id=$(this).parents("li").attr("data-id");
+			api.openWin({
+			    name: 'edit_address',
+			    url: './edit_address.html',
+			    pageParam: {
+			        id: id
+			    }
+			});
+		});
+
+		//点击删除地址
+		$('.address-cont').on('tap','.address-sc',function(){
+			id=$(this).parents("li").attr("data-id");
+			api.confirm({
+			    title: '删除提示',
+			    msg: '确定要删除此收货地址吗？',
+			    buttons: ['确定', '取消']
+			}, function(ret, err){
+			    if( ret ){
+			         console.log( JSON.stringify( ret ) );
+							 if(ret.buttonIndex == 1){
+						 			api.ajax({
+						 			    url: apis + 'address/del',
+						 			    method: 'post',
+						 			    data: {
+						 			        values: {
+						 			            id: id
+						 			        }
+						 			    }
+						 			},function(ret, err){
+						 			    if (ret) {
+						 			        console.log( JSON.stringify( ret ) );
+						 							if(ret.code == 1){
+						 								api.toast({
+						 								    msg: ret.msg,
+						 								    duration: 2000,
+						 								    location: 'bottom'
+						 								});
+						 								getUserAddress();
+						 							}
+						 							if(ret.code == 0){
+						 								api.toast({
+						 								    msg: ret.msg,
+						 								    duration: 2000,
+						 								    location: 'bottom'
+						 								})
+						 							}
+						 			    } else {
+						 			        console.log( JSON.stringify( err ) );
+						 			    }
+						 			});
+							 }
+			    }else{
+			         console.log( JSON.stringify( err ) );
+			    }
+			});
+		});
+
+		//点击设置为默认地址
+		$(".address-cont").on("tap",".address-pc", function() {
+		  id=$(this).parents("li").attr("data-id");
+			$(this).addClass('active')
+			$(this).parents("li").siblings().find('.address-pc').removeClass('active')
+			$(this).parents("li").find('.address-dz span').show();
+			$(this).find('span').text('默认地址')
+			$(this).parents("li").siblings().find('.address-pc span').text('设为默认地址')
+			$(this).parents("li").siblings().find('.address-dz span').hide()
+			api.ajax({
+			    url: apis + 'address/setStatus',
+			    method: 'post',
+			    data: {
+			        values: {
+			            id: id
+			        }
+			    }
+			},function(ret, err){
+			    if (ret) {
+			        console.log( JSON.stringify( ret ) );
+							if(ret.code == 1){
+								api.toast({
+								    msg: ret.msg,
+								    duration: 2000,
+								    location: 'bottom'
+								});
+								api.execScript({
+								    name: 'tijiao_order',
+								    script: 'getUserAddress();'
+								});
+							}
+							if(ret.code == 0){
+								api.toast({
+								    msg: ret.msg,
+								    duration: 2000,
+								    location: 'bottom'
+								})
+							}
+			    } else {
+			        console.log( JSON.stringify( err ) );
+			    }
+			});
+		})
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class='bd'>
+        <div class="v_tishi">
+            <div style='float:left;margin-top:8px;'>您可通过右侧的添加物流按钮来添加物流名称。</div>
+            <p style='float:right;margin-top:4px;'>
+                <a href="{:url('add')}?nav=添加快递" class="btn btn-success">添加快递</a>
+            </p>
+
+            <div style='clear:both;'></div>
+        </div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+            <tr class="h">
+                <td valign="middle">ID</td>
+                <td>别名</td>
+                <td>快递名</td>
+                <td>LOGO</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.b_name}</td>
+                <td>{$vo.name}</td>
+                <td><img src="/public_html{$vo.logo}" style="height:50px;width:50px;"></td>
+                <td>
+                    <a href="{:url('edit')}?id={$vo.id}&nav=编辑快递信息" class="btn btn-primary">编辑</a>
+                    <a href="javascript:;" class="btn btn-danger" onclick="del('{$vo.id}');">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+    </div>
+</div>
+{include file="common:foot"}
+
+<script>
+    function del(id) {
+        if (!confirm('此操作不能撤销，确定要删除该物流信息吗?')){
+            return false;
+        }
+        $.ajax({
+            url: "{:url('del')}",
+            data: "id=" + id,
+            type: 'post',
+            success: function (ret) {
+                if (ret.code == 1) {
+                    tishi('success', ret.msg, window.location.href)
+                }else{
+                    tishi('error', ret.msg, window.location.href)
+                }
+            }
+        })
+    }
+</script>

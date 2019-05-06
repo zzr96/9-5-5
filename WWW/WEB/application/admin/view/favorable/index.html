@@ -1,0 +1,104 @@
+{include file="common:head"}
+{load href="/static/manage/js/jquery-confirm.js" /}
+{load href="/static/manage/css/jquery-confirm.css" /}
+{load href="/static/manage/css/bundled.css" /}
+<style>
+    .inner-head .logo a {
+        color: rgba(0, 0, 0, 0.3);
+        align-self: flex-start;
+        padding: 0.25rem 0.75rem;
+        font-size: 2rem;
+        line-height: 1;
+        background: transparent;
+        border: 1px solid transparent;
+        touch-action: manipulation;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        position: absolute;
+        top: 16px;
+        left: 214px;
+        margin-left:3px;
+        margin-top:1px;
+    }
+</style>
+<div class="v_bd">
+    <div class="v_bd_tag">
+		<span>搜索：
+			<input name="email" id="name" class="edit_input" value="{:input('name')}" type="text"/>
+			<a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a> <i class="huise"> ( 输入优惠券名称
+                ) </i>
+		</span>
+        
+        <p style='float:right;margin-top:4px;'>
+            <a href="{:url('add')}" class="btn btn-success">创建优惠券</a>
+        </p>
+    </div>
+    <br/>
+
+    <div class="bd">
+        <?php
+			if(!$list){
+		?>
+        <div class="none_list">没有优惠券</div>
+        <?php
+			}else{
+		?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>Id</td>
+                <td>优惠券名称</td>
+                <td>满减</td>
+                <td>开始时间</td>
+                <td>结束时间</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr id="{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.name}</td>
+                <td>
+                    {$vo.mz_money}/{$vo.yh_money}
+                </td>
+                <td>{$vo.start_time}</td>
+                <td>{$vo.end_time}</td>
+                <td>
+                    <a href="{:url('edit')}?id={$vo.id}" class="btn btn-success">编辑</a>
+                    <a href="javascript:;" onClick="del({$vo.id})" class="btn btn-danger">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+    function del(id) {
+        var r = confirm("您确定要删除当前优惠券吗?");
+        if (!r) {
+            return false;
+        }
+        var url = '{:url("del")}?id=' + id;
+        $.ajax({
+            url: url,
+            success: function (txt) {
+                
+                if (txt.code == 1) {
+                    tishi("success", txt.msg,window.location.href);
+                } else {
+                    tishi("error", txt.msg);
+                }
+            }
+        })
+    }
+
+    function searchs() {
+        var search = $("#name").val();
+        if (search == "") {
+            alert("请输入优惠券模板名")
+            return false
+        }
+        var url = '{:url("index")}?search=' + search;
+        window.location.href = url;
+    }
+</script>

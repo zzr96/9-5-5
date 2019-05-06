@@ -1,0 +1,94 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('edit_do')}" method="post" id="form">
+        <input name="id" type="hidden" value="{$view.id}"/>
+        <div class="item">
+            <label>LOGO：</label>
+
+            <div class="i_bd">
+                <div class="chanpin_pic_list">
+                    <div class="iitem">
+                        <input name="logo" id="picval_img" type="hidden" value='{$view.logo}'/>
+
+                        <div class="pic" id="img">
+                            <a onclick="addpic();" class="upload_pic" title="上传图片">
+                                <img id='pic_yl_img' src="/public_html{$view.logo ? $view.logo: '__STATIC__/manage/images/addpic.gif'}" width="100" height="100"/></a>
+                        </div>
+                    </div>
+                    <br>&nbsp;&nbsp;<span>(推荐大小100px*100px)</span>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <label>网站名字：</label>
+
+            <div class="i_bd">
+                <input class="edit_input" name="name" value="{$view.name}" style="width:30%;" type="text"/>
+            </div>
+        </div>
+        <div class="item">
+                <label>步数兑换：</label>
+    
+                <div class="i_bd">
+                    <input class="edit_input" name="step_money" value="{$view.step_money}" style="width:30%;" type="number"/>(如1000步1元)
+                </div>
+        </div>
+        <div class="item">
+            <label>App版本号：</label>
+
+            <div class="i_bd">
+                <input class="edit_input" name="version" value="{$view.version}" style="width:30%;"
+                       type="text"/>
+            </div>
+        </div>
+        <div class="item">
+            <label>公司名称：</label>
+
+            <div class="i_bd">
+                <input class="edit_input" name="gs_name" value="{$view.gs_name}" style="width:30%;"
+                       type="text"/>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <a href="javascript:;" id="form_btn" class="btn btn-success">提交</a>
+            </div>
+        </div>
+    </form>
+
+</div><!--v_bd-->
+{include file="common/foot" /}
+{load href="__STATIC__/manage/editor/kindeditor.js"}>
+<script>
+KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, window.location.href)
+                } else {
+                    tishi('error', txt.msg)
+                }
+            });
+        })
+
+
+    });
+   function addpic() {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("/admin/upload/img")}" ></iframe>';
+        tanchuang("apppic_img", 700, '上传图片', html)
+    }
+    function addpic_do(img, pid) {
+        re_tanchuang('apppic_img');
+        $("#pic_yl_img").attr('src', '/public_html'+img);
+        $("#picval_img").val(img)
+    }
+</script>

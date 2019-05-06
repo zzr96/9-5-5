@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="../css/mui.min.css" />
+    <link rel="stylesheet" href="../css/iconfont.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/swiper.min.css" />
+    <title></title>
+    <style type="text/css">
+        body,
+        html {
+            background: #f7f7f7;
+        }
+
+        .swiper-container-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-custom,
+        .swiper-pagination-fraction {
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -15px;
+            z-index: 2;
+        }
+
+        .swiper-pagination-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 3px;
+            background: #BDBDBD;
+            border: 0
+        }
+
+        .swiper-pagination-fraction {
+            width: 50px;
+            color: #fff;
+            background: rgba(100, 100, 100, .9);
+            border-radius: 11px;
+            left: 10%;
+            height: 22px;
+            bottom: 10px
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #00C65D;
+        }
+
+        .swiper-pagination-current {
+            color: #00C65D;
+        }
+
+        .search-input {
+            height: 30px;
+            border-radius: 15px;
+            background: #f1f1f1;
+            margin-top: 6px;
+            width: 100%;
+            font-weight: normal;
+        }
+
+        .mui-title i.icon-sousuo {
+            color: #999;
+            font-size: 18px;
+            float: left;
+            height: 20px;
+            width: 30px;
+            line-height: 32px;
+            margin-left: 5px;
+            margin-top: 0px;
+        }
+
+        .mui-title input {
+            float: left;
+            border: 0;
+            background: #f1f1f1;
+            margin-bottom: 0;
+            height: 30px;
+            width: 80%;
+            padding: 0;
+        }
+
+        .mui-bar-nav span {
+            color: #aaa;
+            font-size: 19px;
+            font-weight: normal;
+        }
+
+        .index-container .fast-go {
+            position: absolute;
+            left: 5px;
+            bottom: 35px;
+            width: 120px;
+            background: #fff;
+            z-index: 99;
+            text-align: center;
+            line-height: 26px;
+            height: 26px;
+            color: #F84100;
+            font-weight: bold;
+            border-radius: 13px;
+        }
+
+        .index-container2 {
+            overflow: inherit;
+        }
+
+        .backTop {
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            right: 10px;
+            bottom: 15px;
+            width: 40px;
+            height: 40px;
+            z-index: 9999;
+            text-align: center;
+            padding-top: 10px;
+            opacity: 0.8;
+            box-shadow: 0 0 5px #aaa;
+        }
+
+        .backTop .iconfont {
+            font-size: 24px;
+            color: #8D8D8D;
+            font-weight: 200;
+        }
+
+        @media only screen and (max-width:320px) {
+            .product-list .pro-item .price span:first-child m {
+                font-size: 12px;
+            }
+            .product-list .pro-item .price span:first-child {
+                font-size: 12px;
+            }
+            .product-list .pro-item .price span:last-child {
+                font-size: 10px;
+                margin-left: 0px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--头 -->
+    <header class="mui-bar mui-bar-nav ">
+        <a class="mui-pull-left"></a>
+        <h1 class="mui-title">
+    			<div class="search-input clearfix">
+    				<i class="iconfont icon-sousuo"></i>
+    				<input type="text" id="search" value="" placeholder="搜索商品"/>
+    			</div>
+    		</h1>
+        <span class="iconfont icon-xiaoxi newactlogin" id="xiaoxi" url="../index/xt_msg.html"></span>
+    </header>
+    <div class="index-content header-counter">
+        <div class="swiper-container index-container">
+            <div class="swiper-wrapper">
+                <!-- <div class="swiper-slide"><img src="../img/zq02.jpg" /></div>
+                <div class="swiper-slide"><img src="../img/zq03.jpg" /></div>
+                <div class="swiper-slide"><img src="../img/zq04.jpg" /></div> -->
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination index-pgt"></div>
+            <!-- <div class="fast-go">立即去抢 &gt;</div> -->
+        </div>
+        <nav class="cate">
+            <!-- <figure>
+                <img src="../img/nav1.png" class="img-box2"/>
+                <figcaption>蔬菜</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/nav2.png" class="img-box2"/>
+                <figcaption>水果</figcaption>
+            </figure>
+            <figure>                <img src="../img/nav3.png" class="img-box2"/>
+                <figcaption>酒席海鲜</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/nav4.png" class="img-box2"/>
+                <figcaption>母婴食品</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/nav5.png" class="img-box2" />
+                <figcaption>本地家禽</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/nav6.png" class="img-box2" />
+                <figcaption>酒水饮料</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/nav7.png" class="img-box2" />
+                <figcaption>领券</figcaption>
+            </figure>
+            <figure>
+                <img src="data:image/png;base64,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" class="img-box2" />
+                <figcaption>全部</figcaption>
+            </figure> -->
+        </nav>
+        <div class="notice clearfix" data-id="">
+            <img src="../img/notice.png" />
+            <div class="mid">
+                <p class="twoline gonggaoContent"></p>
+            </div>
+            <img src="" class="img-right gonggaoImg" />
+        </div>
+        <div class="new-product clearfix padd10">
+            <h2 class="clearfix">
+    	    		<div class="left clearfix">
+    	    			<span>新品速递</span>
+    	    			<span>NEW<br/>PRODUCTS</span>
+    	    		</div>
+    	    		<i id='xinpinMore'>更多</i>
+    	    	</h2>
+            <div id="xinpinsudi" class="goods">
+                <!-- <div class="product-box">
+                  <div class="top">
+                      <h3 class="oneline">环球海鲜盛dcfsfvasdgfvsagvsag宴</h3>
+                      <p>89.9元起</p>
+                      <img src="../img/jiantou1.png" alt="" />
+                  </div>
+                  <div class="img-box">
+                      <img src="../img/pic3.png" />
+                  </div>
+              </div>
+              <div class="product-box product-box2 clearfix">
+                  <div class="top">
+                      <h3 class="oneline">优品合集</h3>
+                      <p>89.9元起</p>
+                      <img src="../img/jiantou2.png" alt="" />
+                  </div>
+                  <div class="img-box">
+                      <img src="../img/pic3.png" />
+                  </div>
+              </div>
+              <div class="product-box product-box2 clearfix">
+                  <div class="top">
+                      <h3 class="oneline" style="color: #FF8B00;">本期优选</h3>
+                      <p>89.9元起</p>
+                      <img src="../img/jiantou2.png" alt="" />
+                  </div>
+                  <div class="img-box">
+                      <img src="../img/pic3.png" />
+                  </div>
+              </div> -->
+            </div>
+        </div>
+        <div class="new-product clearfix padd10">
+            <h2 class="clearfix">
+	    		<div class="left clearfix">
+	    			<span>热销产品</span>
+	    			<span>HOT-SALE<br/>PRODUCTS</span>
+	    		</div>
+	    		<i id="rexiaoMore">更多</i>
+	    	</h2>
+
+            <div class="swiper-container" id="youhui">
+
+                <div class="swiper-wrapper product-list goods">
+                    <!-- <div class="swiper-slide pro-item">
+                        <div class="img-box">
+                            <img src="../img/pic2.png" />
+                        </div>
+                        <p class="oneline">壹家壹站 原装原装原装</p>
+                        <p class="price">
+                            <span>¥ <m>19.009</m></span>
+                            <span>¥<m>19.900</m></span>
+                        </p>
+                    </div>
+                    <div class="swiper-slide pro-item">
+                        <div class="img-box">
+                            <img src="../img/pic2.png" />
+                        </div>
+                        <p class="oneline">壹家壹站 原装原装原装</p>
+                        <p class="price">
+                            <span>¥ <m>19.9</m></span>
+                            <span>¥<m>19.9</m></span>
+                        </p>
+                    </div>
+                    <div class="swiper-slide pro-item">
+                        <div class="img-box">
+                            <img src="../img/pic2.png" />
+                        </div>
+                        <p class="oneline">壹家壹站 原装原装原装</p>
+                        <p class="price">
+                            <span>¥ <m>19.9</m></span>
+                            <span>¥<m>19.9</m></span>
+                        </p>
+                    </div>
+                    <div class="swiper-slide pro-item">
+                        <div class="img-box">
+                            <img src="../img/pic2.png" />
+                        </div>
+                        <p class="oneline">壹家壹站 原装原装原装</p>
+                        <p class="price">
+                            <span>¥ <m>19.9</m></span>
+                            <span>¥<m>19.9</m></span>
+                        </p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="new-product clearfix padd10 index-tejia">
+            <h2 class="clearfix">
+	    		<div class="left clearfix">
+	    			<span>特价商品</span>
+	    			<span>SPECIAL<br/>PRODUCTS</span>
+	    		</div>
+	    		<i id="tejiaMore">更多</i>
+	    	</h2>
+            <div class="swiper-container index-container2">
+                <ul class="swiper-wrapper goods">
+                    <!-- <li class="swiper-slide clearfix">
+                        <div class="img-box">
+                            <img src="../img/img02.jpg" />
+                        </div>
+                        <div class="right">
+                            <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                            <p class="pingjia">
+                                <em>特价</em>
+                                <span><m>6条评论</m><m>99%好评</m></span>
+                            </p>
+                            <p class="price">
+                                <span>￥<m>301.98</m></span>
+                                <span>￥<m>301.98</m></span>
+                            </p>
+
+                        </div>
+                    </li>
+                    <li class="swiper-slide clearfix">
+                        <div class="img-box">
+                            <img src="../img/img02.jpg" />
+                        </div>
+                        <div class="right">
+                            <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                            <p class="pingjia">
+                                <em>特价</em>
+                                <span><m>6条评论</m><m>99%好评</m></span>
+                            </p>
+                            <p class="price">
+                                <span>￥<m>301.98</m></span>
+                                <span>￥<m>301.98</m></span>
+                            </p>
+
+                        </div>
+                    </li>
+                    <li class="swiper-slide clearfix">
+                        <div class="img-box">
+                            <img src="../img/img02.jpg" />
+                        </div>
+                        <div class="right">
+                            <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                            <p class="pingjia">
+                                <em>特价</em>
+                                <span><m>6条评论</m><m>99%好评</m></span>
+                            </p>
+                            <p class="price">
+                                <span>￥<m>301.98</m></span>
+                                <span>￥<m>301.98</m></span>
+                            </p>
+
+                        </div>
+                    </li> -->
+                </ul>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination index-pgt2"></div>
+            </div>
+
+        </div>
+        <div class="shoucang-content ">
+            <h2>为你推荐</h2>
+            <ul class="lesson-today goods">
+                <!-- <li>
+                    <div class="img-box">
+                        <img src="../img/img02.jpg" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="img-box">
+                        <img src="../img/pic1.png" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿季母婴用品</p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="img-box">
+                        <img src="../img/pic1.png" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿季母婴用品</p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+
+                    </div>
+                </li> -->
+            </ul>
+            <div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+        </div>
+
+    </div>
+    <a id="scrollToTop" class="backTop hide"> <span class="iconfont icon-huidaodingbu"></span> </a>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/swiper.min.js"></script>
+    <script type="text/javascript">
+        var search;
+        var id;
+        var page = 1;
+
+        function api_init() {
+          getBanner();
+          getCate();
+          getXinpinProduct();
+          getRexiaoProduct();
+          getTejiaProduct();
+          getTuijianProduct();
+          getGonggao();
+
+          api.addEventListener({//上拉刷新
+              name: 'scrolltobottom',
+              extra: {
+                  threshold: 20
+              }
+          }, function(ret, err) {
+            console.log(ret);
+              page++;
+              getTuijianProduct();
+          });
+        }
+        //获取banner
+        function getBanner() {
+            api.ajax({
+                url: apis + 'home/slideshow',
+                method: 'post'
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    var html = '';
+                    $.each(ret.data, function(k, v) {
+                        html += '<div class="swiper-slide" data-id="'+v.link+'"><img src="' + iapi + v.img + '" /></div>';
+                    });
+                    $('.index-container .swiper-wrapper').html(html);
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+
+        //获取公告
+        function getGonggao(){
+          api.ajax({
+              url: apis + 'home/getGonggao',
+              method: 'post'
+          },function(ret, err){
+              if (ret) {
+                  console.log( JSON.stringify( ret ) );
+                  $('.gonggaoContent').html(ret.data.content);
+                  $('.gonggaoImg').attr('src',iapi +ret.data.img);
+                  $('.notice').attr('data-id',ret.data.goods_id);
+              } else {
+                  console.log( JSON.stringify( err ) );
+              }
+          });
+        }
+        //获取分类
+        function getCate() {
+            api.ajax({
+                url: apis + 'home/tuijiancate',
+                method: 'post'
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    var html = '';
+                    $.each(ret.data, function(k, v) {
+                        html += '<figure class="goods_cate" data-id="'+v.id+'" data-name="'+v.name+'">'
+                            + '<img src="' + iapi + v.img + '" class="img-box2" />'
+                            + '<figcaption>' + v.name + '</figcaption>' + '</figure>';
+                    });
+                    html += '<figure class="lingquan"><img src="../img/nav7.png" class="img-box2" />'
+                        +'<figcaption>领券</figcaption></figure>';
+                    html += '<figure class="all_cate"><img src="../img/nav8.png" class="img-box2" />'
+                        +'<figcaption>全部</figcaption></figure>';
+                    $('.cate').html(html);
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+        //获取新品速递
+        function getXinpinProduct() {
+            api.ajax({
+                url: apis + 'home/shouyexinpinsudi',
+                method: 'post'
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    $.each(ret.data, function(k, v) {
+                        var html = '';
+                        if (k == 0) {
+                            html += '<div class="product-box seeGoodsDetail" data-id="'+v.id+'">';
+                        } else {
+                            html += '<div class="product-box product-box2 clearfix seeGoodsDetail" data-id="'+v.id+'">';
+                        }
+                        html += '<div class="top">';
+                        if (k == 2) {
+                            html += '<h3 class="oneline" style="color: #FF8B00;">' + v.name + '</h3>';
+                        } else {
+                            html += '<h3 class="oneline">' + v.name + '</h3>';
+                        }
+                        html += '<p>' + v.xprice + '元</p><img src="../img/jiantou1.png" alt="" /></div>' +
+                            '<div class="img-box"><img src="' + iapi + v.img1 + '" /></div></div>';
+                        $('#xinpinsudi').append(html);
+                    });
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+        //获取热销产品
+        function getRexiaoProduct() {
+            api.ajax({
+                url: apis + 'home/shouyerexiaochanpin',
+                method: 'post'
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    var html = '';
+                    $.each(ret.data, function(k, v) {
+                        html += '<div class="swiper-slide pro-item seeGoodsDetail" data-id="'+v.id+'"><div class="img-box">' +
+                            '<img src="' + iapi + v.img1 + '" /></div><p class="oneline">' + v.name + '</p>' +
+                            '<p class="price"><span>¥ <m>' + v.xprice + '</m></span><span>¥<m>' + v.yprice + '</m></span>' +
+                            '</p></div>';
+                    });
+                    $('.product-list').html(html);
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+
+        //获取特价商品
+        function getTejiaProduct() {
+            api.ajax({
+                url: apis + 'home/shouyetejiashangpin',
+                method: 'post'
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    var html = '';
+                    $.each(ret.data, function(k, v) {
+                        html += '<li class="swiper-slide clearfix seeTejiaGoodsDetail" data-id="'+v.id+'"><div class="img-box">'
+                            +'<img src="' + iapi + v.img1 + '" /></div><div class="right">'
+                            +'<p class="twoline">' + v.name + '</p>'
+                            +'<p class="pingjia"><em>特价</em><span><m>' + v.pinglun_num + '条评论</m><m>'
+                            + v.haopingdu + '好评</m></span></p>'
+                            +'<p class="price"><span>￥<m>' + v.xprice + '</m></span><span>￥<m>' + v.yprice + '</m></span>'
+                            +'</p></div></li>';
+                    });
+                    $('.index-container2 ul').html(html);
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+
+        //获取为你推荐商品
+        function getTuijianProduct() {
+          console.log(page);
+            api.ajax({
+                url: apis + 'home/tuijianshangpin',
+                method: 'post',
+                data: {
+                    values: {
+                        page: page
+                    }
+                }
+            }, function(ret, err) {
+                console.log(JSON.stringify(ret));
+                if (ret && ret.data.length > 0) {
+                    //var html = '';
+                    $.each(ret.data, function(k, v) {
+                        var html = '<li class="seeGoodsDetail" data-id="'+v.id+'"><div class="img-box">' +
+                            '<img src="' + iapi + v.img1 + '" /></div>' +
+                            '<div class="right"><p class="twoline">' + v.name + '</p>' +
+                            '<p class="price"><span>￥<m>' + v.xprice + '</m></span><span>￥<m>' + v.yprice + '</m></span>' +
+                            '</p></div></li>';
+                        $('.lesson-today').append(html);
+                    });
+                }else{
+                    if($('.lesson-today li').length > 0){
+                      api.removeEventListener({
+                          name: 'scrolltobottom'
+                      });
+                      $('.more').show();
+                      $('.more').html('没有更多了');
+                    }else{
+                      api.removeEventListener({
+                          name: 'scrolltobottom'
+                      });
+                      $('.lesson-today').html('');
+                      $('.more').show();
+                      $('.more').html('暂无推荐商品');
+                    }
+                }
+                if(err) {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+
+        //点击轮播图
+        $('.index-container .swiper-wrapper').on('tap','.swiper-slide',function(){
+          id = $(this).attr('data-id');
+          api.openWin({
+    			    name: 'shangpin_detail',
+    			    url: '../kind/shangpin_detail.html',
+    			    pageParam: {
+    			        id: id
+    			    }
+    			});
+        });
+
+        //点击通知公告
+        $('.notice').on('tap',function(){
+          id = $(this).attr('data-id');
+          api.openWin({
+              name: 'shangpin_detail',
+              url: '../kind/shangpin_detail.html',
+              pageParam: {
+                  id: id
+              }
+          });
+        });
+
+        //查看商品详情
+    		$('.goods').on('tap','.seeGoodsDetail',function(){
+    			id = $(this).attr('data-id');
+    			api.openWin({
+    			    name: 'shangpin_detail',
+    			    url: '../kind/shangpin_detail.html',
+    			    pageParam: {
+    			        id: id
+    			    }
+    			});
+    		})
+
+        //查看特价商品详情
+    		$('.goods').on('tap','.seeTejiaGoodsDetail',function(){
+    			id = $(this).attr('data-id');
+    			api.openWin({
+    			    name: 'shangpin_detail',
+    			    url: '../kind/shangpin_detail.html',
+    			    pageParam: {
+    			        id: id,
+                  is_tejia: 'tejia'
+    			    }
+    			});
+    		})
+
+        //点击分类查看相应的商品
+        $('.cate').on('tap','.goods_cate',function(){
+          var cate_id = $(this).attr('data-id');
+          var cate_name = $(this).attr('data-name');
+          // console.log(cate_id);
+          api.openWin({
+              name: 'kind_list',
+              url: '../kind/kind_list.html',
+              pageParam: {
+                  cate_id: cate_id,
+                  cate_name:cate_name
+              }
+          });
+        });
+
+        //点击领券
+        $('.cate').on('tap','.lingquan',function(){
+          userId = $api.getStorage('userId');
+          if(!userId){
+            checkLogin();
+          }else{
+            api.openWin({
+                name: 'quan',
+                url: '../index/quan.html'
+            });
+          }
+        });
+
+        //点击全部
+        $('.cate').on('tap','.all_cate',function(){
+          api.openWin({
+              name: 'kind_list',
+              url: '../kind/kind_list.html'
+          });
+        });
+
+        //点击新品更多
+        $('#xinpinMore').on('tap', function() {
+            api.openWin({
+                name: 'new_goods',
+                url: '../index/new_goods.html'
+            });
+        });
+
+        //点击热销更多
+        $('#rexiaoMore').on('tap', function() {
+            api.openWin({
+                name: 'rexiao_goods',
+                url: '../index/rexiao_goods.html'
+            });
+        });
+
+        //点击特价更多
+        $('#tejiaMore').on('tap', function() {
+            api.openWin({
+                name: 'tejia_goods',
+                url: '../index/tejia_goods.html'
+            });
+        });
+
+        //键盘事件
+    		$('#search').keydown(function(event) {
+    			var e = event || window.event;
+    			if (e && e.keyCode == 13 && $(this).val().replace(/ /g, '')) { //回车键的键值为13
+    				var val = $(this).val();
+    				if (val) {
+    					search = val;
+    				} else {
+    					search = '';
+    				}
+    				// console.log(search);
+            api.openWin({
+                name: 'kind_list',
+                url: '../kind/kind_list.html',
+                pageParam: {
+                    search: search
+                }
+            });
+    			}
+    		});
+
+    		//搜索按钮
+    		$('.search-input i').on('tap', function() {
+    			var val = $('#search').val().replace(/ /g, '');
+    			if (val) {
+    				search = val;
+    			} else {
+    				search = '';
+    			}
+    			// console.log(search);
+          api.openWin({
+              name: 'kind_list',
+              url: '../kind/kind_list.html',
+              pageParam: {
+                  search: search
+              }
+          });
+    		});
+
+        var swiper = new Swiper('.index-container', {
+            spaceBetween: 30,
+            centeredSlides: true,
+            observer: true,
+            observeParents: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.index-pgt',
+                type: 'fraction',
+                clickable: true,
+            }
+        });
+        var swiper = new Swiper('.index-container2', {
+            spaceBetween: 30,
+            centeredSlides: true,
+            observer: true,
+            observeParents: true,
+            autoplay: false,
+            pagination: {
+                el: '.index-pgt2',
+                //	        type: 'fraction',
+                clickable: true,
+            }
+        });
+        //	    var mySwiper = new Swiper('#youhui',{
+        //		slidesPerView : 3,
+        //		centeredSlides : true,
+        //		})
+        var swiper = new Swiper('#youhui', {
+            slidesPerView: 3,
+            paginationClickable: true,
+            spaceBetween: 10,
+            freeMode: true,
+            slidesPerColumn: 1,
+        });
+        $(function() {
+            //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+            $(function() {
+                $(window).scroll(function() {
+                    if ($(window).scrollTop() > 200) {
+                        $("#scrollToTop").fadeIn(1500);
+                    } else {
+                        $("#scrollToTop").fadeOut(1500);
+                    }
+                });
+                //当点击跳转链接后，回到页面顶部位置
+                $("#scrollToTop").click(function() {
+                    //$('body,html').animate({scrollTop:0},1000);
+                    if ($('html').scrollTop()) {
+                        $('html').animate({
+                            scrollTop: 0
+                        }, 1000);
+                        return false;
+                    }
+                    $('body').animate({
+                        scrollTop: 0
+                    }, 1000);
+                    return false;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

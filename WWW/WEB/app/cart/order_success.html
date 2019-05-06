@@ -1,0 +1,308 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<link href="../css/style.css" rel="stylesheet" />
+	<link href="../css/iconfont.css" rel="stylesheet" />
+	<style type="text/css">
+		html,
+		body {
+			background: #fff;
+		}
+
+		.pay-order h1 {
+			height: 130px;
+			background: #f7f7f7;
+			overflow: hidden;
+			margin-top: 0;
+			padding-top: 30px;
+			margin-bottom: 0;
+		}
+
+		.pay-order h1 img {
+			margin-bottom: 15px;
+		}
+
+		.pay-order p.pay-way,
+		.pay-order p.pay-money {
+			text-align: left;
+			border-bottom: 1px solid #e6e6e6;
+			height: 50px;
+			line-height: 50px;
+			padding-left: 10px;
+			color: #101010;
+			margin-bottom: 0;
+		}
+
+		.pay-order p.pay-money {
+			text-align: left;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav ">
+		<a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">提交成功</h1>
+		<a href="#" class=" mui-pull-right">
+			<span class="iconfont"></span>
+		</a>
+	</header>
+	<div class="pay-order header-counter">
+		<h1>
+				<img src="../img/success2.png"/>
+				<p>订单提交成功!</p>
+			</h1>
+		<p class="pay-way">订单编号：<span class="order_num"></span></p>
+		<p class="pay-money">支付金额：
+			<m>￥<em class="pay_money"></em></m>
+		</p>
+		<div class="btn-wrap">
+			<button class="btn-2 checkOrderDetail">查看订单</button>
+			<button class="btn-1 backToIndex">返回首页</button>
+
+		</div>
+		<div class="p-btn">
+			<p>点击按钮，支付您的订单</p>
+			<input type="button" id="" class="subbtn" value="去支付" />
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/api.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript">
+		var order_num;
+		var order_payway;
+		function api_init(){
+			order_num = api.pageParam.order_num;
+			getOrderInfo();
+		}
+		//获取订单详情
+		function getOrderInfo(){
+			api.ajax({
+			    url: apis + 'order/info',
+			    method: 'post',
+			    data: {
+			        values: {
+			            order_num: order_num
+			        }
+			    }
+			},function(ret, err){
+			    if (ret) {
+			        console.log( JSON.stringify( ret ) );
+							if(ret.code == 1){
+								$('.order_num').html(ret.data.order_num);
+								$('.pay_money').html(ret.data.paymoney);
+								order_payway = ret.data.payway;
+							}
+			    } else {
+			        console.log( JSON.stringify( err ) );
+			    }
+			});
+		}
+		//点击查看订单
+		$('.checkOrderDetail').on('tap',function(){
+			api.openWin({
+			    name: 'order_detail',
+			    url: './order_detail.html',
+			    pageParam: {
+			        order_num: order_num
+			    }
+			});
+			setTimeout(function(){
+				api.closeWin();
+			},1000);
+		});
+		//返回首页
+		$('.backToIndex').on('tap',function(){
+			api.execScript({
+					name: 'root',
+					script: 'change(0);'
+			});
+			api.closeToWin({
+				name: 'root'
+			});
+			setTimeout(function(){
+				api.closeWin();
+			},1000);
+		});
+		//去支付
+		$('.subbtn').on('tap',function(){
+			if(order_payway == '支付宝支付'){
+				// alipay();
+				// payCeshi();
+			}
+			if(order_payway == '微信支付'){
+				// wxpay();
+				// payCeshi();
+			}
+			if(order_payway == '货到付款'){
+				api.toast({
+				    msg: '此订单为货到付款单',
+				    duration: 2000,
+				    location: 'bottom'
+				});
+				return false;
+			}
+		});
+		//支付测试专用
+		// function payCeshi(){
+		// 	api.ajax({
+		// 	    url: apis + 'order/paySuccess',
+		// 	    method: 'post',
+		// 	    data: {
+		// 	        values: {
+		// 	            order_num: order_num
+		// 	        }
+		// 	    }
+		// 	},function(ret, err){
+		// 	    if (ret) {
+		// 	        console.log( JSON.stringify( ret ) );
+		// 					if(ret.code == 1){
+		// 						api.toast({
+		// 						    msg: ret.msg,
+		// 						    duration: 2000,
+		// 						    location: 'bottom'
+		// 						});
+		// 						api.openWin({
+		// 						    name: 'pay_success',
+		// 						    url: './pay_success.html',
+		// 						    pageParam: {
+		// 						        order_num: order_num
+		// 						    }
+		// 						});
+		// 						setTimeout(function(){
+		// 							api.closeWin();
+		// 						},1000);
+		// 					}
+		// 					if(ret.code == 0){
+		// 						api.toast({
+		// 						    msg: ret.msg,
+		// 						    duration: 2000,
+		// 						    location: 'bottom'
+		// 						});
+		// 						return false;
+		// 					}
+		// 	    } else {
+		// 	        console.log( JSON.stringify( err ) );
+		// 	}
+		// 	});
+		// }
+
+		//支付宝支付
+	  function alipay(){
+	    api.ajax({
+	        url: apis + 'pay/pay_alipay',
+	        method: 'post',
+	        data: {
+	            values: {
+	                order_id: order_num
+	            }
+	        }
+	    }, function(ret, err) {
+	        if (ret) {
+	            console.log(JSON.stringify(ret));
+	            if (ret.data) {
+	                var aliPayPlus = api.require('aliPayPlus');
+	                aliPayPlus.payOrder({
+	                    orderInfo: ret.data
+	                }, function(ret, err) {
+	                    if (ret.code == '9000') {
+	                        //支付成功
+	                        api.alert({
+	                            title: '支付结果',
+	                            msg: '支付成功',
+	                            buttons: ['确定']
+	                        }, function(ret, err) {
+	                            if (ret) {
+	                                console.log(JSON.stringify(ret));
+																	api.openWin({
+																	    name: 'pay_success',
+																	    url: './pay_success.html',
+																	    pageParam: {
+																	        order_num: order_num
+																	    }
+																	});
+																	setTimeout(function(){
+																		api.closeWin();
+																	},1000);
+	                            }
+	                            if (err) {
+	                                console.log(JSON.stringify(err));
+	                            }
+	                        });
+	                    } else {
+	                        // api.alert({
+	                        // 	title: '支付结果',
+	                        // 	msg: '支付失败',
+	                        // 	buttons: ['确定']
+	                        // });
+	                    }
+	                });
+	            }
+	        }
+	        if(err) {
+	            console.log(JSON.stringify(err));
+	        }
+	    });
+	  }
+	  //微信支付
+	  function wxpay(){
+	    api.ajax({
+	        url: apis + 'pay/wxpay',
+	        method: 'post',
+	        data: {
+	            values: {
+	                order_id: order_num
+	            }
+	        }
+	    }, function(ret, err) {
+	        if (ret) {
+	            console.log(JSON.stringify(ret));
+	            if (ret.data) {
+								var wxPay = api.require('wxPay');
+								payData = {
+									apiKey: ret.data.appid,
+									orderId: ret.data.prepayid,
+									mchId: ret.data.partnerid,
+									nonceStr: ret.data.noncestr,
+									timeStamp: ret.data.timestamp,
+									package: ret.data.package,
+									sign: ret.data.sign
+								};
+								wxPay.payOrder(payData, function(ret, err) {
+									if (ret.status) {
+										alert('支付成功');
+										api.openWin({
+												name: 'pay_success',
+												url: './pay_success.html',
+												pageParam: {
+														order_num: order_num
+												}
+										});
+										setTimeout(function(){
+											api.closeWin();
+										},1000);
+									} else {
+										alert('支付取消');
+									}
+								});
+	            }
+	        }
+	        if(err) {
+	            console.log(JSON.stringify(err));
+	        }
+	    });
+	  }
+	</script>
+</body>
+
+</html>

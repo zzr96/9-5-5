@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    {load href="/static/manage/js/jquery-1.8.1.min.js" /}
+    {load href="/static/manage/js/jquery.form.js" /}
+    <script async defer
+            src="http://ditu.google.cn/maps/api/js?key=AIzaSyDiKSg8pp-UDtvfjXT8Wrx5JDe7a2Gzc2o&callback=initMap">
+    </script>
+    <style>
+        body, html, #map {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    function initMap() {
+        var markers = [];
+        var point = {
+            lat: parseFloat($('#point input', parent.document).eq(0).val()),
+            lng: parseFloat($('#point input', parent.document).eq(1).val())
+        };
+        var geocoder = new google.maps.Geocoder;
+        var infowindow = new google.maps.InfoWindow;
+
+        if (!point.lat || !point.lng) {
+            //初始坐标值
+            point = {lat:34.794793,lng:113.621624}
+        }
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: point
+        });
+
+        geocodeLatLng(point);
+        function geocodeLatLng(point) {
+            console.log(point);
+            geocoder.geocode({'location': point}, function (results, status) {
+                if (status === 'OK') {
+                    if (results[1]) {
+                        var address = results[0].formatted_address
+                        $('#address', parent.document).val(address);
+                        infowindow.setContent(address);
+                        infowindow.open(map, addMarker(point));
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
+        }
+
+        function addMarker(point) {
+            map.setZoom(13);
+            clearMarkers();
+            var marker = new google.maps.Marker({
+                position: point,
+                map: map
+            });
+            markers.push(marker);
+            return marker;
+        }
+
+        function clearMarkers() {
+            for (var i in markers) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+        }
+
+        map.addListener('click', function (res) {
+            $('#point input', parent.document).eq(0).val(res.latLng.lat);
+            $('#point input', parent.document).eq(1).val(res.latLng.lng);
+            geocodeLatLng(res.latLng);
+        });
+    }
+
+</script>
+
+</body>
+</html>

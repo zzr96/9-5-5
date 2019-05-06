@@ -1,0 +1,38 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('bank_save')}" method="post" id="form">        
+        <div class="item">
+            <label>银行卡名称：</label>
+
+            <div class="i_bd">
+                <input name="bank_name" id="bank_name" class="edit_input" type="text" size="30"/>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+            <div class="i_bd">
+                <input name="submit" type="button" class="btn btn-success" id="form_btn" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+       $(function (){
+        $("#form_btn").click(function(){
+            var bank_name=$('#bank_name').val();
+            if(!bank_name){
+                tishi('error','请填写银行卡名称');
+                return false; 
+            }
+            $("#form").ajaxSubmit(function (txt){
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("bank")}');
+
+                }else{
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+</script>

@@ -1,0 +1,89 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+	<form action="{:url("edit_do")}" id="addform" method="post">
+		<input name="uid" type="hidden" value="{$users.id}" />
+		<div class="item">
+			<label>昵称:</label>
+			<div class="i_bd">
+				<input name="nickname" class="edit_input" value="{$users.nickname}" type="text" />
+				<span class="hongse">( * )</span>
+			</div>
+		</div>
+		<div class="item">
+			<label>性别：</label>
+			<div class="i_bd" id="price">
+				<div  class="select_style">
+					<select name="sex"  style='height:28.8px;line-height:28.8px;'>
+						<option value="1"{if condition="$users.sex eq 1"}selected="selected" {/if}>男</option>
+						<option value="2" {if condition="$users.sex eq 2"}selected="selected" {/if}>女</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="item">
+			<label>头像：</label>
+			<div class="i_bd">
+				<div class="chanpin_pic_list">
+					<div class="iitem">
+						<input name="logo" id="picval_logo" type="hidden" value='{$users.logo}'/>
+						<div class="pic" id="logo">
+							<a onclick="addpic_logo();" class="upload_pic" title="上传图片"><img id='pic_yl_logo' src="{$users.logo}" width="100" height="100" /></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item">
+			<label>手机号:</label>
+			<div class="i_bd">
+				<input name="mobile" class="edit_input" value="{$users.mobile}" type="text" />
+			</div>
+		</div>
+		<div class="item">
+			<label>积分:</label>
+			<div class="i_bd">
+				<input name="integral" class="edit_input" value="{$users.integral}" type="text" />
+			</div>
+		</div>
+		<div class="item">
+			<label>余额:</label>
+			<div class="i_bd">
+				<input name="money" class="edit_input" value="{$users.money}" type="text" />
+			</div>
+		</div>
+		<div class="item">
+			<label></label>
+			<div class="i_bd">
+				<input name="提交" id="addformbtn" class="btn btn-success" type="submit" value="提交" />
+				<span id="reerror"></span>
+			</div>
+		</div>
+	</form>
+</div><!--v_bd-->	 
+{include file="common:foot"}
+<script>
+$(document).ready(function(){
+	$('#addformbtn').click(function(){
+	    $('#addform').ajaxSubmit(function(data){
+			if(data.code==1){
+			 	tishi("success",data.msg,'{:url("index")}');
+			}else{
+				tishi("error",data.msg);
+			}
+		});
+		return false;
+	});
+});
+
+function addpic_logo(){
+    var html='<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("edit_upimg_logo")}" ></iframe>';
+    tanchuang("apppic_logo",700,'上传图片',html)
+}
+function addpic_do_logo(logo,pid){
+    re_tanchuang('apppic_logo');
+    $("#pic_yl_logo").attr('src',logo);
+    $("#picval_logo").val(logo)
+}
+</script>

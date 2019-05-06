@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link type="text/css" rel="stylesheet" href="http://at.alicdn.com/t/font_514924_p9y50h8mweg919k9.css">
+
+    {load href="__STATIC__/manage/js/jquery-1.8.1.min.js" /}
+    {load href="__STATIC__/manage/js/jquery.form.js" /}
+    <style type="text/css">
+        #iconlist {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        #iconlist li {
+            list-style: none;
+            width: 150px;
+            height: 100px;
+            float: left;
+            text-align: center;
+        }
+
+        #iconlist li i {
+            color: #1f7fcd;
+            font-size: 30px;
+        }
+        #iconlist p{overflow: hidden;width:140px;white-space: nowrap}
+    </style>
+</head>
+<body>
+<div class="pic_col" id="body">
+    <ul id="iconlist">
+        <li><i class="iconfont icon-iconfontcaidan e60f"></i><p >icon-iconfontcaidan</p></li>
+        <li><i class="iconfont icon-shujuku e636"></i><p>icon-shujuku</p></li>
+        <li><i class="iconfont icon-addpeople_fill e6e1"></i><p>icon-addpeople_fill</p></li>
+        <li><i class="iconfont icon-addressbook_fill e6e2"></i><p>icon-addressbook_fill</p></li>
+        <li><i class="iconfont icon-addressbook e6e3"></i><p>icon-addressbook</p></li>
+        <li><i class="iconfont icon-browse_fill e6e4"></i><p>icon-browse_fill</p></li>
+        <li><i class="iconfont icon-computer e6eb"></i><p>icon-computer</p></li>
+        <li><i class="iconfont icon-coupons e6ed"></i><p>icon-coupons</p></li>
+        <li><i class="iconfont icon-createtask e6ef"></i><p>icon-createtask</p></li>
+        <li><i class="iconfont icon-document e6f3"></i><p>icon-document</p></li>
+        <li><i class="iconfont icon-dynamic e6f4"></i><p>icon-dynamic</p></li>
+        <li><i class="iconfont icon-flag_fill e6fb"></i><p>icon-flag_fill</p></li>
+        <li><i class="iconfont icon-flip_fill e6fd"></i><p>icon-flip_fill</p></li>
+        <li><i class="iconfont icon-group e6ff"></i><p>icon-group</p></li>
+        <li><i class="iconfont icon-homepage e702"></i><p>icon-homepage</p></li>
+        <li><i class="iconfont icon-interactive_fill e704"></i><p>icon-interactive_fill</p></li>
+        <li><i class="iconfont icon-live_fill e708"></i><p>icon-live_fill</p></li>
+        <li><i class="iconfont icon-manage_fill e70b"></i><p>icon-manage_fill</p></li>
+        <li><i class="iconfont icon-playon e719"></i><p>icon-playon</p></li>
+        <li><i class="iconfont icon-qrcode e71c"></i><p>icon-qrcode</p></li>
+        <li><i class="iconfont icon-setup e728"></i><p>icon-setup</p></li>
+        <li><i class="iconfont icon-stealth e72c"></i><p>icon-stealth</p></li>
+        <li><i class="iconfont icon-shop_fill e747"></i><p>icon-shop_fill</p></li>
+        <li><i class="iconfont icon-financial_fill e74b"></i><p>icon-financial_fill</p></li>
+        <li><i class="iconfont icon-supply e760"></i><p>icon-supply</p></li>
+        <li><i class="iconfont icon-tools e762"></i><p>icon-tools</p></li>
+    </ul>
+
+</div>
+<script>
+    $(function () {
+        $('#iconlist li').click(function () {
+            var icon = $(this).text();
+            window.parent.setIcon(icon);
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<ul class="s_menu" id="s_menu">
+			<li class="center"><i class="iconfont icon-homepage"></i>管理中心</li>
+			{volist name="menu" id="vo"}
+				<li><a href="{:url($vo['m']."/".$vo['a'])}" <?php if($m==$vo['m']){echo 'class="focus"';} ?>><i class="iconfont {$vo.icon}"></i>{$vo.name}</a></li>
+			{/volist}
+			
+</ul>
+<script>
+$("#edit_menu").click(function(){
+	var ml=$(".s_menu").css("margin-left")
+	if(ml=='0px'){
+		$(".s_menu").animate({marginLeft:'-200px'},'fast')
+		$(".v_col").animate({marginLeft:'0px'},'fast')
+	}else{
+		$(".s_menu").animate({marginLeft:'0px'},'fast')
+		$(".v_col").animate({marginLeft:'200px'},'fast')
+	}
+})
+$(document).ready(function(){
+	layout_init();
+	$(window).resize(function() {
+ 		 layout_init();
+	});
+});
+function layout_init(){
+	$("#s_menu").css("height",$(window).height()-62);
+	$(".v_col").css("height",$(window).height()-82);
+}
+</script>

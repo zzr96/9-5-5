@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {}
+
+        .mui-table-view {
+            margin-top: 0px;
+        }
+
+        .mui-table-view:before {
+            height: 0;
+        }
+
+        .mui-table-view:after {
+            left: 10px;
+            background-color: #eee;
+            right: 10px
+        }
+
+        .mui-table-view-cell:after {
+            height: 0
+        }
+
+        .mui-table-view-cell {
+            padding: 10px;
+            color: #000;
+            font-size: 15px;
+        }
+
+        .mui-table-view:after {
+            height: 0
+        }
+        .qingkong{
+          display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left">
+            <i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">我的收藏</h1>
+        <span class="qingkong">清空</span>
+    </header>
+    <div class="shoucang-content header-counter">
+        <ul class="lesson-today">
+            <!-- <li class="">
+                <div class="img-box">
+                    <img src="../img/img02.jpg" />
+                </div>
+                <div class="right">
+                    <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                    <p class="price">
+                        <span>￥<m>301.98</m></span>
+                        <span>￥<m>301.98</m></span>
+                    </p>
+                    <p class="pingjia">
+                        <span><m>6条评论</m><m>99%好评</m></span>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="img-box">
+                    <img src="../img/pic1.png" />
+                </div>
+                <div class="right">
+                    <p class="twoline">婴儿季母婴用品</p>
+                    <p class="price">
+                        <span>￥<m>301.98</m></span>
+                        <span>￥<m>301.98</m></span>
+                    </p>
+                    <p class="pingjia">
+                        <span><m>6条评论</m><m>99%好评</m></span>
+                    </p>
+                </div>
+            </li>
+            <li class="">
+                <div class="img-box">
+                    <img src="../img/pic1.png" />
+                </div>
+                <div class="right">
+                    <p class="twoline">婴儿季母婴用品</p>
+                    <p class="price">
+                        <span>￥<m>301.98</m></span>
+                        <span>￥<m>301.98</m></span>
+                    </p>
+                    <p class="pingjia">
+                        <span><m>6条评论</m><m>99%好评</m></span>
+                    </p>
+                </div>
+            </li> -->
+        </ul>
+        <div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+    </div>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+      var id;
+      var page = 1;
+      var flag;
+
+      function api_init(){
+        getUserCollect();
+        upRefresh();
+      }
+      //上拉刷新
+      function upRefresh(){
+        api.addEventListener({//上拉刷新
+            name: 'scrolltobottom',
+            extra: {
+                threshold: 20
+            }
+        }, function(ret, err) {
+            console.log(ret);
+            page++;
+            getUserCollect();
+        });
+      }
+      //获取我的收藏
+      function getUserCollect(){
+        api.ajax({
+            url: apis + 'user/myCollect',
+            method: 'post',
+            data: {
+              values: {
+                page: page
+              }
+            }
+        },function(ret, err){
+            console.log( JSON.stringify( ret ) );
+            if (ret && ret.data.length > 0) {
+              $('.qingkong').show();
+              var html = '';
+              $.each(ret.data,function(k,v){
+                html += '<li class="goods" data-id="'+v.id+'"><div class="img-box">'
+                    +'<img src="'+iapi+v.img1+'" /></div>'
+                    +'<div class="right"><p class="twoline">'+v.name+'</p><p class="price">'
+                    +'<span>￥<m>'+v.xprice+'</m></span><span>￥<m>'+v.yprice+'</m></span></p>'
+                    +'<p class="pingjia"><span><m>'+v.pinglun_num+'条评论</m><m>'+v.haopingdu+'好评</m></span></p></div></li>';
+              });
+              $('.lesson-today').html(html);
+            } else{
+              if($('.lesson-today li').length > 0){
+                api.removeEventListener({
+                    name: 'scrolltobottom'
+                });
+                $('.qingkong').show();
+                $('.more').show();
+                $('.more').html('没有更多了');
+              }else{
+                api.removeEventListener({
+                    name: 'scrolltobottom'
+                });
+                $('.lesson-today').html('');
+                $('.qingkong').hide();
+                $('.more').show();
+                $('.more').html('暂无收藏');
+              }
+            }
+            if(err){
+                console.log( JSON.stringify( err ) );
+            }
+        });
+      }
+      //长按删除
+      $('.lesson-today').on('touchstart','li',function(){
+        flag = false;
+        setTimeout(function(){
+          flag = true;
+        },1000);
+      });
+      $('.lesson-today').on('touchend','li',function(){
+        if(flag){
+          id = $(this).attr('data-id');
+          api.confirm({
+              title: '删除提示',
+              msg: '您确定要删除此收藏吗？',
+              buttons: ['确定', '取消']
+          }, function(ret, err){
+              if( ret ){
+                console.log( JSON.stringify( ret ) );
+                if (ret.buttonIndex == 1) {
+                  api.ajax({
+                      url: apis + 'user/clearOneCollect',
+                      method: 'post',
+                      data:{
+                        values:{
+                          gid:id
+                        }
+                      }
+                  },function(ret, err){
+                      if (ret) {
+                          console.log( JSON.stringify( ret ) );
+                          if(ret.code == 1){
+                            api.toast({
+                                msg: ret.msg,
+                                duration: 2000,
+                                location: 'bottom'
+                            });
+                            $('.lesson-today').html('');
+                            page = 1;
+                            getUserCollect();
+                          }
+                          if(ret.code == 0){
+                            api.toast({
+                                msg: ret.msg,
+                                duration: 2000,
+                                location: 'bottom'
+                            });
+                            return false;
+                          }
+                      } else {
+                          console.log( JSON.stringify( err ) );
+                      }
+                  });
+                }
+              }else{
+                   console.log( JSON.stringify( err ) );
+              }
+          });
+        }
+      });
+      //清空
+      $('.qingkong').on('tap',function(){
+        api.confirm({
+            title: '删除提示',
+            msg: '您确定要清空收藏列表吗？',
+            buttons: ['确定', '取消']
+        }, function(ret, err){
+            if( ret ){
+                 console.log( JSON.stringify( ret ) );
+                 if (ret.buttonIndex == 1) {
+                   api.ajax({
+                       url: apis + 'user/clearCollect',
+                       method: 'post'
+                   },function(ret, err){
+                       if (ret) {
+                           console.log( JSON.stringify( ret ) );
+                           if(ret.code == 1){
+                             api.toast({
+                                 msg: ret.msg,
+                                 duration: 2000,
+                                 location: 'bottom'
+                             });
+                             $('.lesson-today').html('');
+                             page = 1;
+                             getUserCollect();
+                           }
+                           if(ret.code == 0){
+                             api.toast({
+                                 msg: ret.msg,
+                                 duration: 2000,
+                                 location: 'bottom'
+                             });
+                             return false;
+                           }
+                       } else {
+                           console.log( JSON.stringify( err ) );
+                       }
+                   });
+                 }
+            }else{
+                 console.log( JSON.stringify( err ) );
+            }
+        });
+      });
+
+      //点击查看商品详情
+      $('.lesson-today').on('tap','.goods',function(){
+        id = $(this).attr('data-id');
+        api.openWin({
+            name: 'shangpin_detail',
+            url: '../kind/shangpin_detail.html',
+            pageParam: {
+                id: id
+            }
+        });
+      });
+
+      function refreshCurrentWin(){
+        $('.lesson-today').html('');
+        page = 1;
+        getUserCollect();
+      }
+    </script>
+</body>
+
+</html>

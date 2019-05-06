@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mui.picker.css" />
+    <link rel="stylesheet" href="../css/mui.poppicker.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            background: #f8f8f8;
+        }
+
+        .mui-content>.mui-table-view:first-child {
+            margin-top: 0;
+        }
+
+        .mui-table-view:before {
+            height: 0;
+        }
+
+        .mui-table-view:after {
+            background-color: #fff;
+        }
+
+        .mui-table-view-cell:after {
+            left: 0;
+            background-color: #efefef;
+        }
+
+        .mui-table-view-cell {
+            padding: 11px 12px;
+        }
+
+        .mui-navigate-right:after,
+        .mui-push-right:after {
+            color: #d8d8d8;
+            font-size: 18px;
+            right: 6px;
+        }
+
+        .mui-btn-outlined.mui-btn-primary {
+            border: 0;
+            color: #333;
+        }
+
+        .icon-erweima {
+            float: right;
+            font-size: 26px;
+            color: #d2d2d2;
+        }
+
+        .wode_ziliao_content .erweima {
+            height: 47px
+        }
+
+        .baocun {
+            float: right;
+            font-size: 15px;
+            line-height: 44px;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left"><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">图片裁剪</h1>
+        <span class="baocun" id="save">完成</span>
+    </header>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        var userId;
+        var subData;
+        api_init = function() {
+            clip(api.pageParam.file);
+            setTap();
+        }
+
+        function clip(file) {
+
+            //console.log(JSON.stringify(file));
+            var FNImageClip = api.require('FNImageClip');
+            FNImageClip.open({
+                rect: {
+                    x: 0,
+                    y: 44,
+                    w: api.winWidth,
+                    h: api.winHeight
+                },
+                srcPath: file,
+                style: {
+                    mask: 'rgba(100,100,100,.0)',
+                    clip: {
+                        w: api.winWidth - 1,
+                        h: api.winWidth - 1,
+                        x: 0,
+                        y: (api.winHeight - api.winWidth) / 2 - 21,
+                        borderColor: '#0f0',
+                        borderWidth: 0,
+                    }
+                },
+                mode: 'image'
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    $('#save').on('tap', function() {
+                        path = 'fs://imageClip/result.png';
+                        FNImageClip.save({
+                            destPath: path,
+                            copyToAlbum: false,
+                            quality: 1
+                        }, function(ret, err) {
+                            if (ret) {
+                                console.log(JSON.stringify(ret));
+                                console.log(api.pageParam.from);
+                                api.execScript({
+                                    name: api.pageParam.from,
+                                    script: 'upload("' + ret.destPath + '");'
+                                });
+                                api.closeWin();
+                            } else {
+                                console.log(JSON.stringify(err));
+                            }
+                        });
+                    });
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+
+        function setTap() {}
+    </script>
+</body>
+
+</html>

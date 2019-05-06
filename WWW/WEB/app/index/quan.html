@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left"><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">领券中心</h1>
+    </header>
+    <div class="youhui-quan header-counter">
+        <div class="box padd10">
+            <!-- <div class="tab-box clearfix">
+                <div class="img-box">
+                    <img src="../img/vip.png" />
+                </div>
+                <div class="left">
+                    <p class="oneline">优惠劵 </p>
+                    <p class="oneline">满15可用</p>
+                    <p>有效期至：2018.7.31</p>
+                </div>
+                <div class="right">
+                    <p>￥
+                        <m>125</m>
+                    </p>
+                    <p>立即领取</p>
+                </div>
+            </div>
+            <div class="tab-box clearfix">
+                <div class="img-box">
+                    <img src="../img/vip.png" />
+                </div>
+                <div class="left">
+                    <p class="oneline">优惠劵 </p>
+                    <p class="oneline">满15可用</p>
+                    <p>有效期至：2018.7.31</p>
+                </div>
+                <div class="right">
+                    <p>￥
+                        <m>125</m>
+                    </p>
+                    <p style="color: #999;border-color: #999;">已领取</p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+      function api_init(){
+        getCoupons();
+      }
+      //获取优惠券
+      function getCoupons(){
+        api.ajax({
+            url: apis + 'home/coupon',
+            method: 'post'
+        },function(ret, err){
+            if (ret) {
+                console.log( JSON.stringify( ret ) );
+                if(ret.code == 1){
+                  var html = '';
+                  $.each(ret.data,function(k,v){
+                    html += '<div class="tab-box clearfix" data-id="'+v.cid+'">';
+                    if(v.type == 0){
+                      html += '<div class="img-box"><img src="../img/quan.png" /></div>';
+                    }else{
+                      html += '<div class="img-box"><img src="../img/zhuan.png" /></div>';
+                    }
+                    html += '<div class="left"><p class="oneline">'+v.name+'</p><p class="oneline">满'+v.man+'可用</p>'
+                        +'<p>有效期至：'+v.endtime+'</p></div><div class="right"><p>￥<m>'+v.jian+'</m></p>';
+                    if(v.status == 0){
+                      html += '<p class="lijilingqu">立即领取</p></div></div>';
+                    }else{
+                      html += '<p style="color: #999;border-color: #999;">已领取</p></div></div>';
+                    }
+                  });
+                  $('.box').html(html);
+                }else{
+                  $('.box').html('<p style="text-align:center;margin-top:10px;">暂无优惠券</p>');
+                }
+            } else {
+                console.log( JSON.stringify( err ) );
+            }
+        });
+      }
+
+      //点击领券
+      $('.box').on('tap','.lijilingqu',function(){
+        var userId = $api.getStorage('userId');
+        if(!userId){
+          checkLogin();
+          return false;
+        }
+        var coupon_id = $(this).parent().parent().attr('data-id');
+        api.ajax({
+            url: apis + 'home/lingCoupon',
+            method: 'post',
+            data: {
+                values: {
+                    cid: coupon_id
+                }
+            }
+        },function(ret, err){
+            if (ret) {
+                console.log( JSON.stringify( ret ) );
+                if(ret.code == 1){
+                  api.toast({
+                      msg: ret.msg,
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                  getCoupons();
+                  api.execScript({
+                      name: 'root',
+                      frameName: 'wode',
+                      script: 'getUserCoupon();'
+                  });
+                }
+                if(ret.code == 0){
+                  api.toast({
+                      msg: ret.msg,
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                  return false;
+                }
+            } else {
+                console.log( JSON.stringify( err ) );
+            }
+        });
+      });
+    </script>
+</body>
+
+</html>

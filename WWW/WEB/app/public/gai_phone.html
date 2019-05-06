@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            background: #fff;
+        }
+
+        .register-content .phone-li {
+            margin-top: 0;
+        }
+
+        .register-content input[type=button] {
+            margin-top: 50%;
+        }
+
+        .register-content p {
+            color: #ff6535;
+            font-size: 12px;
+            padding: 0 20px;
+            margin-top: 5px;
+        }
+        .tishi{
+          display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title"></h1>
+        <span></span>
+    </header>
+    <div class="register-content header-counter">
+
+        <div class="mui-input-row phone-li">
+            <input type="text" class="haoma" value="" placeholder="">
+        </div>
+        <div class="mui-input-row ">
+            <input type="number" class='code' value="" placeholder="请输入验证码">
+            <span class="getcode" id="code_btn">发送验证码</span>
+            <span class="getcode" id="count_down" style="display: none;">60s后重新发送</span>
+        </div>
+        <p class="tishi">说明：点击发送验证码后，您的邮箱将受到一封邮件，请登录 邮箱查看验证码，返回APP进行填写提交。 </p>
+        <input type="button" class="subbtn" value="确认提交" />
+
+    </div>
+
+</body>
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+  var type;
+  var haoma;
+  var code;
+  var yanzhengma;
+
+  function api_init(){
+    type = api.pageParam.type;
+    setTap();
+  }
+  function setTap(){
+    if(type == 'phone'){
+      $('.mui-title').html('更换手机号');
+      $('.haoma').attr('placeholder','请输入手机号');
+    }else if(type == "email"){
+      $('.mui-title').html('更换邮箱');
+      $('.haoma').attr('placeholder','请输入邮箱');
+      $('.tishi').show();
+    }
+  }
+
+  //点击发送验证码
+  $('#code_btn').on('tap', function() {
+      haoma = $('.haoma').val();
+      if(type == 'phone'){
+        if (!haoma) {
+            api.toast({
+                msg: '请输入手机号',
+                duration: 2000,
+                location: 'bottom'
+            });
+            return false;
+        }
+        if (haoma) {
+            var retel = /^1[3|4|5|7|8]\d{9}$/;
+            if (!retel.test(haoma)) {
+                api.toast({
+                    msg: '手机号格式不正确！',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+            }
+        }
+        getPhoneCode(haoma);
+        // yanzhengma = getRandCode(4);
+        // alert(yanzhengma);
+        timer(60);
+      }else if(type == 'email'){
+        if (!haoma) {
+            api.toast({
+                msg: '请输入邮箱',
+                duration: 2000,
+                location: 'bottom'
+            });
+            return false;
+        }
+        if (haoma) {
+            var retel = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+            if (!retel.test(haoma)) {
+                api.toast({
+                    msg: '邮箱格式不正确！',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+            }
+        }
+        getEmailCode(haoma);
+        // yanzhengma = getRandCode(4);
+        // alert(yanzhengma);
+        timer(60);
+      }
+  });
+
+  //点击提交
+  $('.subbtn').on('tap',function(){
+    haoma = $('.haoma').val();
+    code = $('.code').val();
+    if(!haoma){
+      if(type == 'phone'){
+        api.toast({
+            msg: '请输入手机号',
+            duration: 2000,
+            location: 'bottom'
+        });
+        return false;
+      }else if(type == 'email'){
+        api.toast({
+            msg: '请输入邮箱',
+            duration: 2000,
+            location: 'bottom'
+        });
+        return false;
+      }
+    }
+
+    if(!code){
+      api.toast({
+          msg: '请输入验证码',
+          duration: 2000,
+          location: 'bottom'
+      });
+      return false;
+    }
+
+    if(haoma){
+      if(type == 'phone'){
+        var retel = /^1[3|4|5|7|8]\d{9}$/;
+        if (!retel.test(haoma)) {
+            api.toast({
+                msg: '手机号格式不正确！',
+                duration: 2000,
+                location: 'bottom'
+            });
+            return false;
+        }
+      }else if(type == 'email'){
+        var retel = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+        if (!retel.test(haoma)) {
+            api.toast({
+                msg: '邮箱格式不正确！',
+                duration: 2000,
+                location: 'bottom'
+            });
+            return false;
+        }
+      }
+    }
+
+    if(code != yanzhengma){
+      api.toast({
+          msg: '验证码不正确！',
+          duration: 2000,
+          location: 'bottom'
+      });
+      return false;
+    }
+
+    if(type == 'phone'){
+      api.ajax({
+          url: apis + 'user/changePhone',
+          method: 'post',
+          data: {
+              values: {
+                  newPhone: haoma
+              }
+          }
+      },function(ret, err){
+          if (ret) {
+              console.log( JSON.stringify( ret ) );
+              if(ret.code == 1){
+                api.toast({
+                    msg: ret.msg,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                api.execScript({
+                    name: '../wode/per_data.html',
+                    script: 'getUserInfo();'
+                });
+
+                setTimeout(function(){
+                  api.closeWin();
+                },2000);
+              }
+              if(ret.code == 0){
+                api.toast({
+                    msg: ret.msg,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+              }
+          } else {
+              console.log( JSON.stringify( err ) );
+          }
+      });
+    }else if(type == 'email'){
+      api.ajax({
+          url: apis + 'user/changeEmail',
+          method: 'post',
+          data: {
+              values: {
+                  newEmail: haoma
+              }
+          }
+      },function(ret, err){
+          if (ret) {
+              console.log( JSON.stringify( ret ) );
+              if(ret.code == 1){
+                api.toast({
+                    msg: ret.msg,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                api.execScript({
+                    name: '../wode/per_data.html',
+                    script: 'getUserInfo();'
+                });
+                setTimeout(function(){
+                  api.closeWin();
+                },2000);
+              }
+              if(ret.code == 0){
+                api.toast({
+                    msg: ret.msg,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+              }
+          } else {
+              console.log( JSON.stringify( err ) );
+          }
+      });
+    }
+  });
+
+  //获取手机验证码
+  function getPhoneCode(haoma) {
+      api.ajax({
+          url: apis + 'user/code_phone',
+          method: 'post',
+          data: {
+              values: {
+                  phone: haoma
+              }
+          }
+      }, function(ret, err) {
+          if (ret.code == 1) {
+              yanzhengma = ret.data;
+          } else {
+              console.log(JSON.stringify(err));
+          }
+      });
+  }
+  //获取邮箱验证码
+  function getEmailCode(haoma) {
+      api.ajax({
+          url: apis + 'user/code_email',
+          method: 'post',
+          data: {
+              values: {
+                  email: haoma
+              }
+          }
+      }, function(ret, err) {
+          if (ret.code == 1) {
+              yanzhengma = ret.data;
+          } else {
+              console.log(JSON.stringify(err));
+          }
+      });
+  }
+  //定时器
+  function timer(time) {
+      $("#code_btn").hide();
+      $("#count_down").show();
+      interval = setInterval(function() {
+          time--;
+          $('#count_down').html(time + "s后重新发送");
+          if (time <= 0) {
+              $("#code_btn").show();
+              $("#count_down").hide();
+              clearInterval(interval);
+              $('#count_down').html("60s后重新发送");
+          }
+      }, 1000);
+      return;
+  }
+  //获取随机四位数验证码  测试用
+  function getRandCode(length) {
+      var pow = Math.pow(10, length);
+      var code = Math.floor(Math.random() * pow + pow / 10).toString();
+      return code.substr(0, length);
+  }
+</script>
+
+</html>

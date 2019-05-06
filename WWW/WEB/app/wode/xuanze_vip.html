@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            background: #fff;
+        }
+
+        .youhui-quan .tab-box .right p:last-child {
+            border: none;
+        }
+
+        .youhui-quan .tab-box {
+            width: 88%;
+            float: left;
+        }
+
+        .xuanze {
+            float: right;
+            margin-top: 45px;
+            margin-right: 10px;
+        }
+
+        .box i:after {
+            content: '\e63e';
+            color: #9e9e9e;
+        }
+
+        .box .one.active i:after {
+            content: '\e756';
+            color: #00C55B;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left"><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">我的优惠券</h1>
+        <span class="queding">确定</span>
+    </header>
+    <div class="youhui-quan header-counter">
+        <div class="box padd10">
+            <!-- <div class="clearfix one">
+            <div class="tab-box">
+                <div class="img-box">
+                    <img src="../img/vip.png" />
+                </div>
+                <div class="left">
+                    <p class="oneline">优惠劵 </p>
+                    <p class="oneline">满15可用</p>
+                    <p>有效期至：2018.7.31</p>
+                </div>
+                <div class="right">
+                    <p>￥
+                        <m>125</m>
+                    </p>
+                    <p>立即领取</p>
+                </div>
+            </div>
+            <div class="xuanze">
+              <i class="iconfont "></i>
+            </div>
+          </div>
+          <div class="clearfix one">
+            <div class="tab-box">
+                <div class="img-box">
+                    <img src="../img/vip.png" />
+                </div>
+                <div class="left">
+                    <p class="oneline">优惠劵 </p>
+                    <p class="oneline">满15可用</p>
+                    <p>有效期至：2018.7.31</p>
+                </div>
+                <div class="right">
+                    <p>￥
+                        <m>125</m>
+                    </p>
+                    <p style="color: #999;border-color: #999;">已领取</p>
+                </div>
+            </div>
+            <div class="xuanze">
+              	<i class="iconfont "></i>
+            </div>
+          </div> -->
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        var you_money = [];
+        var use_condition;
+        var youhuiquan_id = [];
+        var youhuiquan_type = [];
+        var youhuiquan_status;
+        var TotalPrice;
+        var from; //来源
+
+        function api_init() {
+            TotalPrice = api.pageParam.TotalPrice * 1;
+            from = api.pageParam.from;
+            getCoupons();
+        }
+        //获取优惠券
+        function getCoupons() {
+            console.log(TotalPrice);
+            api.ajax({
+                url: apis + 'user/myUnuserCoupon',
+                method: 'post',
+                data: {
+                    values: {
+                        totalPrice: TotalPrice
+                    }
+                }
+            }, function(ret, err) {
+                if (ret) {
+                    console.log(JSON.stringify(ret));
+                    if (ret.data.youhuiquan.length > 0 || ret.data.dikouquan.length > 0) {
+                        var html = '';
+
+                        $.each(ret.data.youhuiquan, function(k, v) {
+                            html += '<div class="clearfix one" data-youhui="' + v.jian + '" data-type="' + v.type + '" data-youhuiquan-id="' +
+                                v.cid + '" data-use-condition="' + v.man + '" data-status="' + v.status + '"><div class="tab-box">';
+                            if (v.type == 0) {
+                                html += '<div class="img-box"><img src="../img/quan.png" /></div>';
+                            } else {
+                                html += '<div class="img-box"><img src="../img/zhuan.png" /></div>';
+                            }
+
+                            html += '<div class="left"><p class="oneline">' + v.name + '</p>' +
+                                '<p class="oneline">满' + v.man + '可用</p>' +
+                                '<p>有效期至：' + v.endtime + '</p></div>' +
+                                '<div class="right"><p>￥<m>' + v.jian + '</m></p>';
+
+                            if (v.status == 0) {
+                                html += '<p>未使用</p>';
+                            }
+                            if (v.status == 1) {
+                                html += '<p style="color: #999;">已使用</p>';
+                            }
+
+                            html += '</div></div>';
+                            html += '<div class="xuanze"><i class="iconfont "></i></div></div>';
+                        });
+                        $.each(ret.data.dikouquan, function(k, v) {
+                            html += '<div class="clearfix one" data-youhui="' + v.jian + '" data-type="' + v.type + '" data-youhuiquan-id="' +
+                                v.cid + '" data-use-condition="' + v.man + '" data-status="' + v.status + '"><div class="tab-box">';
+
+                            html += '<div class="img-box"><img src="../img/quan.png" /></div>';
+
+                            html += '<div class="left"><p class="oneline">' + v.name + '</p>' +
+                                '<p class="oneline">满' + v.man + '可用</p>';
+
+                            html += '<p>有效期至：永久有效</p></div>' +
+                                '<div class="right"><p>￥<m>' + v.jian + '</m></p>';
+
+                            if (v.status == 0) {
+                                html += '<p>未使用</p>';
+                            }
+                            if (v.status == 1) {
+                                html += '<p style="color: #999;">已使用</p>';
+                            }
+
+                            html += '</div></div>';
+                            html += '<div class="xuanze"><i class="iconfont "></i></div></div>';
+                        });
+                        $('.box').html(html);
+                    } else {
+                        $('.box').html('<p style="text-align:center;margin-top:10px;">暂无满足条件的优惠券</p>');
+                    }
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+
+        //点击复选框
+        $('.box').on('tap', '.xuanze', function() {
+          $(this).parent().toggleClass('active');
+          if ($(this).parent().hasClass("active")) {
+            if ($.inArray('0', youhuiquan_type) > -1) {
+              var type = $(this).parent().attr('data-type');
+              if(type == 0 || type == 1){
+                $(this).parent().removeClass('active');
+                api.toast({
+                    msg: '只有抵扣券可以和其他优惠券叠加使用',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+              }
+              if($.inArray('3', youhuiquan_type) > -1){
+                $(this).parent().removeClass('active');
+                api.toast({
+                    msg: '只有抵扣券可以和其他优惠券叠加使用',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+              }
+            }
+            if ($.inArray('1', youhuiquan_type) > -1) {
+              var type = $(this).parent().attr('data-type');
+              if(type == 0 || type == 1){
+                $(this).parent().removeClass('active');
+                api.toast({
+                    msg: '只有抵扣券可以和其他优惠券叠加使用',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+              }
+              if($.inArray('3', youhuiquan_type) > -1){
+                $(this).parent().removeClass('active');
+                api.toast({
+                    msg: '只有抵扣券可以和其他优惠券叠加使用',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+              }
+            }
+            if ($.inArray('3', youhuiquan_type) > -1) {
+              var type = $(this).parent().attr('data-type');
+              if(type == 3){
+                $(this).parent().removeClass('active');
+                api.toast({
+                    msg: '只有抵扣券可以和其他优惠券叠加使用',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+              }
+            }
+            youhuiquan_id.push($(this).parent().attr('data-youhuiquan-id'));
+            you_money.push($(this).parent().attr('data-youhui'));
+            youhuiquan_type.push($(this).parent().attr('data-type'));
+          } else {
+            youhuiquan_id.splice($.inArray($(this).parent().attr('data-youhuiquan-id'), youhuiquan_id), 1);
+            you_money.splice($.inArray($(this).parent().attr('data-youhui'), you_money), 1);
+            youhuiquan_type.splice($.inArray($(this).parent().attr('data-type'), youhuiquan_type), 1);
+          }
+
+          console.log(youhuiquan_id);
+          console.log(you_money);
+          console.log(youhuiquan_type);
+        });
+
+        //点击确定
+        $('.queding').on('tap', function() {
+            api.execScript({
+                name: 'tijiao_order',
+                script: 'YouMoney("' + you_money + '","' + youhuiquan_id + '")'
+            });
+            setTimeout(function() {
+                api.closeWin();
+            }, 1000);
+            youhuiquan_id = [];
+            you_money = [];
+            youhuiquan_type = [];
+        });
+    </script>
+</body>
+
+</html>

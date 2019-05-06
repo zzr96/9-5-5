@@ -1,0 +1,90 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('edit_do')}" method="post" id="form">
+        <input name="id" type="hidden" value="{$view.id}"/>
+
+        <div class="item">
+            <label>菜单名：</label>
+
+            <div class="i_bd">
+                <input type="text" name="name" value="{$view.name}" class="edit_input" size="60"/>
+            </div>
+        </div>
+
+        <div class="item">
+            <label>所属菜单：</label>
+
+            <div class="i_bd">
+                <select name="fid" id="cat">
+                    <option value="0">顶级菜单</option>
+                    {volist name="cat" id="vo"}
+                    <option value="{$vo.id}" {$vo.id==$view.fid?'selected="selected"':''}>
+                        {$vo.name}
+                    </option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+
+        <div class="item">
+            <label>控制器：</label>
+
+            <div class="i_bd">
+                <input type="text" name="m" value="{$view.m}" class="edit_input" size="60"/>
+            </div>
+        </div>
+        <div class="item">
+            <label>方法：</label>
+
+            <div class="i_bd">
+                <input type="text" name="a" value="{$view.a}" class="edit_input" size="60"/>
+            </div>
+        </div>
+
+
+        <div class="item">
+            <label>图标：</label>
+
+            <div class="i_bd">
+                <input type="text" name="icon" id="icon" value="{$view.icon}" class="edit_input" size="60"/>
+                <a class="v_btn" onclick="choiceIcon()">选择</a>
+            </div>
+        </div>
+
+
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" class="btn btn-success" type="button" id="form_btn" value="提交"/>
+            </div>
+        </div>
+
+    </form>
+
+</div><!--v_bd-->
+<script>
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, "{:url('index')}");
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+
+    function choiceIcon() {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="500" width="100%" src="{:url("icon")}" ></iframe>';
+        tanchuang("choiceIcon", 800, '选择图标', html);
+    }
+
+    function setIcon(icon) {
+        re_tanchuang('choiceIcon');
+        $('#icon').val(icon);
+    }
+
+</script>
+{include file="common/foot" /}

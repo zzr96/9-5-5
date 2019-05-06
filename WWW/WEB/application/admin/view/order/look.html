@@ -1,0 +1,129 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('fh')}" method="post" id="form">
+        <div class="item">
+            <label>订单编号：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                    {$res.order_sn}
+            </div>
+        </div>
+        <div class="item">
+            <label>商品信息：</label>
+             {volist name="goods" id="vo"}
+            <div class="i_bd">
+                 <img src="/public_html{$vo.goods_img}" style="width:100px;">
+                 <br>商品名字：{$vo.goods_name}单价：{$vo.price}购买数量：{$vo.goods_num}      
+            </div>
+            {/volist}
+        </div>
+        <div class="item">
+            <label>发货信息：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {$res.u_name}&nbsp;&nbsp;&nbsp;{$res.u_mobile}
+                <br />
+                {$res.u_addr}
+            </div>
+        </div>
+        <div class="item">
+            <label>留言：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {if condition="$res.content eq null"}
+                暂无留言
+                {else}
+                {$res.content}
+                {/if}
+            </div>
+        </div>
+        <div class="item">
+            <label>支付金额：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {$res.price}
+            </div>
+        </div>
+        <div class="item">
+            <label>下单时间：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {$res.dateline}
+            </div>
+        </div>
+        {if condition="$u_kd.name neq null"}
+        <div class="item">
+            <label>发货信息：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                物流名称：{$u_kd.name}
+                <br/>
+                物流单号：{$res.kd_num}
+            </div>
+        </div>
+        {/if}
+        <div class="item">
+            <label>订单状态：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {if condition="$res.status eq 1"}
+                待付款
+                {elseif condition="$res.status eq 2"}
+                待发货
+                {elseif condition="$res.status eq 3"}
+                待收货
+                {elseif condition="$res.status eq 4"}
+                已完成
+                {elseif condition="$res.status eq 5"}
+                退款审核中
+                {elseif condition="$res.status eq 6"}
+                退款审核通过
+                {elseif condition="$res.status eq 7"}
+                已退款
+                {/if}
+            </div>
+        </div>
+        {if condition="$res.status eq 2"}
+        <div class="item">
+            <label>物流选择：</label>
+
+            <div class="i_bd">
+               <select name="kd_id" style='width:200px;height:28.8px;'>
+                    {volist name="kd" id="vo"}
+                    <option value="{$vo.id}">{$vo.name}</option>
+                    {/volist}
+               </select>
+            </div>
+        </div>
+        <div class="item">
+            <label>物流单号：</label>
+
+            <div class="i_bd">
+                   <input type="text" name="kd_num" style="height:28.8px;width:230px;">
+            </div>
+        </div>
+        <input type="hidden" name="id" value="{$res.id}">
+        <div class="item">
+            <label></label>
+            <div class="i_bd">
+                <input name="" type="button" class="btn btn-success" id="form_btn" value="发货"/>
+            </div>
+        </div>
+        {/if}
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+       $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1){
+                    tishi('success', txt.msg, '{:url("index")}');
+
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+</script>

@@ -1,0 +1,91 @@
+{include file="common:head"}
+{load href="__STATIC__/manage/js/jquery-confirm.js" /}
+{load href="__STATIC__/manage/css/jquery-confirm.css" /}
+{load href="__STATIC__/manage/css/bundled.css" /}
+<style>
+    .inner-head .logo a {
+        color: rgba(0, 0, 0, 0.3);
+        align-self: flex-start;
+        padding: 0.25rem 0.75rem;
+        font-size: 2rem;
+        line-height: 1;
+        background: transparent;
+        border: 1px solid transparent;
+        touch-action: manipulation;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        position: absolute;
+        top: 16px;
+        left: 214px;
+        margin-left:3px;
+        margin-top:1px;
+    }
+</style>
+<div class="v_bd">
+        <div class="v_tishi" style="height: 50px;">
+                <div style='float:left;margin-top:8px;'>您可通过右侧的添加活动按钮来活动。</div>
+                <p style='float:right;margin-top:4px;'>
+                    <a href="{:url('activity_add')}" class="btn btn-success">添加活动</a>
+                </p>
+    
+                <div style='clear:both;'></div>
+        </div>
+    <div class="bd">
+        <?php
+			if(!$list){
+		?>
+        <div class="none_list">暂未添加活动</div>
+        <?php
+			}else{
+		?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>Id</td>
+                <td>类型</td>
+                <td>是否全场</td>
+                <td>店铺</td>
+                <td>标题</td>
+                <td>满减/折扣</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{if condition="$vo.type eq 2"}满减{else}折扣{/if}</td>
+                <td>{if condition="$vo.is_all eq 1"}全场{else}单商品{/if}</td>
+                <td>{$vo.shop_name}</td>
+                <td>{$vo.title}</td>
+                <td>
+                    {$vo.max_price}/{$vo.min_price}
+                </td>
+                <td>
+                    <a href="{:url('activity_edit')}?id={$vo.id}&nav=编辑活动" class="btn btn-success">编辑</a>
+                    <a href="javascript:;" onClick="activity_del({$vo.id})" class="btn btn-danger">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+    function activity_del(id) {
+        var r = confirm("您确定要删除当前活动?");
+        if (!r) {
+            return false;
+        }
+        var url = '{:url("activity_del")}?id=' + id;
+        $.ajax({
+            url: url,
+            success: function (txt) {
+                
+                if (txt.code == 1) {
+                    tishi("success", txt.msg,window.location.href);
+                } else {
+                    tishi("error", txt.msg);
+                }
+            }
+        })
+    }
+</script>

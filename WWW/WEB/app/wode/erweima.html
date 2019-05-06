@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            /*background: #E1DDD7;*/
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">二维码名片</h1>
+    </header>
+    <div class="header-counter ma-content">
+        <div class="ma-main">
+            <div class="top clearfix">
+                <div class="head-box user_headimg">
+                    <img src="" />
+                </div>
+                <div class="right">
+                    <p class="user_nick"></p>
+                    <p class="user_area"></p>
+                </div>
+            </div>
+
+            <div class="btm userQrcode">
+                <img src="" width="180" height="180"/>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+  function api_init(){
+    getUserInfo();
+    getUserQrcode();
+  }
+  //获取用户信息
+  function getUserInfo(){
+    api.ajax({
+        url: apis + 'user/info',
+        method: 'post'
+    },function(ret, err){
+        if (ret) {
+            console.log( JSON.stringify( ret ) );
+            if(ret.code == 1){
+              console.log($api.getStorage('erweima'));
+              $('.user_headimg img').attr('src',iapi+ret.data.headimg);
+              $('.user_nick').html(ret.data.nick);
+            }
+        } else {
+            console.log( JSON.stringify( err ) );
+        }
+    });
+  }
+  //获取用户二维码
+  function getUserQrcode(){
+    api.ajax({
+        url: apis + 'user/myQrcode',
+        method: 'post'
+    },function(ret, err){
+        if (ret) {
+            console.log( JSON.stringify( ret ) );
+            $('.userQrcode img').attr('src',ret.data);
+        } else {
+            console.log( JSON.stringify( err ) );
+        }
+    });
+  }
+</script>
+
+</html>

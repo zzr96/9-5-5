@@ -1,0 +1,168 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+			  <tr class="h">
+				<td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value="" />全选</td>
+				<td>会员名</td>
+				<td>角色</td>
+				<td>状态</td>
+				<td>操作</td>
+			  </tr>
+			  {volist name="list" id="vo"}
+			  <tr>
+				<td><input name="chk_list" type="checkbox" value="{$vo.id}" /></td>
+				<td><a href="{:url("edit?id=$vo[id]")}"><b>{$vo.name}</b></a>  注册于{$vo.regdate|date="Y-m-d H:i:s",###} </span></td>
+				<td><a href="{:url("index?cat=$vo[cat]")}">{$vo.cats.name}</a></td>
+				<td><a href="{:url("index?status=$vo[status]")}" class="btn btn-default">
+					<?php
+						if($vo['status']==1){
+							echo '正常';
+						}else{
+							echo '禁用';
+						}
+					?>
+				</a></td>
+				<td><a href="{:url("edit?id=$vo[id]&nav=编辑管理员")}" class="btn btn-success">编辑</a> </td>
+			  </tr>
+			  {/volist}
+			  <tr class="f">
+				<td><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+			    <td>
+					选中项 :
+					<a href="javascript:;" class="btn btn-danger" onclick="del();" >删除</a>
+					<a href="javascript:;" class="btn btn-primary" onclick="move();">移动</a>
+					<a href="javascript:;" class="btn btn-primary" onclick="qiyong();" >启用</a>
+					<a href="javascript:;" class="btn btn-danger" onclick="jinyong();" >禁用</a>	
+				</td>
+			    <td colspan="3">{$page}</td>
+			  </tr>
+			</table>
+
+</div><!--v_bd-->
+{include file="common/foot" /}
+
+<script>
+$(".chk_all").click(function(){
+	if(!$(this).attr("checked")){
+		$("input[name='chk_list']").removeAttr("checked");
+	}else{
+     $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+	 }
+});
+function del(){
+if(!confirm("确定要删除选中项吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url("del")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+					 }
+
+		})
+}
+function jinyong(){
+	if(!confirm("确定要选中项禁用吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url("jinyong")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+
+					 }
+
+		})
+}
+function qiyong(){
+	if(!confirm("确定要选中项启用吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url("qiyong")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+
+					 }
+
+		})
+}
+function move(){
+	var arrChk=$("input[name='chk_list']:checked");
+	var val='';
+    for (var i=0;i<arrChk.length;i++){
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	$html='选择要移入的类别:<select name="cat" id="cat" ><option value="">选择要移入的类别</option>{volist name="cat" id="vo"}<option value="{$vo.id}">{$vo.name}</option>{volist name="vo['one']" id="vo2"}<option value="{$vo2.id}">┠{$vo2.name}</option>{volist name="vo2['two']" id="vo3"}<option value="{$vo3.id}">&nbsp;&nbsp;┠{$vo3.name}</option>	{/volist}{/volist}{/volist}</select>';
+	$html+='<div style="padding:20px 0px 0px 100px;"><input name="" class="i_btn" onclick="move_do();" value="提交" type="button" /></div>';
+	tanchuang("move",'400','信息移动',$html)
+}
+function move_do(){
+	if(!confirm("确定要移动选中项吗？")){
+		return false;
+	}
+	var cid=$("#cat").val();
+	if(cid==''){
+		alert("请选择要移入的类别");
+		return false;
+	}
+	var arrChk=$("input[name='chk_list']:checked");
+	var val='';
+    for (var i=0;i<arrChk.length;i++){
+         val=val+","+arrChk[i].value;
+    }
+	var url="{:url("move")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val+"&cat="+cid,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+					 }
+
+		})
+}
+</script>

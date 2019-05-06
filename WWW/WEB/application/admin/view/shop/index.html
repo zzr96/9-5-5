@@ -1,0 +1,67 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class='bd'>
+        <div class="v_tishi">
+            <div style='float:left;'>您可通过操作查看按钮了解申请店铺详情并进行相应的操作!</div>
+            <div style='clear:both;'></div>
+        </div>
+         <?php
+            if(!$list){
+        ?>
+        <div class="none_list">暂无店铺申请记录</div>
+        <?php
+            }else{
+        ?>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+            <tr class="h">
+                <td valign="middle">ID</td>
+                <td>姓名</td>
+                <td>类型</td>
+                <td>店铺名称</td>
+                <td>电话</td>
+                <td>创建时间</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td><b>{$vo.name}</b></td>
+                <td>{$vo.cat_name}</td>
+                <td>{$vo.shop_name}</td>
+                <td>{$vo.mobile}</td>
+                <td>{$vo.dateline}</td>
+                <td>{if condition="$vo.status eq 1"}未审核{elseif condition="$vo.status eq 2"}审核通过{else}拒绝{/if}</td>
+                <td>
+                    <a href="{:url('edit')}?id={$vo.id}&nav=查看" class="btn btn-success">查看</a>
+                    <a href="javascript:;" class="btn btn-danger" onclick="del('{$vo.id}');">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+            <div class="page">{$page}</div>
+        <?php
+            }
+        ?>
+    </div>
+</div>
+{include file="common:foot"}	
+<script type="text/javascript">
+    function del(id){
+        if (!confirm('此操作不能撤销，确定要删除该申请记录?')) {
+            return false;
+        }
+        $.ajax({
+            url: "{:url('del')}",
+            data: "id=" + id,
+            type: 'post',
+            success: function (ret) {
+                if (ret.code == 1) {
+                    tishi('success', ret.msg, window.location.href)
+                }else{
+                    tishi('error',ret.msg);
+                }
+            }
+        })
+    }
+</script>

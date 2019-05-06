@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class="mui-bar mui-bar-nav ">
+        <a class="mui-pull-left"><i class="iconfont icon-fanhui"></i> </a>
+        <h1 class="mui-title">特价商品</h1>
+    </header>
+    <div class="shoucang-content header-counter">
+        <div class="lesson-today tejia-content">
+            <ul class="">
+                <!-- <li class="clearfix">
+                    <div class="img-box">
+                        <img src="../img/img02.jpg" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                        <p class="pingjia">
+                            <em>特价</em>
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="img-box">
+                        <img src="../img/pic1.png" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿季母婴用品</p>
+                        <p class="pingjia">
+                            <em>特价</em>
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+                    </div>
+                </li>
+                <li class="">
+                    <div class="img-box">
+                        <img src="../img/pic1.png" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿季母婴用品</p>
+                        <p class="pingjia">
+                            <em>特价</em>
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                        <p class="price">
+
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+                    </div>
+                </li> -->
+            </ul>
+            <div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+        </div>
+    </div>
+
+</body>
+<!--<script type="text/javascript" src="../js/api.js" ></script>-->
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+  var page = 1;
+  function api_init(){
+    getTejiaProduct();
+    upRefresh();
+  }
+  //上拉刷新
+  function upRefresh(){
+    api.addEventListener({//上拉刷新
+        name: 'scrolltobottom',
+        extra: {
+            threshold: 20
+        }
+    }, function(ret, err) {
+        console.log(ret);
+        page++;
+        getTejiaProduct();
+    });
+  }
+  //获取特价商品
+  function getTejiaProduct(){
+    api.ajax({
+        url: apis + 'home/tejiashangpin',
+        method: 'post',
+        data:{
+          values: {
+              page: page
+          }
+        }
+    },function(ret, err){
+        console.log( JSON.stringify( ret ) );
+        if (ret && ret.data.length > 0) {
+          $.each(ret.data,function(k,v){
+            var html = '<li class="seeGoodsDetail" data-id="'+v.id+'"><div class="img-box">'
+                +'<img src="'+iapi+v.img1+'" /></div><div class="right">'
+                +'<p class="twoline">'+v.name+'</p>'
+                +'<p class="pingjia"><em>特价</em><span><m>'+v.pinglun_num+'条评论</m><m>'+v.haopingdu+'好评</m></span></p>'
+                +'<p class="price"><span>￥<m>'+v.xprice+'</m></span><span>￥<m>'+v.yprice+'</m></span>'
+                +'</p></div></li>';
+            $('.tejia-content ul').append(html);
+          });
+        } else{
+          if($('.tejia-content ul li').length > 0){
+            api.removeEventListener({
+                name: 'scrolltobottom'
+            });
+            $('.more').show();
+            $('.more').html('没有更多了');
+          }else{
+            api.removeEventListener({
+                name: 'scrolltobottom'
+            });
+            $('.tejia-content ul').html('');
+            $('.more').show();
+            $('.more').html('暂无商品');
+          }
+        }
+        if(err){
+            console.log( JSON.stringify( err ) );
+        }
+    });
+  }
+  //查看商品详情
+  $('.tejia-content ul').on('tap','.seeGoodsDetail',function(){
+    id = $(this).attr('data-id');
+    api.openWin({
+        name: 'shangpin_detail',
+        url: '../kind/shangpin_detail.html',
+        pageParam: {
+            id: id,
+            is_tejia:'tejia'
+        }
+    });
+  })
+
+</script>
+
+</html>

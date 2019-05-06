@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>首页</title>
+    <link rel="stylesheet" href="../css/mui.min.css" />
+    <link rel="stylesheet" href="../css/swiper.min.css" />
+    <link rel="stylesheet" href="../css/iconfont.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+        .mui-control-content {
+            min-height: 215px;
+        }
+
+        .mui-control-content .mui-loading {
+            margin-top: 50px;
+        }
+
+        .mui-scroll-wrapper {
+            overflow: inherit;
+        }
+
+        .mui-slider_ss {
+            height: 100%;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            border: 0;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            border-color: #e77636;
+            color: #e77636;
+        }
+
+        .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+            border: 0;
+        }
+
+        .mui-segmented-control {
+            background: #fff;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active .xian_box {
+            display: block;
+        }
+
+        .mui-control-item {
+            position: relative;
+        }
+
+        .mui-control-item .xian_box {
+            display: none;
+            position: absolute;
+            width: 30%;
+            left: 35%;
+            bottom: 3px;
+            height: 2px;
+            background: #f3ba9a;
+            border-radius: 20px;
+        }
+
+        .more_h {
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        //自定义变量
+        //页面初始化
+        api_init = function() {
+            getData();
+        }
+
+        //获取数据
+        function getData() {
+            var photoBrowser = api.require('photoBrowser');
+            photoBrowser.open({
+                images: api.pageParam.images,
+                activeIndex: api.pageParam.the,
+                placeholderImg: 'widget://res/img/apicloud.png',
+                bgColor: '#000'
+            }, function(ret, err) {
+                console.log(JSON.stringify(ret));
+                if (ret.eventType=="click") {
+                  api.closeWin();
+                  photoBrowser.close();
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

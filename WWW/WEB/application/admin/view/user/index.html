@@ -1,0 +1,65 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="v_bd_tag">
+        <a href="{:url('index')}"><span class="focus">全部用户({$num})</span></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span>会员搜索：
+			<input name="email" id="name" class="edit_input" value="{:input('key')}" type="text"/>
+			<a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a>
+            <i class="huise"> ( 支持ID/昵称/电话搜索 ) </i>
+		</span>
+    </div>
+    <br/>
+
+    <div class="bd">
+        <?php
+			if(!$list){
+		?>
+        <div class="none_list">没有任何会员</div>
+        <?php
+			}else{
+		?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>Id</td>
+                <td>昵称</td>
+                <td>头像</td>
+                <td>性别</td>
+                <td>电话</td>
+                <td>积分</td>
+                <td>余额</td>
+                <td>注册日期</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr id="item{$vo.id}">
+                <td>{$vo.id}</td>
+                <td>{$vo.nickname}</td>
+                <td><img src="{$vo.logo}" style="height: 50px;width: 50px" alt=""></td>
+                <td>
+                    <?php  echo $vo['sex']==1?'男':'女'; ?>
+                </td>
+                <td>{$vo.mobile}</td>
+                <td>{$vo.integral}</td>
+                <td>{$vo.money}</td>
+                <td>{$vo.dateline}</td>
+                <td>
+                    <a href="{:url('user/edit')}?uid={$vo.id}&nav=编辑用户信息" class="btn btn-success">编辑</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+    function searchs(){
+        var val = $("#name").val();
+        if (val.replace(/ /g, '') == "") {
+            return alert("请输入正确用户手机号");
+        }
+        window.location.href = '{:url("index")}?key=' + val;
+    }
+</script>

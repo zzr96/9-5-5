@@ -1,0 +1,117 @@
+{include file="common:head"}
+<div class="v_bd">
+    <div class="v_bd_tag">
+        <a href="{:url('caiwu')}"><span class="focus">全部流水({$num})</span></a>
+        <!--按店铺查看：-->
+        <!--<div class="select_style">-->
+            <!--<select name="" onchange="changeShop(this)" style='height:28.5px;line-height:28.5px'>-->
+                <!--<option value="0">全部</option>-->
+                <!--{volist name="shoplist" key='k' id='v'}-->
+                <!--{if condition="input('shop_id') == $v.id" }-->
+                <!--<option value="{$v.id}" selected='selected'>{$v.name}</option>-->
+                <!--{else/}-->
+                <!--<option value="{$v.id}">{$v.name}</option>-->
+                <!--{/if}-->
+                <!--{/volist}-->
+            <!--</select>-->
+        <!--</div>-->
+		<span>
+            店铺名称搜索：
+			<input name="email" id="name" class="edit_input" value="{:input('key')}" type="text"/>
+			<a href="javascript:;" onClick="searchs();" class="btn btn-success">提交</a>
+            <i class="huise"> ( 输入店铺名称 ) </i>
+		</span>
+    </div>
+    <br/>
+
+    <div class="bd">
+        <?php
+			if(!$list){
+		?>
+        <div class="none_list">暂无任何流水</div>
+        <?php
+			}else{
+		?>
+        <table width="100%" border="0" cellpadding="0" class="table" cellspacing="0">
+            <tr class="h">
+                <td>Id</td>
+                <td>Logo</td>
+                <td>名称</td>
+                <td>金额</td>
+                <td>备注</td>
+                <td>日期</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr id="item{$vo.id}">
+
+                <td>{$vo.id}</td>
+                <td><img src="{$vo.logo}" height="50"/></td>
+
+                <td>{$vo.name}</td>
+
+                <td>${$vo.money}</td>
+                <td>{$vo.note}</td>
+                <td>{$vo.datetime}</td>
+                <td>
+                    <a href="javascript:;" class="v_btn" onclick="Del('{$vo.shop_id}');">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+        <?php } ?>
+    </div>
+</div>
+{include file="common:foot"}
+<script>
+
+    function changeShop(obg) {
+        var val = $(obg).val();
+        window.location.href = '?key={:input("key")}&shop_id=' + val;
+    }
+
+    function searchs() {
+        var val = $("#name").val();
+        if (val.replace(/ /g, '') == "") {
+            alert("不能搜索空内容");
+            return false
+        }
+        window.location.href = '?key=' + val + '&shop_id={:input("shop_id")}';
+    }
+
+    function status(uid, status) {
+        var data = 'id=' + uid + '&status=' + status;
+        var url = '{:url("status")}';
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                if (data.code == 0) {
+                    alert(data.msg);
+                    window.location.href = window.location.href;
+                } else {
+                    alert(data.msg);
+                }
+            }
+        })
+    }
+
+    function Del(id) {
+        if (!confirm("确定要删除此条数据吗？")) {
+            return;
+        }
+        var url = '/admin/shop/dele.html?id=' + id;
+        $.ajax({
+            url: url,
+            success: function (txt) {
+                alert(txt.msg)
+                if (txt.code == 1) {
+                    window.location.href = window.location.href
+                }
+            }
+        })
+    }
+
+</script>

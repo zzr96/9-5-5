@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>战绩展示</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./css/mui.min.css" rel="stylesheet" />
+		<link href="./css/base.css" rel="stylesheet" />
+		<link href="./iconfont/iconfont.css" rel="stylesheet" />
+		<link href="./css/sai_zhanji.css" rel="stylesheet" />
+	</head>
+	<style>
+		.share div{
+			  height: 40px;
+				line-height: 40px;
+				text-align: center;
+				border-radius: 6px;
+				background: #F29C2A;
+				color: #fff;
+				margin-top: 20px;
+		}
+	</style>
+	<body>  
+		<header class="mui-bar mui-bar-nav">
+		    <!-- <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a> -->
+		    <h1 class="mui-title">战绩展示</h1>
+			<!-- <span class="iconfont icon-gengduo"></span> -->
+		</header>
+		<div class="mui-content">
+		  <div class="warp">
+			  <div class="beijing">
+				  <img src="./images/saizhan.png" />
+			  </div>
+			  <div class="list">
+				  <div class="time">
+					  <span></span>
+					  <label></label>
+					  <em></em>
+				  </div>
+				  <div class="lianxu">
+					  <div class="lianxu_top">
+						  <img src="./images/naozhong.png" />
+						  <img src="./images/jiayou.png" />
+					  </div>
+					  <div class="xie">
+						  <p>我已经连续打卡<em>0</em>天</p>
+						  <p>累计参与打卡0天</p>
+						  <p>累计获得早起奖励<i>0</i>元</p>
+					  </div>
+					  
+				  </div>
+				  <div class="share">
+					  <p>我的邀请码为13562896523</p>
+					  <span>改变习惯是改变命运的最佳策略。</span>
+						<div>去注册</div>
+					  <!-- <ul>
+						  <li class="circle">
+							  <img src="../../images/weixinpy.png" />
+							  <p>朋友圈</p>
+						  </li>
+						  <li class="wx">
+							  <img src="../../images/weixin.png" />
+							  <p>微信</p>
+						  </li>
+						  <li>
+							  <img src="../../images/bendi.png" />
+							  <p>本地保存</p>
+						  </li>
+					  </ul> -->
+				  </div>
+			  </div>
+			  
+			  
+			  
+			  
+		  </div>
+		</div>
+		
+	</body>
+	<script src="./js/mui.min.js"></script>
+	<script src="./js/castapp.js"></script>
+	<script src="./js/jquery-3.2.1.min.js"></script>
+	<script src="./js/config.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		ca.init();
+		$('.beijing img').css('height',parseFloat(document.body.clientHeight)-parseFloat(44))
+		var uid = GetQueryString('uid')
+		var year = GetQueryString('year')
+		var month = GetQueryString('month')
+		var hour = GetQueryString('hour')
+		$('.time span').text(year)
+		$('.time em').text(month)
+		$('.time label').text(hour)
+		$('.share').on('tap', 'div', function(){
+			mui.openWindow({
+				 url:"./register.html?uid=" + uid,
+				 id: 'register.html'
+		})
+	})
+	</script>	
+</html>

@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>购物车</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<link href="../css/style.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+	<style>
+		.mui-table-view-cell {
+			padding: 12px 11px
+		}
+
+		.mui-table-view {
+			padding: 0px;
+		}
+
+		.mui-table-view-cell>a:not(.mui-btn) {
+			margin: -11px -10px
+		}
+
+		.mui-table-view:before {
+			background: #e6e6e6;
+		}
+
+		.mui-table-view:after {
+			left: 10px;
+			right: 10px;
+			background: #e6e6e6;
+		}
+
+		.mui-navigate-right:after,
+		.mui-push-right:after {
+			height: 0
+		}
+
+		.mui-table-view-cell:after {
+			left: 10px;
+			right: 10px;
+			background: #e6e6e6;
+		}
+
+		.mui-navigate-right:after,
+		.mui-push-right:after {
+			right: 6px;
+			top: 16px;
+			color: #d1d1d1;
+			font-size: 16px;
+		}
+
+		.mui-numbox .mui-input-numbox {
+			border-left: 0!important;
+			border-right: 0!important;
+		}
+
+		.mui-numbox [class*=btn-numbox],
+		.mui-numbox [class*=numbox-btn] {
+			width: 30px
+		}
+
+		.mui-numbox {
+			padding: 0 25px;
+			width: 85px
+		}
+
+		.shoucang-content {
+			margin-bottom: 50px;
+		}
+		.shanchu{
+			display: none;
+		}
+		.kong_btn{
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav shopping">
+		<!-- <a class="mui-action-back mui-pull-left"><i class="iconfont icon-fanhui"></i></a> -->
+		<h1 class="mui-title">购物车</h1>
+		<span class="shopping-clear shanchu">删除</span>
+	</header>
+	<div class="header-counter cart-content">
+		<!--内容列表-->
+		<div class="shopping-list-main">
+			<ul class="shopping-mian-ul">
+				<!-- <li>
+					<div class="shopping-main-dui ">
+						<div class="shopping-main-left">
+							<i class="iconfont "></i>
+						</div>
+					</div>
+					<div class="shopping-itme">
+						<div class="shopping-img">
+							<img src="../img/img01.jpg" />
+						</div>
+						<div class="shopping-right">
+							<div class="shopping-right-top">
+								<h1>
+										<p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品母婴母婴</p>
+									</h1>
+							</div>
+							<div class="shopping-right-bom clearfix">
+								<span>￥<b class="one-price">455.00</b></span>
+								<div class="fr-div clearfix">
+									<div class="mui-numbox fr" data-numbox-min="1" data-numbox-max="100">
+										<button class="mui-btn mui-btn-numbox-minus" type="button" disabled="">-</button>
+										<input class="mui-input-numbox" type="number" id="user-num" value="1">
+										<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="shopping-main-dui ">
+						<div class="shopping-main-left">
+							<i class="iconfont "></i>
+						</div>
+					</div>
+					<div class="shopping-itme">
+						<div class="shopping-img">
+							<img src="../img/img01.jpg" />
+						</div>
+						<div class="shopping-right">
+							<div class="shopping-right-top">
+								<h1>
+										<p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品母婴母婴</p>
+									</h1>
+							</div>
+							<div class="shopping-right-bom clearfix">
+								<span>￥<b class="one-price">455.00</b></span>
+								<div class="fr-div clearfix">
+									<div class="mui-numbox fr" data-numbox-min="1" data-numbox-max="100">
+										<button class="mui-btn mui-btn-numbox-minus" type="button" disabled="">-</button>
+										<input class="mui-input-numbox" type="number" id="user-num" value="1">
+										<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li> -->
+			</ul>
+			<!--空的购物车 隐藏中-->
+			<div class="kongkong" style="display:none;">
+				<p><i class="iconfont icon-gouwuche"></i></p>
+				<h3>主银,您的购物车为空的哦！</h3>
+				<div class="btn-wrap kong_btn">
+					<button class='backToIndex'>返回首页</button>
+					<button class="btn-2" id="goguangguang">去逛逛</button>
+				</div>
+			</div>
+		</div>
+		<div class="shoucang-content">
+			<h2>为你推荐</h2>
+			<ul class="lesson-today">
+				<!-- <li>
+					<div class="img-box">
+						<img src="../img/img02.jpg" />
+					</div>
+					<div class="right">
+						<p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+						<p>
+							<span>￥<m>301.98</m></span>
+							<span>￥<m>301.98</m></span>
+						</p>
+						<p>
+							<span><m>6条评论</m><m>99%好评</m></span>
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="img-box">
+						<img src="../img/pic1.png" />
+					</div>
+					<div class="right">
+						<p class="twoline">婴儿季母婴用品</p>
+						<p>
+							<span>￥<m>301.98</m></span>
+							<span>￥<m>301.98</m></span>
+						</p>
+						<p>
+							<span><m>6条评论</m><m>99%好评</m></span>
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="img-box">
+						<img src="../img/pic1.png" />
+					</div>
+					<div class="right">
+						<p class="twoline">婴儿季母婴用品</p>
+						<p>
+							<span>￥<m>301.98</m></span>
+							<span>￥<m>301.98</m></span>
+						</p>
+						<p>
+							<span><m>6条评论</m><m>99%好评</m></span>
+						</p>
+					</div>
+				</li> -->
+			</ul>
+		</div>
+		<!--内容列表完-->
+		<!--底部全选-->
+		<div class="shopping-dele">
+			<div class="shopping-dele-left">
+				<div class="shopping-main-left AllCheck" id="AllCheck">
+					<i class="iconfont"></i>
+				</div>
+				<span class="quanxuan">全选</span>
+				<span class="shopping-math">合计：<em>￥</em>  <b id="all-total">0.00</b></span>
+			</div>
+			<button class="shopping-but-dele" id="go-pay">去结算</button>
+		</div>
+
+	</div>
+	<div class="mask"></div>
+	<script src="../js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="../js/api.js"></script>
+	<script type="text/javascript">
+		var id = ''; //购物车ID
+		var num;
+		var goods_id;
+		var goods_size;
+		var goods_id_arr = new Array();
+		var goods_size_arr = new Array();
+		var userId;
+		var page = 1;
+
+		function api_init() {
+			getCart();
+			getTuijianProduct();
+
+			api.addEventListener({//上拉刷新
+					name: 'scrolltobottom',
+					extra: {
+							threshold: 20
+					}
+			}, function(ret, err) {
+				console.log(ret);
+					page++;
+					getTuijianProduct();
+			});
+		}
+
+		//获取购物车
+		function getCart() {
+			api.ajax({
+				url: apis + 'trolley/get',
+				method: 'post'
+			}, function(ret, err) {
+				console.log(JSON.stringify(ret));
+				if (ret && ret.data.length > 0) {
+					$('.kongkong').hide();
+					$('.shopping-dele').show();
+					$('.shanchu').show();
+					var html = '';
+					$.each(ret.data, function(k, v) {
+						 html += '<li data-id="' + v.id + '" data-goods-id="' + v.gid + '" data-goods-size="' + v.size + '">' +
+							'<div class="shopping-main-dui "><div class="shopping-main-left"><i class="iconfont "></i></div></div>' +
+							'<div class="shopping-itme"><div class="shopping-img"><img src="' + iapi + v.img1 + '" /></div>' +
+							'<div class="shopping-right"><div class="shopping-right-top"><h1><p class="twoline">' + v.name + ' ' + v.size +'</p></h1></div>' +
+							'<div class="shopping-right-bom clearfix"><span>￥<b class="one-price">' + v.price + '</b></span>' +
+							'<div class="fr-div clearfix"><div class="mui-numbox fr" data-numbox-min="1" data-numbox-max="100">' +
+							'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>' +
+							'<input class="mui-input-numbox" type="number" id="user-num" readonly value="' + v.num + '">' +
+							'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>' +
+							'</div></div></div></div></div></li>';
+
+					});
+					$('.shopping-list-main ul').html(html);
+				} else{
+					$('.shopping-list-main ul').html('');
+					$('.kongkong').show();
+					$('.shopping-dele').hide();
+					$('.shanchu').hide();
+				}
+				if(err){
+					console.log(JSON.stringify(err));
+				}
+			});
+		}
+		//获取为你推荐商品
+		function getTuijianProduct() {
+			api.ajax({
+				url: apis + 'home/tuijianshangpin',
+				method: 'post',
+				data: {
+						values: {
+								page: page
+						}
+				}
+			}, function(ret, err) {
+				console.log(JSON.stringify(ret));
+				if (ret && ret.data.length > 0) {
+						//var html = '';
+						$.each(ret.data, function(k, v) {
+								var html = '<li class="seeGoodsDetail" data-id="'+v.id+'"><div class="img-box">' +
+										'<img src="' + iapi + v.img1 + '" /></div>' +
+										'<div class="right"><p class="twoline">' + v.name + '</p>' +
+										'<p class="price"><span>￥<m>' + v.xprice + '</m></span><span>￥<m>' + v.yprice + '</m></span>' +
+										'</p></div></li>';
+								$('.lesson-today').append(html);
+						});
+				}else{
+					if($('.lesson-today li').length > 0){
+						api.removeEventListener({
+								name: 'scrolltobottom'
+						});
+						$('.shoucang-content ul').after('<p style="text-align:center;margin-top:10px;">没有更多了</p>');
+					}
+				}
+				if(err) {
+						console.log(JSON.stringify(err));
+				}
+			});
+		}
+
+		//返回首页
+		$('.backToIndex').on('tap',function(){
+			api.execScript({
+			    name: 'root',
+			    script: 'change(0);'
+			});
+		});
+
+		//删除
+		$('.shopping-clear').on('click', function() {
+			if ($('.shopping-list-main ul li.active').length == 0) {
+				api.toast({
+					msg: '请选择要删除的商品',
+					duration: 2000,
+					location: 'middle'
+				});
+				return;
+			}
+			$('.shopping-list-main ul li.active').each(function(k, v) {
+				id = id + "," + $(this).attr('data-id'); //购物车ID
+			});
+			console.log(id);
+			api.confirm({
+				title: '删除提示',
+				msg: '确定要删除？',
+				buttons: ['确定', '取消']
+			}, function(ret, err) {
+				if (ret.buttonIndex == 1) {
+					api.ajax({
+						url: apis + 'trolley/del',
+						method: 'post',
+						data: {
+							values: {
+								id: id
+							}
+						}
+					}, function(ret, err) {
+						if (ret) {
+							console.log(JSON.stringify(ret));
+							if (ret.code == 0) {
+								api.toast({
+									msg: ret.msg,
+									duration: 2000,
+									location: 'bottom'
+								});
+								return false;
+							}
+							if (ret.code == 1) {
+								api.toast({
+									msg: ret.msg,
+									duration: 2000,
+									location: 'bottom'
+								});
+								getCart();
+								clearTotalmoney();
+								id = ''; //清空ID
+							}
+						} else {
+							console.log(JSON.stringify(err));
+						}
+					});
+				} else {
+					id = ''; //清空ID
+				}
+			});
+		});
+
+		//点击单选按钮
+		$('.shopping-mian-ul').on('tap', '.shopping-main-left', function() {
+			console.log(4564);
+			$(this).closest('li').toggleClass('active'); //点击小图标，加样式和取消样式
+			TotalPrice();
+			//获取商品的ID、规格
+			goods_id = $(this).closest('li').attr('data-goods-id');
+			goods_size = $(this).closest('li').attr('data-goods-size');
+
+			if ($(this).closest('li').hasClass('active')) {
+				goods_id_arr.push(goods_id);
+				goods_size_arr.push(goods_size);
+			} else {
+				goods_id_arr.splice($.inArray(goods_id, goods_id_arr), 1);
+				goods_size_arr.splice($.inArray(goods_size, goods_size_arr), 1);
+			}
+
+			var len = $(this).parents('.shopping-mian-ul').find('li').length;
+			//取消
+			if ($(this).parents('.shopping-mian-ul').find('li.active').length < len) {
+				$('#AllCheck').removeClass('active');
+				$(this).parents('.shopping-mian-ul').find(".title-quyu").removeClass('active');
+			}
+			//全选
+			var lens = $(this).parents('.shopping-list-main').find('li').length;
+			if ($(this).parents('.shopping-list-main').find('li.active').length == lens) { //少于列表总数，点击取消
+				$('#AllCheck').addClass('active');
+			} else {
+				$('#AllCheck').removeClass('active');
+			}
+			TotalPrice();
+		});
+
+		// 数量减
+		$(".shopping-mian-ul").on('tap', '.mui-btn-numbox-minus', function() {
+			num = $(this).closest('li').find('#user-num').val();
+			console.log(num);
+			if (num < 2) {
+				api.toast({
+					msg: '不能再减少了哦',
+					duration: 2000,
+					location: 'middle'
+				});
+				return;
+			}
+			num--;
+			$(this).closest('li').find('#user-num').val(num);
+			TotalPrice();
+			changeGoodsNum($(this)); //执行修改商品的数量
+		});
+		// 数量加
+		$(".shopping-mian-ul").on('tap', '.mui-btn-numbox-plus', function() {
+			num = $(this).closest('li').find('#user-num').val();
+			num++;
+			console.log(num);
+			$(this).closest('li').find('#user-num').val(num);
+			TotalPrice();
+			changeGoodsNum($(this)); //执行修改商品的数量
+		});
+
+		//修改商品数量
+		function changeGoodsNum(th) {
+			id = th.closest('li').attr('data-id'); //购物车ID
+			api.ajax({
+				url: apis + 'trolley/setNum',
+				method: 'post',
+				data: {
+					values: {
+						id: id,
+						num: num
+					}
+				}
+			}, function(ret, err) {
+				if (ret) {
+					console.log(JSON.stringify(ret));
+				} else {
+					console.log(JSON.stringify(err));
+				}
+			});
+		}
+
+		//去结算
+		$('#go-pay').on('tap', function() {
+			if ($('.shopping-mian-ul').find('li.active').length == 0) {
+				api.toast({
+					msg: '请选择要购买的商品',
+					duration: 2000,
+					location: 'bottom'
+				});
+				return false;
+			}
+			console.log(JSON.stringify(goods_id_arr));
+			console.log(goods_size_arr);
+			api.openWin({
+				name: 'tijiao_order',
+				url: '../cart/tijiao_order.html',
+				pageParam: {
+					goods_id_arr: JSON.stringify(goods_id_arr),
+					goods_size_arr: JSON.stringify(goods_size_arr),
+					from: 'shopping_cart'
+				}
+			});
+		});
+		// 点击全选按钮
+		$("#AllCheck").click(function() {
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+				$('.shopping-mian-ul li').removeClass('active');
+				goods_id_arr = [];
+				goods_size_arr = [];
+				TotalPrice();
+			} else {
+				$(this).addClass('active');
+				$('.shopping-mian-ul li').addClass('active');
+				goods_id_arr = [];
+				goods_size_arr = [];
+				if ($('.shopping-mian-ul li').hasClass('active')) {
+					$('.shopping-mian-ul li').each(function() {
+						goods_id_arr.push($(this).attr('data-goods-id'));
+						goods_size_arr.push($(this).attr('data-goods-size'));
+					});
+				}
+				TotalPrice();
+			}
+		});
+		//计算
+		function TotalPrice() {
+			var totalPrice = 0; //总价
+			$(".shopping-mian-ul li").each(function() {
+				if ($(this).hasClass('active')) { //如果该商品被选中
+					var num = parseInt($(this).find(".mui-input-numbox").val()) - 0; //得到商品的数量
+					var price = parseFloat($(this).find(".one-price").text()) - 0; //得到商品的单价
+					var total = price * num; //计算单个商品的总价
+					totalPrice += total; //计算该店铺的总价
+				}
+			});
+
+			$("#all-total").text(totalPrice.toFixed(2)); //输出优惠后总价
+		}
+
+		//去逛逛
+		$('#goguangguang').on('tap', function() {
+			api.openWin({
+				name: 'kind_list',
+				url: '../kind/kind_list.html'
+			});
+		});
+
+		//查看商品详情
+		$('.lesson-today').on('tap', '.seeGoodsDetail', function() {
+			var sp_id = $(this).closest('li').attr('data-id');
+			api.openWin({
+				name: 'shangpin_detail',
+				url: '../kind/shangpin_detail.html',
+				pageParam: {
+					id: sp_id
+				}
+			});
+		})
+
+		//清空总价，取消全选    供提交完订单用
+		function  clearTotalmoney(){
+			$("#AllCheck").removeClass('active');
+			$("#all-total").text('0.00');
+		}
+	</script>
+</body>
+
+</html>

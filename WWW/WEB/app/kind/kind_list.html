@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        .mui-bar-nav {
+            z-index: 999;
+        }
+
+        .tab-control .control-item {
+            padding: 0 10px;
+            display: inline-block;
+            line-height: 45px;
+            color: #666;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .tab-control {
+            height: 45px;
+            z-index: 997;
+            width: 100%;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            top: 44px;
+            left: 0
+        }
+
+        .tab-control i {
+            color: #888;
+            font-size: 14px;
+            line-height: normal;
+        }
+
+        .tab-control span {
+            position: relative;
+            display: inline-block;
+            width: 15px;
+            height: 25px
+        }
+
+        .tab-control span i.icon-sort-up {
+            position: absolute;
+            top: 9px;
+            left: 0
+        }
+
+        .tab-control span i.icon-sort-up1 {
+            position: absolute;
+            bottom: -7px;
+            left: -1px;
+            font-size: 16px;
+        }
+
+        .tab-control .dange i.icon-sort-up1 {
+            bottom: -4px;
+            left: -2px;
+            font-size: 16px;
+        }
+
+        .control-item.active {
+            border: 0;
+            color: #00C55B;
+        }
+
+        .control-item.active .icon-sort-up1 {
+            color: #00C55B;
+        }
+
+        .search-input {
+            height: 32px;
+            border-radius: 4px;
+            background: #f7f7f7;
+            margin-top: 6px;
+            width: 100%
+        }
+
+        .mui-title i.icon-sousuo {
+            color: #999;
+            font-size: 12px;
+            float: left;
+            margin-bottom: 5px;
+            height: 32px;
+            width: 30px;
+            line-height: 32px;
+            ;
+        }
+
+        .mui-title input {
+            float: left;
+            border: 0;
+            background: #f7f7f7;
+            margin-bottom: 0;
+            height: 32px;
+            width: 80%;
+            padding: 0;
+        }
+
+        .mask {
+            top: 0px;
+        }
+
+        .header-counter {
+            padding-top: 89px;
+        }
+        .row1 {
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+        }
+        .row2 {
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class="mui-bar mui-bar-nav ">
+        <a class="mui-pull-left"><i class="iconfont icon-fanhui"></i> </a>
+        <h1 class="mui-title">
+    			<div class="search-input clearfix">
+    				<i class="iconfont icon-sousuo"></i>
+    				<input type="text" id="search" value="" placeholder="搜索商品"/>
+    			</div>
+    		</h1>
+        <span class="iconfont icon-fenlei-outline"></span>
+    </header>
+    <div class="shoucang-content header-counter">
+        <div class="tab-control">
+            <a class="control-item active dange" data="desc" data-order="zonghe">
+              <m>综合</m>
+              <span><i class="iconfont icon-sort-up1"></i></span>
+            </a>
+            <a class="control-item" data="asc" data-order="sales">
+              <m>销量</m>
+              <span>
+                <i class="iconfont icon-sort-up"></i>
+                <i class="iconfont icon-sort-up1"></i>
+              </span>
+    				</a>
+            <a class="control-item" data="asc" data-order="price">
+              <m>价格</m>
+              <span>
+                <i class="iconfont icon-sort-up"></i>
+                <i class="iconfont icon-sort-up1"></i>
+              </span>
+            </a>
+            <a class="control-item show-action" data="asc" data-order="sales"><m>分类</m>
+              <span><i class="iconfont icon-sort-up1"></i></span>
+				    </a>
+        </div>
+
+        <div class="lesson-today list1" style="display: none;">
+            <ul class="">
+                <!-- <li class="">
+                    <div class="img-box">
+                        <img src="../img/img02.jpg" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+                        <p class="pingjia">
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="img-box">
+                        <img src="../img/pic1.png" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿季母婴用品</p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+                        <p class="pingjia">
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                    </div>
+                </li>
+                <li class="">
+                    <div class="img-box">
+                        <img src="../img/pic1.png" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿季母婴用品</p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+                        <p class="pingjia">
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                    </div>
+                </li> -->
+            </ul>
+            <div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+        </div>
+        <div class="lesson-today tejia-content list2">
+            <ul class="">
+                <!-- <li class="clearfix">
+                    <div class="img-box">
+                        <img src="../img/img02.jpg" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                        <p class="pingjia">
+                            <em>特价</em>
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="img-box">
+                        <img src="../img/pic1.png" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿季母婴用品</p>
+                        <p class="pingjia">
+                            <em>特价</em>
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                        <p class="price">
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+                    </div>
+                </li>
+                <li class="">
+                    <div class="img-box">
+                        <img src="../img/pic1.png" />
+                    </div>
+                    <div class="right">
+                        <p class="twoline">婴儿季母婴用品</p>
+                        <p class="pingjia">
+                            <em>特价</em>
+                            <span><m>6条评论</m><m>99%好评</m></span>
+                        </p>
+                        <p class="price">
+
+                            <span>￥<m>301.98</m></span>
+                            <span>￥<m>301.98</m></span>
+                        </p>
+                    </div>
+                </li> -->
+            </ul>
+            <div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+        </div>
+    </div>
+    <div class="mask"></div>
+    <div class="shaixuan-tk">
+        <div class="shai-wrap">
+            <h2>商品分类</h2>
+            <ul class="cate">
+                <!-- <li>
+                    <h3 class="active"><m>家禽</m> <i class="iconfont icon-zhankai"></i></h3>
+                    <div class="list show">
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                    </div>
+                </li>
+                <li>
+                    <h3>家禽 <i class="iconfont icon-arrow-up"></i></h3>
+                    <div class="list">
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                    </div>
+                </li>
+                <li>
+                    <h3>家禽 <i class="iconfont icon-arrow-up"></i></h3>
+                    <div class="list">
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                        <p>鸡肉</p>
+                    </div>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js" ></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+  var search;
+  var order;
+  var cate_id;
+  var cate_name;
+  var page = 1;
+  var flag = 1;
+
+  function api_init() {
+    search = api.pageParam.search;
+    cate_id = api.pageParam.cate_id;
+    cate_name = api.pageParam.cate_name;
+    if(cate_name){
+      $('.show-action m').html(cate_name);
+    }
+    getData();
+    getCate();
+    upRefresh();
+  }
+
+  //上拉刷新
+  function upRefresh(){
+    api.addEventListener({//上拉刷新
+        name: 'scrolltobottom',
+        extra: {
+            threshold: 20
+        }
+    }, function(ret, err) {
+        console.log(ret);
+        page++;
+        getData();
+    });
+  }
+  //获取商品
+  function getData(){
+    api.ajax({
+        url: apis + 'home/goods',
+        method: 'post',
+        data: {
+            values: {
+                page: page,
+                search: search,
+                order: order,
+                cate_id: cate_id
+            }
+        }
+    },function(ret, err){
+        console.log( JSON.stringify( ret ) );
+        if (ret && ret.data.length > 0) {
+          $.each(ret.data,function(k,v){
+            var html = '<li class="goods" data-id="'+v.id+'">'
+                +'<div class="img-box"><img src="'+iapi+v.img1+'" /></div>'
+                +'<div class="right"><p class="twoline">'+v.name+'</p><p class="pingjia">';
+            if(v.goods_cate3){
+              html += '<em>特价</em>';
+            }
+            html += '<span><m>'+v.pinglun_num+'条评论</m><m>'+v.haopingdu+'好评</m></span></p><p class="price">'
+                +'<span>￥<m>'+v.xprice+'</m></span><span>￥<m>'+v.yprice+'</m></span></p></div></li>';
+            $('.lesson-today ul').append(html);
+          });
+        } else {
+          if($('.lesson-today ul li').length > 0){
+            $('.more').show();
+            $('.more').html('没有更多了');
+            api.removeEventListener({
+                name: 'scrolltobottom'
+            });
+          }else{
+            if(search){
+              api.removeEventListener({
+                  name: 'scrolltobottom'
+              });
+              $('.more').show();
+              $('.more').html('暂无'+search+'相关商品');
+            }else{
+              api.removeEventListener({
+                  name: 'scrolltobottom'
+              });
+              $('.lesson-today ul').html('');
+              $('.more').show();
+              $('.more').html('暂无商品');
+            }
+          }
+        }
+        if(err){
+            console.log( JSON.stringify( err ) );
+        }
+    });
+  }
+  //获取分类
+  function getCate() {
+      api.ajax({
+          url: apis + 'home/shopcate',
+          method: 'post'
+      }, function(ret, err) {
+          if (ret) {
+              console.log(JSON.stringify(ret));
+              var html = '';
+              $.each(ret.data, function(k, v) {
+                console.log(k);
+                  html += '<li>';
+                  if(k == 0){
+                    html += '<h3 class="active" data-id="'+v.id+'" data-name="'+v.name+'"><m class="goods_zhu_cate">'+v.name
+                        +'</m><i class="iconfont icon-arrow-up"></i></h3>'
+                        + '<div class="list show">';
+                  }else{
+                    html += '<h3 class="" data-id="'+v.id+'" data-name="'+v.name+'"><m class="goods_zhu_cate">'+v.name
+                        +'</m><i class="iconfont icon-zhankai"></i></h3>'
+                        + '<div class="list">';
+                  }
+                  $.each(v.son,function(k1,v1){
+                    html += '<p class="goods_cate" data-id="'+v1.id+'" data-name="'+v1.name+'">'+v1.name+'</p>';
+                  });
+                  html += '</div></li>';
+              });
+              console.log(html);
+              $('.cate').html(html);
+          } else {
+              console.log(JSON.stringify(err));
+          }
+      });
+  }
+
+  //键盘事件
+  $('#search').keydown(function(event) {
+    var e = event || window.event;
+    if (e && e.keyCode == 13 && $(this).val().replace(/ /g, '')) { //回车键的键值为13
+      var val = $(this).val();
+      if (val) {
+        search = val;
+      } else {
+        search = '';
+      }
+      $('.lesson-today ul').html('');
+      $('.more').hide();
+      page = 1;
+      getData();
+      upRefresh();
+    }
+  });
+
+  //搜索按钮
+  $('.search-input i').on('tap', function() {
+    var val = $('#search').val().replace(/ /g, '');
+    if (val) {
+      search = val;
+    } else {
+      search = '';
+    }
+    $('.lesson-today ul').html('');
+    $('.more').hide();
+    page = 1;
+    getData();
+    upRefresh();
+  });
+
+  //切换列表
+  $('.icon-fenlei-outline').on('tap',function(){
+    if($('.list1').css('display') === 'none'){
+      $('.list1').show();
+      $('.list2').hide();
+      $(this).addClass('row1');
+      $(this).removeClass('row2');
+    }else{
+      $('.list1').hide();
+      $('.list2').show();
+      $(this).addClass('row2');
+      $(this).removeClass('row1');
+    }
+  });
+
+  //综合、销量、价格 切换
+  $(".tab-control").on("click", "a", function() {
+      $(this).addClass("active").siblings().removeClass("active");
+      var data = $(this).attr('data');
+      var iorder = $(this).attr('data-order');
+
+      if($(this).find('i').length > 1){
+        if(data == 'asc'){//下
+          $(this).attr('data', 'desc');
+          order = iorder + "_desc";
+          $(this).siblings().find('.icon-sort-up').css('color','#888888');
+          $(this).siblings().find('.icon-sort-up1').css('color','#888888');
+          $(this).find('.icon-sort-up').css('color','#888888');
+          $(this).find('.icon-sort-up1').css('color','#00C55B');
+          $(this).siblings().attr('data','asc');
+        }else{//上
+          $(this).attr('data', 'asc');
+          order = iorder + "_asc";
+          $(this).siblings().find('.icon-sort-up').css('color','#888888');
+          $(this).siblings().find('.icon-sort-up1').css('color','#888888');
+          $(this).find('.icon-sort-up').css('color','#00C55B');
+          $(this).find('.icon-sort-up1').css('color','#888888');
+          $(this).siblings().attr('data','asc');
+        }
+      }else{
+        order = iorder + "_desc";
+        $(this).siblings().find('.icon-sort-up').css('color','#888888');
+        $(this).siblings().find('.icon-sort-up1').css('color','#888888');
+        $(this).find('.icon-sort-up1').css('color','#00C55B');
+        $(this).siblings().attr('data','asc');
+      }
+
+      $('.lesson-today ul').html('');
+      $('.more').hide();
+      page = 1;
+      getData();
+      upRefresh();
+  });
+
+  //点击主分类查看相应的商品
+  $('.cate').on('click','.goods_zhu_cate',function(){
+    cate_id = $(this).parent().attr('data-id');
+    cate_name = $(this).parent().attr('data-name');
+    $(".shaixuan-tk").hide();
+    $(".mask").hide();
+    $('.show-action m').html(cate_name);
+    $('.lesson-today ul').html('');
+    $('.more').hide();
+    page = 1;
+    getData();
+    upRefresh();
+  });
+
+  //点击子分类查看相应的商品
+  $('.cate').on('tap','.goods_cate',function(){
+    cate_id = $(this).attr('data-id');
+    cate_name = $(this).attr('data-name');
+    $(".shaixuan-tk").hide();
+    $(".mask").hide();
+    $('.show-action m').html(cate_name);
+    $('.lesson-today ul').html('');
+    $('.more').hide();
+    page = 1;
+    getData();
+    upRefresh();
+  });
+
+  //点击查看商品详情
+  $('.lesson-today ul').on('tap','.goods',function(){
+    var goods_id = $(this).attr('data-id');
+    // console.log(goods_id);return;
+    api.openWin({
+        name: 'shangpin_detail',
+        url: './shangpin_detail.html',
+        pageParam: {
+            id: goods_id
+        }
+    });
+  });
+
+  //关闭当前页面     供商品详情页进入购物车用
+  function closeCurrentWin(){
+    api.closeWin();
+  }
+
+  //点击分类弹出分类列表
+  $(".show-action").on('click', function() {
+      $(".shaixuan-tk").show();
+      $(".mask").show();
+  });
+  $(".mask").on("click", function() {
+      $(".shaixuan-tk").hide();
+      $(".mask").hide();
+  });
+
+  //分类类目切换
+  $(".shai-wrap ul ").on("click", "h3 i", function() {
+    // console.log(123);
+      $(this).parent().toggleClass("active");
+      $(this).parent().siblings().toggleClass("show");
+      if ($(this).parent().hasClass("active")) {
+        $(this).removeClass("icon-zhankai").addClass("icon-arrow-up");
+      } else {
+        $(this).removeClass("icon-arrow-up").addClass("icon-zhankai");
+
+      }
+  })
+</script>
+
+</html>

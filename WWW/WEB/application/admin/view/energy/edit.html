@@ -1,0 +1,45 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('editsave')}" method="post" id="form">
+        <input type="hidden" name="id" value="{$finds.id}">
+        <div class="item">
+                <label>商品：</label>        
+                <div class="i_bd">
+                    <select class="edit_input"  name="goods_id">
+                        {volist name="find" id="vo"}
+                        <option  value="{$vo.id}" {if condition="$finds.goods_id eq $vo.id"}selected=selected{/if}>{$vo.goods_name}</option>
+                        {/volist}
+                    </select>
+                 </div>
+        </div>
+        <div class="item">
+                <label>需要能量币：</label>
+    
+                <div class="i_bd">
+                    <input name="energy_than" class="edit_input" type="text" size="30" value="{$finds.energy_than}"/>
+                </div>
+        </div>
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" type="button" class="btn btn-success" id="form_btn" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("index")}');
+
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+</script>

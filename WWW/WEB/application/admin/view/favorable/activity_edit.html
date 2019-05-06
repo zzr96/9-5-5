@@ -1,0 +1,110 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('add_do')}" id="addform" method="post">
+        <div class="item">
+            <label>标题：</label>
+
+            <div class="i_bd">
+                <input type="text" id="title" name="title" class="edit_input" value="{$find.title}" size="30"/> <span>(*必填)</span>
+            </div>
+        </div>
+        <div class="item">
+            <label>活动类型：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="type" id="type" class="edit_input">
+                        <option value="2" {if condition="$find.type eq 2"}selected="selected"{/if}>满减</option>
+                        <option value="3" {if condition="$find.type eq 2"}selected="selected"{/if}>折扣</option> 
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+                <label>是否全场：</label>
+                <div class="i_bd">
+                    <div class="select_style">
+                        <select name="is_all" id="is_all" class="edit_input">
+                            <option value="1" {if condition="$find.is_all eq 1"}selected="selected"{/if}></option>>是</option>
+                            <option value="2" {if condition="$find.is_all eq 2"}selected="selected"{/if}></option>>否</option> 
+                        </select>
+                    </div>
+                </div>
+        </div>
+        <div class="item">
+                <label>是否全场：</label>
+                <div class="i_bd">
+                    <div class="select_style">
+                        <select name="shop_id" id="shop_id" class="edit_input">
+                            {volist name='shoplist' id='vo'}
+                            <option value="{$vo.id}"></option>{$vo.shop_name}</option> 
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+        </div>
+        <div class="item" id="normal1">
+            <label>满/折扣：</label>
+
+            <div class="i_bd">
+                <input type="number" id="max_price" name="max_price" class="edit_input" size="20"/> <span>(*必填)</span>
+            </div>
+        </div>
+
+        <div class="item" id="normal2">
+            <label>减：</label>
+
+            <div class="i_bd">
+                <input type="number" id="min_price" name="min_price" class="edit_input" size="20"/> <span>(*必填)</span>
+            </div>
+        </div>       
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="提交" id="addformbtn" class="btn btn-success" type="submit" value="提交"/>
+                <span id="reerror"></span>
+            </div>
+        </div>
+    </form>
+</div>
+{include file="common:foot"}
+<script>
+    $(document).ready(function () {
+        $('#addformbtn').click(function () {
+            var name=$('#name').val();
+            if(name==''){
+                tishi("error", '请填写名称!');
+                return false;
+            }
+            var mz_money=$('#mz_money').val();
+            if(mz_money==''){
+                tishi("error", '请填写满足金额!');
+                return false;
+            }
+            var yh_money=$('#yh_money').val();
+            if(yh_money==''){
+                tishi("error", '请填写优惠金额!');
+                return false;
+            }
+            var start_time=$('#start_time').val();
+            if(start_time==''){
+                tishi("error", '请填写开始时间!');
+                return false;
+            }
+            var end_time=$('#end_time').val();
+            if(end_time==''){
+                tishi("error", '请填写结束时间!');
+                return false;
+            }
+            $('#addform').ajaxSubmit(function (data) {
+                if (data.code == 1) {
+                    tishi("success", data.msg,'{:url("index")}');
+                } else {
+                    tishi("error", data.msg);
+                }
+            });
+            return false;
+        });
+    });
+</script>
+

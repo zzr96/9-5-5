@@ -1,0 +1,80 @@
+{include file="common:head"}
+<style type="text/css">
+</style>
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('cate_add_do')}" method="post" id="form">
+    	 <div class="item">
+            <label>名称：</label>
+
+            <div class="i_bd">
+                <input type="txt" name="name" id="title" value="" style="height:28.8px;">
+            </div>
+        </div>
+        <div class="item">
+            <label>顺序：</label>
+
+           <div class="i_bd">
+                <input type="number"  name="number" class="edit_input" size="20" placeholder="请填写大于的0的数字" />
+                 <div style='margin-top:10px;color:red;'>此处请慎重填写，此处数字决定图标为APP首页排列顺序</div>
+            </div>
+        </div>
+        <div class="item">
+            <label>图标：</label>
+            <div class="i_bd">
+                <div class="chanpin_pic_list" style='height:140px;'>
+
+                    <div class="iitem">
+                        <input name="img" id="picval_5" type="hidden"/>
+
+                        <div class="pic" id="pic_5">
+                            <a onclick="addpic(5);" title="上传图片">
+                                <img id="pic_yl_5" width="100" height="100"
+                                     src="/static/manage/images/add_fpic.gif"/></a>
+                        </div>
+                        <div id='pic_btn_5' style='margin-top:10px;text-align:center;display:none;'>
+                            <a onclick='del_pic(5)' class="btn btn-success">删除</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div style='margin-top:10px;color:red;'>请上传图片尺寸为 90px x 90px 的图片!</div>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" type="button" id="form_btn" class="btn btn-success" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+    $(function (){
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("cate")}');
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+     function addpic(id) {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("/admin/upload/img")}?pid=' + id + '" ></iframe>';
+        tanchuang("apppic", 700, '上传图片', html)
+    }
+    function addpic_do(pic, pid) {
+        re_tanchuang('apppic');
+        $("#pic_yl_" + pid).attr('src', pic);
+        $("#picval_" + pid).val(pic);
+        $('#pic_btn_' + pid).show();
+    }
+    function del_pic(id) {
+        $('#pic_yl_' + id).attr('src', '/static/manage/images/add_fpic.gif');
+        $('#picval_' + id).val('');
+        $('#pic_btn_' + id).hide();
+    }
+</script>

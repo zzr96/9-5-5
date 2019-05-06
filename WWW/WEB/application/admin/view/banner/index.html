@@ -1,0 +1,76 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <div class='bd'>
+        <div class="v_tishi">
+            <div style='float:left;margin-top:8px;'>您可通过右侧的添加轮播图按钮来添加轮播图。</div>
+            <p style='float:right;margin-top:4px;'>
+                <a href="{:url('add')}" class="btn btn-success">添加轮播图</a>
+            </p>
+
+            <div style='clear:both;'></div>
+        </div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+            <tr class="h">
+                <td valign="middle">ID</td>
+                <td>图片</td>
+                <td>商品ID</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            {volist name="list" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td><img src="/public_html{$vo.img}" height="50"/></td>
+                <td><b>{$vo.link}</b></td>
+                <td>
+                    {if condition = '$vo.status eq 1'}使用中
+                    {else/}未使用
+                    {/if}
+                </td>
+
+                <td>
+                    {if condition = '$vo.status eq 1'}
+                    <a href="javascript:;" onClick="status('{$vo.id}',0)" class="btn btn-danger">禁用</a>
+                    {else/}
+                    <a href="javascript:;" onClick="status('{$vo.id}',1)" class="btn btn-success">启用</a>
+                    {/if}
+                    <a href="{:url('edit')}?id={$vo.id}" class="btn btn-primary">编辑</a>
+                    <a href="javascript:;" class="btn btn-danger" onclick="del('{$vo.id}');">删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">{$page}</div>
+    </div>
+</div>
+{include file="common:foot"}
+
+<script>
+    function del(id){
+        if (!confirm('此操作不能撤销，确定要删除该图片记录吗?')) {
+            return false;
+        }
+        $.ajax({
+            url: "{:url('del')}",
+            data: "id=" + id,
+            type: 'post',
+            success: function (ret) {
+                if (ret.code == 1) {
+                    tishi('success', ret.msg, window.location.href)
+                }
+            }
+        })
+    }
+    function status(uid, status) {
+        var data = 'id=' + uid + '&status=' + status;
+        var url = '{:url("status")}';
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                    window.location.href = window.location.href;
+            }
+        })
+    }
+</script>

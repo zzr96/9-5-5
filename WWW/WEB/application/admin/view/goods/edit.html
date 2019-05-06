@@ -1,0 +1,301 @@
+{include file="common:head"}
+<style>
+    .v_col .v_bd .item .size{margin-top: 5px;}
+</style>
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('edit_do')}" method="post" id="form">
+    	<input name="id"  type="hidden" value="{$find.id}" />
+        <div class="item">
+            <label>商品名称：</label>
+            <div class="i_bd">
+                <input type="text" id="goods_name" name="goods_name" class="edit_input" size="60" value="{$find.goods_name}"/> <span>(*必填)</span>
+            </div>
+        </div>
+        <div class="item">
+            <label>价格：</label>
+            <div class="i_bd">
+                <input type="text" id="price" name="price" class="edit_input" size="60" value="{$find.price}"/> <span>(*必填)</span>
+            </div>
+        </div>
+        <div class="item">
+            <label>优惠价：</label>
+            <div class="i_bd">
+                <input type="text" id="yh_price" name="yh_price" class="edit_input" size="60" value="{$find.yh_price}"/> <span>(*必填)</span>
+            </div>
+        </div>
+        <div class="item">
+            <label>商城选择：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="shop_id" id="shop_id"  class="edit_input">
+<!--                         <option value="0">趣习惯自营</option> -->
+                        {volist name="shop_list" id="vo"}
+                        <option value="{$vo.id}" {if condition="$find.shop_id eq $vo.id"}selected="selected"{/if}>{$vo.shop_name}</option>
+                        {/volist}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <label>商城主分类：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="cate_id" id="cate_id" class="edit_input" onchange="edit_shop()">
+                        <option value="">请选择</option>
+                        {volist name="shop_cat" id="vo"}
+                        <option value="{$vo.id}" {if condition="$find.cate_id eq $vo.id"}selected="selected"{/if}>{$vo.name}</option>
+                        {/volist}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <label>商城子分类：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="zcate_id" id="zcate_id" class="edit_input">
+                         <option value="{$shop_cat1.id}">{$shop_cat1.name}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <label>商品主分类：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="size_id" id="size_id" class="edit_input" onchange="edit_good()">
+                        <option value="">请选择</option>
+                        {volist name="goods_cate" id="vo"}
+                        <option value="{$vo.id}" {if condition="$find.size_id eq $vo.id"}selected="selected"{/if}>{$vo.name}</option>
+                        {/volist}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <label>商品子分类：</label>
+            <div class="i_bd">
+                <div class="select_style">
+                    <select name="zsize_id" id="zsize_id" class="edit_input">
+                        <option value="{$goods_cate1.id}">{$goods_cate1.name}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="item" id="goodsSize">
+            <label>商品规格：</label>
+            {volist name='$res' id='vo'}            
+            <div class="i_bd size">
+                <span>颜色分类：</span><input type="text" name="color[]" class="edit_input" value="{$vo.color}" size="20">
+                <span>尺寸：</span><input type="text" name="spec[]" class="edit_input" value="{$vo.spec}" size="20">
+                <span>价格：</span><input type="text" name="fprice[]" class="edit_input" value="{$vo.fprice}" size="10">
+                <span>库存：</span><input type="text" name="total[]" class="edit_input" value="{$vo.total}" size="10">
+                {if condition="$key eq 0"}
+                <a href="javascript:" id="addsize" class="btn btn-default">添加</a>
+                {/if}
+            	{if condition="$key neq 0"}
+            	<a href="javascript:" class="btn btn-default delsize" onclick="delsize(this)">删除</a>
+                {/if}
+            </div>
+            {/volist}
+        </div>
+        <div class="item">
+            <label>商品类型：</label>
+            <div class="i_bd">
+                <input name="is_new" class="chk_all" type="checkbox" value="2" {if condition="$find.is_new eq 2"}checked{/if}/> 新品速递 
+                <input name="is_hot" class="chk_all" type="checkbox" value="2" {if condition="$find.is_hot eq 2"}checked{/if}/> 热销产品 
+                <span>(*必填)</span>
+            </div>
+        </div>
+        <div class="item">
+            <label>商品图片：</label>
+
+            <div class="i_bd">
+                <div class="chanpin_pic_list" style='height:140px;'>
+                    <div class="iitem">
+                        <input name="img1" id="picval_1" type="hidden" value="{$find.img1}" />
+
+                        <div class="pic" id="pic_1">
+                            <a onclick="addpic(1);" title="上传图片">
+                            	{if condition="$find.img1 eq null"}
+                                <img id="pic_yl_1" width="100" height="100" src="__STATIC__/manage/images/add_fpic.gif"/>
+                            	{else}
+                            	<img id="pic_yl_1" width="100" height="100" src="/public_html{$find.img1}"/>
+                            	{/if}
+                            </a>
+                        </div>
+                        <div id='pic_btn_1' style='margin-top:10px;text-align:center;display:none;'>
+                            <a onclick='del_pic(1)' class="btn btn-success">删除</a>
+                        </div>
+                    </div>
+
+                    <div class="iitem">
+                        <input name="img2" id="picval_2" type="hidden" value="{$find.img2}"/>
+
+                        <div class="pic" id="pic_2">
+                            <a onclick="addpic(2);" title="上传图片">
+                            	{if condition="$find.img2 eq null"}
+                                <img id="pic_yl_2" width="100" height="100" src="__STATIC__/manage/images/add_fpic.gif"/>
+                                {else}
+								<img id="pic_yl_2" width="100" height="100" src="/public_html{$find.img2}"/>
+								{/if}
+                            </a>
+                        </div>
+                        <div id='pic_btn_2' style='margin-top:10px;text-align:center;display:none;'>
+                            <a onclick='del_pic(2)' class="btn btn-success">删除</a>
+                        </div>
+                    </div>
+                    <div class="iitem">
+                        <input name="img3" id="picval_3" type="hidden" value="{$find.img3}"/>
+
+                        <div class="pic" id="pic_3">
+                            <a onclick="addpic(3);" title="上传图片">
+                            	{if condition="$find.img3 eq null"}
+                                <img id="pic_yl_3" width="100" height="100" src="__STATIC__/manage/images/add_fpic.gif"/>
+                                {else}
+                                <img id="pic_yl_3" width="100" height="100" src="/public_html{$find.img3}"/>
+                                {/if}
+                            </a>
+                        </div>
+                        <div id='pic_btn_3' style='margin-top:10px;text-align:center;display:none;'>
+                            <a onclick='del_pic(3)'
+                               class="btn btn-success">删除</a>
+                        </div>
+                    </div>
+                    <div class="iitem">
+                        <input name="img4" id="picval_4" type="hidden" value="{$find.img4}"/>
+
+                        <div class="pic" id="pic_4">
+                            <a onclick="addpic(4);" title="上传图片">
+                            	{if condition="$find.img4 eq null"}
+                                <img id="pic_yl_4" width="100" height="100" src="__STATIC__/manage/images/add_fpic.gif"/>
+                                {else}
+								<img id="pic_yl_4" width="100" height="100" src="/public_html{$find.img4}"/>
+                                {/if}
+                            </a>
+                        </div>
+                        <div id='pic_btn_4' style='margin-top:10px;text-align:center;display:none;'>
+                            <a onclick='del_pic(4)' class="btn btn-success">删除</a>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div style='margin-top:10px;color:red;'>第一张为封面图请慎重,图片尺寸均为 226px x 226px 的图片!</div>
+            </div>
+        </div>
+        <div class="item">
+            <label>商品详情：</label>
+
+            <div class="i_bd">
+                <textarea id="content" name="content" style="width:700px;height:300px;" cols="" rows="" >{$find.content}</textarea>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+            <div class="i_bd">
+                <input name="" type="button" id="form_btn" class="btn btn-success" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+{load href="__STATIC__/manage/editor/kindeditor.js"}
+<script>
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#content', {
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+    $(function () {
+        $("#form_btn").click(function () {
+            var goods_name=$('#goods_name').val();
+            if(!goods_name){
+                tishi('error','商品名字不能为空');
+                return false; 
+            }
+            var color = $('#goodsSize .i_bd:last input').eq(0).val();
+            var spec = $('#goodsSize .i_bd:last input').eq(1).val();
+            var fprice = $('#goodsSize .i_bd:last input').eq(2).val();
+            var total = $('#goodsSize .i_bd:last input').eq(3).val();
+            $("#form").ajaxSubmit(function (txt){
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("index")}');
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+    function addpic(id) {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("/admin/upload/img")}?pid=' + id + '" ></iframe>';
+        tanchuang("apppic", 700, '上传图片', html);
+    }
+
+    function addpic_do(pic, pid) {
+        re_tanchuang('apppic');
+        $("#pic_yl_" + pid).attr('src', '/public_html'+pic);
+        $("#picval_" + pid).val(pic);
+        $('#pic_btn_' + pid).show();
+    }
+
+    function del_pic(id) {
+        $('#pic_yl_' + id).attr('src', '__STATIC__/manage/images/add_fpic.gif');
+        $('#picval_' + id).val('');
+        $('#pic_btn_' + id).hide();
+    }
+
+    //克隆规格
+    $('#addsize').click(function(){
+        var html = '<div class="i_bd size">'
+                +' <span>颜色分类：</span><input type="text" name="color[]" value="" class="edit_input" size="20">'
+                +' <span>尺寸：</span><input type="text" name="spec[]" value="" class="edit_input" size="20">'
+                +' <span>价格：</span><input type="text" name="fprice[]" value="" class="edit_input" size="10">'
+                +' <span>库存：</span><input type="text" name="total[]" value="" class="edit_input" size="10">'
+                +' <a href="javascript:" class="btn btn-default delsize" onclick="delsize(this)">删除</a>'
+                +'</div>';
+        $('#goodsSize').append(html);
+    });
+    //删除规格
+    function delsize(n){
+        var size_len = $('#goodsSize .i_bd').length;
+        if(size_len > 1){
+            $(n).parent().remove();
+        }else{
+            tishi('error','至少有一个规格');
+        }
+    }
+    //获取商城分类
+    function edit_shop(){
+        var id = $("select[name='cate_id']").val();
+        var url = '{:url("shop_cat")}';
+        $.ajax({
+            url: url,
+            data: {id:id},
+            type: 'POST',
+            success: function (res){
+                 if(res){
+                    $("#zcate_id").html(res);
+                }
+            }
+        })
+    }
+
+    //获取商品子分类
+    function edit_good(){
+        var id = $("select[name='size_id']").val();
+        var url = '{:url("goods_cat")}';
+        $.ajax({
+            url: url,
+            data: {id:id},
+            type: 'POST',
+            success: function (res){
+                 if(res){
+                    $("#zsize_id").html(res);
+                }
+            }
+        })
+    }   
+</script>

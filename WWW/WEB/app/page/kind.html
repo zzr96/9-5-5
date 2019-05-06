@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <style type="text/css">
+        .mui-row.mui-fullscreen>[class*="mui-col-"] {
+            height: 100%;
+            background: #fff;
+        }
+
+        .mui-content {
+            background: #fff;
+        }
+
+        .mui-col-xs-3,
+        .mui-control-content {
+            overflow-y: auto;
+            height: 100%;
+            display: block;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+            border: 0!important;
+            border-right: 1px solid #eee;
+            color: #666;
+        }
+
+        .mui-segmented-control .mui-control-item {
+            line-height: 50px;
+            width: 100%;
+            background: #fff;
+            position: relative;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            background-color: #F1F1F1;
+            border: 0;
+            color: #00C55B;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active .xian {
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 3px;
+            height: 30px;
+            background: #00C55B;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item.mui-active {
+            border-color: #f2efe1;
+            color: #00C55B;
+        }
+
+        .search-input {
+            height: 32px;
+            border-radius: 4px;
+            background: #f7f7f7;
+            margin-top: 6px;
+            width: 100%
+        }
+
+        .mui-title i.icon-sousuo {
+            color: #999;
+            font-size: 12px;
+            float: left;
+            margin-bottom: 5px;
+            height: 32px;
+            width: 30px;
+            line-height: 32px;
+            ;
+        }
+
+        .mui-title input {
+            float: left;
+            border: 0;
+            background: #f7f7f7;
+            margin-bottom: 0;
+            height: 32px;
+            width: 80%;
+            padding: 0;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted {
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mui-bar .mui-title {
+            left: 20px;
+            right: 20px
+        }
+
+        .mui-bar-nav {
+            border-bottom: 1px solid #e6e6e6!important;
+        }
+
+        .mui-control-item:first-child {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left "></a>
+        <h1 class="mui-title">
+			分类
+		</h1>
+    </header>
+    <div class="mui-content mui-row mui-fullscreen kind-content">
+        <div class="mui-col-xs-3">
+            <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+                <!-- <a class="mui-control-item mui-active" href="#content1">
+                    <p class="xian"></p> 食品酒水</a>
+                <a class="mui-control-item " href="#content1">
+                    <p class="xian"></p>食品酒水</a>
+                <a class="mui-control-item " href="#content1">
+                    <p class="xian"></p>食品酒水</a>
+                <a class="mui-control-item " href="#content1">
+                    <p class="xian"></p>食品酒水</a>
+                <a class="mui-control-item " href="#content1">
+                    <p class="xian"></p>食品酒水</a>
+                <a class="mui-control-item " href="#content1">
+                    <p class="xian"></p>食品酒水</a>
+                <a class="mui-control-item " href="#content1">
+                    <p class="xian"></p>食品酒水</a> -->
+            </div>
+        </div>
+        <div id="segmentedControlContents" class="mui-col-xs-9">
+            <div id="item1" class="mui-control-content">
+                <div class="list">
+                    <ul class="clearfix">
+                        <!-- <h3 class="padd10 clearfix"><span>精品男装</span> <m>查看全部</m></h3>
+                        <li>
+                            <div class="img-box">
+                                <img src="../img/pic1.png" />
+                            </div>
+                            <p>卸妆</p>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <img src="../img/pic1.png" />
+                            </div>
+                            <p>卸妆</p>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <img src="../img/pic1.png" />
+                            </div>
+                            <p>卸妆</p>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <img src="../img/pic1.png" />
+                            </div>
+                            <p>卸妆</p>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <img src="../img/pic1.png" />
+                            </div>
+                            <p>卸妆</p>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        var id;//分类ID
+        function api_init(){
+          getCate();
+        }
+
+        var controls = document.getElementById("segmentedControls");
+        var contents = document.getElementById("segmentedControlContents");
+        // 切换      *jquery 写法
+        $('#segmentedControls').on('tap', '.mui-control-item', function() {
+            $(this).addClass('mui-active').siblings().removeClass('mui-active');
+            getZicate();
+        });
+
+        //获取分类
+        function getCate(){
+          api.ajax({
+              url: apis + 'home/shopcate',
+              method: 'post'
+          },function(ret, err){
+              if (ret) {
+                  console.log( JSON.stringify( ret ) );
+                  var html = '';
+                  $.each(ret.data,function(k,v){
+                    if(k == 0){
+                      html += '<a class="mui-control-item mui-active" href="#content1" data-id="'+v.id+'" data-name="'+v.name+'">';
+                    }else{
+                      html += '<a class="mui-control-item" href="#content1" data-id="'+v.id+'" data-name="'+v.name+'">';
+                    }
+                    html += '<p class="xian"></p>'+v.name+'</a>';
+                  });
+                  $('#segmentedControls').html(html);
+                  getZicate();
+              } else {
+                  console.log( JSON.stringify( err ) );
+              }
+          });
+        }
+        //获取子分类
+        function getZicate(){
+          id = $('#segmentedControls .mui-active').attr('data-id');
+          name = $('#segmentedControls .mui-active').attr('data-name');
+          api.ajax({
+              url: apis + 'home/shopsoncate',
+              method: 'post',
+              data: {
+                  values: {
+                      cate_id: id
+                  }
+              }
+          },function(ret, err){
+              if (ret) {
+                  console.log( JSON.stringify( ret ) );
+                  if(ret.code == 1){
+                    var html = '';
+                    html += '<h3 class="padd10 clearfix" data-id="'+id+'" data-name="'+name+'">'
+                        +'<span>'+ret.data.my.name+'</span> <m class="checkAll">查看全部</m></h3>';
+                    $.each(ret.data.son,function(k,v){
+                      html += '<li class="goods_cate" data-id="'+v.id+'" data-name="'+v.name+'">'
+                          +'<div class="img-box"><img src="'+iapi+v.img+'" /></div><p>'+v.name+'</p></li>';
+                    });
+                    $('.list ul').html(html);
+                  }
+              } else {
+                  console.log( JSON.stringify( err ) );
+              }
+          });
+        }
+
+        //点击查看全部查看相应的商品
+        $('.list').on('tap','.checkAll',function(){
+          var cate_id = $(this).parent().attr('data-id');
+          var cate_name = $(this).parent().attr('data-name');
+          // console.log(cate_id);
+          api.openWin({
+              name: 'kind_list',
+              url: '../kind/kind_list.html',
+              pageParam: {
+                  cate_id: cate_id,
+                  cate_name: cate_name
+              }
+          });
+        });
+
+        //点击分类查看相应的商品
+        $('.list').on('tap','.goods_cate',function(){
+          var cate_id = $(this).attr('data-id');
+          var cate_name = $(this).attr('data-name');
+          api.openWin({
+              name: 'kind_list',
+              url: '../kind/kind_list.html',
+              pageParam: {
+                  cate_id: cate_id,
+                  cate_name: cate_name
+              }
+          });
+        });
+    </script>
+</body>
+
+</html>

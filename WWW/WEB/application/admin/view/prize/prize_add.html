@@ -1,0 +1,53 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('prize_add_save')}" method="post" id="form">
+        <div class="item">
+                <label>标题：</label>
+        
+                <div class="i_bd">
+                    <input name="prize" class="edit_input" type="text" size="30"/>
+                </div>
+        </div>
+        <div class="item">
+                <label>奖品列表：</label>    
+                <div class="i_bd">
+                    <select class="edit_input"  name="gift_id">
+                        <option  value="0">谢谢惠顾</option>
+                        {volist name="res" id="vo"}
+                        <option  value="{$vo.id}">{$vo.name}</option>
+                        {/volist}
+                    </select>
+                </div>
+        </div>
+        <div class="item">
+            <label>中奖概率：</label>
+
+            <div class="i_bd">
+                <input name="v" class="edit_input" type="number" size="35" placeholder="数字越大中奖概率越大"/>
+            </div>
+        </div>
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" type="button" class="btn btn-success" id="form_btn" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+
+       $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1) {
+                    tishi('success', txt.msg, '{:url("turntable")}');
+
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+</script>

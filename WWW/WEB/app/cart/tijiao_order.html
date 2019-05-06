@@ -1,0 +1,514 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<link href="../css/style.css" rel="stylesheet" />
+	<link href="../css/iconfont.css" rel="stylesheet" />
+	<style type="text/css">
+		.mui-table-view-cell {
+			background: #fff;
+		}
+
+		.mui-navigate-right:after,
+		.mui-push-right:after {
+			color: #999;
+			font-size: 20px;
+			top: 20px
+		}
+
+		.mui-table-view-cell:after {
+			height: 0;
+		}
+
+		.mui-table-view:before {
+			background-color: #e6e6e6;
+		}
+
+		.header-counter {
+			margin-bottom: 50px;
+		}
+
+		.mui-table-view:after {
+			height: 0
+		}
+
+		.phone,
+		.address-cont,
+		.goOptAddress {
+			display: none;
+		}
+		.goOptAddress{
+			margin-left: 5px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.phone{
+			margin-top: 10px;
+		}
+		.userAddress{
+			margin-top: 5px;
+		}
+		.address-cont{
+			margin-bottom: 10px;
+		}
+
+		.mui-pull-left i {
+			line-height: normal;
+		}
+
+		.address em {
+			float: right;
+			color: #999;
+			font-size: 18px;
+			margin-right: 6px;
+			margin-top: 5px
+		}
+	</style>
+</head>
+
+<body>
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-icon mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">提交订单</h1>
+
+	</header>
+	<div class="order-content header-counter ">
+		<div class="address">
+			<a class="" id="xuanzeshouhuodizhi" data-address-id="0">
+				<p class="phone">收货人：<span class="userName"></span> <span class="userPhone"></span></p>
+				<div class="address-cont clearfix">
+					<i class="iconfont icon-my-weizhi"></i>
+					<p class="twoline userAddress"></p>
+					<em class="mui-icon mui-icon-arrowright"></em>
+				</div>
+				<p class="goOptAddress">请选择收货地址 <em class="mui-icon mui-icon-arrowright"></em></p>
+			</a>
+		</div>
+		<div class="shop-wrap padd10" id='goodsInfo'>
+			<!-- <div class="shopping-item ">
+				<div class="img-box">
+					<img src="../img/img01.jpg" />
+				</div>
+				<div class="shopping-right">
+					<div class="shopping-right-top">
+						<h1>
+							<p class="twoline">西芝 鸭饲料开口料批发乌鸡鹦鹉八哥玉米碎粒</p>
+						</h1>
+					</div>
+					<div class="shopping-right-bom clearfix">
+						<div class="left">
+							<span>￥<b class="one-price">455.00</b></span>
+						</div>
+						<div class="num">
+							x1
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="shopping-item ">
+				<div class="img-box">
+					<img src="../img/img01.jpg" />
+				</div>
+				<div class="shopping-right">
+					<div class="shopping-right-top">
+						<h1>
+								<p class="twoline">西芝 鸭饲料开口料批发乌鸡鹦鹉八哥玉米碎粒
+	</p>
+							</h1>
+					</div>
+					<div class="shopping-right-bom clearfix">
+						<div class="left">
+							<span>￥<b class="one-price">455.00</b></span>
+						</div>
+						<div class="num">
+							x1
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div class="item-wrap youhui-wrap">
+			<div class="item ">
+				<label for="">商品总额</label>
+				<m>￥<em class="goods_total_money"></em></m>
+			</div>
+			<div class="item coupon">
+				<label for="">优惠券</label>
+				<m style="color: #FF541F;">-￥<em class="youhui_money">0.00</em></m>
+			</div>
+			<div class="item">
+				<label for="">运费</label>
+				<!-- <m style="font-size:14px;font-weight: normal;">运费5元，全场满30元免运费</m> -->
+				<m class="yunfei"></m>
+			</div>
+			<div class="beizhu item">
+				<label for="">备注</label>
+				<textarea name="" rows="" id="note" cols="" placeholder="请输入您的留言"></textarea>
+			</div>
+		</div>
+		<div class="pay-way">
+			<h2>支付方式</h2>
+			<ul class="mui-table-view mui-table-view-radio select">
+				<li class="mui-table-view-cell" data-payway="支付宝支付">
+					<a class="mui-navigate-right"><i class="iconfont icon-z-alipay"></i><m>支付宝支付</m> </a>
+				</li>
+				<li class="mui-table-view-cell" data-payway="微信支付">
+					<a class="mui-navigate-right"><i class="iconfont icon-weixin"></i><m>微信支付</m></a>
+				</li>
+				<li class="mui-table-view-cell mui-selected" data-payway="货到付款">
+					<a class="mui-navigate-right"><i class="iconfont icon-huodaofukuan"></i><m>货到付款</m></a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="shopping-dele">
+			<div class="shopping-dele-left">
+				<span>实付款：<em>￥<b id="all-total"></b></em></span>
+			</div>
+			<button class="shopping-but-dele subbtn" id="go-buy">提交订单</button>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/api.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript">
+		//自定义变量
+		var goods_id_arr;
+		var goods_size_arr;
+		var from;
+		var goods_num;
+		var address;
+		var payway;
+		var note;
+		var subData = {};
+		var TotalPrice = 0;
+		var you_money = 0;
+		var youhuiquan_id;
+		var yunfei_money = 0;
+		var address_id;
+
+		//页面初始化
+		function api_init() {
+			goods_id_arr = api.pageParam.goods_id_arr;
+			goods_size_arr = api.pageParam.goods_size_arr;
+			from = api.pageParam.from;
+			goods_num = api.pageParam.goods_num;
+			getUserAddress();
+			getGoodsInfo();
+			setTap();
+		}
+
+		//点击选择收货地址
+		$('#xuanzeshouhuodizhi').on('tap',function(){
+			api.openWin({
+			    name: 'address',
+			    url: '../wode/address.html',
+			    pageParam: {
+			        from: 'tijiao_order'
+			    }
+			});
+		});
+
+		//设置事件
+		function setTap() {
+			//选择支付方式
+			$(".select").on("tap", "li", function() {
+				var payway = $(this).attr('data-payway');
+				if(payway != '货到付款'){
+					api.toast({
+					    msg: '称重产品--仅支持货到付款',
+					    duration: 2000,
+					    location: 'bottom'
+					});
+					return false;
+				}
+				$(this).toggleClass('active').siblings().removeClass('active');
+
+			});
+		}
+
+		//获取运费
+		function getYunfei() {
+			api.ajax({
+				url: apis + 'home/yunfei',
+				method: 'post'
+			}, function(ret, err) {
+				if (ret) {
+					console.log(JSON.stringify(ret));
+					if (ret.code == 1) {
+						var total_money = $('.goods_total_money').text();
+						console.log(total_money);
+						console.log(ret.data.man);
+						if (total_money * 1 >= ret.data.man * 1) {
+							yunfei_money = 0.00;
+							$('.yunfei').html('￥<em class="yunfei_money">0.00</em>');
+						} else {
+							yunfei_money = ret.data.yunfei * 1;
+							yunfei_money = yunfei_money.toFixed(2);
+							$('.yunfei').html('￥<em class="yunfei_money">' + yunfei_money + '</em>');
+						}
+						checkTotal();
+					}
+				} else {
+					console.log(JSON.stringify(err));
+				}
+			});
+
+		}
+
+		//获取用户默认地址
+		function getUserAddress() {
+			api.ajax({
+				url: apis + 'address/getDefaultAddress',
+				method: 'post',
+				data: {
+					values: {
+						address_id: address_id
+					}
+				}
+			}, function(ret, err) {
+				if (ret) {
+					console.log(JSON.stringify(ret));
+					if (ret.code == 0) {
+						$('.phone').hide();
+						$('.address-cont').hide();
+						$('.goOptAddress').show();
+					}
+					if (ret.code == 1) {
+						$('.phone').show();
+						$('.address-cont').show();
+						$('.goOptAddress').hide();
+						$('.userName').html(ret.data.name);
+						$('.userPhone').html(ret.data.phone);
+						$('.userAddress').html('收货地址：' + ret.data.areap + ret.data.areac + ret.data.areax + ret.data.address);
+						$('.address a').attr('data-address-id', ret.data.id);
+					}
+				} else {
+					console.log(JSON.stringify(err));
+				}
+			});
+		}
+
+		function changeAddress(id){
+			address_id = id;
+			getUserAddress();
+		}
+		//获取商品信息
+		function getGoodsInfo() {
+			if (from == 'shangpin_detail') { //立即支付
+				api.ajax({
+					url: apis + 'order/liji_goumai',
+					method: 'post',
+					data: {
+						values: {
+							gid: goods_id_arr,
+							size: goods_size_arr
+						}
+					}
+				}, function(ret, err) {
+					if (ret) {
+						console.log(JSON.stringify(ret));
+						if (ret.code == 1) {
+							var html = '';
+							html += '<div class="shopping-item ">' +
+								'<div class="img-box"><img src="' + iapi + ret.data.img1 + '" /></div>' +
+								'<div class="shopping-right"><div class="shopping-right-top">' +
+								'<h1><p class="twoline">' + ret.data.name + ' ' + ret.data.size + '</p></h1></div>' +
+								'<div class="shopping-right-bom clearfix"><div class="left">' +
+								'<span>￥<b class="one-price">' + ret.data.price + '</b></span></div>' +
+								'<div class="num">x' + goods_num + '</div></div></div></div>';
+
+							$('#goodsInfo').html(html);
+
+							$('.goods_total_money').html((ret.data.price * goods_num).toFixed(2));
+							checkTotal();
+							getYunfei();
+							getYouhuiquan();
+						}
+					} else {
+						console.log(JSON.stringify(err));
+					}
+				});
+				return;
+			}
+			api.ajax({
+				url: apis + 'order/to',
+				method: 'post',
+				data: {
+					values: {
+						gid: goods_id_arr,
+						size: goods_size_arr
+					}
+				}
+			}, function(ret, err) {
+				if (ret) {
+					console.log(JSON.stringify(ret));
+					if (ret.code == 1) {
+						var html = '';
+						$.each(ret.data.data.goods, function(k, v) {
+							html += '<div class="shopping-item ">' +
+								'<div class="img-box"><img src="' + iapi + v.img1 + '" /></div>' +
+								'<div class="shopping-right"><div class="shopping-right-top">' +
+								'<h1><p class="twoline">' + v.name + ' ' + v.size + '</p></h1></div>' +
+								'<div class="shopping-right-bom clearfix"><div class="left">' +
+								'<span>￥<b class="one-price">' + v.price + '</b></span></div>' +
+								'<div class="num">x' + v.num + '</div></div></div></div>';
+						});
+						$('#goodsInfo').html(html);
+						$('.goods_total_money').html(ret.data.sum.toFixed(2));
+						checkTotal();
+						getYunfei();
+					}
+				} else {
+					console.log(JSON.stringify(err));
+				}
+			});
+		}
+
+		//点击优惠券选择优惠券
+		$('.coupon').on('tap', function() {
+			TotalPrice = $('.goods_total_money').html();
+			api.openWin({
+				name: 'xuanze_vip',
+				url: '../wode/xuanze_vip.html',
+				pageParam: {
+					TotalPrice: TotalPrice,
+					from: 'tijiao_order'
+				}
+			});
+		});
+
+		function YouMoney(money, coupon_id) {
+			you_money = money.split(',');
+			if(you_money.length > 0){
+				var qian = '';
+				for (var i = 0; i < you_money.length; i++) {
+					qian = qian*1 + you_money[i]*1;
+				}
+			}
+			youhuiquan_id = coupon_id;//字符串
+			$(".youhui_money").text(qian.toFixed(2));
+			checkTotal();
+		}
+
+		//计算总价
+		function checkTotal() {
+			TotalPrice = $('.goods_total_money').html();
+			var youhui_money = $('.youhui_money').html();
+			TotalPrice = TotalPrice * 1 - youhui_money * 1 + yunfei_money * 1;
+			console.log(TotalPrice);
+			$("#all-total").html(TotalPrice.toFixed(2));
+		}
+
+		//提交订单
+		$('.subbtn').on('tap', function() {
+			address = $('.address a').attr('data-address-id'); //获取地址ID
+			payway = $('.select .mui-selected').attr('data-payway'); //获取支付方式
+			note = $('#note').val(); //获取备注
+			if (address == 0) {
+				api.toast({
+					msg: '请选择收货地址',
+					duration: 2000,
+					location: 'bottom'
+				});
+				return false;
+			}
+			subData = {
+				gid: goods_id_arr,
+				size: goods_size_arr,
+				address: address,
+				payway: payway,
+				coupons_id: youhuiquan_id,
+				yunfei: yunfei_money,
+				note: note,
+				from: from
+			};
+			console.log(JSON.stringify(subData));
+			if (from == 'shangpin_detail') {
+				subData.num = goods_num;
+			}
+			api.ajax({
+				url: apis + 'order/submit',
+				method: 'post',
+				data: {
+					values: subData
+				}
+			}, function(ret, err) {
+				if (ret) {
+					console.log(JSON.stringify(ret));
+					if (ret.code == 1) {
+						api.toast({
+							msg: ret.msg,
+							duration: 2000,
+							location: 'bottom'
+						});
+						api.execScript({
+						    name: 'root',
+						    frameName: 'shopping_cart',
+						    script: 'getCart();'
+						});
+						api.execScript({
+						    name: 'root',
+						    frameName: 'shopping_cart',
+						    script: 'clearTotalmoney();'
+						});
+						api.openWin({
+							name: 'order_success',
+							url: './order_success.html',
+							pageParam: {
+								order_num: ret.data.order_num
+							}
+						});
+						setTimeout(function() {
+							api.closeWin();
+						}, 1000);
+					}
+					if (ret.code == 0) {
+						api.toast({
+							msg: ret.msg,
+							duration: 2000,
+							location: 'bottom'
+						});
+						return false;
+					}
+				} else {
+					console.log(JSON.stringify(err));
+				}
+			});
+		});
+
+		//获取符合条件的最大的优惠券
+		function getYouhuiquan(){
+			TotalPrice = $('.goods_total_money').html();
+			console.log(TotalPrice);
+			api.ajax({
+			    url: apis + 'user/myBigCoupon',
+			    method: 'post',
+			    data: {
+			        values: {
+			            TotalPrice: TotalPrice
+			        }
+			    }
+			},function(ret, err){
+			    if (ret) {
+			        console.log( JSON.stringify( ret ) );
+							if(ret.code == 1){
+								$(".coupon em").text(ret.data.jian.toFixed(2));
+								checkTotal();
+								youhuiquan_id=ret.data.cid;
+							}
+			    } else {
+			        console.log( JSON.stringify( err ) );
+			    }
+			});
+		}
+	</script>
+</body>
+
+</html>

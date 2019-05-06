@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            background: #f7f7f7;
+        }
+
+        .mui-table-view {
+            margin-top: 0px;
+        }
+
+        .mui-table-view:before {
+            height: 0;
+        }
+
+        .mui-table-view:after {
+            left: 10px;
+            background-color: #eee;
+            right: 10px
+        }
+
+        .mui-table-view-cell:after {
+            height: 0
+        }
+
+        .mui-table-view-cell {
+            padding: 10px;
+            color: #000;
+            font-size: 15px;
+        }
+
+        .mui-table-view:after {
+            height: 0
+        }
+
+        .goods-detail-pingjia ul {
+            background: #f7f7f7;
+            padding-left: 0;
+        }
+
+        .goods-detail-pingjia li {
+            background: #fff;
+            padding-left: 10px;
+        }
+        /*.goods-detail-item .xin{text-align: left;}*/
+
+        .goods-detail-item .xin .icon-wodeshoucang {
+            margin-right: 0;
+            float: left;
+        }
+
+        .goods-detail-pingjia ul li em {
+            width: 20px;
+            height: 16px;
+            float: left;
+            margin-top: 14px;
+            display: none;
+        }
+
+        .goods-detail-pingjia ul li em.icon-xuanzhong {
+            color: #555
+        }
+
+        .goods-detail-pingjia ul li .active {
+            float: left;
+            width: calc(100% - 20px)
+        }
+
+        @media screen and (max-width: 420px) {
+            .goods-detail-pingjia .active .plimg .imgbox {
+                width: 116px;
+                height: 116px;
+            }
+        }
+
+        @media screen and (max-width: 380px) {
+            .goods-detail-pingjia .active .plimg .imgbox {
+                width: 108px;
+                height: 108px;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            .goods-detail-pingjia .active .plimg .imgbox {
+                width: 98px;
+                height: 98px;
+            }
+        }
+
+        @media screen and (max-width: 340px) {
+            .goods-detail-pingjia .active .plimg .imgbox {
+                width: 86px;
+                height: 86px;
+            }
+        }
+        .icon-xuanzhong {
+            color: #01c65d;
+        }
+        .shanchu{
+          display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left">
+            <i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">我的评价</h1>
+        <span class="shanchu">删除</span>
+    </header>
+    <div class="header-counter my-pingjia">
+        <div class="goods-detail-item">
+            <div class="goods-detail-pingjia">
+                <ul class="">
+                    <!-- <li>
+                        <em class="iconfont icon-iconfontico2"> </em>
+                        <em class="iconfont icon-xuanzhong"> </em>
+                        <div class="pingjia-box active">
+                            <div class="head">
+                                <div class="head-img">
+                                    <img src="../img/touxiang.jpg" />
+                                </div>
+                                <div class="head-name">
+                                    <p>西施</p>
+                                    <p class="btm-p">
+                                        <span class="xin">
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  									</span>
+                                    </p>
+                                </div>
+                                <span class="timer">2018-01-21 16:22</span>
+                            </div>
+                            <div class="content">
+                                质量不错，售后也有保障，有需ss要还会回ss购的！质量不错，售后也有保障，有需要还会回购的！
+                                <br />
+                                <div class="plimg clearfix">
+                                    <div class="imgbox"><img src="../img/img01.jpg" alt="" /></div>
+                                    <div class="imgbox"><img src="../img/pic1.png" alt="" /></div>
+                                    <div class="imgbox"><img src="../img/pic1.png" alt="" /></div>
+                                </div>
+                            </div>
+                            <div class="shopping-itme">
+                                <div class="shopping-img">
+                                    <img src="../img/img01.jpg" />
+                                </div>
+                                <div class="shopping-right">
+                                    <div class="shopping-right-top">
+                                        <h1>
+                  										<p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品母婴母婴</p>
+                  									</h1>
+                                    </div>
+                                    <div class="shopping-right-bom clearfix">
+                                        <span>￥<b class="one-price">455.00</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="head">
+                            <div class="head-img">
+                                <img src="../img/touxiang.jpg" />
+                            </div>
+                            <div class="head-name">
+                                <p>西施</p>
+                                <p class="btm-p">
+                                    <span class="xin">
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  										<i class="iconfont icon-wodeshoucang"></i>
+                  									</span>
+                                </p>
+                            </div>
+                            <span class="timer">2018-01-21 16:22</span>
+                        </div>
+
+                        <div class="content">
+                            质量不错，售后也有保障，有需ss要还会回ss购的！质量不错，售后也有保障，有需要还会回购的！
+                            <br />
+                            <div class="plimg clearfix">
+                                <div class="imgbox"><img src="../img/img01.jpg" alt="" /></div>
+                                <div class="imgbox"><img src="../img/pic1.png" alt="" /></div>
+                            </div>
+                        </div>
+                    </li> -->
+                </ul>
+                <div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        var page = 1;
+        var id = [];
+        var status = [];
+
+        function api_init() {
+            getUserPingjia();
+            upRefresh();
+        }
+
+        //上拉刷新
+        function upRefresh() {
+            api.addEventListener({ //上拉刷新
+                name: 'scrolltobottom',
+                extra: {
+                    threshold: 20
+                }
+            }, function(ret, err) {
+                console.log(ret);
+                page++;
+                getUserPingjia();
+            });
+        }
+        //获取我的评价
+        function getUserPingjia() {
+            api.ajax({
+                url: apis + 'user/myPingjia',
+                method: 'post',
+                data: {
+                    values: {
+                        page: page
+                    }
+                }
+            }, function(ret, err) {
+                console.log(JSON.stringify(ret));
+                if (ret && ret.data.length > 0) {
+                    $('.shanchu').show();
+                    $.each(ret.data, function(k, v) {
+                        var html = '<li data-id="' + v.id + '"><em data-status="0" class="iconfont icon-iconfontico2"></em>' +
+                            '<div class="pingjia-box"><div class="head"><div class="head-img">' +
+                            '<img src="' + iapi + v.headimg + '" /></div>' +
+                            '<div class="head-name"><p>' + v.nick + '</p><p class="">' +
+                            '<span class="xin">';
+                        for (var i = 0; i < v.nice; i++) {
+                          html += '<i class="iconfont icon-wodeshoucang"></i>';
+                        }
+                        html += '</span></p></div><span class="timer">' + v.datetime + '</span></div>' +
+                            '<div class="content">' + v.content +
+                            '<br /><div class="plimg clearfix">';
+                        if (v.img1) {
+                            html += '<div class="imgbox"><img src="' + iapi + v.img1 + '" alt="" /></div>';
+                        }
+                        if (v.img2) {
+                            html += '<div class="imgbox"><img src="' + iapi + v.img2 + '" alt="" /></div>';
+                        }
+                        if (v.img3) {
+                            html += '<div class="imgbox"><img src="' + iapi + v.img3 + '" alt="" /></div>';
+                        }
+                        html += '</div></div>' +
+                            '<div class="shopping-itme"><div class="shopping-img"><img src="' + iapi + v.goods_img + '" /></div>' +
+                            '<div class="shopping-right"><div class="shopping-right-top">' +
+                            '<h1><p class="twoline">' + v.name + '</p></h1></div>' +
+                            '<div class="shopping-right-bom clearfix"><span>￥<b class="one-price">' + v.xprice + '</b></span></div>' +
+                            '</div></div></div></li>';
+                        $('.goods-detail-pingjia ul').append(html);
+                    });
+
+                } else {
+                    if ($('.goods-detail-pingjia ul li').length > 0) {
+                        api.removeEventListener({
+                            name: 'scrolltobottom'
+                        });
+                        $('.shanchu').show();
+                        $('.more').show();
+                        $('.more').html('没有更多了');
+                    } else {
+                        api.removeEventListener({
+                            name: 'scrolltobottom'
+                        });
+                        $('.goods-detail-pingjia ul').html('');
+                        $('.shanchu').hide();
+                        $('.more').show();
+                        $('.more').html('暂无评价');
+                    }
+                }
+                if (err) {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }
+        //点击删除
+        $('.shanchu').on('tap', function() {
+            $('.goods-detail-pingjia ul li em').show();
+            $('.goods-detail-pingjia ul li .pingjia-box').addClass('active');
+            if (id.length == 0) {
+                api.toast({
+                    msg: '请选择要删除的评论',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+            }
+            api.confirm({
+                title: '温馨提示',
+                msg: '您确定要删除该评论吗？',
+                buttons: ['确定', '取消']
+            }, function(ret, err) {
+                if (ret) {
+                    if (ret.bottonIndex == 1) {
+                        api.ajax({
+                            url: apis + 'user/clearPingjia',
+                            method: 'post',
+                            data: {
+                                values: {
+                                    id: JSON.stringify(id)
+                                }
+                            }
+                        }, function(ret, err) {
+                            if (ret) {
+                                console.log(JSON.stringify(ret));
+                                if (ret.code == 1) {
+                                    api.toast({
+                                        msg: ret.msg,
+                                        duration: 2000,
+                                        location: 'bottom'
+                                    });
+                                    $('.goods-detail-pingjia ul').html('');
+                                    page = 1;
+                                    getUserPingjia();
+                                }
+                            } else {
+                                console.log(JSON.stringify(err));
+                            }
+                        });
+                    }
+                    console.log(JSON.stringify(ret));
+                } else {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        });
+        //点击单选框
+        $('.goods-detail-pingjia ul').on('tap', 'em', function() {
+            if ($(this).attr('data-status') == 0) {
+                $(this).addClass('icon-xuanzhong');
+                $(this).removeClass('icon-iconfontico2');
+                $(this).attr('data-status', 1);
+                id.push($(this).closest('li').attr('data-id'));
+                // console.log(id);
+            } else {
+                $(this).removeClass('icon-xuanzhong');
+                $(this).addClass('icon-iconfontico2');
+                $(this).attr('data-status', 0);
+                id.splice($.inArray($(this).closest('li').attr('data-id'), id), 1);
+                // console.log(id);
+            }
+        });
+    </script>
+</body>
+
+</html>

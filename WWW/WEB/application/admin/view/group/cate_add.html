@@ -1,0 +1,74 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('cate_add_do')}" method="post" id="form">
+        <div class="item">
+            <label>分类名称：</label>
+
+            <div class="i_bd">
+                <input type="text" name="name" class="edit_input" size="60"/>
+            </div>
+        </div>
+
+        <div class="item">
+            <label>所属菜单：</label>
+
+            <div class="i_bd">
+                <select name="fid" id="cat">
+                    <option value="0">顶级菜单</option>
+                    {volist name="cat" id="vo"}
+                    <option value="{$vo.id}">{$vo.name}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+
+
+        <div class="item">
+            <label>分类图标：</label>
+
+            <div class="i_bd">
+                <div class="chanpin_pic_list" style='height:auto;'>
+                    <input name="pic" id="picval" type="hidden"/>
+
+                    <div class="pic" id="pic">
+                        <a onclick="addpic();" class="upload_pic" title="上传图片">
+                            <img id='pic_yl' src="/static/manage/images/addpic.gif" width="60" height="60"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" class="btn btn-success" id="form_btn" type="button" value="提交"/>
+            </div>
+        </div>
+    </form>
+</div>
+{include file="common:foot"}
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+    function addpic() {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="100px" width="100%" src="{:url("/admin/upload/img")}" ></iframe>';
+        tanchuang("apppic", 700, '上传图片', html)
+    }
+    function addpic_do(pic, pid) {
+        re_tanchuang('apppic');
+        $("#pic_yl").attr('src', pic);
+        $("#picval").val(pic)
+    }
+    $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 0) {
+                    tishi('success', txt.msg);
+                    window.location.href = '{:url("cate_index")}'
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    })
+</script>

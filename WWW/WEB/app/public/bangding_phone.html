@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            background: #fff;
+        }
+
+        .phone,
+        .email,
+        .wei,
+        .haoma,
+        .current_haoma {
+            display: none;
+        }
+
+        .register-content input[type=button]{
+            margin-right: 3%;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title title"></h1>
+    </header>
+    <div class="register-content bang_phone header-counter">
+        <img class='phone' src="../img/phone.png" />
+        <img class='email' src="../img/youxiang.png" style="width:125px;height:110px" />
+        <img class='wei' src="" style="width:110px;height:110px" />
+        <h3 class="haoma"></h3>
+        <p class="current_haoma"></p>
+        <input type="button" class="subbtn" value="" />
+    </div>
+</body>
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+    var type;
+    var button;
+
+    function api_init() {
+        type = api.pageParam.type;
+        getUserInfo(type);
+    }
+    //获取手机
+    function getUserInfo(type) {
+        api.ajax({
+            url: apis + 'user/info',
+            method: 'post'
+        }, function(ret, err) {
+            if (ret) {
+                console.log(JSON.stringify(ret));
+                if (ret.code == 1) {
+                    if (type == 'phone') {
+                        if (ret.data.phone) {
+                          $('.phone').show();
+                          $('.haoma').show();
+                          $('.current_haoma').show();
+                          $('.email').hide();
+                          $('.wei').hide();
+                          $('.haoma').html(ret.data.phone);
+                          $('.current_haoma').html('当前绑定手机号');
+                          $('.subbtn').val('更换手机号');
+                          $('.title').html('绑定手机号');
+                        } else {
+                          $('.phone').hide();
+                          $('.haoma').hide();
+                          $('.current_haoma').show();
+                          $('.email').hide();
+                          $('.wei').show();
+                          $('.wei').attr('src','../img/bangdingshouji.png');
+                          $('.current_haoma').html('您目前未绑定手机号');
+                          $('.subbtn').val('绑定手机号');
+                          $('.title').html('绑定手机号');
+                        }
+                    }
+                    if (type == 'email') {
+                        if (ret.data.email) {
+                          $('.phone').hide();
+                          $('.wei').hide();
+                          $('.email').show();
+                          $('.haoma').show();
+                          $('.current_haoma').show();
+                          $('.haoma').html(ret.data.email);
+                          $('.current_haoma').html('当前绑定邮箱');
+                          $('.subbtn').val('更换邮箱');
+                          $('.title').html('绑定邮箱');
+                        } else {
+                          $('.phone').hide();
+                          $('.email').hide();
+                          $('.haoma').hide();
+                          $('.wei').show();
+                          $('.current_haoma').show();
+                          $('.wei').attr('src','../img/wei.png');
+                          $('.current_haoma').html('您目前未绑定邮箱');
+                          $('.subbtn').val('绑定邮箱');
+                          $('.title').html('绑定邮箱');
+                        }
+                    }
+                }
+            } else {
+                console.log(JSON.stringify(err));
+            }
+        });
+    }
+    //点击按钮
+    $('.subbtn').on('tap',function(){
+      button = $(this).val();
+      if(button == '绑定手机号' || button == '绑定邮箱'){
+        api.openWin({
+            name: 'zhixingbangding',
+            url: './zhixingbangding.html',
+            pageParam: {
+                type: type
+            }
+        });
+        setTimeout(function(){
+          api.closeWin();
+        },1000);
+      }else if(button == '更换手机号' || button == '更换邮箱'){
+        api.openWin({
+            name: 'gai_phone',
+            url: './gai_phone.html',
+            pageParam: {
+                type: type
+            }
+        });
+        setTimeout(function(){
+          api.closeWin();
+        },1000);
+      }
+    });
+</script>
+
+</html>

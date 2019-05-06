@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+            border: 0;
+        }
+
+        .mui-segmented-control {
+            background: #fff;
+        }
+
+        .mui-segmented-control .mui-control-item {
+            line-height: 44px;
+            color: #666!important;
+            font-size: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        /*样式改变*/
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            border: 0;
+            color: #00C55B!important;
+            font-weight: bold;
+        }
+
+        .mui-control-item {
+            position: relative;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active .xian-box {
+            display: block;
+        }
+
+        .mui-control-item .xian-box {
+            display: none;
+            position: absolute;
+            width: 50%;
+            left: 25%;
+            bottom: 0px;
+            height: 2px;
+            background: #00C55B;
+            border-radius: 1px;
+        }
+        /*固定*/
+
+        #sliderSegmentedControl {
+            position: fixed;
+            left: 0;
+            top: 44px;
+            z-index: 999;
+        }
+
+        .header-counter {
+            padding-top: 99px;
+        }
+
+        .dingdan-content .mid .price em {
+            float: right;
+            color: #666;
+        }
+
+        .dingdan-content .mid .price span:first-child {
+            color: #666;
+            font-weight: normal;
+            float: right;
+            margin-left: 15px;
+        }
+
+        .dingdan-content .mid .price m {
+            color: #333;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .dingdan-content .mid .price i {
+            font-size: 17px;
+        }
+
+        .dingdan-content .all-dingdan ul li .mid {
+            border-bottom: 1px solid #e6e6e6;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">全部订单</h1>
+    </header>
+    <div id="slider" class="dingdan-content">
+        <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <a class="mui-control-item mui-active" order-status='0'>
+                <p class="xian-box"></p>全部</a>
+            <a class="mui-control-item" order-status='1'>
+                <p class="xian-box"></p>待付款</a>
+            <a class="mui-control-item" order-status='2'>
+                <p class="xian-box"></p>待发货</a>
+            <a class="mui-control-item" order-status='3'>
+                <p class="xian-box"></p>待收货</a>
+            <a class="mui-control-item" order-status='4'>
+                <p class="xian-box"></p>已完成</a>
+            <a class="mui-control-item" order-status='5'>
+                <p class="xian-box"></p>退换货</a>
+            <a class="mui-control-item" order-status='7'>
+                <p class="xian-box"></p>已取消</a>
+        </div>
+        <div class="all-dingdan header-counter">
+            <ul>
+                <!-- <li class="">
+                    <div class="top padd10">
+                        <span id="">订单编号：2018458423</span><span id="">待收货</span>
+                    </div>
+                    <div class="mid-wrap padd10">
+                        <div class="mid clearfix">
+                            <div class="img-box">
+                                <img src="../img/touxiang.jpg" />
+                            </div>
+                            <div class="right">
+                                <p class="name twoline">品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一</p>
+
+                                <p class="price clearfix"> <span>合计: <m>￥<i>4.44</i></m></span>
+                                    <em>共1件商品</em>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="btn-wrap clearfix">
+
+                        <button class="btn-2">去付款</button>
+                        <button class="btn-1">查看物流</button>
+                        <button class="btn-1">取消订单</button>
+                    </div>
+                </li>
+                <li class="">
+                    <div class="top padd10">
+                        <span id="">订单编号：2018458423</span><span id="">待收货</span>
+                    </div>
+                    <div class="mid-wrap padd10">
+                        <div class="mid clearfix">
+                            <div class="img-box">
+                                <img src="../img/touxiang.jpg" />
+                            </div>
+                            <div class="right">
+                                <p class="name twoline">品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一</p>
+
+                                <p class="price clearfix"> <span>合计: <m>￥<i>4.44</i></m></span>
+                                    <em>共1件商品</em>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="btn-wrap clearfix">
+
+                        <button class="btn-2">去付款</button>
+                        <button class="btn-1">查看物流</button>
+                        <button class="btn-1">取消订单</button>
+                    </div>
+                </li> -->
+            </ul>
+            <div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+//自定义变量
+  var page = 1;
+  var status = 0;
+  var order_num;
+
+  //页面初始化
+  function api_init() {
+      status = api.pageParam.status;//来源我的页面
+      // console.log(api.winName);
+      getUserOrder();
+      setStatus();
+      //下拉刷新
+      api.setRefreshHeaderInfo({
+          loadingImg: '../img/loding_more.png',
+          bgColor: '#ddd',
+          textColor: '#fff',
+          textDown: '下拉刷新...',
+          textUp: '松开刷新...',
+          // showTime:false
+      }, function(ret, err) {
+          //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+          page = 1;
+          $('.all-dingdan ul').html(''); //清空页面数据
+          getUserOrder();
+          setTimeout(function() {
+              api.refreshHeaderLoadDone();
+          }, 2000);
+          upRefresh();
+      });
+      upRefresh();
+  }
+
+  //上拉刷新
+  function upRefresh(){
+    api.addEventListener({//上拉刷新
+        name: 'scrolltobottom',
+        extra: {
+            threshold: 20
+        }
+    }, function(ret, err) {
+        console.log(ret);
+        page++;
+        getUserOrder();
+    });
+  }
+
+  //获取用户订单
+  function getUserOrder() {
+      // showProgress();
+      api.ajax({
+          url: apis + 'order/get',
+          method: 'post',
+          data: {
+              values: {
+                  page: page,
+                  status: status
+              }
+          }
+      }, function(ret, err) {
+          console.log(JSON.stringify(ret));
+          if (ret && ret.data.length > 0) {
+              $.each(ret.data, function(k, v) {
+
+                  var html = '<li class="" data-order-num="' + v.order_num + '" data-order-payway="'+v.payway+'">'
+                      +'<div class="top padd10"><span id="">订单编号：' + v.order_num + '</span>';
+
+                  if (v.status == 1) {
+                      html += '<span id="">待付款</span></div>';
+                  }
+                  if (v.status == 2) {
+                      html += '<span id="">待发货</span></div>';
+                  }
+                  if (v.status == 3) {
+                      html += '<span id="">待收货</span></div>';
+                  }
+                  if (v.status == 4) {
+                      html += '<span id="">已完成</span></div>';
+                  }
+                  if (v.status == 5) {
+                      html += '<span id="">退货中</span></div>';
+                  }
+                  if (v.status == 6) {
+                      html += '<span id="">已退货</span></div>';
+                  }
+                  if (v.status == 7) {
+                      html += '<span id="">已取消</span></div>';
+                  }
+                  if (v.status == 8) {
+                      html += '<span id="">换货中</span></div>';
+                  }
+                  if (v.status == 9) {
+                      html += '<span id="">已换货</span></div>';
+                  }
+                  html += '<div class="mid-wrap padd10">';
+
+                  $.each(v.goods, function(i, n) {
+                    html += '<div class="mid clearfix"><div class="img-box">'
+                        +'<img src="' + iapi + n.img1 + '" /></div>'
+                        +'<div class="right"><p class="name twoline">' + n.name + '</p><p class="price clearfix">';
+                    html += '<span>合计: <m>￥<i>'+n.num * n.price+'</i></m></span><em>共'+n.num+'件商品</em>'
+                        +'</p></div></div>';
+                  });
+
+                  html += '</div><div class="btn-wrap clearfix">';
+                  if (v.status == 1) {
+                      html += '<button class="btn-2 gopay">去付款</button>'
+                          + '<button class="btn-1 checkorderdetail">查看详情</button>'
+                          + '<button class="btn-1 quxiaoorder">取消订单</button>';
+                  }
+                  if (v.status == 2) {
+                      html += '<button class="btn-1 checkorderdetail">查看详情</button>'
+                          + '<button class="btn-1 quxiaoorder">取消订单</button>';
+                  }
+                  if (v.status == 3) {
+                      html += '<button class="btn-2 shouhuo">确认收货</button>'
+                          + '<button class="btn-1 checkwuliu">查看物流</button>'
+                          + '<button class="btn-1 tuihuan">退换货</button>';
+                  }
+                  if (v.status == 4) {
+                    html += '<button class="btn-2 pingjia">去评价</button>'
+                        + '<button class="btn-1 checkorderdetail">查看详情</button>';
+                  }
+                  if (v.status == 7) {
+                    html += '<button class="btn-1 shanchu">删除订单</button>';
+                  }
+                  html += '</div></li>';
+                  $('.all-dingdan ul').append(html);
+              });
+          }else{
+              if($('.all-dingdan ul li').length > 0){
+                api.removeEventListener({
+                    name: 'scrolltobottom'
+                });
+                $('.more').show();
+                $('.more').html('没有更多了');
+              }else{
+                api.removeEventListener({
+                    name: 'scrolltobottom'
+                });
+                $('.all-dingdan ul').html('');
+                $('.more').show();
+                $('.more').html('暂无订单');
+              }
+          }
+          if (err) {
+              console.log(JSON.stringify(err));
+          }
+      });
+  }
+  //刷新订单页面
+  function refresh_order(){
+    $('.all-dingdan ul').html('');
+    page = 1;
+    console.log('执行')
+    getUserOrder();
+  }
+  //取消订单
+  $('.all-dingdan ul').on('tap','.quxiaoorder',function(){
+    order_num = $(this).closest('li').attr('data-order-num');
+    api.confirm({
+        title: '温馨提示',
+        msg: '您确定要取消此订单吗？',
+        buttons: ['确定', '取消']
+    }, function(ret, err){
+        if( ret ){
+             console.log( JSON.stringify( ret ) );
+             if(ret.buttonIndex == 1){
+               api.ajax({
+                   url: apis + 'order/quxiao',
+                   method: 'post',
+                   data: {
+                       values: {
+                           order_num: order_num
+                       }
+                   }
+               },function(ret, err){
+                   if (ret) {
+                       console.log( JSON.stringify( ret ) );
+                       if(ret.code == 1){
+                         api.toast({
+                             msg: ret.msg,
+                             duration: 2000,
+                             location: 'bottom'
+                         });
+                         refresh_order();
+                       }
+                       if(ret.code == 0){
+                         api.toast({
+                             msg: ret.msg,
+                             duration: 2000,
+                             location: 'bottom'
+                         });
+                         return false;
+                       }
+                   } else {
+                       console.log( JSON.stringify( err ) );
+                   }
+               });
+             }
+        }else{
+             console.log( JSON.stringify( err ) );
+        }
+    });
+  });
+  //查看详情
+  $('.all-dingdan ul').on('tap','.checkorderdetail',function(){
+    order_num = $(this).closest('li').attr('data-order-num');
+    api.openWin({
+        name: 'order_detail',
+        url: '../cart/order_detail.html',
+        pageParam: {
+            order_num: order_num
+        }
+    });
+  });
+  //去付款
+  $('.all-dingdan ul').on('click', '.gopay', function() {
+    order_num = $(this).closest('li').attr('data-order-num');
+    order_payway = $(this).closest('li').attr('data-order-payway');
+    if(order_payway == '货到付款'){
+      api.toast({
+          msg: '此订单为货到付款单',
+          duration: 2000,
+          location: 'bottom'
+      });
+      return false;
+    }
+    if(order_payway == '支付宝支付'){
+      // alipay();
+      payCeshi();
+    }
+    if(order_payway == '微信支付'){
+      // wxpay();
+      payCeshi();
+    }
+  });
+
+  //支付测试专用
+  function payCeshi(){
+    api.ajax({
+        url: apis + 'order/paySuccess',
+        method: 'post',
+        data: {
+            values: {
+                order_num: order_num
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+            console.log( JSON.stringify( ret ) );
+            if(ret.code == 1){
+              api.toast({
+                  msg: ret.msg,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+              api.openWin({
+                  name: 'pay_success',
+                  url: '../cart/pay_success.html',
+                  pageParam: {
+                      order_num: order_num
+                  }
+              });
+              setTimeout(function(){
+                api.closeWin();
+              },1000);
+            }
+            if(ret.code == 0){
+              api.toast({
+                  msg: ret.msg,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+              return false;
+            }
+        } else {
+            console.log( JSON.stringify( err ) );
+        }
+    });
+  }
+
+  //确认收货
+  $('.all-dingdan ul').on('click', '.shouhuo', function() {
+      order_num = $(this).closest('li').attr('data-order-num');
+      api.ajax({
+          url: apis + 'order/setStatus',
+          method: 'post',
+          data: {
+              values: {
+                  order_num: order_num
+              }
+          }
+      },function(ret, err){
+          if (ret) {
+              console.log( JSON.stringify( ret ) );
+              if(ret.code == 1){
+                api.toast({
+                    msg: ret.msg,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                refresh_order();
+              }
+              if(ret.code == 0){
+                api.toast({
+                    msg: ret.msg,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return false;
+              }
+          } else {
+              console.log( JSON.stringify( err ) );
+          }
+      });
+  });
+
+  //查看物流
+  $('.all-dingdan ul').on('click', '.checkwuliu', function() {
+    order_num = $(this).closest('li').attr('data-order-num');
+    api.toast({
+        msg: '此功能正在开发中',
+        duration: 2000,
+        location: 'bottom'
+    });
+    return false;
+  });
+
+  //退换货
+  $('.all-dingdan ul').on('click', '.tuihuan', function() {
+      order_num = $(this).closest('li').attr('data-order-num');
+      api.openWin({
+          name: 'tuihuo',
+          url: './tuihuo.html',
+          pageParam: {
+              order_num: order_num
+          }
+      });
+  });
+
+  //评价
+  $('.all-dingdan ul').on('click', '.pingjia', function() {
+      order_num = $(this).closest('li').attr('data-order-num');
+      api.openWin({
+          name: 'pingjia',
+          url: './pingjia.html',
+          pageParam: {
+              order_num: order_num
+          }
+      });
+  });
+
+  //删除订单
+  $('.all-dingdan ul').on('click', '.shanchu', function() {
+      order_num = $(this).closest('li').attr('data-order-num');
+      api.confirm({
+          title: '温馨提示',
+          msg: '您确定要删除此订单吗？',
+          buttons: ['确定', '取消']
+      }, function(ret, err){
+          if( ret ){
+               console.log( JSON.stringify( ret ) );
+               if(ret.buttonIndex == 1){
+                 api.ajax({
+                     url: apis + 'order/del',
+                     method: 'post',
+                     data: {
+                         values: {
+                             order_num: order_num
+                         }
+                     }
+                 },function(ret, err){
+                     if (ret) {
+                         console.log( JSON.stringify( ret ) );
+                         if(ret.code == 1){
+                           api.toast({
+                               msg: ret.msg,
+                               duration: 2000,
+                               location: 'bottom'
+                           });
+                           refresh_order();
+                         }
+                         if(ret.code == 0){
+                           api.toast({
+                               msg: ret.msg,
+                               duration: 2000,
+                               location: 'bottom'
+                           });
+                           return false;
+                         }
+                     } else {
+                         console.log( JSON.stringify( err ) );
+                     }
+                 });
+               }
+          }else{
+               console.log( JSON.stringify( err ) );
+          }
+      });
+  });
+
+  //根据状态，查询订单
+  $("#sliderSegmentedControl").on('tap', 'a', function() {
+      status = $(this).attr('order-status');
+      $('.more').hide();
+      refresh_order();
+      upRefresh();
+  });
+
+  //我的页面选择不同的状态查看对应的订单
+  function setStatus(){
+    if(status == 1){
+      $("#sliderSegmentedControl a:nth-child(2)").addClass('mui-active');
+      $("#sliderSegmentedControl a:nth-child(2)").siblings().removeClass('mui-active');
+    }
+    if(status == 2){
+      $("#sliderSegmentedControl a:nth-child(3)").addClass('mui-active');
+      $("#sliderSegmentedControl a:nth-child(3)").siblings().removeClass('mui-active');
+    }
+    if(status == 3){
+      $("#sliderSegmentedControl a:nth-child(4)").addClass('mui-active');
+      $("#sliderSegmentedControl a:nth-child(4)").siblings().removeClass('mui-active');
+    }
+    if(status == 4){
+      $("#sliderSegmentedControl a:nth-child(5)").addClass('mui-active');
+      $("#sliderSegmentedControl a:nth-child(5)").siblings().removeClass('mui-active');
+    }
+    if(status == 5){
+      $("#sliderSegmentedControl a:nth-child(6)").addClass('mui-active');
+      $("#sliderSegmentedControl a:nth-child(6)").siblings().removeClass('mui-active');
+    }
+  }
+
+  //支付宝支付
+  function alipay(){
+    api.ajax({
+        url: apis + 'pay/pay_alipay',
+        method: 'post',
+        data: {
+            values: {
+                order_id: order_num
+            }
+        }
+    }, function(ret, err) {
+        if (ret) {
+            console.log(JSON.stringify(ret));
+            if (ret.data) {
+                var aliPayPlus = api.require('aliPayPlus');
+                aliPayPlus.payOrder({
+                    orderInfo: ret.data
+                }, function(ret, err) {
+                    if (ret.code == '9000') {
+                        //支付成功
+                        api.alert({
+                            title: '支付结果',
+                            msg: '支付成功',
+                            buttons: ['确定']
+                        }, function(ret, err) {
+                            if (ret) {
+                                console.log(JSON.stringify(ret));
+                                api.openWin({
+                                    name: 'pay_success',
+                                    url: '../cart/pay_success.html',
+                                    pageParam: {
+                                        order_num: order_num
+                                    }
+                                });
+                                setTimeout(function() {
+                                  api.closeWin();
+                                }, 1000);
+                            }
+                            if (err) {
+                                console.log(JSON.stringify(err));
+                            }
+                        });
+                    } else {
+                        // api.alert({
+                        // 	title: '支付结果',
+                        // 	msg: '支付失败',
+                        // 	buttons: ['确定']
+                        // });
+                    }
+                });
+            }
+        }
+        if(err) {
+            console.log(JSON.stringify(err));
+        }
+    });
+  }
+  //微信支付
+  function wxpay(){
+    api.ajax({
+        url: apis + 'pay/wxpay',
+        method: 'post',
+        data: {
+            values: {
+                order_id: order_num
+            }
+        }
+    }, function(ret, err) {
+        if (ret) {
+            console.log(JSON.stringify(ret));
+            if (ret.data) {
+                var wxPay = api.require('wxPay');
+                wxPay.pay({
+                    tradeNo: ret.data
+                }, function(ret, err) {
+                    if (ret.status) {
+                        console.log(ret.result);
+                    } else {
+                        api.alert({ msg: err.msg });
+                    }
+                });
+            }
+        }
+        if(err) {
+            console.log(JSON.stringify(err));
+        }
+    });
+  }
+</script>
+
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            background: #fff;
+            line-height: 14px;
+        }
+
+        .icon-icon_title_fenxiang {
+            float: right;
+            color: #fff;
+            margin-top: 14px;
+        }
+
+        img {
+            display: block;
+            height: 100%
+        }
+        /*我的二维码*/
+        .erweima_content {
+            padding-top: 44px;
+        }
+
+        .erweima_content .main {
+            width: 90%;
+            margin-left: 5%;
+            height: 408px;
+            /*border: 1px solid #efefef;*/
+            border-radius: 4px;
+            margin-top: 30%;
+            text-align: center;
+        }
+
+        .erweima_content .main .head {
+            overflow: hidden;
+        }
+          .erweima_content .main button{
+          width:110px;
+          background: #EF5431;
+          border-radius: 20px;
+          border:0;
+          color: #fff
+
+          }
+        .erweima_content .main .head .head_box {
+            width: 52px;
+            height: 52px;
+            overflow: hidden;
+            border-radius: 4px;
+            margin-left: 25px;
+            margin-top: 18px;
+            float: left;
+        }
+
+        .erweima_content .main .head_box img {
+            width: 100%;
+        }
+
+        .erweima_content .main .head span {
+            float: left;
+            margin-top: 26px;
+            margin-left: 12px;
+            font-size: 17px;
+            color: #000;
+        }
+
+        .erweima_content .erweima {
+            width: 150px;
+            height: 150px;
+            margin: 30px auto;
+            display: block;
+        }
+
+        .erweima_content .main p{
+            font-size: 13px;
+            color: #666;
+            line-height: 21px;
+            margin-bottom: 10px;
+        }
+
+        .erweima_content .fenxiang {
+            border-top: 1px solid #e1e1e1;
+            position: relative;
+            margin-top: 62px;
+        }
+
+        .erweima_content .fenxiang p {
+            position: absolute;
+            left: 50%;
+            top: -7px;
+            text-align: center;
+            width: 100px;
+            color: #000;
+            background: #fff;
+            margin-left: -50px;
+        }
+
+        .erweima_content .fenxiang ul {
+            width: 100%;
+            padding-top: 32px;
+        }
+
+        .erweima_content .fenxiang ul li {
+            float: left;
+            width: 44px;
+            text-align: center;
+            margin-left: 33%;
+        }
+
+        .erweima_content .fenxiang ul li:last-child {
+            float: right;
+            margin-right: 33%;
+            margin-left: 0;
+        }
+
+        .erweima_content .fenxiang ul li img {
+            width: 25px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+        }
+        .mui-pull-left i{
+            line-height: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <!-- <a class="mui-icon mui-pull-left"><i class="iconfont icon-fanhui"></i></a> -->
+        <h1 class="mui-title">网络连接失败</h1>
+    </header>
+    <div class="erweima_content content_pad44 content_btm50">
+        <div class="main">
+            <img id="ecode" class="erweima" src="../img/netless.png" />
+            <p class="">您的网络似乎出了点问题</p>
+            <button id="re">刷新试试</button>
+        </div>
+        <!-- <div class="fenxiang">
+            <p>分享二维码</p>
+            <ul>
+                <li><img src="../img/pengyou .png" />朋友圈</li>
+                <li><img src="../img/weixin.png" />微信</li>
+            </ul>
+        </div> -->
+    </div>
+
+</body>
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+    api_init = function() {
+      api.addEventListener({
+          name: 'online'
+      }, function(ret, err) {
+          api.execScript({
+              name: 'root',
+              script: 'reload()'
+          });
+          api.closeWin({
+              name: 'offline'
+          });
+      });
+      api.addEventListener({
+          name: 'keyback'
+      }, function(ret, err) {
+        api.execScript({
+            name: 'root',
+            script: 'reload()'
+        });
+        api.closeWin({
+            name: 'offline'
+        });
+      });
+
+      $('#re').on('tap', function() {
+          if (api.connectionType != 'none') {
+            api.execScript({
+                name: 'root',
+                script: 'reload()'
+            });
+            api.closeWin({
+                name: 'offline'
+            });
+          }
+      });
+    }
+
+</script>
+
+</html>

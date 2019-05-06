@@ -1,0 +1,145 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+			  <tr class="h">
+				<td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value="" />全选(<?php echo count($list); ?>)</td>
+				<td>数据表名</td>
+				<td>引擎</td>
+				<td>字符集</td>
+				<td>操作</td>
+			  </tr>
+			  {volist name="list" id="vo"}
+			  <tr>
+				<td><input name="chk_list" type="checkbox" value="" /></td>
+				<td>{$vo.name}</td>
+				<td>{$vo.engine}</td>
+				<td>{$vo.collation}</td>
+				<td><a href="" class="btn btn-success">编辑</a></td>
+			  </tr>
+			  {/volist}
+			  <tr class="f">
+				<td><input name="" class="chk_all" type="checkbox" value="" />全选 </td>
+			    <td>
+					
+					</td>
+			    <td colspan="5"></td>
+			  </tr>
+			</table>
+	 
+</div><!--v_bd-->	 
+{include file="common/foot" /}
+
+<script>
+$(".chk_all").click(function(){
+	if(!$(this).attr("checked")){
+		$("input[name='chk_list']").removeAttr("checked");
+	}else{
+     $("input[name='chk_list']").attr("checked",$(this).attr("checked"));
+	 }
+});
+
+$(function(){
+	$(".paixu_r").click(function(){
+		$(".paixu").hide();
+		$(".paixu_r").show();
+		$(this).hide();
+		$(this).next("span").show();
+		$(this).next("span").find(".v_btn").click(function(){
+			var val=$(this).prev('.edit_input').val();
+			var id=$(this).attr("data");
+			$.ajax({
+				url:'{:url("paixu")}',
+				data:"id="+id+"&position="+val,
+				success:function(txt){
+				//alert(txt.code)
+					if(txt.code==1){
+						tishi("success",txt.msg,window.location.href=window.location.href);
+					}else{
+						tishi("success",txt.msg)
+					}
+				}
+			})
+		
+		})
+	})
+})
+
+function del(){
+if(!confirm("确定要删除选中项吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url("del")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+					 }
+					
+		})
+}
+function jinyong(){
+	if(!confirm("确定要选中项禁用吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url("jinyong")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+
+					 }
+					
+		})
+}
+function qiyong(){
+	if(!confirm("确定要选中项启用吗？")){
+	return false;
+}
+var arrChk=$("input[name='chk_list']:checked");
+var val='';
+    for (var i=0;i<arrChk.length;i++)
+    {
+         val=val+","+arrChk[i].value;
+    }
+	if(val==''){
+		alert("请选择需要操作的信息")
+		return false;
+	}
+	var url="{:url("qiyong")}";
+		$.ajax({
+				 url:url,
+				 data:"id="+val,
+				 type:'post',
+					success:function(txt){
+						tishi('success',txt.msg,window.location.href)
+
+					 }
+					
+		})
+}
+
+</script>

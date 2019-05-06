@@ -1,0 +1,113 @@
+.mui-bar{
+	border: none;
+	background: #2f98dd; 
+}
+.mui-bar .mui-title{
+	color: #fff;
+}
+.mui-bar a{
+	color: #fff;
+}
+.mui-bar span{
+	margin-top: 12px;
+	float: right;
+	font-size: 22px;
+	color: #fff;
+}
+.warp{
+	width: 100%;
+	position: relative;
+}
+.warp .beijing{
+	width: 100%;
+}
+.warp .beijing img{
+	width: 100%;
+}
+.list{
+	width: 100%;
+	position: absolute;
+	top: 15px;
+}
+.list .time{
+	width: 90%;
+	text-align: right;
+	color: #fff;
+}
+.list .time label{
+	margin: 5px 0;
+	display: block;
+	font-size: 26px;
+}
+.list .lianxu{
+	width: 80%;
+	margin: 15px 10%;
+	padding-bottom: 35px;
+	overflow: hidden;
+	background:#fff;
+	border-radius: 6px;
+	z-index: 989;
+}
+.list .lianxu .lianxu_top{
+	margin-bottom: 15px;
+}
+.list .lianxu .lianxu_top img{
+	width: 35%;
+}
+.list .lianxu .lianxu_top img:nth-child(1){
+	top: 65px;
+	left: 20%;
+	position: absolute;
+}
+.list .lianxu .lianxu_top img:nth-child(2){
+	margin-left: 45%;
+	margin-top: 8px;
+}
+
+.list .lianxu .xie{
+	text-align: center;
+}
+.list .lianxu p{
+	font-size: 13px;
+	color: #666;
+}
+.list .lianxu p em{
+	margin: 0 4px;
+	font-size: 15px;
+	color: #333;
+}
+.list .lianxu p i{
+	margin: 0 4px;
+	color: #F29C2A;
+}
+.list .share{
+	width: 80%;
+	margin: 0 10%;
+	padding: 30px 4%;
+	overflow: hidden;
+	background:#fff;
+	border-radius: 6px;
+}
+.list .share p{
+	color: #666;
+}
+.list .share span{
+	font-size: 15px;
+	color: #fc6246;
+}
+.list .share ul{
+	width: 100%;
+	margin-top: 25px;
+	overflow: hidden;
+}
+.list .share ul li{
+	width: 50%;
+	text-align: center;
+	float: left;
+}
+.list .share ul li img{
+	width: 30%;
+}
+.list .share ul li p{
+	margin: 8px 0 0;
+}

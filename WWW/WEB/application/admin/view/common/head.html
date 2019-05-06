@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{$title}</title>
+    {load href="__STATIC__/manage/js/jquery-1.8.1.min.js" /}
+    {load href="__STATIC__/manage/js/jquery.form.js" /}
+    {load href="__STATIC__/manage/js/common.js" /}
+    {load href="__STATIC__/manage/css/style.css" /}
+    <!--{load href="__STATIC__/manage/layui/css/layui.css" /}-->
+    {load href="__STATIC__/manage/layui/layer/layer.js" /}
+    {load href="//at.alicdn.com/t/font_514924_p9y50h8mweg919k9.css" /}
+    {load href="__STATIC__/manage/layui/css/layui.css"} 
+    {load href="__STATIC__/manage/layui/layui.js"}
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_624393_mvshhlyudzz4obt9.css"/>
+</head>
+<body>
+<div class="head_container">
+    <div class="inner-head">
+        <div class="logo"><img src="__STATIC__/manage/images/logo.png"/><a href="javascript:;" id="edit_menu">☰</a></div>
+        <div class="login"><a href="{:url('index/index')}" class="name">你好,{$admin.name}</a> |
+            <?php
+		if(isset($xiaoqu)){
+	?>
+            {$xiaoqu.name} 小区管理 |
+            <?php } ?>
+            <?php
+		if(isset($dianpu)){
+			echo $dianpu['name']."管理";
+		}
+	?>
+            <a href="{:url('login/out')}" target="_blank">退出登录</a>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+<div class="col">
+    {include file="common:menu" /}
+    <div class="v_col"><!--v_col-->
+        <div class="v_hd"><!--v_hd-->
+            <div class="v_nav"><!--v_nav-->
+                {volist name="nav" id="vo"}
+                <span <?php if($a==$vo['a']){echo 'class="focus"';}elseif($vo['a']=='javascript:;'){echo 'class="focus"';} ?>
+                ><a href="{:url($vo['a'])}">{$vo.name}</a></span>
+                {/volist}
+            </div><!--v_nav-->
+        </div> <!--v_hd-->

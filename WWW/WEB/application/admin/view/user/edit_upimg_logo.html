@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>无标题文档</title>
+		{load href="/static/manage/js/jquery-1.8.1.min.js" /}
+		{load href="/static/manage/js/jquery.form.js" /}
+	</head>
+	<body>
+		<div class="pic_col" id="body">
+		    <form method="post" action="{:url("edit_imgup_do_logo")}" id="form" enctype="multipart/form-data">
+	            <input type="file" name="file">
+	            <input type="button" value="上传" id="form_btn">
+		    </form>
+		</div>
+		<div id="loading" style="display:none"><img src="/static/manage/images/loading.gif" /></div>
+		<script>
+			$(function(){
+				$("#form_btn").click(function(){
+					$("#body").hide();
+					$("#loading").show();
+					$("#form").ajaxSubmit(function(txt){
+						if(txt.code==0){
+							window.parent.addpic_do_logo(txt.pic,{:input("pid")})
+						}else{
+							$("#loading").hide();
+							$("#body").show();
+							alert(txt.msg);
+						}
+					});
+				})
+			})
+		</script>
+	</body>
+</html>

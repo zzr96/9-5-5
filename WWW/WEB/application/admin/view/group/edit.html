@@ -1,0 +1,90 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('edit_do')}" method="post" id="form">
+        <input type='hidden' name='id' value='{$data.id}'/>
+
+        <div class="item">
+            <label>群组名称：</label>
+
+            <div class="i_bd">
+                <input type="text" name="name" class="edit_input" size="60" value='{$data.name}'/> <span>(*必填)</span>
+            </div>
+        </div>
+
+        <div class="item">
+            <label>所在地：</label>
+
+            <div class="i_bd">
+                <input type="text" id="address" name="address" class="edit_input" size="60" onclick="tomap()" value='{$data.address}'/>
+                <span>(*必填)</span>
+            </div>
+
+        </div>
+
+        <div class="item">
+            <label>logo：</label>
+
+            <div class="i_bd">
+                <div class="chanpin_pic_list">
+                    <div class="iitem">
+                        <input name="logo" id="picval_logo" type="hidden" value='{$data.logo}'/>
+
+                        <div class="pic" id="logo">
+                            <a onclick="addpic();" class="upload_pic" title="上传图片">
+                                <img id='pic_yl_logo' src="{$data.logo}" width="100" height="100"/></a>
+                        </div>
+                    </div>
+                    <br>&nbsp;&nbsp;<span>(推荐大小90px*90px)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <label>简介：</label>
+
+            <div class="i_bd">
+                <textarea name="note" id="editor_id" cols="50" rows="10" title="">{$data.note}</textarea>
+            </div>
+        </div>
+
+        <div class="item">
+            <label></label>
+
+            <div class="i_bd">
+                <input name="" type="button" id="form_btn" class="btn btn-success" value="修改"/>
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+{load href="/static/manage/editor/kindeditor.js"}
+<script>
+    $("#form_btn").click(function () {
+        //$("#form").submit();
+        $("#form").ajaxSubmit(function (txt) {
+            if (txt.code == 1) {
+                tishi('success', txt.msg, '{:url("index")}');
+            } else {
+                tishi('error', txt.msg);
+            }
+        });
+    });
+
+    function addpic() {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="100" width="100%" src="{:url("/admin/upload/img")}" ></iframe>';
+        tanchuang("apppic_logo", 700, '上传图片', html)
+    }
+    function addpic_do(logo, pid) {
+        re_tanchuang('apppic_logo');
+        $("#pic_yl_logo").attr('src', logo);
+        $("#picval_logo").val(logo)
+    }
+
+    function tomap() {
+        var html = '<iframe frameborder="0" marginheight="0" marginwidth="0" height="600" width="100%" src="{:url("/admin/map/google")}" ></iframe>';
+        tanchuang("map", 1000, '位置信息', html)
+    }
+    function addpic_do_zhizhao(zhizhao, pid) {
+        re_tanchuang('map');
+    }
+</script>

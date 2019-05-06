@@ -1,0 +1,667 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<link href="../css/style.css" rel="stylesheet" />
+	<link href="../css/iconfont.css" rel="stylesheet" />
+	<style type="text/css">
+		.mui-table-view-cell>a:not(.mui-btn) {
+			margin: -11px -20px
+		}
+
+		.address:after {
+			height: 0
+		}
+
+		.dingdan-content .all-dingdan ul li .mid {
+			padding: 10px 0;
+			border-bottom: 1px solid #eee;
+		}
+
+		.dingdan-content .all-dingdan ul li {
+			border: 0;
+		}
+
+		.all-dingdan {
+			padding-top: 15px;
+		}
+
+		.dingdan-content .all-dingdan ul li .top {
+			height: 30px;
+			border-bottom: 1px solid #eee;
+			line-height: 30px;
+		}
+
+		.dingdan-content .all-dingdan ul li .top span {
+			line-height: 30px;
+		}
+		.payway,
+		.order_pay_time,
+		.gopay,
+		.shouhuo,
+		.tuihuan,
+		.pingjia,
+		.shanchu,
+		.quxiao{
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav no-input">
+		<a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">订单详情</h1>
+		<a href="#" class=" mui-pull-right">
+			<span class="iconfont"></span>
+		</a>
+	</header>
+	<div class="dingdan-content myorder-detail header-counter">
+		<div class="order-bg">
+			<i class="iconfont icon-daifahuo"></i>
+			<!-- <i class="iconfont icon-daifukuan"></i>
+		 	<i class="iconfont icon-daishouhuo"></i>
+		 	<i class="iconfont icon-yiwancheng"></i> -->
+			<p><span></span> <br/>
+				<m></m>
+			</p>
+		</div>
+
+		<div class="address">
+
+			<p class="address-name">收货人：<span class="shouhuoren"></span> <span class="phone"></span></p>
+			<div class="address-cont">
+				<i class="iconfont icon-my-weizhi"></i>
+				<div class="twoline p1" id="address">
+					<!-- 收货地址：河南省郑州市二七区大学路康桥华城国际中心13楼河南省郑州市二七区大学路 -->
+				</div>
+			</div>
+
+		</div>
+		<div class="all-dingdan clearfix">
+			<ul>
+				<li class="padd10">
+					<div class="list">
+						<!-- <div class="mid clearfix">
+							<div class="img-box">
+								<img src="../img/touxiang.jpg" />
+							</div>
+							<div class="right">
+								<p class="name twoline">品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一</p>
+
+								<p class="price clearfix">
+									<span>￥<m>9.22</m></span>
+									<span>x1</span>
+								</p>
+							</div>
+						</div>
+						<div class="mid clearfix">
+							<div class="img-box">
+								<img src="../img/touxiang.jpg" />
+							</div>
+							<div class="right">
+								<p class="name twoline">品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一品牌一</p>
+
+								<p class="price clearfix">
+									<span>￥<m>9.22</m></span>
+									<span>x1</span>
+								</p>
+							</div>
+						</div> -->
+					</div>
+				</li>
+
+			</ul>
+
+		</div>
+		<div class="kuaidi">
+			<p>商品总价<time style="color: #101010;font-weight: bold;" class="total_money"></time></p>
+			<p>优惠券<time style="color: #fe551e;" class="youhuiquan"></time></p>
+			<p>运费<time style="color: #101010;" class="yunfei"></time></p>
+
+
+		</div>
+		<div class="beizhu-wrap padd10">
+			<div class="beizhu clearfix">
+				<label for="">应付款:</label><span>￥ <m class="yingfu_money"></m></span>
+			</div>
+		</div>
+		<h2>订单信息</h2>
+		<div class="order-time">
+			<p>订单备注：<time class="note"></time></p>
+			<p>订单编号：<time class="order_num"></time></p>
+			<p>创建时间：<time class="order_time"></time></p>
+			<p class="payway">支付方式：<time></time></p>
+			<p class="order_pay_time">付款时间：<time></time></p>
+		</div>
+		<div class="btn-wrap">
+			<button class="btn-2 gopay">去付款</button>
+			<button class="quxiao">取消订单</button>
+			<button class="btn-2 shouhuo">确定收货</button>
+			<button class="tuihuan">退换货</button>
+			<button class="btn-2 pingjia">去评价</button>
+			<button class="shanchu">删除订单</button>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/api.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript">
+		var order_num;
+
+		function api_init() {
+			order_num = api.pageParam.order_num;
+			getOrderInfo();
+		}
+		//获取订单详情
+		function getOrderInfo() {
+			api.ajax({
+				url: apis + 'order/info',
+				method: 'post',
+				data: {
+					values: {
+						order_num: order_num
+					}
+				}
+			}, function(ret, err) {
+				if (ret) {
+					console.log(JSON.stringify(ret));
+					if (ret.code == 1) {
+						$('.order_num').html(ret.data.order_num);
+						$('.note').html(ret.data.note ? ret.data.note : '无备注');
+						$('.order_time').html(ret.data.addtime);
+						$('.shouhuoren').html(ret.data.name);
+						$('.phone').html(ret.data.phone);
+						$('#address').html('收货地址：'+ret.data.address);
+						$('.total_money').html('￥'+ret.data.sum);
+						$('.youhuiquan').html('￥'+(ret.data.coupons ? ret.data.coupons : '0.00'));
+						$('.yunfei').html('￥'+ret.data.cost);
+						$('.yingfu_money').html(ret.data.paymoney);
+						$('.payway time').html(ret.data.payway);
+						$('.order_pay_time time').html(ret.data.paytime);
+
+						if(ret.data.status == 1){//未支付
+							daojishi(ret.data.strtime, ret.data.reqtime); //请求时间
+
+							$('.order-bg i').addClass('icon-daifukuan');
+							$('.order-bg i').removeClass('icon-daifahuo');
+							$('.order-bg i').removeClass('icon-yiwancheng');
+							$('.order-bg i').removeClass('icon-daishouhuo');
+							$('.order-bg p span').html('等待买家付款');
+							// $('.order-bg p m').html('剩12分钟13秒自动关闭');
+							$('.gopay').show();
+							$('.quxiao').show();
+						}
+						if(ret.data.status == 2){//待发货
+							$('.order-bg i').addClass('icon-daifahuo');
+							$('.order-bg i').removeClass('icon-yiwancheng');
+							$('.order-bg i').removeClass('icon-daishouhuo');
+							$('.order-bg i').removeClass('icon-daifukuan');
+							$('.order-bg p span').html('订单待发货');
+							$('.order-bg p m').html('请耐心等候哦~');
+							$('.tuihuan').show();
+							$('.payway').show();
+							$('.order_pay_time').show();
+						}
+						if(ret.data.status == 3){//待收货
+							$('.order-bg i').removeClass('icon-daifahuo');
+							$('.order-bg i').removeClass('icon-yiwancheng');
+							$('.order-bg i').addClass('icon-daishouhuo');
+							$('.order-bg i').removeClass('icon-daifukuan');
+							$('.order-bg p span').html('订单待收货');
+							$('.order-bg p m').html('宝贝正在努力的向您奔跑~');
+							$('.tuihuan').show();
+							$('.shouhuo').show();
+							$('.payway').show();
+							$('.order_pay_time').show();
+						}
+						if(ret.data.status == 4){//已完成
+							$('.order-bg i').removeClass('icon-daifahuo');
+							$('.order-bg i').addClass('icon-yiwancheng');
+							$('.order-bg i').removeClass('icon-daishouhuo');
+							$('.order-bg i').removeClass('icon-daifukuan');
+							$('.order-bg p span').html('订单已完成');
+							$('.order-bg p m').html('欢迎您的再次光临！');
+							$('.pingjia').show();
+							$('.shanchu').show();
+							$('.payway').show();
+							$('.order_pay_time').show();
+						}
+
+						var html = '';
+						$.each(ret.data.goods,function(k,v){
+							html += '<div class="mid clearfix"><div class="img-box"><img src="'+iapi+v.img1+'" /></div>'
+									+'<div class="right"><p class="name twoline">'+v.name+'</p><p class="price clearfix"><span>￥<m>'+v.price+'</m></span>'
+									+'<span>x'+v.num+'</span></p></div></div>';
+						});
+						$('.list').html(html);
+					}
+				} else {
+					console.log(JSON.stringify(err));
+				}
+			});
+		}
+
+		//计算倒计时
+		function daojishi(ordertime,reqtime){
+			var date = new Date();
+			var endTime = ordertime + 15*60;
+			var nowTime = reqtime;
+			console.log(endTime+':'+nowTime);
+			if(endTime > nowTime){
+				timer(endTime-nowTime); //秒
+			}else{
+				$('.order-bg p m').html('此订单已关闭');
+				quxiao_order();
+			}
+		}
+
+		//15分钟倒计时
+		function timer(intDiff){
+		    interval = setInterval(function(){
+		    var day=0,
+		        hour=0,
+		        minute=0,
+		        second=0;//时间默认值
+		    if(intDiff > 0){
+		        day = Math.floor(intDiff / (60 * 60 * 24));
+		        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+		        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+		        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+		    }
+		    if (minute <= 9) minute = '0' + minute;
+		    if (second <= 9) second = '0' + second;
+
+				$('.order-bg p m').html('剩'+minute+'分钟'+second+'秒自动关闭');
+				if(minute == '00' && second == '00'){
+					$('.order-bg p m').html('此订单已关闭');
+					quxiao_order();
+					clearInterval(interval);
+				}
+		    intDiff--;
+		    }, 1000);
+		}
+
+		function quxiao_order() {
+			api.ajax({
+					url: apis + 'order/quxiao',
+					method: 'post',
+					data: {
+							values: {
+									order_num: order_num
+							}
+					}
+			},function(ret, err){
+					if (ret) {
+							console.log( JSON.stringify( ret ) );
+					} else {
+							console.log( JSON.stringify( err ) );
+					}
+			});
+		}
+
+		//取消订单
+	  $('.quxiao').on('tap',function(){
+	    api.confirm({
+	        title: '温馨提示',
+	        msg: '您确定要取消此订单吗？',
+	        buttons: ['确定', '取消']
+	    }, function(ret, err){
+	        if( ret ){
+	             console.log( JSON.stringify( ret ) );
+	             if(ret.buttonIndex == 1){
+	               api.ajax({
+	                   url: apis + 'order/quxiao',
+	                   method: 'post',
+	                   data: {
+	                       values: {
+	                           order_num: order_num
+	                       }
+	                   }
+	               },function(ret, err){
+	                   if (ret) {
+	                       console.log( JSON.stringify( ret ) );
+	                       if(ret.code == 1){
+	                         api.toast({
+	                             msg: ret.msg,
+	                             duration: 2000,
+	                             location: 'bottom'
+	                         });
+													 api.execScript({
+					 								    name: 'my_order',
+					 								    script: 'refresh_order();'
+					 								});
+
+	                         setTimeout(function(){
+														 api.closeWin();
+													 },1000);
+	                       }
+	                       if(ret.code == 0){
+	                         api.toast({
+	                             msg: ret.msg,
+	                             duration: 2000,
+	                             location: 'bottom'
+	                         });
+	                         return false;
+	                       }
+	                   } else {
+	                       console.log( JSON.stringify( err ) );
+	                   }
+	               });
+	             }
+	        }else{
+	             console.log( JSON.stringify( err ) );
+	        }
+	    });
+	  });
+
+	  //去付款
+	  $('.gopay').on('click', function() {
+	    var order_payway = $('.payway time').html();
+			console.log(order_payway);
+	    if(order_payway == '货到付款'){
+	      api.toast({
+	          msg: '此订单为货到付款单',
+	          duration: 2000,
+	          location: 'bottom'
+	      });
+	      return false;
+	    }
+	    if(order_payway == '支付宝支付'){
+	      // alipay();
+				// payCeshi();
+	    }
+	    if(order_payway == '微信支付'){
+	      // wxpay();
+				// payCeshi();
+	    }
+	  });
+		//支付测试专用
+		// function payCeshi(){
+		// 	api.ajax({
+		// 	    url: apis + 'order/paySuccess',
+		// 	    method: 'post',
+		// 	    data: {
+		// 	        values: {
+		// 	            order_num: order_num
+		// 	        }
+		// 	    }
+		// 	},function(ret, err){
+		// 	    if (ret) {
+		// 	        console.log( JSON.stringify( ret ) );
+		// 					if(ret.code == 1){
+		// 						api.toast({
+		// 						    msg: ret.msg,
+		// 						    duration: 2000,
+		// 						    location: 'bottom'
+		// 						});
+		// 						api.openWin({
+		// 						    name: 'pay_success',
+		// 						    url: './pay_success.html',
+		// 						    pageParam: {
+		// 						        order_num: order_num
+		// 						    }
+		// 						});
+		// 						api.execScript({
+		// 						    name: 'my_order',
+		// 						    script: 'refresh_order();'
+		// 						});
+		//
+		// 						setTimeout(function(){
+		// 							api.closeWin();
+		// 						},1000);
+		// 					}
+		// 					if(ret.code == 0){
+		// 						api.toast({
+		// 						    msg: ret.msg,
+		// 						    duration: 2000,
+		// 						    location: 'bottom'
+		// 						});
+		// 						return false;
+		// 					}
+		// 	    } else {
+		// 	        console.log( JSON.stringify( err ) );
+		// 	    }
+		// 	});
+		// }
+
+
+	  //确认收货
+	  $('.shouhuo').on('click', function() {
+	      api.ajax({
+	          url: apis + 'order/setStatus',
+	          method: 'post',
+	          data: {
+	              values: {
+	                  order_num: order_num
+	              }
+	          }
+	      },function(ret, err){
+	          if (ret) {
+	              console.log( JSON.stringify( ret ) );
+	              if(ret.code == 1){
+	                api.toast({
+	                    msg: ret.msg,
+	                    duration: 2000,
+	                    location: 'bottom'
+	                });
+									api.execScript({
+									    name: 'my_order',
+									    script: 'refresh_order();'
+									});
+									setTimeout(function(){
+										api.closeWin();
+									},1000);
+	              }
+	              if(ret.code == 0){
+	                api.toast({
+	                    msg: ret.msg,
+	                    duration: 2000,
+	                    location: 'bottom'
+	                });
+	                return false;
+	              }
+	          } else {
+	              console.log( JSON.stringify( err ) );
+	          }
+	      });
+	  });
+
+	  //退换货
+	  $('.tuihuan').on('click', function() {
+	      api.openWin({
+	          name: 'tuihuo',
+	          url: '../wode/tuihuo.html',
+	          pageParam: {
+	              order_num: order_num
+	          }
+	      });
+				setTimeout(function(){
+					api.closeWin();
+				},1000);
+	  });
+
+	  //评价
+	  $('.pingjia').on('click', function() {
+	      api.openWin({
+	          name: 'pingjia',
+	          url: '../wode/pingjia.html',
+	          pageParam: {
+	              order_num: order_num
+	          }
+	      });
+				setTimeout(function(){
+					api.closeWin();
+				},1000);
+	  });
+
+	  //删除订单
+	  $('.shanchu').on('click', function() {
+	      api.confirm({
+	          title: '温馨提示',
+	          msg: '您确定要删除此订单吗？',
+	          buttons: ['确定', '取消']
+	      }, function(ret, err){
+	          if( ret ){
+	               console.log( JSON.stringify( ret ) );
+	               if(ret.buttonIndex == 1){
+	                 api.ajax({
+	                     url: apis + 'order/del',
+	                     method: 'post',
+	                     data: {
+	                         values: {
+	                             order_num: order_num
+	                         }
+	                     }
+	                 },function(ret, err){
+	                     if (ret) {
+	                         console.log( JSON.stringify( ret ) );
+	                         if(ret.code == 1){
+	                           api.toast({
+	                               msg: ret.msg,
+	                               duration: 2000,
+	                               location: 'bottom'
+	                           });
+														 api.execScript({
+						 								    name: 'my_order',
+						 								    script: 'refresh_order();'
+						 								});
+	                           setTimeout(function(){
+															 api.closeWin();
+														 },1000);
+	                         }
+	                         if(ret.code == 0){
+	                           api.toast({
+	                               msg: ret.msg,
+	                               duration: 2000,
+	                               location: 'bottom'
+	                           });
+	                           return false;
+	                         }
+	                     } else {
+	                         console.log( JSON.stringify( err ) );
+	                     }
+	                 });
+	               }
+	          }else{
+	               console.log( JSON.stringify( err ) );
+	          }
+	      });
+	  });
+		//支付宝支付
+	  function alipay(){
+	    api.ajax({
+	        url: apis + 'pay/pay_alipay',
+	        method: 'post',
+	        data: {
+	            values: {
+	                order_id: order_num
+	            }
+	        }
+	    }, function(ret, err) {
+	        if (ret) {
+	            console.log(JSON.stringify(ret));
+	            if (ret.data) {
+	                var aliPayPlus = api.require('aliPayPlus');
+	                aliPayPlus.payOrder({
+	                    orderInfo: ret.data
+	                }, function(ret, err) {
+	                    if (ret.code == '9000') {
+	                        //支付成功
+	                        api.alert({
+	                            title: '支付结果',
+	                            msg: '支付成功',
+	                            buttons: ['确定']
+	                        }, function(ret, err) {
+	                            if (ret) {
+	                                console.log(JSON.stringify(ret));
+																	api.openWin({
+	                                    name: 'pay_success',
+	                                    url: '../cart/pay_success.html',
+	                                    pageParam: {
+	                                        order_num: order_num
+	                                    }
+	                                });
+																	api.execScript({
+																	    name: 'my_order',
+																	    script: 'refresh_order();'
+																	});
+	                                setTimeout(function() {
+	                                  api.closeWin();
+	                                }, 1000);
+	                            }
+	                            if (err) {
+	                                console.log(JSON.stringify(err));
+	                            }
+	                        });
+	                    } else {
+	                        // api.alert({
+	                        // 	title: '支付结果',
+	                        // 	msg: '支付失败',
+	                        // 	buttons: ['确定']
+	                        // });
+	                    }
+	                });
+	            }
+	        }
+	        if(err) {
+	            console.log(JSON.stringify(err));
+	        }
+	    });
+	  }
+	  //微信支付
+	  function wxpay(){
+	    api.ajax({
+	        url: apis + 'pay/wxpay',
+	        method: 'post',
+	        data: {
+	            values: {
+	                order_id: order_num
+	            }
+	        }
+	    }, function(ret, err) {
+	        if (ret) {
+	            console.log(JSON.stringify(ret));
+	            if (ret.data) {
+								var wxPay = api.require('wxPay');
+								payData = {
+									apiKey: ret.data.appid,
+									orderId: ret.data.prepayid,
+									mchId: ret.data.partnerid,
+									nonceStr: ret.data.noncestr,
+									timeStamp: ret.data.timestamp,
+									package: ret.data.package,
+									sign: ret.data.sign
+								};
+								wxPay.payOrder(payData, function(ret, err) {
+									if (ret.status) {
+										alert('支付成功');
+										api.execScript({
+												name: 'my_order',
+												script: 'refresh_order();'
+										});
+										setTimeout(function(){
+											api.closeWin();
+										},1000);
+									} else {
+										alert('支付取消');
+									}
+								});
+	            }
+	        }
+	        if(err) {
+	            console.log(JSON.stringify(err));
+	        }
+	    });
+	  }
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="../css/mui.min.css" />
+	<link rel="stylesheet" href="../css/iconfont.css" />
+	<link rel="stylesheet" href="../css/style.css" />
+	<title></title>
+	<style type="text/css">
+		html,
+		body {
+			background: #f8f8f8;
+		}
+	</style>
+</head>
+
+<body style="">
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-pull-left"><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">系统消息</h1>
+
+	</header>
+	<div class="header-counter">
+		<div class="msg-detail-box">
+			<!-- <div class="center-top">
+				<div class="time">
+					<span>6.13 18:50</span></div>
+				<div class="content">
+					<h3>中国股市有许多奇奇怪怪的现</h3>
+					<p>中国股市有许多奇奇怪怪的现象，比如特有的 涨停板敢死队，比如明明要退市的公司跌停板还有成交量。
+					</p>
+				</div>
+			</div>
+			<div class="center-top">
+				<div class="time">
+					<span>6.13 18:50</span></div>
+				<div class="content">
+					<h3>中国股市有许多奇奇怪怪的现</h3>
+					<p>中国股市有许多奇奇怪怪的现象，比如特有的 涨停板敢死队，比如明明要退市的公司跌停板还有成交量。
+					</p>
+				</div>
+			</div> -->
+		</div>
+		<div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+	</div>
+	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/api.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript">
+		var page = 1;
+		var id;
+		function api_init(){
+			getXitongxiaoxi();
+			upRefresh();
+		}
+		//上拉刷新
+		function upRefresh(){
+			api.addEventListener({//上拉刷新
+					name: 'scrolltobottom',
+					extra: {
+							threshold: 20
+					}
+			}, function(ret, err) {
+					console.log(ret);
+					page++;
+					getXitongxiaoxi();
+			});
+		}
+		//获取系统消息
+		function getXitongxiaoxi(){
+			api.ajax({
+			    url: apis + 'home/messlist',
+			    method: 'post',
+					data:{
+						values:{
+							page: page
+						}
+					}
+			},function(ret, err){
+					console.log( JSON.stringify( ret ) );
+			    if (ret && ret.data.length > 0) {
+						var html = '';
+						$.each(ret.data,function(k,v){
+							html += '<div class="center-top" data-id="'+v.id+'"><div class="time"><span>'+v.datetime+'</span></div>'
+									+'<div class="content"><h3>'+v.title+'</h3><p>'+v.content+'</p></div></div>';
+						});
+						$('.msg-detail-box').html(html);
+
+			    } else{
+						if($('.msg-detail-box div').length > 0){
+							api.removeEventListener({
+									name: 'scrolltobottom'
+							});
+							$('.more').show();
+							$('.more').html('没有更多了');
+						}else{
+							api.removeEventListener({
+									name: 'scrolltobottom'
+							});
+							$('.msg-detail-box').html('');
+							$('.more').show();
+							$('.more').html('暂无系统消息');
+						}
+					}
+					if(err){
+			        console.log( JSON.stringify( err ) );
+			    }
+			});
+		}
+		//查看消息详情
+		$('.msg-detail-box').on('tap','.center-top',function(){
+			id = $(this).attr('data-id');
+			api.openWin({
+			    name: 'xt_msg_detail',
+			    url: './xt_msg_detail.html',
+			    pageParam: {
+			        id: id
+			    }
+			});
+		});
+	</script>
+</body>
+
+</html>

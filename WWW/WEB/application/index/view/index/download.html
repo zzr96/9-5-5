@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+    <link href="/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link href="/css/iconfont.css" rel="stylesheet"/>
+    <style type="text/css">
+        html,
+        body {
+            background: #fff;
+            line-height: 14px;
+        }
+
+        .icon-icon_title_fenxiang {
+            float: right;
+            color: #fff;
+            margin-top: 14px;
+        }
+
+        img {
+            display: block;
+            height: 100%
+        }
+
+        /*我的二维码*/
+
+        .erweima_content {
+            padding-top: 20px;
+        }
+
+        .erweima_content .main {
+            width: 90%;
+            margin-left: 5%;
+            height: 408px;
+            border: 1px solid #efefef;
+            border-radius: 4px;
+            margin-top: 6%;
+            text-align: center;
+        }
+
+        .erweima_content .erweima {
+            width: 60px;
+            height: 60px;
+            margin: 30px auto;
+            display: block;
+        }
+
+        .erweima_content .main .yaoqingma {
+            font-size: 17px;
+            color: #000;
+            line-height: 17px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+      
+        .title{
+            margin-top:50px;
+            text-align: center;
+
+        }
+        .weixin-tip{
+            display: none; 
+            position: fixed; 
+            left:0; top:0; 
+            bottom:0; 
+            background: rgba(0,0,0,0.8); 
+            filter:alpha(opacity=80);  
+            height: 100%;
+            width: 100%; 
+            z-index: 100;
+        }
+        .weixin-tip img{
+            max-width: 100%; 
+            height: auto;
+        }
+        
+        .weixin-tip p{
+            text-align: center; 
+            margin-top: 10%; 
+            padding:0 5%;
+        }
+    </style>
+</head>
+
+<body>
+<!--头 -->
+<header class=" mui-bar mui-bar-nav ">
+    <div class="title">
+        <h3 class="mui-title">生鲜配送</h3>
+    </div>
+</header>
+<div class="erweima_content content_pad44 content_btm50">
+    <div class="main">
+        <!-- http://shengxian.niurenjianzhan.com/apis/update/download -->
+        <a href="http://shengxian.niurenjianzhan.com/apis/update/download" class="xiazai">
+            <img id="ecode" class="erweima" src="/uploads/default/logo.png"/>
+             <p class="yaoqingma">Android-{$appver}</p>
+            <span>立即下载</span>
+        </a>
+    </div>
+</div>
+<div class="weixin-tip">
+    <p>
+        <img src="/uploads/default/live_weixin.png" alt="微信打开"/>
+    </p>
+</div>
+
+</body>
+{load href="/static/manage/js/jquery-2.1.1.min.js" /}
+{load href="/static/manage/js/jquery.form.js" /}
+
+<script type="text/javascript">
+    $('.xiazai').click(function(){
+        var winHeight = $(window).height();
+        function is_weixin() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        var isWeixin = is_weixin();
+        if(isWeixin){
+            $(".weixin-tip").css("height",winHeight);
+            $(".weixin-tip").show();
+        }
+    });
+</script>
+
+</html>

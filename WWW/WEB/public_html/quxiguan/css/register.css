@@ -1,0 +1,96 @@
+.mui-bar{
+	border: none;
+}
+.mui-bar span{
+	float: right;
+	margin-top: 12px;
+}
+.warp{
+	width: 94%;
+	margin: 0 3%;
+}
+.warp .top{
+	margin: 25px 0;
+}
+.warp .top p{
+	color: #666;
+}
+.shuru div{
+	height: 55px;
+	line-height: 55px;
+	border-bottom: 1px solid #e6e6e6;
+}
+.shuru em{
+	font-size: 20px;
+	color: #aaaaaa;
+}
+.shuru input{
+	width: 80%;
+	height: 40px;
+	font-size: 14px;
+	border: none;
+}
+.shuru .code input{
+	width: 60%;
+}
+.shuru .code span{
+	color: #f29c2a;
+}
+.dianji{
+	margin: 40px 0 45px;
+	text-align: center;
+}
+.dianji span{
+	display: block;
+}
+.dianji span.login{
+	width: 100%;
+	height: 45px;
+	text-align: center;
+	line-height: 45px;
+	font-size: 15px;
+	color: #fff;
+	background: #f29c2a;
+	border-radius: 8px;
+}
+.dianji span.wj_pass{
+	margin-top: 12px;
+	color: #f29c2a;
+}
+.fotter{
+	width: 100%;
+	text-align: center;
+}
+.fotter .pic img{
+	width: 30%;
+}
+.fotter .pic span{
+	margin: 0 8px;
+}
+.fotter .weixin img{
+	width: 10%;
+	margin: 15px 0;
+}
+.footer-li{
+	width: 100%;
+	text-align: center;
+	position: fixed;
+	bottom: 35px;
+}
+.mui-radio input[type='radio']:before, .mui-checkbox input[type='checkbox']:before{
+	font-size: 20px;
+}
+.mui-radio input[type='radio']:checked:before, .mui-checkbox input[type='checkbox']:checked:before{
+	color: #f29c2a;
+}
+.tongyi{
+	float: right;
+	position: absolute;
+	margin-top: -23px;
+	font-size: 14px;
+	margin-left: 45px;
+	color: #ccc;
+}
+.tongyi .xieyi{
+	color: #333;
+}

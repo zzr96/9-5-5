@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件</title>
+</head>
+<body>
+  <form action="{:url('fileupload')}" enctype="multipart/form-data" method="post" style="text-align:center;margin:30px;">
+    <input type="file" name="photo"/>
+    <input type="hidden" name="MAX_FILE_SIZE" value="204800" />
+    <input type="hidden" name="type" value="webfile"/>
+    <input type="submit" value="确定上传">
+  </form>
+</body>
+</html>

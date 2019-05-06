@@ -1,0 +1,109 @@
+{include file="common:head"}
+<div class="v_bd"><!--v_bd-->
+    <form action="{:url('tk_xq_do')}" method="post" id="form">
+        <div class="item">
+            <label>订单编号：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                    {$find.order_sn}
+            </div>
+        </div>
+        <div class="item">
+            <label>退款金额：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                    {$find.paymoney}
+            </div>
+        </div>
+        <div class="item">
+            <label>退款原因：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {if condition="$res.content eq null"}
+                未填写原因
+                {else}
+                {$res.content}
+                {/if}
+            </div>
+        </div>       
+        <div class="item">
+            <label>退货图片：</label>
+            {if condition="$res.img1 neq null"}
+            <img src="/public_html{$res.img1}" style="width:100px;">
+            {/if}
+            {if condition="$res.img2 neq null"}
+            <img src="/public_html{$res.img2}" style="width:100px;">
+            {/if}
+            {if condition="$res.img3 neq null"}
+            <img src="/public_html{$res.img3}" style="width:100px;">
+            {/if}
+            {if condition="$res.img4 neq null"}
+            <img src="/public_html{$res.img4}" style="width:100px;">
+            {/if}
+        </div>
+        
+        <div class="item">
+            <label>当前状态：</label>
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                {if condition="$res.status eq 1"}
+                审核中
+                {elseif condition="$res.status eq 2"}
+                审核通过
+                {elseif condition="$res.status eq 3"}
+                已退款
+                {/if}
+            </div>
+        </div>        
+        <div class="item">
+            <label>物流名称：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                    {if condition="$res.kd_name eq null"}
+                    未填写
+                    {else}
+                    {$res.kd_name}
+                    {/if}
+            </div>
+        </div>
+        <div class="item">
+            <label>物流单号：</label>
+
+            <div class="i_bd" style="border:1px solid;padding:5px;width:30%">
+                    {if condition="$res.kd_sn eq null"}
+                    未填写
+                    {else}
+                    {$res.kd_sn}
+                    {/if}
+            </div>
+        </div>
+        <input type="hidden" name="id" value="{$res.id}">
+        <div class="item">
+            <label></label>
+            
+            <div class="i_bd">
+                {if condition="$res.status eq 2"}
+                <input name="" type="button" class="btn btn-success" id="form_btn" value="标记退款"/>
+                {elseif condition="$res.status eq 3"}
+                <input name="" type="button" class="btn btn-success" value="已退款"/>
+                {else}
+                <input name="" type="button" class="btn btn-success" value="暂不可操作"/>
+                {/if}
+            </div>
+        </div>
+    </form>
+</div><!--v_bd-->
+{include file="common:foot"}
+<script>
+       $(function () {
+        $("#form_btn").click(function () {
+            $("#form").ajaxSubmit(function (txt) {
+                if (txt.code == 1){
+                    tishi('success', txt.msg, '{:url("index")}');
+
+                } else {
+                    tishi('error', txt.msg);
+                }
+            });
+        })
+    });
+</script>

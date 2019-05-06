@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="../css/mui.min.css" />
+	<link rel="stylesheet" href="../css/iconfont.css" />
+	<link rel="stylesheet" href="../css/style.css" />
+	<title></title>
+	<style type="text/css">
+		html,
+		body {
+			background: #fff;
+		}
+
+		img:not([src]),
+		img[src=""] {
+			opacity: 0;
+			border-color: #fff;
+		}
+	</style>
+</head>
+
+<body style="">
+	<!--头 -->
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-pull-left"><i class="iconfont icon-fanhui"></i></a>
+		<h1 class="mui-title">消息详情</h1>
+
+	</header>
+	<div class="header-counter">
+		<div class="msg-detail padd10">
+			<div class="title oneline">
+				<h2></h2>
+				<time></time>
+			</div>
+			<!-- <div class="img-box"><img src="../img/huodong1.jpg" /></div> -->
+			<div class="content"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/api.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript">
+		var id;
+
+		function api_init(){
+			id = api.pageParam.id;
+			getXiaoxixiangqing();
+		}
+
+		//获取消息详情
+		function getXiaoxixiangqing(){
+			api.ajax({
+			    url: apis + 'home/mess',
+			    method: 'post',
+			    data: {
+			        values: {
+			            messid: id
+			        }
+			    }
+			},function(ret, err){
+			    if (ret) {
+			        console.log( JSON.stringify( ret ) );
+							if(ret.code == 1){
+								$('.title h2').html(ret.data.title);
+								$('.title time').html(ret.data.sendtime);
+								$('.content').html(ret.data.content);
+								$('.content img').each(function() {
+									if($(this).attr('src').indexOf('http') == -1){
+										var src = iapi + $(this).attr('src');
+										$(this).attr('src', src);
+									}
+								});
+							}
+			    } else {
+			        console.log( JSON.stringify( err ) );
+			    }
+			});
+		}
+	</script>
+</body>
+
+</html>

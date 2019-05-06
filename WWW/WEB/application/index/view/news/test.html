@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>首页</title>
+    <link rel="stylesheet" href="/style/css/mui.min.css" />
+    <link rel="stylesheet" href="/style/css/swiper.min.css" />
+    <link rel="stylesheet" href="/style/css/iconfont.css" />
+    <link rel="stylesheet" href="/style/css/style.css" />
+    <style>
+        .mui-control-content {
+            min-height: 215px;
+        }
+
+        .mui-control-content .mui-loading {
+            margin-top: 50px;
+        }
+
+        .mui-scroll-wrapper {
+            overflow: inherit;
+        }
+
+        .mui-slider_ss {
+            height: 100%;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            border: 0;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            border-color: #e77636;
+            color: #e77636;
+        }
+
+        .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+            border: 0;
+        }
+
+        .mui-segmented-control {
+            background: #fff;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active .xian_box {
+            display: block;
+        }
+
+        .mui-control-item {
+            position: relative;
+        }
+
+        .mui-control-item .xian_box {
+            display: none;
+            position: absolute;
+            width: 30%;
+            left: 35%;
+            bottom: 3px;
+            height: 2px;
+            background: #f3ba9a;
+            border-radius: 20px;
+        }
+
+        .more_h {
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+<!--轮播-->
+<div class="index">
+    <div class="mui-slider index_container" id="banner">
+        <div class="mui-slider-group  mui-slider-loop">
+            <div class="mui-slider-item mui-slider-item-duplicate"><img src="../img/lunbo01.png" /></div>
+            <div class="mui-slider-item"><img src="../img/lunbo02.png" /></div>
+            <div class="mui-slider-item"><img src="../img/lunbo01.png" /></div>
+            <div class="mui-slider-item"><img src="../img/lunbo02.png" /></div>
+            <div class="mui-slider-item"><img src="../img/lunbo01.png" /></div>
+            <div class="mui-slider-item mui-slider-item-duplicate"><img src="../img/lunbo02.png" /></div>
+        </div>
+    </div>
+</div>
+<div id="slider" class="mui-slider_ss">
+    <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+        <a class="mui-control-item mui-active" href="#item1mobile">最新动态<p class="xian_box"></p></a>
+        <a class="mui-control-item" href="#item2mobile">
+            <p class="xian_box"></p>正能量传播</a>
+        <a class="mui-control-item" href="javascript:">
+            <p class="xian_box"></p>商友会</a>
+    </div>
+    <div class="mui-slider-group">
+
+        <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+            <div id="scroll1" class="mui-scroll-wrapper">
+                <div class="mui-scroll dongtai">
+                    <ul id="nlist">
+                        <!-- <li>
+                            <div class="index_list_name">
+                                <span>
+                                            <img src="../img/header.png"/>
+                                        </span>
+                                <span>
+                                            <p class="name"><m>申晨溯</m><i class="iconfont icon-nan"></i></p>
+                                            <p class="vip_box"><m class="vip_bj vip0"></m><b>黄金会员</b></p>
+                                        </span>
+                                <span class="iconfont icon-mintui-more"></span>
+                            </div>
+                            <div class="index_list_con">
+                                <p class="intro_content more_h">
+                                    不需要晚多久，就再过那么几年，那时我们有稳定的收入，靠谱的工作，所有的一切步入正轨、我不再是一个追梦的漂浮的女生，而是一个只寻求安稳生活的女人，你不再是一个青涩的毛头小伙子，而是一个成熟的男人。 到那个时候，我们在相爱、 如果，我们可以晚一些相遇。 不需要多久，就在过那么几年，那时候我们已经学会了知足学会了包容和珍惜，而你也真的能从容的面对那些不追逐你的异性、 到那时候，那时候我们在相爱、
+                                </p>
+                                <div class="more">展开全文</div>
+                            </div>
+                            <div class="index_list_photo">
+                                <span>
+                                            <img src="../img/sp01.png"/>
+                                        </span>
+                                <span>
+                                            <img src="../img/sp01.png"/>
+                                        </span>
+                            </div>
+                            <div class="index_list_time">
+                                <span>
+                                            <p>1小时前</p>
+                                            <p>64转发</p>
+                                        </span>
+                                <span>
+                                            <p><i class="iconfont icon-zan"></i>287</p>
+                                            <p><i class="iconfont icon-xiaoxi"></i>99</p>
+                                        </span>
+                            </div>
+                            <div class="index_list_zan">
+                                <span>
+                                            <i class="iconfont icon-xin"></i>
+                                            <p>jmin、乱世王者</p>
+                                        </span>
+                                <span>
+                                            <p><m>jmin:</m><m>通过花瓣Chrome扩展采集 </m></p>
+                                        </span>
+                            </div>
+                        </li> -->
+
+                    </ul>
+                    <div class="kong kongn">沒有更多了</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="item2mobile" class="mui-slider-item mui-control-content">
+            <div id="scroll2" class="mui-scroll-wrapper">
+                <div class="mui-scroll index_znl">
+                    <ul id="mlist">
+                        <li>
+                            <p>CheckinHUB-酒店智慧前台</p>
+                            <i class="iconfont icon-mintui-more"></i>
+                        </li>
+                        <li>
+                            <p>轻鸟短信平台</p>
+                            <i class="iconfont icon-mintui-more"></i>
+                        </li>
+                        <li>
+                            <p>眯会儿共享车载按摩垫</p>
+                            <i class="iconfont icon-mintui-more"></i>
+                        </li>
+                    </ul>
+                    <div class="kong kongm">沒有更多了</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="item3mobile" class="mui-slider-item mui-control-content">
+            <div id="scroll2" class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    333
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--评论-礼物-->
+<div class="liwu_bj pinglu_bj">
+    <div class="liwu_bottom">
+        <div class="pl_button">
+            <input type="text" name="" id="" value="" placeholder="评论..." />
+            <button>发布</button>
+        </div>
+        <div class="swiper-container index_container">
+            <div class="swiper-wrapper">
+                <div class="mui-slider-item liwu_list">
+                    <ul id="glist">
+                    </ul>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <!--<div class="swiper-pagination index_pgt"></div>-->
+            <div class="chongzhi_box">
+                    <span>
+                  <img src="../img/money1.png"/>
+                  <p id="coin">0</p>
+                </span>
+                    <span id="pay" style="display:none;">
+                  <p>去充值</p>
+                  <i class="iconfont icon-jiantou"></i>
+                </span>
+            </div>
+        </div>
+        <!--<button class="zengsong">确定赠送</button>-->
+    </div>
+</div>
+<!--分享-->
+<div class="liwu_bj fenxiang_bj">
+    <div class="liwu_bottom">
+        <div class="fenxiang_box">
+            <ul id="share">
+                <li>
+                    <i class="iconfont icon-iconfontzhizuobiaozhunbduan36"></i>
+                    <p>朋友圈</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-weixin2"></i>
+                    <p>微信</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-qq1"></i>
+                    <p>QQ</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-haoyou"></i>
+                    <p>好友/群组</p>
+                </li>
+            </ul>
+        </div>
+        <button class="zengsong" id="cancle">取消</button>
+    </div>
+</div>
+<div class="zzc_bj"></div>
+<script type="text/javascript" src="/style/js/api.js"></script>
+<script type="text/javascript" src="/style/js/jquery.js"></script>
+<script type="text/javascript" src="/style/js/lazyload.js"></script>
+<script type="text/javascript" src="/style/js/mui.min.js"></script>
+<script type="text/javascript" src="/style/js/common.js"></script>
+<script>
+    var vip = 0;
+    var nPage = 1;
+    var mPage = 1;
+    var news = true;
+    getData();
+//    api_init = function() {
+//        checkLogin();
+//        getData();
+//        setTap();
+//        api.setRefreshHeaderInfo({
+//            loadingImg: '../img/waiting.png',
+//            bgColor: '#ddd',
+//            textColor: '#fff',
+//            textDown: '下拉刷新...',
+//            textUp: '松开刷新...'
+//        }, function(ret, err) { //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+//            if (news) {
+//                nPage = 1;
+//                getNlist();
+//            } else {
+//                mPage = 1;
+//                getMlist();
+//            }
+//            setTimeout(function() {
+//                api.refreshHeaderLoadDone();
+//            }, 3000);
+//        });
+//        api.addEventListener({
+//            name: 'scrolltobottom',
+//            extra: {
+//                threshold: api.winHeight / 2 //设置距离底部多少距离时触发，默认值为0，数字类型
+//            }
+//        }, function(ret, err) {
+//            if (news) {
+//                nPage++;
+//                getNlist();
+//            } else {
+//                mPage++;
+//                getMlist();
+//            }
+//        });
+//    }
+
+    function getData() {
+        // loadingStart();
+        getBanner();
+        getNlist();
+        getMlist();
+        getGiftList();
+        setTimeout(function() {
+            loadingClose();
+        }, 3000);
+    }
+
+    var gallery = mui('#banner');
+    gallery.slider({
+        interval: 3000 //自动轮播周期，若为0则不自动播放，默认为0；
+    });
+    var localBanner;
+
+    function getBanner() {
+        $.ajax({
+            url: apis + 'img/banner',
+            success: function(ret) {
+                console.log(JSON.stringify(ret));
+                if (ret.code == 0 && localBanner != JSON.stringify(ret.data)) {
+                    localBanner = JSON.stringify(ret.data);
+                    $('#banner .mui-slider-group').html('');
+                    $.each(ret.data, function(k, v) {
+                        var html = '<div class="mui-slider-item"><img src="' + iapi + v.img + '" link="' + v.link + '"/></div>';
+                        $('#banner .mui-slider-group').append(html);
+                    });
+                    $('.mui-slider-item').eq(0).addClass('mui-slider-item-duplicate');
+                    var last = $('#banner .mui-slider-group .mui-slider-item').length - 1;
+                    $('.mui-slider-item').eq(last).addClass('mui-slider-item-duplicate');
+                    gallery.slider({
+                        interval: 3000 //自动轮播周期，若为0则不自动播放，默认为0；
+                    });
+                    $('#banner img').on('tap', function() {
+                        var link = $(this).attr('link');
+                        if (link) {
+                            api.openWin({
+                                name: link,
+                                url: link,
+                                pageParam: {
+                                    name: link
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    }
+    var localNlist;
+
+    function getNlist() {
+        $.ajax({
+            url: apis + 'news/getNlist',
+            data: {
+                page: nPage
+            },
+            success: function(ret) {
+                if ($('#nlist li').length >= ret.data.total) {
+                    $('.kongn').show();
+                    return;
+                }
+                if (ret.code == 0 && localNlist != JSON.stringify(ret.data)) {
+                    localNlist = JSON.stringify(ret.data);
+                    console.log(nPage);
+                    if (nPage < 2)
+                        $('#nlist').html('');
+                    $.each(ret.data.items, function(k, v) {
+                        html = '<li id="' + v.id + '">' +
+                                '<div class="index_list_name ">' +
+                                '<span class="touser" data-id="' + v.uid + '">' +
+                                '<img src="' + iapi + v.headimg + '"/>' +
+                                '</span>' +
+                                '<span>' +
+                                '<p class="name"><m>' + (v.nick ? v.nick : '未设置昵称') + '</m><i class="iconfont ' + (v.sex != 1 ? 'icon-nv' : 'icon-nan') + '"></i></p>' +
+                                '<p class="vip_box"><m class="' + (v.vip > 0 ? 'vip_bj' : 'vip0') + '"></m><b>' + (v.vip > 0 ? 'V' + v.vip : '') + ret.data.viplist[v.vip] + '</b></p>' +
+                                '</span>' +
+                                '<span class="iconfont icon-mintui-more"></span>' +
+                                '</div>' +
+                                '<div class="index_list_con">';
+                        var maxheight = 80;
+                        if (v.content.length > maxheight) {
+                            show = v.content.substring(0, maxheight);
+                            hide = v.content.substring(maxheight);
+                            html += '<p class="intro_content more_h">' + show + '<i>...</i><span class="hide" style="display:none;">' + hide + '</span></p>';
+                            html += '<div class="more">展开全文</div>';
+                        } else {
+                            html += '<p class="intro_content more_h">' + v.content + '</p>';
+                        }
+
+                        html += '</div>' +
+                                '<div class="index_list_photo">';
+                        $.each(v, function(ik, iv) {
+                            if (ik.indexOf('img') > -1 && ik != 'headimg' && iv) {
+                                html += '<span><img src="' + iapi + iv + '"/></span>';
+                            }
+                        })
+                        html += '</div>' +
+                                '<div class="index_list_time">' +
+                                '<span>' +
+                                '<p>' + GetDateDiff(v.datetime) + '</p>' +
+                                '<p>' + (v.forward ? v.forward + '转发' : '') + '</p>' +
+                                '</span>' +
+                                '<span>' +
+                                '<p><i class="iconfont icon-zan"></i>' + v.nice + '</p>' +
+                                '<p class="feedback"><i class="iconfont icon-xiaoxi"></i>' + v.feedback + '</p>' +
+                                '</span>' +
+                                '</div>' +
+                                '<div class="index_list_zan">' +
+                                '<span>';
+                        nicelist = [];
+                        $.each(v.nicelist, function(nk, nv) {
+                            nicelist.push(nv.nick ? nv.nick : '未设置昵称');
+                        });
+                        if (nicelist) {
+                            html += '<i class="iconfont icon-xin"></i><p>' + nicelist.join(',') + '</p>';
+                        }
+                        html += '</span>';
+                        html += '<span>';
+                        $.each(v.feedbacklist, function(fk, fv) {
+                            html += '<p><m>' + (fv.nick ? fv.nick : '未设置昵称') + ':</m>' + fv.content + '</p>';
+                        })
+                        html += '</span>';
+                        '</div>' +
+                        '</li>';
+                        $('#nlist').append(html);
+                    });
+
+                    if ($('#nlist li').length > 0) {
+                        $('.kongn').hide();
+                    }
+                    var ln = (api.winWidth - 50) / 3;
+                    $('.index_list_photo span').css('width', ln).css('height', ln);
+                    moreshow();
+                    $('.touser').on('tap', function() {
+                        var id = $(this).attr('data-id');
+                        api.openWin({
+                            name: 'detail_ziliao',
+                            url: '../haoyou/detail_ziliao.html',
+                            pageParam: {
+                                name: 'detail_ziliao',
+                                tid: id
+                            }
+                        });
+                        return false;
+                    });
+                    $('.index_list_photo span').on('tap', function() {
+                        var images = [];
+                        var the = $(this).index();
+                        $(this).parents('.index_list_photo').find('img').each(function() {
+                            var src = $(this).attr('src').replace('//uploads', '/uploads');
+                            images.push(src);
+                        });
+                        console.log(the);
+                        api.openWin({
+                            name: 'photoBrowser',
+                            url: '../page/photoBrowser.html',
+                            pageParam: {
+                                name: 'photoBrowser',
+                                images: images,
+                                the: the
+                            }
+                        });
+                        return false;
+                    })
+                    $('.icon-zan').on('tap', function() {
+                        var id = $(this).parents('li').attr('id');
+                        nice(id);
+                        return false;
+                    });
+                    $('#nlist .icon-mintui-more').on('tap', function() {
+                        var id = $(this).parents('li').attr('id');
+                        console.log(id);
+                        $('.fenxiang_bj').toggle()
+                        $('.zzc_bj').toggle()
+                        $('.fenxiang_bj').attr('data-id', id);
+                        return false;
+                    });
+                    $('.feedback').on('tap', function() {
+                        nid = $(this).parents('li').attr('id');
+                        $('.pinglu_bj').toggle()
+                        $('.zzc_bj').toggle()
+                        return false;
+                    });
+                    $('.zzc_bj').on('tap', function() {
+                        $('.fenxiang_bj').hide()
+                        $('.pinglu_bj').hide()
+                        $('.zzc_bj').hide()
+                        return false;
+                    });
+                }
+
+                setTimeout(function() {
+                    api.refreshHeaderLoadDone();
+                }, 500);
+            }
+        });
+    }
+    var localMlist;
+
+    function getMlist() {
+        $.ajax({
+            url: apis + 'news/getMlist',
+            data: {
+                page: mPage
+            },
+            success: function(ret) {
+                if (ret.code == 0 && localMlist != JSON.stringify(ret.data)) {
+                    localMlist = JSON.stringify(ret.data);
+                    if (mPage < 2)
+                        $('#mlist').html('');
+                    if ($('#mlist li').length >= ret.data.total) {
+                        $('#kong').show();
+                        return;
+                    }
+                    $.each(ret.data.items, function(k, v) {
+                        html = '<li id="' + v.id + '"><p>' + v.title + '</p>' +
+                                '<i class="iconfont icon-mintui-more"></i>' +
+                                '</li>';
+                        $('#mlist').append(html);
+                    })
+                    if ($('#mlist li').length > 0) {
+                        $('.kongm').hide();
+                    }
+                }
+                $('#mlist li').on('tap', function() {
+                    var id = $(this).attr('id');
+                    api.openWin({
+                        name: 'news',
+                        url: '../my/news.html',
+                        pageParam: {
+                            name: 'news',
+                            id: id
+                        }
+                    });
+
+                    return false;
+                });
+                $('#mlist .icon-mintui-more').on('tap', function() {
+                    var id = $(this).parents('li').attr('id');
+                    $('.fenxiang_bj').toggle()
+                    $('.zzc_bj').toggle()
+                    return false;
+                });
+            }
+        });
+    }
+    var localGlist;
+
+    function getGiftList() {
+        $.ajax({
+            url: apis + 'gift/getlist',
+            data: {},
+            success: function(ret) {
+                if (ret.code == 0 && localGlist != JSON.stringify(ret.data)) {
+                    localGlist = JSON.stringify(ret.data);
+                    $('#glist').html('');
+                    $('#coin').html(ret.data.user.coin);
+                    vip = ret.data.user.vip;
+                    $.each(ret.data.items, function(k, v) {
+                        html = '<li id="' + v.id + '">' +
+                                '<img src="' + (v.img ? iapi + v.img : '../img/money.png') + '" />' +
+                                '<p>' + v.name + '</p>' +
+                                '<p>' +
+                                '<m>' + v.price + '</m>金币</p>' +
+                                '</li>';
+                        $('#glist').append(html);
+                    });
+                    $('#glist li').eq(0).addClass('active');
+                    $('.liwu_list li').on('tap', function() {
+                        $(this).addClass('active').siblings().removeClass('active')
+                        $(this).addClass('active').parents('.liwu_list').siblings().find('li').removeClass('active')
+                    })
+                }
+            }
+        });
+    }
+
+
+    function feedback(nid, content, gift) {
+        $.ajax({
+            url: apis + 'news/feedback',
+            data: 'nid=' + nid + '&content=' + content + '&gift=' + gift,
+            success: function(ret) {
+                if (ret.code < 0)
+                    console.log(JSON.stringify(ret));
+                if (ret.code > 0) {
+                    api.toast({
+                        msg: ret.msg,
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                } else {
+                    $('.pinglu_bj').toggle()
+                    $('.zzc_bj').toggle()
+                    $('.pl_button input').val('');
+                    getData();
+                }
+            }
+        });
+    }
+
+    function nice(id) {
+        $.ajax({
+            url: apis + 'news/nice',
+            data: 'nid=' + id,
+            success: function(ret) {
+                if (ret.code < 0)
+                    console.log(JSON.stringify(ret));
+                if (ret.code > 0)
+                    api.toast({
+                        msg: ret.msg,
+                        duration: 2000,
+                        location: 'bottom'
+                    });
+                // getData();
+            }
+        });
+    }
+
+    function setTap() {
+        $('#sliderSegmentedControl a').on('tap', function() {
+            switch ($(this).index()) {
+                case 0:
+                    news = true;
+                    break;
+                case 1:
+                    news = false;
+                    break;
+                case 2:
+                    api.openWin({
+                        name: 'group',
+                        url: '../group/group.html',
+                        pageParam: {
+                            name: 'group'
+                        },
+                        allowEdit: false
+                    });
+                    break;
+                default:
+            }
+        });
+
+        $('.pl_button button').on('tap', function() {
+            var content = $('.pl_button input').val();
+            var gift = $('#glist .active').attr('id');
+            var price = $('#glist .active m').html();
+            if (price * 1 > $('#coin').html() * 1) {
+                api.toast({
+                    msg: '你的金币不够',
+                    duration: 2000,
+                    location: 'middle'
+                });
+                return false;
+            }
+            feedback(nid, content, gift);
+            return false;
+        });
+
+        $('#pay').on('tap', function() {
+            api.openWin({
+                name: 'pay',
+                url: '../my/pay.html',
+                pageParam: {
+                    name: 'pay',
+                    coin: $('#coin').html(),
+                    vip: vip
+                }
+            });
+            $('.pinglu_bj').toggle()
+            $('.zzc_bj').toggle()
+            $('.pl_button input').val('');
+            return false;
+        });
+
+        $('#cancle').on('tap', function() {
+            $('.fenxiang_bj').hide()
+            $('.zzc_bj').hide()
+        });
+
+        $('#share li').on('tap', function() {
+            var nid = $('.fenxiang_bj').attr('data-id');
+            switch ($(this).index()) {
+                case 0:
+                    shareWx(nid, 'timeline');
+                    // shareWx(scene, title, description, thumbUrl, contentUrl);
+                    break;
+                case 1:
+                    shareWx(nid, 'session');
+                    // shareWx(scene, title, description, thumbUrl, contentUrl;
+                    break;
+                case 2:
+                    shareQQ(nid);
+                    break;
+                default:
+                    shareQQ(nid);
+            }
+        })
+    }
+
+    function moreshow() {
+        $(".more").on('tap', function() {
+            if ($(this).html() == '展开全文') {
+                $(this).html("收起文章");
+                $(this).parents('.index_list_con').find('.hide').show();
+                $(this).parents('.index_list_con').find('i').hide();
+            } else {
+                $(this).html("展开全文");
+                $(this).parents('.index_list_con').find('.hide').hide();
+                $(this).parents('.index_list_con').find('i').show();
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

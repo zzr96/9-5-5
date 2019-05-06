@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {}
+
+        .mui-table-view {
+            margin-top: 0px;
+        }
+
+        .mui-table-view:before {
+            height: 0;
+        }
+
+        .mui-table-view:after {
+            left: 10px;
+            background-color: #eee;
+            right: 10px
+        }
+
+        .mui-table-view-cell:after {
+            height: 0
+        }
+
+        .mui-table-view-cell {
+            padding: 10px;
+            color: #000;
+            font-size: 15px;
+        }
+
+        .mui-table-view:after {
+            height: 0
+        }
+
+        .control-item .xian-box {
+            display: none;
+            position: absolute;
+            width: 36%;
+            left: 30%;
+            bottom: 0px;
+            height: 3px;
+            background: #00C55B;
+            border-radius: 1px;
+        }
+
+        .tab-control .control-item {
+            width: auto;
+            position: relative;
+            padding: 0 10px;
+            display: inline-block;
+            line-height: 45px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .control-wrap {
+            overflow: hidden;
+            height: 45px;
+            z-index: 999;
+            width: 100%;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab-control {
+            overflow-x: scroll;
+            height: 120%;
+            white-space: nowrap;
+            background: #fff;
+        }
+
+        .control-item.active .xian-box {
+            display: block;
+        }
+
+        .control-item.active {
+            border: 0;
+            color: #00C55B;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left">
+            <i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">新品速递</h1>
+        <span></span>
+
+    </header>
+    <div class="shoucang-content header-counter">
+        <div class="control-wrap">
+            <div class="tab-control">
+                <!-- <a class="control-item active">
+                    <p class="xian-box"></p>分类一
+                </a>
+                <a class="control-item">
+                    <p class="xian-box"></p>分类一
+                </a>
+                <a class="control-item">
+                    <p class="xian-box"></p>分类一
+                </a>
+                <a class="control-item">
+                    <p class="xian-box"></p>分类一
+                </a>
+                <a class="control-item">
+                    <p class="xian-box"></p>分类一
+                </a>
+                <a class="control-item">
+                    <p class="xian-box"></p>分类一
+                </a>
+                <a class="control-item">
+                    <p class="xian-box"></p>分类一
+                </a>
+                <a class="control-item">
+                    <p class="xian-box"></p>分类一
+                </a>
+                <a class="control-item">
+                    <p class="xian-box"></p>分类一
+                </a> -->
+            </div>
+        </div>
+        <div>
+          <ul class="lesson-today" id="xinpinsudi">
+              <!-- <li class="">
+                  <div class="img-box">
+                      <img src="../img/img02.jpg" />
+                  </div>
+                  <div class="right">
+                      <p class="twoline">婴儿衣服彩棉新生儿礼盒春秋季套装 纯棉宝宝0-3个月夏季母婴用品</p>
+                      <p class="price">
+                          <span>￥<m>301.98</m></span>
+                          <span>￥<m>301.98</m></span>
+                      </p>
+                      <p class="pingjia">
+                          <span><m>6条评论</m><m>99%好评</m></span>
+                      </p>
+                  </div>
+              </li>
+              <li>
+                  <div class="img-box">
+                      <img src="../img/pic1.png" />
+                  </div>
+                  <div class="right">
+                      <p class="twoline">婴儿季母婴用品</p>
+                      <p class="price">
+                          <span>￥<m>301.98</m></span>
+                          <span>￥<m>301.98</m></span>
+                      </p>
+                      <p class="pingjia">
+                          <span><m>6条评论</m><m>99%好评</m></span>
+                      </p>
+                  </div>
+              </li>
+              <li class="">
+                  <div class="img-box">
+                      <img src="../img/pic1.png" />
+                  </div>
+                  <div class="right">
+                      <p class="twoline">婴儿季母婴用品</p>
+                      <p class="price">
+                          <span>￥<m>301.98</m></span>
+                          <span>￥<m>301.98</m></span>
+                      </p>
+                      <p class="pingjia">
+                          <span><m>6条评论</m><m>99%好评</m></span>
+                      </p>
+                  </div>
+              </li> -->
+          </ul>
+          <div class="more" style="display:none;text-align:center;margin:10px auto;"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/api.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+      var page = 1;
+      var cate_id;
+      function api_init(){
+        setTap();
+        getCate();
+        upRefresh();
+      }
+      //上拉刷新
+      function upRefresh(){
+        api.addEventListener({//上拉刷新
+            name: 'scrolltobottom',
+            extra: {
+                threshold: 20
+            }
+        }, function(ret, err) {
+            console.log(ret);
+            page++;
+            getXinpinProduct();
+        });
+      }
+      //获取分类
+      function getCate(){
+        api.ajax({
+            url: apis + 'home/shopcate',
+            method: 'post'
+        },function(ret, err){
+            if (ret) {
+                console.log( JSON.stringify( ret ) );
+                var html = '';
+                html += '<a class="control-item active" ><p class="xian-box"></p>全部</a>';
+                $.each(ret.data,function(k,v){
+                  html += '<a class="control-item" data-id="'+v.id+'">';
+                  html += '<p class="xian-box"></p>'+v.name+'</a>';
+                });
+                $('.tab-control').html(html);
+            } else {
+                console.log( JSON.stringify( err ) );
+            }
+        });
+      }
+      //获取新品速递
+      function getXinpinProduct(){
+        console.log(cate_id);
+        api.ajax({
+            url: apis + 'home/xinpinsudi',
+            method: 'post',
+            data:{
+              values: {
+                  cate_id: cate_id,
+                  page: page
+              }
+            }
+        },function(ret, err){
+            console.log( JSON.stringify( ret ) );
+            if (ret && ret.data.length > 0) {
+                $.each(ret.data,function(k,v){
+                  var html = '<li class="seeGoodsDetail" data-id="'+v.id+'"><div class="img-box"><img src="'+iapi+v.img1+'" /></div>'
+                      +'<div class="right"><p class="twoline">'+v.name+'</p>'
+                      +'<p class="price"><span>￥<m>'+v.xprice+'</m></span><span>￥<m>'+v.yprice+'</m></span></p>'
+                      +'<p class="pingjia"><span><m>'+v.pinglun_num+'条评论</m><m>'+v.haopingdu+'好评</m></span></p></div></li>';
+                  $('#xinpinsudi').append(html);
+                });
+            } else{
+                if($('#xinpinsudi li').length > 0){
+                  api.removeEventListener({
+                      name: 'scrolltobottom'
+                  });
+                  $('.more').show();
+                  $('.more').html('没有更多了');
+                }else{
+                  api.removeEventListener({
+                      name: 'scrolltobottom'
+                  });
+                  $('#xinpinsudi').html('');
+                  $('.more').show();
+                  $('.more').html('暂无商品');
+                }
+            }
+            if(err){
+                console.log( JSON.stringify( err ) );
+            }
+        });
+      }
+
+      //查看商品详情
+      $('#xinpinsudi').on('tap','.seeGoodsDetail',function(){
+        id = $(this).attr('data-id');
+        api.openWin({
+            name: 'shangpin_detail',
+            url: '../kind/shangpin_detail.html',
+            pageParam: {
+                id: id
+            }
+        });
+      });
+      //设置事件
+      function setTap(){
+        cate_id = $('.tab-control a .active').attr('data-id');
+        page = 1;
+        getXinpinProduct();
+      }
+
+      //点击分类
+      $('.tab-control').on('tap','a',function(){
+        cate_id = $(this).attr('data-id');
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+        $('#xinpinsudi').html('');
+        $('.more').hide();
+        page = 1;
+        getXinpinProduct();
+        upRefresh();
+      })
+    </script>
+</body>
+
+</html>

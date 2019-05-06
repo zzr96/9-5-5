@@ -1,0 +1,111 @@
+{include file="common/head" /}
+<div class="v_bd"><!--v_bd-->
+    <div class="v_bd_tag">
+        <a href="javascript:;" class="focus" onclick="backup();">新建备份</a>
+    </div>
+
+
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+        <tr class="h">
+            <td width="60" valign="middle"><input name="" class="chk_all" type="checkbox" value=""/>全选</td>
+            <td>文件名</td>
+            <td>文件大小</td>
+            <td>备份日期</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id="vo"}
+        <tr>
+            <td><input name="chk_list" type="checkbox" value="{$vo.time}"/></td>
+            <td>{$vo.name}.sql</td>
+            <td>{$vo.size|count_size}</td>
+            <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+            <td><a href="javascript:;" class="btn btn-success" onclick="importsql('{$vo.time}')">还原该备份</a></td>
+        </tr>
+        {/volist}
+        <tr class="f">
+            <td><input name="" class="chk_all" type="checkbox" value=""/>全选</td>
+            <td>
+                选中项 :
+                <a href="javascript:;" class="btn btn-danger" onclick="del();">删除</a>
+            </td>
+            <td colspan="5"></td>
+        </tr>
+    </table>
+
+</div><!--v_bd-->
+{include file="common/foot" /}
+
+<script>
+    $(".chk_all").click(function () {
+        if (!$(this).attr("checked")) {
+            $("input[name='chk_list']").removeAttr("checked");
+        } else {
+            $("input[name='chk_list']").attr("checked", $(this).attr("checked"));
+        }
+    });
+
+
+    function del() {
+        if (!confirm("确定要删除选中项吗？")) {
+            return false;
+        }
+        var arrChk = $("input[name='chk_list']:checked");
+        var val = '';
+        for (var i = 0; i < arrChk.length; i++) {
+            val = val + "," + arrChk[i].value;
+        }
+        if (val == '') {
+            alert("请选择需要操作的信息")
+            return false;
+        }
+        var url = "{:url('del')}";
+        $.ajax({
+            url: url,
+            data: "id=" + val,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            },
+            error: function (e) {
+                console.log(JSON.stringify(e));
+            }
+        })
+    }
+    function backup() {
+        if (!confirm("备份过程中请勿关闭浏览器？")) {
+            return false;
+        }
+
+        var url = "{:url('backup_do')}";
+        $.ajax({
+            url: url,
+            type: 'post',
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            },
+            error: function (e) {
+                console.log(JSON.stringify(e));
+            }
+        })
+    }
+
+    function importsql(time) {
+        if (!confirm("还原过程中请勿关闭浏览器？")) {
+            return false;
+        }
+
+        var url = "{:url('huanyuan')}";
+        $.ajax({
+            url: url,
+            data: 'time=' + time,
+            success: function (txt) {
+                tishi('success', txt.msg, window.location.href)
+            },
+            error: function (e) {
+                console.log(JSON.stringify(e));
+            }
+        })
+    }
+
+
+</script>

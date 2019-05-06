@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <style type="text/css">
+        html,
+        body {
+            background: #fff;
+        }
+
+        .mui-table-view:before {
+            height: 0
+        }
+
+        .mui-table-view:after {
+            height: 0;
+        }
+
+        .mui-table-view-cell {
+            padding: 14px 10px
+        }
+
+        .mui-navigate-right:after {
+            right: 10px
+        }
+        .kefu-content .lei {
+            height: 60px;
+            border-bottom: 10px solid #f7f7f7;
+        }
+        .kefu-content .lei label {
+            float: left;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+        }
+        .kefu-content .lei ul {
+            float: right;
+            width: calc(100% - 100px);
+        }
+        .kefu-content .lei li {
+            float: right;
+            width: 80px;
+            height: 30px;
+            border: 1px solid #999;
+            color: #999;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 15px;
+            margin-top: 10px;
+            margin-left: 15px;
+        }
+        .kefu-content .lei li.active {
+            color: #00C55B;
+            border: 1px solid #00C55B;
+        }
+    </style>
+</head>
+
+<body>
+    <!--头 -->
+    <header class=" mui-bar mui-bar-nav ">
+        <a class="mui-pull-left "><i class="iconfont icon-fanhui"></i></a>
+        <h1 class="mui-title">申请退货</h1>
+    </header>
+    <div class="header-counter kefu-content">
+        <div class="lei padd10">
+            <label for="">退换货选择</label>
+            <ul>
+                <li class="active">退货</li>
+                <li>换货</li>
+            </ul>
+        </div>
+        <div class="kefu-main padd10">
+            <p>退货原因</p>
+            <textarea name="" rows="" id="content" cols="" placeholder="请输入退换货原因"></textarea>
+        </div>
+        <input type="button" class="subbtn" value="提交" />
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/api.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+  var order_num;
+  var type;
+  var content;
+  function api_init(){
+    order_num = api.pageParam.order_num;
+  }
+  $('.subbtn').on('tap',function(){
+    type = $('.lei .active').html();
+    content = $('#content').val();
+    if(!content){
+      api.toast({
+          msg: '请输入'+type+'原因',
+          duration: 2000,
+          location: 'bottom'
+      });
+      return false;
+    }
+    api.ajax({
+        url: apis + 'order/backadd',
+        method: 'post',
+        data: {
+            values: {
+                order_num: order_num,
+                content: content,
+                type: type
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+            console.log( JSON.stringify( ret ) );
+            if(ret.code == 1){
+              api.toast({
+                  msg: ret.msg,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+              api.execScript({
+                  name: 'my_order',
+                  script: 'refresh_order();'
+              });
+
+              setTimeout(function(){
+                api.closeWin();
+              },1000);
+            }
+            if(ret.code == 0){
+              api.toast({
+                  msg: ret.msg,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+              return false;
+            }
+        } else {
+            console.log( JSON.stringify( err ) );
+        }
+    });
+  });
+
+  $(".lei ul").on("click", "li", function() {
+      $(this).addClass("active").siblings().removeClass("active");
+      type = $('.lei .active').html();
+      $('.mui-title').html('申请'+type);
+      $('.kefu-main p').html(type + '原因');
+      $('#content').attr('placeholder','请输入'+type+'原因');
+  })
+</script>
+
+</html>
